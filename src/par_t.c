@@ -1,0 +1,225 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "par_t.h"
+
+/*
+ * read from file
+ */
+
+int
+par_read_from_file(char *par_fname,  par_t *par, int verbose)
+{
+  //
+  // read whole file into str
+  //
+  FILE *fp = fopen(par_fname,"r");
+  if (!fp) {
+    fprintf(stderr,"Error: can't open par file: %s\n", par_fname);
+    exit(1);
+  }
+
+  fseek(fp, 0, SEEK_END);
+  long len = ftell(fp);
+
+  fseek(fp, 0, SEEK_SET);
+  char *str = (char*)malloc(len+1);
+  fread(str, 1, len, fp);
+  fclose(fp);
+
+  // read from str
+  par_read_from_str(str, par);
+
+  return 0;
+}
+
+/*
+ * funcs to get par from alread read in str
+ */
+int 
+par_read_from_str(const char *str, par_t *par)
+{
+  int ierr = 0;
+
+  // convert str to json
+  cJSON *root = cJSON_Parse(str);
+  if (NULL == root) {
+    printf("Error at parsing json!\n");
+    exit(1);
+  }
+
+  cJSON *item;
+  cJSON *subitem, *thirditem;
+
+  // default not check
+  par->check_orth  = 0;
+  par->check_jac   = 0;
+  par->check_ratio = 0;
+  par->check_step  = 0;
+  par->check_smooth = 0;
+  if (item = cJSON_GetObjectItem(root, "check_orth")) {
+    par->check_orth = item->valueint;
+  }
+  if (item = cJSON_GetObjectItem(root, "check_jac")) {
+    par->check_jac = item->valueint;
+  }
+  if (item = cJSON_GetObjectItem(root, "check_ratio")) {
+    par->check_ratio = item->valueint;
+  }
+  if (item = cJSON_GetObjectItem(root, "check_step")) {
+    par->check_step = item->valueint;
+  }
+  if (item = cJSON_GetObjectItem(root, "check_smooth")) {
+    par->check_smooth = item->valueint;
+  }
+
+  // default not strech
+  par->flag_strech_x = 0;
+  par->flag_strech_z = 0;
+  if (item = cJSON_GetObjectItem(root, "flag_strech_x")) {
+    par->flag_strech_x = item->valueint;
+  }
+  if (item = cJSON_GetObjectItem(root, "strech_x_coef")) {
+    par->strech_x_coef = item->valuedouble;
+  }
+  if (item = cJSON_GetObjectItem(root, "flag_strech_z")) {
+    par->flag_strech_z = item->valueint;
+  }
+  if (item = cJSON_GetObjectItem(root, "strech_z_coef")) {
+    par->strech_z_coef = item->valuedouble;
+  }
+
+  // default not intep
+  par->sample_factor_x = 1.0;
+  par->sample_factor_z = 1.0;
+  if (item = cJSON_GetObjectItem(root, "flag_sample_x")) {
+    par->flag_sample_x = item->valueint;
+  }
+  if (item = cJSON_GetObjectItem(root, "sample_factor_x")) {
+    par->sample_factor_x = item->valuedouble;
+  }
+  if (item = cJSON_GetObjectItem(root, "flag_sample_z")) {
+    par->flag_sample_z = item->valueint;
+  }
+  if (item = cJSON_GetObjectItem(root, "sample_factor_z")) {
+    par->sample_factor_z = item->valuedouble;
+  }
+
+  if (item = cJSON_GetObjectItem(root, "geometry_input_file")) {
+    sprintf(par->geometry_input_file, "%s", item->valuestring);
+  }
+  if (item = cJSON_GetObjectItem(root, "grid_export_dir")) {
+    sprintf(par->grid_export_dir, "%s", item->valuestring);
+  }
+
+  if (item = cJSON_GetObjectItem(root, "grid_method")) {
+    if (subitem = cJSON_GetObjectItem(item, "linear_TFI")) {
+      par->method_itype = TFI;
+    }
+    if (subitem = cJSON_GetObjectItem(item, "hermite")) {
+      par->method_itype = HERMITE;
+      if (thirditem = cJSON_GetObjectItem(subitem, "coef")) {
+        par->coef = thirditem->valuedouble;
+      }
+    }
+    if (subitem = cJSON_GetObjectItem(item, "elli_diri")) {
+      par->method_itype = ELLI_DIRI;
+      if (thirditem = cJSON_GetObjectItem(subitem, "coef")) {
+        par->coef = thirditem->valuedouble;
+      }
+    }
+    if (subitem = cJSON_GetObjectItem(item, "elli_higen")) {
+      par->method_itype = ELLI_HIGEN;
+      if (thirditem = cJSON_GetObjectItem(subitem, "coef")) {
+        par->coef = thirditem->valuedouble;
+      }
+    }
+    if (subitem = cJSON_GetObjectItem(item, "parabolic")) {
+      par->method_itype = PARABOLIC;
+      if (thirditem = cJSON_GetObjectItem(subitem, "coef")) {
+        par->coef = thirditem->valuedouble;
+      }
+    }
+    if (subitem = cJSON_GetObjectItem(item, "hyperbolic")) {
+      par->method_itype = HYPERBOLIC;
+      if (thirditem = cJSON_GetObjectItem(subitem, "coef")) {
+        par->coef = thirditem->valuedouble;
+      }
+      if (thirditem = cJSON_GetObjectItem(subitem, "num_layers")) {
+        par->num_layers = thirditem->valueint;
+      }
+      if (thirditem = cJSON_GetObjectItem(subitem, "step_input_file")) {
+        sprintf(par->step_input_file, "%s", thirditem->valuestring);
+      }
+    }
+  }
+
+  return ierr;
+}
+
+
+int
+par_print(par_t *par)
+{    
+  int ierr = 0;
+
+  fprintf(stdout, "-------------------------------------------------------\n");
+  fprintf(stdout, "------- grid quality check-------\n");
+  if (par->check_orth == 1) {
+    fprintf(stdout, "------- check grid orthogonality-------\n");
+  }
+  if (par->check_jac == 1) {
+    fprintf(stdout, "------- check grid jacobi-------\n");
+  }
+  if (par->check_ratio == 1) {
+    fprintf(stdout, "------- check grid ratio-------\n");
+  }
+  if (par->check_step == 1) {
+    fprintf(stdout, "------- check grid step-------\n");
+  }
+  if (par->check_smooth == 1) {
+    fprintf(stdout, "------- check grid smooth-------\n");
+  }
+
+  fprintf(stdout,"input geometry file is \n %s\n",par->geometry_input_file);
+  fprintf(stdout,"export grid dir is \n %s\n",par->grid_export_dir);
+  fprintf(stdout,"sample grid x direction factor is %f\n",par->sample_factor_x);
+  fprintf(stdout,"sample grid z direction factor is %f\n",par->sample_factor_z);
+  if(par->flag_strech_x == 1) {
+    fprintf(stdout, "------- strech x and strech coef is %f-------\n",par->strech_x_coef);
+  }
+  if(par->flag_strech_z == 1) {
+    fprintf(stdout, "------- strech z and strech coef is %f-------\n",par->strech_z_coef);
+  }
+
+  fprintf(stdout, "------- grid generate method-------\n");
+  if(par->method_itype == TFI) {
+    fprintf(stdout, "grid generate method is linear TFI\n");
+  }
+  if(par->method_itype == HERMITE) {
+    fprintf(stdout, "grid generate method is unidirection hermite\n");
+    fprintf(stdout, "hermite coef is %f\n", par->coef);
+  }
+  if(par->method_itype == ELLI_DIRI) {
+    fprintf(stdout, "grid generate method is elliptic_dirichlet\n");
+    fprintf(stdout, "elli_diri coef is %f\n", par->coef);
+  }
+  if(par->method_itype == ELLI_HIGEN) {
+    fprintf(stdout, "grid generate method is elliptic_hilgenstock\n");
+    fprintf(stdout, "elli_higen coef is %f\n", par->coef);
+  }
+  if(par->method_itype == PARABOLIC) {
+    fprintf(stdout, "grid generate method is parabolic\n");
+    fprintf(stdout, "parabolic coef is %f\n", par->coef);
+  }
+
+  if(par->method_itype == HYPERBOLIC) {
+    fprintf(stdout, "grid generate method is hyperbolic\n");
+    fprintf(stdout, "hyperbolic coef is %f\n", par->coef);
+    fprintf(stdout, "number of advanced layers is %d\n",par->num_layers);
+    fprintf(stdout, "step file is  %s\n",par->step_input_file);
+  }
+
+  return ierr;
+}

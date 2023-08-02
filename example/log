@@ -1,0 +1,21 @@
+verbose=100
+par file =  /data3/lihl/code-lihl/2d-grid-generation/example/../project/test.json
+-------------------------------------------------------
+------- grid quality check-------
+------- check grid orthogonality-------
+------- check grid jacobi-------
+------- check grid ratio-------
+------- check grid step-------
+------- check grid smooth-------
+input geometry file is 
+ /data3/lihl/code-lihl/2d-grid-generation/example/data_file_2d.txt
+export grid dir is 
+ /data3/lihl/code-lihl/2d-grid-generation/example/../project/output
+sample grid x direction factor is 1.500000
+sample grid z direction factor is 1.500000
+------- strech z and strech coef is 0.000100-------
+------- grid generate method-------
+grid generate method is unidirection hermite
+hermite coef is 0.300000
+sample grid ... 
+export coord to file ... 
