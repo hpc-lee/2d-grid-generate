@@ -18,11 +18,14 @@
 
 typedef struct{
 
+  int grid_check;
   int check_orth;
   int check_jac;
   int check_ratio;
-  int check_step;
-  int check_smooth;
+  int check_step_x;
+  int check_step_z;
+  int check_smooth_x;
+  int check_smooth_z;
 
   int flag_strech_x;
   int flag_strech_z;

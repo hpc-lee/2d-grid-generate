@@ -32,8 +32,10 @@ cat << ieof > ${PAR_FILE}
   "check_orth" : 1,
   "check_jac" : 1,
   "check_ratio" : 1,
-  "check_step" : 1,
-  "check_smooth" : 1,
+  "check_step_x" : 1,
+  "check_step_z" : 1,
+  "check_smooth_x" : 1,
+  "check_smooth_z" : 1,
 
   "flag_strech_x" : 0,
   "strech_x_coef" : 0.0001,
@@ -41,9 +43,9 @@ cat << ieof > ${PAR_FILE}
   "strech_z_coef" : 0.0001,
 
   "flag_sample_x" : 1,
-  "sample_factor_x" : 1.5,
-  "flag_sample_x" : 1,
-  "sample_factor_z" : 1.5,
+  "sample_factor_x" : 2.0,
+  "flag_sample_x" : 0,
+  "sample_factor_z" : 1.0,
 
   "geometry_input_file" : "${INPUTDIR}/data_file_2d.txt",
   "grid_export_dir" : "${OUTPUT_DIR}",

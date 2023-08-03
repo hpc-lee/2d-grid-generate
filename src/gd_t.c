@@ -2,12 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "netcdf.h" 
-
+#include "fdlib_mem.h"
 #include "gd_t.h"
 #include "constants.h"
-#include "fdlib_mem.h"
 #include "algebra.h"
+#include "io_funcs.h"
 
 int
 init_gdcurv(gd_t *gdcurv, int nx, int nz)
@@ -172,65 +171,16 @@ grid_sample(gd_t *gdcurv_new, gd_t *gdcurv, float coef_x, float coef_z)
   int nz = gdcurv->nz;
   int nx_new = (int) (nx*coef_x);
   int nz_new = (int) (nz*coef_z);
+  if(nx_new < nx || nz_new < nz)
+  {
+    fprintf(stdout,"only support up sample, \
+                    nx_new(nz_new) must >= nx(nz)\n");
+    exit(1);
+  }
 
   init_gdcurv(gdcurv_new, nx_new, nz_new);
     
   sample_interp(gdcurv_new, gdcurv); 
-
-  return 0;
-}
-
-int
-gd_curv_coord_export(gd_t *gdcurv, char *output_dir)
-{
-  size_t *restrict c3d_pos   = gdcurv->cmp_pos;
-  char  **restrict c3d_name  = gdcurv->cmp_name;
-  int  nx = gdcurv->nx;
-  int  nz = gdcurv->nz;
-
-  // construct file name
-  char ou_file[CONST_MAX_STRLEN];
-  sprintf(ou_file, "%s/coord.nc", output_dir);
-  
-  // read in nc
-  int ncid;
-  int varid[gdcurv->ncmp];
-  int dimid[CONST_NDIM];
-
-  int ierr = nc_create(ou_file, NC_CLOBBER, &ncid);
-  handle_nc_err(ierr);
-
-  // define dimension
-  ierr = nc_def_dim(ncid, "i", nx, &dimid[1]);
-  handle_nc_err(ierr);
-  ierr = nc_def_dim(ncid, "k", nz, &dimid[0]);
-  handle_nc_err(ierr);
-
-  // define vars
-  for (int ivar=0; ivar<gdcurv->ncmp; ivar++) {
-    ierr = nc_def_var(ncid, gdcurv->cmp_name[ivar], NC_FLOAT, CONST_NDIM, dimid, &varid[ivar]);
-    handle_nc_err(ierr);
-  }
-
-  // attribute: index in output snapshot, index w ghost in thread
-  int l_count[] = { nx, nz };
-  nc_put_att_int(ncid,NC_GLOBAL,"number_of_points",
-                   NC_INT,CONST_NDIM,l_count);
-
-  // end def
-  ierr = nc_enddef(ncid);
-  handle_nc_err(ierr);
-
-  // add vars
-  for (int ivar=0; ivar<gdcurv->ncmp; ivar++) {
-    float *ptr = gdcurv->v3d + gdcurv->cmp_pos[ivar];
-    ierr = nc_put_var_float(ncid, varid[ivar],ptr);
-    handle_nc_err(ierr);
-  }
-  
-  // close file
-  ierr = nc_close(ncid);
-  handle_nc_err(ierr);
 
   return 0;
 }
@@ -295,37 +245,4 @@ check_bdry(float *x1, float *x2, float *z1, float *z2, int nx, int nz)
 
   return 0;
 }
-
-
-int
-io_get_nextline(FILE *fp, char *str, int length)
-{
-  int ierr = 0;
-
-  do
-  {
-    if (fgets(str, length, fp) == NULL)
-    {
-      ierr = 1;
-      return ierr;
-    }
-  } while (str[0] == '#' || str[0] == '\n');
-
-  // remove newline char
-  int len = strlen(str);
-
-  if (len > 0 && str[len-1] == '\n') {
-    str[len-1] = '\0';
-  }
-
-  // for debug:
-  //fprintf(stdout," --return: %s\n", str);
-
-  return ierr;
-}
-
-
-
-
-
 

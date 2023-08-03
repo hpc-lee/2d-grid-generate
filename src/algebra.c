@@ -47,12 +47,12 @@ int linear_tfi(gd_t *gdcurv)
 
       U_x = a0*x2d[iptr1] + a1*x2d[iptr2];
       W_x = c0*x2d[iptr3] + c1*x2d[iptr4];
-      UW_x = a0*c0*x2d[iptr5] + a0*c1*x2d[iptr6] 
+      UW_x = a0*c0*x2d[iptr5] + a0*c1*x2d[iptr6] \
            + a1*c0*x2d[iptr7] + a1*c1*x2d[iptr8];
 
       U_z = a0*z2d[iptr1] + a1*z2d[iptr2];
       W_z = c0*z2d[iptr3] + c1*z2d[iptr4];
-      UW_z = a0*c0*z2d[iptr5] + a0*c1*z2d[iptr6]
+      UW_z = a0*c0*z2d[iptr5] + a0*c1*z2d[iptr6] \
            + a1*c0*z2d[iptr7] + a1*c1*z2d[iptr8];
 
       x2d[iptr] = U_x + W_x - UW_x;
@@ -441,6 +441,8 @@ sample_interp(gd_t *gdcurv_new, gd_t *gdcurv)
   free(v);
   free(x2d_temp);
   free(z2d_temp);
+  // use sample grid gdcurv_new, so free gdcurv space 
+  free(gdcurv->v3d);
 
   return 0;
 }

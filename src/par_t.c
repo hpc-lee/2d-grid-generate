@@ -53,11 +53,14 @@ par_read_from_str(const char *str, par_t *par)
   cJSON *subitem, *thirditem;
 
   // default not check
+  par->grid_check = 0;
   par->check_orth  = 0;
   par->check_jac   = 0;
   par->check_ratio = 0;
-  par->check_step  = 0;
-  par->check_smooth = 0;
+  par->check_step_x  = 0;
+  par->check_step_z  = 0;
+  par->check_smooth_x = 0;
+  par->check_smooth_z = 0;
   if (item = cJSON_GetObjectItem(root, "check_orth")) {
     par->check_orth = item->valueint;
   }
@@ -67,11 +70,25 @@ par_read_from_str(const char *str, par_t *par)
   if (item = cJSON_GetObjectItem(root, "check_ratio")) {
     par->check_ratio = item->valueint;
   }
-  if (item = cJSON_GetObjectItem(root, "check_step")) {
-    par->check_step = item->valueint;
+  if (item = cJSON_GetObjectItem(root, "check_step_x")) {
+    par->check_step_x = item->valueint;
   }
-  if (item = cJSON_GetObjectItem(root, "check_smooth")) {
-    par->check_smooth = item->valueint;
+  if (item = cJSON_GetObjectItem(root, "check_step_z")) {
+    par->check_step_z = item->valueint;
+  }
+  if (item = cJSON_GetObjectItem(root, "check_smooth_x")) {
+    par->check_smooth_x = item->valueint;
+  }
+  if (item = cJSON_GetObjectItem(root, "check_smooth_z")) {
+    par->check_smooth_z = item->valueint;
+  }
+  int check = par->check_orth + par->check_jac /
+            + par->check_ratio + par->check_step_x /
+            + par->check_step_z +  par->check_smooth_x /
+            + par->check_smooth_z; 
+  if(check != 0)
+  {
+    par->grid_check = 1;
   }
 
   // default not strech
@@ -96,14 +113,30 @@ par_read_from_str(const char *str, par_t *par)
   if (item = cJSON_GetObjectItem(root, "flag_sample_x")) {
     par->flag_sample_x = item->valueint;
   }
-  if (item = cJSON_GetObjectItem(root, "sample_factor_x")) {
-    par->sample_factor_x = item->valuedouble;
+  if (par->flag_sample_x == 1) 
+  {
+    if (item = cJSON_GetObjectItem(root, "sample_factor_x")) {
+      par->sample_factor_x = item->valuedouble;
+      if((par->sample_factor_x-1) < 0.0)
+      {
+        fprintf(stdout,"sample_factor_x must >= 1\n");
+        exit(1);
+      }
+    }
   }
   if (item = cJSON_GetObjectItem(root, "flag_sample_z")) {
     par->flag_sample_z = item->valueint;
   }
-  if (item = cJSON_GetObjectItem(root, "sample_factor_z")) {
-    par->sample_factor_z = item->valuedouble;
+  if (par->flag_sample_z == 1) 
+  {
+    if (item = cJSON_GetObjectItem(root, "sample_factor_z")) {
+      par->sample_factor_z = item->valuedouble;
+      if((par->sample_factor_z-1) < 0.0)
+      {
+        fprintf(stdout,"sample_factor_z must >= 1\n");
+        exit(1);
+      }
+    }
   }
 
   if (item = cJSON_GetObjectItem(root, "geometry_input_file")) {
@@ -164,8 +197,12 @@ par_print(par_t *par)
 {    
   int ierr = 0;
 
+  fprintf(stdout,"input geometry file is \n %s\n",par->geometry_input_file);
+  fprintf(stdout,"export grid dir is \n %s\n",par->grid_export_dir);
   fprintf(stdout, "-------------------------------------------------------\n");
-  fprintf(stdout, "------- grid quality check-------\n");
+  if (par->grid_check == 1) {
+    fprintf(stdout, "------- grid quality check-------\n");
+  }
   if (par->check_orth == 1) {
     fprintf(stdout, "------- check grid orthogonality-------\n");
   }
@@ -175,17 +212,25 @@ par_print(par_t *par)
   if (par->check_ratio == 1) {
     fprintf(stdout, "------- check grid ratio-------\n");
   }
-  if (par->check_step == 1) {
-    fprintf(stdout, "------- check grid step-------\n");
+  if (par->check_step_x == 1) {
+    fprintf(stdout, "------- check grid step x direction-------\n");
   }
-  if (par->check_smooth == 1) {
-    fprintf(stdout, "------- check grid smooth-------\n");
+  if (par->check_step_z == 1) {
+    fprintf(stdout, "------- check grid step z direction-------\n");
+  }
+  if (par->check_smooth_x == 1) {
+    fprintf(stdout, "------- check grid smooth x direction-------\n");
+  }
+  if (par->check_smooth_z == 1) {
+    fprintf(stdout, "------- check grid smooth z direction-------\n");
   }
 
-  fprintf(stdout,"input geometry file is \n %s\n",par->geometry_input_file);
-  fprintf(stdout,"export grid dir is \n %s\n",par->grid_export_dir);
-  fprintf(stdout,"sample grid x direction factor is %f\n",par->sample_factor_x);
-  fprintf(stdout,"sample grid z direction factor is %f\n",par->sample_factor_z);
+  if (par->flag_sample_x == 1) {
+    fprintf(stdout,"sample grid x direction factor is %f\n",par->sample_factor_x);
+  }
+  if (par->flag_sample_z == 1) {
+    fprintf(stdout,"sample grid z direction factor is %f\n",par->sample_factor_z);
+  }
   if(par->flag_strech_x == 1) {
     fprintf(stdout, "------- strech x and strech coef is %f-------\n",par->strech_x_coef);
   }

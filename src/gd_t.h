@@ -36,13 +36,7 @@ grid_init_set(gd_t *gdcurv, char *input_file);
 int
 grid_sample(gd_t *gdcurv_new, gd_t *gdcurv, float coef_x, float coef_z);
 
-int
-gd_curv_coord_export(gd_t *gdcurv, char *output_dir);
-
 int 
 check_bdry(float *x1, float *x2, float *z1, float *z2, int nx, int nz);
-
-int
-io_get_nextline(FILE *fp, char *str, int length);
 
 #endif

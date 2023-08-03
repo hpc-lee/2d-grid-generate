@@ -9,19 +9,21 @@
 #include "constants.h"
 #include "gd_t.h"
 #include "algebra.h"
+#include "io_funcs.h"
+#include "quality_check.h"
 
 int main(int argc, char** argv)
 {
-  int verbose = 1; // default fprint
+  int verbose;
   char *par_fname;
   char err_message[CONST_MAX_STRLEN];
 
-//-------------------------------------------------------------------------------
-// get commond-line argument
-//-------------------------------------------------------------------------------
+  //-------------------------------------------------------------------------------
+  // get commond-line argument
+  //-------------------------------------------------------------------------------
 
   // argc checking
-  if (argc < 2) {
+  if (argc < 3) {
     fprintf(stdout,"usage: main_grid_2d <par_file> <opt: verbose>\n");
     exit(1);
   }
@@ -44,6 +46,8 @@ int main(int argc, char** argv)
    
   // generate grid 
   gd_t *gdcurv = (gd_t *) malloc(sizeof(gd_t));
+  // for grid sample space
+  gd_t *gdcurv_new = (gd_t *) malloc(sizeof(gd_t));
   switch(par->method_itype)
   {
     case TFI : {
@@ -101,7 +105,6 @@ int main(int argc, char** argv)
     zt_arc_strech(gdcurv,par->strech_z_coef);
   }
 
-  gd_t *gdcurv_new = (gd_t *) malloc(sizeof(gd_t));
   if(par->flag_sample_x == 1 || par->flag_sample_z == 1)
   {
     grid_sample(gdcurv_new,gdcurv,par->sample_factor_x,par->sample_factor_z);
@@ -114,6 +117,22 @@ int main(int argc, char** argv)
     gd_curv_coord_export(gdcurv,par->grid_export_dir);
   }
 
+  // grid quality check and export quality data
+  io_quality_t *io_quality = (io_quality_t *) malloc(sizeof(io_quality_t));
+  if(par->grid_check == 1)
+  {
+    fprintf(stdout,"********************************************* \n");
+    fprintf(stdout,"***** grid quality check and export quality data *****\n");
+    fprintf(stdout,"********************************************* \n");
+    if(par->flag_sample_x == 1 || par->flag_sample_z == 1)
+    {
+      init_io_quality(io_quality,gdcurv_new);
+      grid_quality_check(io_quality,gdcurv_new,par);
+    } else {
+      init_io_quality(io_quality,gdcurv);
+      grid_quality_check(io_quality,gdcurv,par);
+    }
+  }
   return 0;
 }
 
