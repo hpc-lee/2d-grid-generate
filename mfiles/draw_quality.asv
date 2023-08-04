@@ -25,7 +25,7 @@ clrmp       = 'parula';
 % varable to plot 
 %  'orth', 'jacobi', 'ratio', 'smooth_x', 
 %  'smooth_z', 'step_x', 'step_z'
-varnm = 'jacobi';
+varnm = 'step_x';
 %-----------------------------------------------------------
 %-- load coord
 %-----------------------------------------------------------

@@ -47,6 +47,7 @@ typedef struct{
   int  method_itype;
 
   float coef;
+  int o2i;
   int num_layers; 
 } par_t;
 

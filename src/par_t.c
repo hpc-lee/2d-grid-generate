@@ -173,6 +173,9 @@ par_read_from_str(const char *str, par_t *par)
       if (thirditem = cJSON_GetObjectItem(subitem, "coef")) {
         par->coef = thirditem->valuedouble;
       }
+      if (thirditem = cJSON_GetObjectItem(subitem, "o2i")) {
+        par->o2i = thirditem->valueint;
+      }
     }
     if (subitem = cJSON_GetObjectItem(item, "hyperbolic")) {
       par->method_itype = HYPERBOLIC;
@@ -257,6 +260,12 @@ par_print(par_t *par)
   if(par->method_itype == PARABOLIC) {
     fprintf(stdout, "grid generate method is parabolic\n");
     fprintf(stdout, "parabolic coef is %f\n", par->coef);
+    if(par->o2i == 1)
+    {
+      fprintf(stdout, "outer(bdry_2) to inner(bdry_1)\n");
+    } else {
+      fprintf(stdout, "inner(bdry_1) to outer(bdry_2)\n");
+    }
   }
 
   if(par->method_itype == HYPERBOLIC) {

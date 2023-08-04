@@ -11,6 +11,7 @@
 #include "algebra.h"
 #include "io_funcs.h"
 #include "quality_check.h"
+#include "parabolic.h"
 
 int main(int argc, char** argv)
 {
@@ -79,8 +80,8 @@ int main(int argc, char** argv)
     }
     case PARABOLIC : {
 
-
-
+      grid_init_set(gdcurv,par->geometry_input_file);
+      para_gene(gdcurv,par->coef,par->o2i);
 
       break;
     }

@@ -13,12 +13,14 @@ export grid dir is
 ------- check grid step z direction-------
 ------- check grid smooth x direction-------
 ------- check grid smooth z direction-------
-sample grid x direction factor is 2.000000
-------- strech z and strech coef is 0.000100-------
 ------- grid generate method-------
-grid generate method is unidirection hermite
-hermite coef is 0.300000
-sample grid ... 
+grid generate method is parabolic
+parabolic coef is -10.000000
+outer(bdry_2) to inner(bdry_1)
+parabolic method, march direction from inner bdry(k=0) to outer bdry(nz-1)
+so if we want from outer bdry(nz-1) to inner bdry(k=0), must be flip
+flip coord, trans outer bdry(nz-1) to inner bdry(0)
+not sample grid ... 
 export coord to file ... 
 ********************************************* 
 ***** grid quality check and export quality data *****

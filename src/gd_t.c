@@ -246,3 +246,31 @@ check_bdry(float *x1, float *x2, float *z1, float *z2, int nx, int nz)
   return 0;
 }
 
+int
+flip_coord(float *coord, int nx, int nz)
+{
+  size_t iptr,iptr1;
+  float *tmp_coord = NULL;
+  tmp_coord = (float *) malloc(nx*nz*sizeof(float));
+  // copy data
+  for(int k=0; k<nz; k++) {
+    for(int i=0; i<nx; i++) 
+    {
+      iptr = k*nx + i;
+      tmp_coord[iptr] = coord[iptr];
+    }
+  }
+  // flip coord
+  for(int k=0; k<nz; k++) {
+    for(int i=0; i<nx; i++) 
+    {
+      iptr = k*nx + i;
+      iptr1 = (nz-1-k)*nx + i;
+      coord[iptr] = tmp_coord[iptr1];
+    }
+  }
+
+  free(tmp_coord);
+
+  return 0;
+}

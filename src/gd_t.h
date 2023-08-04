@@ -39,4 +39,7 @@ grid_sample(gd_t *gdcurv_new, gd_t *gdcurv, float coef_x, float coef_z);
 int 
 check_bdry(float *x1, float *x2, float *z1, float *z2, int nx, int nz);
 
+int
+flip_coord(float *coord, int nx, int nz);
+
 #endif

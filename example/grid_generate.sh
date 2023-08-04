@@ -39,10 +39,10 @@ cat << ieof > ${PAR_FILE}
 
   "flag_strech_x" : 0,
   "strech_x_coef" : 0.0001,
-  "flag_strech_z" : 1,
+  "flag_strech_z" : 0,
   "strech_z_coef" : 0.0001,
 
-  "flag_sample_x" : 1,
+  "flag_sample_x" : 0,
   "sample_factor_x" : 2.0,
   "flag_sample_x" : 0,
   "sample_factor_z" : 1.0,
@@ -52,7 +52,7 @@ cat << ieof > ${PAR_FILE}
 
   "grid_method" : {
       "#linear_TFI" : "",
-      "hermite" : {
+      "#hermite" : {
           "coef" : 0.3
       },
       "#elli_diri" : {
@@ -61,8 +61,9 @@ cat << ieof > ${PAR_FILE}
       "#elli_higen" : {
           "coef" : 0.3
       },
-      "#parabolic" : {
-          "coef" : 0.3
+      "parabolic" : {
+          "coef" : -10,
+          "o2i" : 1
       },
       "#hyperbolic" : {
           "coef" : 0.3,
