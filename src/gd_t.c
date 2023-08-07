@@ -246,6 +246,7 @@ check_bdry(float *x1, float *x2, float *z1, float *z2, int nx, int nz)
   return 0;
 }
 
+// 2D array flip z direction.  nz-1->0 0->nz-1 i->(nz-1)-i 
 int
 flip_coord(float *coord, int nx, int nz)
 {
@@ -274,3 +275,55 @@ flip_coord(float *coord, int nx, int nz)
 
   return 0;
 }
+
+// 2D array permute. transposition (nx,nz) -> (nz,nx)
+int
+permute_coord(gd_t *gdcurv)
+{
+  int nx = gdcurv->nx;
+  int nz = gdcurv->nz;
+
+  float *x2d = gdcurv->x2d;
+  float *z2d = gdcurv->z2d;
+
+  size_t iptr,iptr1;
+
+  float *tmp_coord_x = NULL;
+  float *tmp_coord_z = NULL;
+  tmp_coord_x = (float *) malloc(nx*nz*sizeof(float));
+  tmp_coord_z = (float *) malloc(nx*nz*sizeof(float));
+  // copy x
+  for(int k=0; k<nz; k++) {
+    for(int i=0; i<nx; i++) 
+    {
+      iptr = k*nx + i;
+      tmp_coord_x[iptr] = x2d[iptr];
+      tmp_coord_z[iptr] = z2d[iptr];
+    }
+  }
+  // permute coord, x to z
+  for(int k=0; k<nz; k++) {
+    for(int i=0; i<nx; i++) 
+    {
+      iptr = i*nz + k;
+      iptr1 = k*nx + i;
+      z2d[iptr] = tmp_coord_x[iptr1];
+      x2d[iptr] = tmp_coord_z[iptr1];
+    }
+  }
+
+  // NOTE:  
+  gdcurv->nx = nz;
+  gdcurv->nz = nx;
+
+  free(tmp_coord_x); 
+  free(tmp_coord_z); 
+
+  return 0;
+}
+
+
+
+
+
+

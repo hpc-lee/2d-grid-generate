@@ -6,6 +6,7 @@
 #include <string.h>
 
 #include "cJSON.h"
+#include "constants.h"
 #include "par_t.h"
 
 #define PAR_MAX_STRLEN 1000
@@ -15,6 +16,9 @@
 #define ELLI_HIGEN 4
 #define PARABOLIC 5
 #define HYPERBOLIC 6
+
+#define X_DIRE 1
+#define Z_DIRE 2
 
 typedef struct{
 
@@ -44,11 +48,17 @@ typedef struct{
   // TFI hermite elliptic-dirichlet
   // elliptic-hilgenstock
   // parabolic hyperbolic
-  int  method_itype;
+  int method_itype;
 
+  int dire_itype;
+  char direction[PAR_MAX_STRLEN];
   float coef;
-  int o2i;
-  int num_layers; 
+
+  float distance[CONST_NDIM];  // for higenstock 
+  float i_err;   // iteration error
+  int max_iter;  // max iterations
+  int o2i;  // for parabolic
+  int num_layers; // for hyperbolic 
 } par_t;
 
 int

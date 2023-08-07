@@ -91,7 +91,7 @@ cal_orth(io_quality_t *io_quality, gd_t *gdcurv)
       len_zt = sqrt(pow(x_zt,2) + pow(z_zt,2));
       cos_angle = dot/(len_xi*len_zt); 
       // offset relative 90 degree
-      var[iptr] = abs((acos(cos_angle) * trans - 90));
+      var[iptr] = fabs((acos(cos_angle) * trans - 90));
     }
   }
   
@@ -141,7 +141,7 @@ cal_jacobi(io_quality_t *io_quality, gd_t *gdcurv)
       x_zt = x2d[iptr2] - x2d[iptr];
       z_zt = z2d[iptr2] - z2d[iptr];
 
-      var[iptr] = abs(x_xi*z_zt - z_xi*x_zt);
+      var[iptr] = fabs(x_xi*z_zt - z_xi*x_zt);
     }
   }
 

@@ -11,7 +11,7 @@ output_dir='../project/output';
 % which grid profile to plot
 subs=[1,1];     % start from index '1'
 subc=[-1,-1];   % '-1' to plot all points in this dimension
-subt=[2,2];
+subt=[1,1];
 
 % figure control parameters
 flag_km     = 1;
@@ -26,6 +26,7 @@ clrmp       = 'parula';
 %  'orth', 'jacobi', 'ratio', 'smooth_x', 
 %  'smooth_z', 'step_x', 'step_z'
 varnm = 'jacobi';
+% varnm = 'smooth_x';
 %-----------------------------------------------------------
 %-- load coord
 %-----------------------------------------------------------
@@ -36,7 +37,7 @@ varnm = 'jacobi';
 v=gather_quality(parfnm,output_dir,varnm,subs,subc,subt);
 
 %- set coord unit
-flag_km     = 1;
+flag_km     = 0;
 if flag_km
    x=x/1e3;
    z=z/1e3;
@@ -72,7 +73,7 @@ end
 if exist('scl_daspect')
     daspect(scl_daspect);
 end
-axis tight
+axis equal
 % colormap and colorbar
 if exist('clrmp')
     colormap(clrmp);

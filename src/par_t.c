@@ -155,6 +155,17 @@ par_read_from_str(const char *str, par_t *par)
       if (thirditem = cJSON_GetObjectItem(subitem, "coef")) {
         par->coef = thirditem->valuedouble;
       }
+      if (thirditem = cJSON_GetObjectItem(subitem, "direction")) {
+        sprintf(par->direction, "%s", thirditem->valuestring);
+        if(strcmp(par->direction,"x") == 0)
+        {
+          par->dire_itype = X_DIRE;
+        }
+        if(strcmp(par->direction,"z") == 0)
+        {
+          par->dire_itype = Z_DIRE;
+        }
+      }
     }
     if (subitem = cJSON_GetObjectItem(item, "elli_diri")) {
       par->method_itype = ELLI_DIRI;
@@ -167,6 +178,28 @@ par_read_from_str(const char *str, par_t *par)
       if (thirditem = cJSON_GetObjectItem(subitem, "coef")) {
         par->coef = thirditem->valuedouble;
       }
+      if (thirditem = cJSON_GetObjectItem(subitem, "distance")) {
+         for (int i = 0; i < CONST_NDIM; i++) {
+           par->distance[i] = cJSON_GetArrayItem(thirditem, i)->valuedouble;
+         }
+      }
+      if (thirditem = cJSON_GetObjectItem(subitem, "iter_err")) {
+        par->i_err = thirditem->valuedouble;
+      }
+      if (thirditem = cJSON_GetObjectItem(subitem, "max_iter")) {
+        par->max_iter = thirditem->valueint;
+      }
+      if (thirditem = cJSON_GetObjectItem(subitem, "direction")) {
+        sprintf(par->direction, "%s", thirditem->valuestring);
+        if(strcmp(par->direction,"x") == 0)
+        {
+          par->dire_itype = X_DIRE;
+        }
+        if(strcmp(par->direction,"z") == 0)
+        {
+          par->dire_itype = Z_DIRE;
+        }
+      }
     }
     if (subitem = cJSON_GetObjectItem(item, "parabolic")) {
       par->method_itype = PARABOLIC;
@@ -175,6 +208,17 @@ par_read_from_str(const char *str, par_t *par)
       }
       if (thirditem = cJSON_GetObjectItem(subitem, "o2i")) {
         par->o2i = thirditem->valueint;
+      }
+      if (thirditem = cJSON_GetObjectItem(subitem, "direction")) {
+        sprintf(par->direction, "%s", thirditem->valuestring);
+        if(strcmp(par->direction,"x") == 0)
+        {
+          par->dire_itype = X_DIRE;
+        }
+        if(strcmp(par->direction,"z") == 0)
+        {
+          par->dire_itype = Z_DIRE;
+        }
       }
     }
     if (subitem = cJSON_GetObjectItem(item, "hyperbolic")) {
@@ -248,6 +292,12 @@ par_print(par_t *par)
   if(par->method_itype == HERMITE) {
     fprintf(stdout, "grid generate method is unidirection hermite\n");
     fprintf(stdout, "hermite coef is %f\n", par->coef);
+    if(par->dire_itype == X_DIRE) {
+      fprintf(stdout, "grid generate direction is x\n");
+    }
+    if(par->dire_itype == Z_DIRE) {
+      fprintf(stdout, "grid generate direction is z\n");
+    }
   }
   if(par->method_itype == ELLI_DIRI) {
     fprintf(stdout, "grid generate method is elliptic_dirichlet\n");
@@ -256,10 +306,28 @@ par_print(par_t *par)
   if(par->method_itype == ELLI_HIGEN) {
     fprintf(stdout, "grid generate method is elliptic_hilgenstock\n");
     fprintf(stdout, "elli_higen coef is %f\n", par->coef);
+    fprintf(stdout, "max_iteration is %d\n", par->max_iter);
+    fprintf(stdout, "iter_error is %f\n", par->i_err);
+    if(par->dire_itype == X_DIRE) {
+      fprintf(stdout, "grid generate direction is x\n");
+      fprintf(stdout, "expect distance x1 bdry is %f\n",par->distance[0]);
+      fprintf(stdout, "expect distance x2 bdry is %f\n",par->distance[1]);
+    }
+    if(par->dire_itype == Z_DIRE) {
+      fprintf(stdout, "grid generate direction is z\n");
+      fprintf(stdout, "expect distance z1 bdry is %f\n",par->distance[0]);
+      fprintf(stdout, "expect distance z2 bdry is %f\n",par->distance[1]);
+    }
   }
   if(par->method_itype == PARABOLIC) {
     fprintf(stdout, "grid generate method is parabolic\n");
     fprintf(stdout, "parabolic coef is %f\n", par->coef);
+    if(par->dire_itype == X_DIRE) {
+      fprintf(stdout, "grid generate direction is x\n");
+    }
+    if(par->dire_itype == Z_DIRE) {
+      fprintf(stdout, "grid generate direction is z\n");
+    }
     if(par->o2i == 1)
     {
       fprintf(stdout, "outer(bdry_2) to inner(bdry_1)\n");

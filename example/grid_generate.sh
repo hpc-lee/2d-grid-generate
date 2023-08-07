@@ -53,16 +53,22 @@ cat << ieof > ${PAR_FILE}
   "grid_method" : {
       "#linear_TFI" : "",
       "#hermite" : {
-          "coef" : 0.3
+          "coef" : 0.3,
+          "direction" : "x"
       },
       "#elli_diri" : {
           "coef" : 0.3
       },
-      "#elli_higen" : {
-          "coef" : 0.3
+      "elli_higen" : {
+          "coef" : -20,
+          "iter_err" : 0.0001,
+          "max_iter" : 5000,
+          "distance" : [10.0,10.0],
+          "direction" : "z"
       },
-      "parabolic" : {
-          "coef" : -10,
+      "#parabolic" : {
+          "coef" : -40,
+          "direction" : "x",
           "o2i" : 1
       },
       "#hyperbolic" : {

@@ -5,10 +5,11 @@
 #include <stddef.h>
 
 #include "parabolic.h"
+#include "solver.h"
 #include "fdlib_mem.h"
 
 int 
-para_gene(gd_t *gdcurv,float coef, int o2i)
+para_gene(gd_t *gdcurv, float coef, int o2i)
 {
   int nx = gdcurv->nx;
   int nz = gdcurv->nz;
@@ -36,6 +37,13 @@ para_gene(gd_t *gdcurv,float coef, int o2i)
     // base predict points
     // update k layer points
     update_point(x2d,z2d,var_th,nx,nz,k);
+  }
+
+  if(o2i == 1)
+  {
+    // flip to return.
+    flip_coord(x2d,nx,nz);
+    flip_coord(z2d,nx,nz);
   }
 
   free(var_th);
@@ -104,15 +112,18 @@ predict_point(float *x2d, float *z2d, int nx, int nz, int k, int o2i, float coef
     iptr3 = (k+1)*nx + 0; // (0,k+1)
     iptr4 =  k*nx + 0; // (0,k)
 
-    R1_x = x2d[iptr1] - x2d[iptr2];
+    //R1_x = x2d[iptr1] - x2d[iptr2];
+    R1_x = 0.0;
     R1_z = z2d[iptr1] - z2d[iptr2];
     R1 = sqrt(pow(R1_x,2)+pow(R1_z,2));
 
-    r1_x = x2d[iptr1] - x2d[iptr3];
+    //r1_x = x2d[iptr1] - x2d[iptr3];
+    r1_x = 0.0;
     r1_z = z2d[iptr1] - z2d[iptr3];
     r1 = sqrt(pow(r1_x,2)+pow(r1_z,2));
 
-    r11_x = x2d[iptr1] - x2d[iptr4];
+    //r11_x = x2d[iptr1] - x2d[iptr4];
+    r11_x = 0.0;
     r11_z = z2d[iptr1] - z2d[iptr4];
     r11 = sqrt(pow(r11_x,2)+pow(r11_z,2));
 
@@ -125,15 +136,18 @@ predict_point(float *x2d, float *z2d, int nx, int nz, int k, int o2i, float coef
     iptr3 = (k+1)*nx + nx-1; // (nx-1,k+1)
     iptr4 =  k*nx + nx-1; // (nx-1,k)
 
-    R2_x = x2d[iptr1] - x2d[iptr2];
+    //R2_x = x2d[iptr1] - x2d[iptr2];
+    R2_x = 0.0;
     R2_z = z2d[iptr1] - z2d[iptr2];
     R2 = sqrt(pow(R2_x,2)+pow(R2_z,2));
 
-    r2_x = x2d[iptr1] - x2d[iptr3];
+    //r2_x = x2d[iptr1] - x2d[iptr3];
+    r2_x = 0.0;
     r2_z = z2d[iptr1] - z2d[iptr3];
     r2 = sqrt(pow(r2_x,2)+pow(r2_z,2));
 
-    r22_x = x2d[iptr1] - x2d[iptr4];
+    //r22_x = x2d[iptr1] - x2d[iptr4];
+    r22_x = 0.0;
     r22_z = z2d[iptr1] - z2d[iptr4];
     r22 = sqrt(pow(r22_x,2)+pow(r22_z,2));
 
@@ -151,6 +165,7 @@ predict_point(float *x2d, float *z2d, int nx, int nz, int k, int o2i, float coef
     z0 = z2d[iptr1] + vn_z*c*R;
     
     // xs,zs linear distance point
+    iptr1 = (k-1)*nx + i; //(i,k-1)
     iptr2 = (nz-1)*nx + i;   //(i,nz-1)
     xs = x2d[iptr1] + c*(x2d[iptr2]-x2d[iptr1]);
     zs = z2d[iptr1] + c*(z2d[iptr2]-z2d[iptr1]);
@@ -163,6 +178,8 @@ predict_point(float *x2d, float *z2d, int nx, int nz, int k, int o2i, float coef
     x2d[iptr4] = x2d[iptr1] + cc*(x2d[iptr3]-x2d[iptr1]);
     z2d[iptr4] = z2d[iptr1] + cc*(z2d[iptr3]-z2d[iptr1]);
   }
+
+  bdry_effct(x2d,z2d,nx,nz,k);
 
   return 0;
 }
@@ -252,3 +269,55 @@ update_point(float *x2d, float *z2d, float *var_th, int nx, int nz, int k)
   return 0;
 }
 
+int
+bdry_effct(float *x2d, float *z2d, int nx, int nz, int k)
+{
+  // add bdry point effct
+  // due to bdry maybe nonlinear,
+  // bdry undulate 
+  // only x coord need modify
+  // x1 bdry x-dire distance
+  float x1_len1, x1_len2, x1_len3, x1_len4;
+  float x2_len1, x2_len2, x2_len3, x2_len4;
+  float dif_x1_len1, dif_x1_len2, dif_x2_len1, dif_x2_len2;
+  size_t iptr1,iptr2,iptr3;
+  iptr1 = (k-1)*nx + 0; //(0,k-1)
+  iptr2 =  k*nx + 0;    //(0,k)
+  iptr3 = (k+1)*nx + 0; //(0,k+1)
+  x1_len1 = x2d[iptr2]-x2d[iptr1];
+  x1_len2 = x2d[iptr3]-x2d[iptr2];
+  iptr1 = (k-1)*nx + 1; //(1,k-1)
+  iptr2 =  k*nx + 1;    //(1,k)
+  iptr3 = (k+1)*nx + 1; //(1,k+1)
+  x1_len3  = x2d[iptr2]-x2d[iptr1];
+  x1_len4  = x2d[iptr3]-x2d[iptr2];
+  dif_x1_len1 = x1_len1-x1_len3;
+  dif_x1_len2 = x1_len2-x1_len4;
+  // x2 bdry x-dire distance
+  iptr1 = (k-1)*nx + (nx-1); //(nx-1,k-1)
+  iptr2 =  k*nx + (nx-1);    //(nx-1,k)
+  iptr3 = (k+1)*nx + (nx-1); //(nx-1,k+1)
+  x2_len1 = x2d[iptr2]-x2d[iptr1];
+  x2_len2 = x2d[iptr3]-x2d[iptr2];
+  iptr1 = (k-1)*nx + (nx-2); //(nx-2,k-1)
+  iptr2 =  k*nx + (nx-2);    //(nx-2,k)
+  iptr3 = (k+1)*nx + (nx-2); //(nx-2,k+1)
+  x2_len3  = x2d[iptr2]-x2d[iptr1];
+  x2_len4  = x2d[iptr3]-x2d[iptr2];
+  dif_x2_len1 = x2_len1-x2_len3;
+  dif_x2_len2 = x2_len2-x2_len4;
+  
+  float xi, bdry_effct1, bdry_effct2;
+  for(int i=1; i<nx-1; i++)
+  {
+    xi = (1.0*i)/(nx-1);
+    bdry_effct1 = (1-xi)*dif_x1_len1 + xi*dif_x2_len1;
+    bdry_effct2 = (1-xi)*dif_x1_len2 + xi*dif_x2_len2;
+    iptr1 = k*nx + i; 
+    x2d[iptr1] = x2d[iptr1] + 2.05*bdry_effct1;
+    iptr2 = (k+1)*nx + i; 
+    x2d[iptr2] = x2d[iptr2] + 2.05*bdry_effct2;
+  }
+
+  return 0;
+}
