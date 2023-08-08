@@ -5,15 +5,22 @@
 #include "par_t.h"
 
 int
-higen_gene(gd_t *gdcurv, par_t *par);
-
-int 
-higen_P_SOR(float *x2d, float *z2d, int nx, int nz, float *P, float *Q,
-            float d1, float d2, float coef, float err, int max_iter, float w);
-
+diri_gene(gd_t *gdcurv, par_t *par);
 
 int
-set_src_higen(float *x2d, float *z2d, float *P, float *Q,
-              float coef, int nx, int nz, float d1, float d2);
+set_src_diri(float *x2d, float *z2d, int nx, int nz, 
+             float *P, float *Q, float *p_x, float *p_z,
+             float *g11_x, float *g22_z, float coef);
+
+int
+ghost_cal(float *x2d, float *z2d, int nx, int nz, float *p_x, float *p_z,
+          float *g11_x, float *g22_z);
+
+int
+higen_gene(gd_t *gdcurv, par_t *par);
+
+int
+set_src_higen(float *x2d, float *z2d, int nx, int nz,
+              float *P, float *Q, float coef, float d1, float d2);
 
 #endif

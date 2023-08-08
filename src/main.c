@@ -82,7 +82,21 @@ int main(int argc, char** argv)
     }
     case ELLI_DIRI : {
 
+      grid_init_set(gdcurv,par->geometry_input_file);
+      // before grid generate
+      if(par->dire_itype == X_DIRE)
+      {
+        permute_coord(gdcurv);
+      }
+      // linear tfi generate init iter grid
+      linear_tfi(gdcurv);
+      diri_gene(gdcurv,par);
 
+      // after grid generate
+      if(par->dire_itype == X_DIRE)
+      {
+        permute_coord(gdcurv);
+      }
 
       break;
     }
@@ -103,8 +117,6 @@ int main(int argc, char** argv)
       {
         permute_coord(gdcurv);
       }
-
-
 
       break;
     }

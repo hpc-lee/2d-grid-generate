@@ -172,6 +172,23 @@ par_read_from_str(const char *str, par_t *par)
       if (thirditem = cJSON_GetObjectItem(subitem, "coef")) {
         par->coef = thirditem->valuedouble;
       }
+      if (thirditem = cJSON_GetObjectItem(subitem, "iter_err")) {
+        par->i_err = thirditem->valuedouble;
+      }
+      if (thirditem = cJSON_GetObjectItem(subitem, "max_iter")) {
+        par->max_iter = thirditem->valueint;
+      }
+      if (thirditem = cJSON_GetObjectItem(subitem, "direction")) {
+        sprintf(par->direction, "%s", thirditem->valuestring);
+        if(strcmp(par->direction,"x") == 0)
+        {
+          par->dire_itype = X_DIRE;
+        }
+        if(strcmp(par->direction,"z") == 0)
+        {
+          par->dire_itype = Z_DIRE;
+        }
+      }
     }
     if (subitem = cJSON_GetObjectItem(item, "elli_higen")) {
       par->method_itype = ELLI_HIGEN;
@@ -302,6 +319,14 @@ par_print(par_t *par)
   if(par->method_itype == ELLI_DIRI) {
     fprintf(stdout, "grid generate method is elliptic_dirichlet\n");
     fprintf(stdout, "elli_diri coef is %f\n", par->coef);
+    fprintf(stdout, "max_iteration is %d\n", par->max_iter);
+    fprintf(stdout, "iter_error is %f\n", par->i_err);
+    if(par->dire_itype == X_DIRE) {
+      fprintf(stdout, "grid generate direction is x\n");
+    }
+    if(par->dire_itype == Z_DIRE) {
+      fprintf(stdout, "grid generate direction is z\n");
+    }
   }
   if(par->method_itype == ELLI_HIGEN) {
     fprintf(stdout, "grid generate method is elliptic_hilgenstock\n");
