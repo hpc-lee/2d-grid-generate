@@ -204,8 +204,8 @@ set_src_diri(float *x2d, float *z2d, int nx, int nz,
     z_xixi = p_x1[k+nz] + z2d[iptr3] - 2*z2d[iptr];
     g22 = pow(x_zt,2) + pow(z_zt,2);
 
-    P[iptr] = -(x_xi*x_xixi + z_xi*z_xixi)/g11_x[k]  
-              -(x_xi*x_ztzt + z_xi*z_ztzt)/g22;
+    //P[iptr] = -(x_xi*x_xixi + z_xi*z_xixi)/g11_x[k]  
+    //          -(x_xi*x_ztzt + z_xi*z_ztzt)/g22;
     Q[iptr] = -(x_zt*x_xixi + z_zt*z_xixi)/g11_x[k]  
               -(x_zt*x_ztzt + z_zt*z_ztzt)/g22;
   }
@@ -228,8 +228,8 @@ set_src_diri(float *x2d, float *z2d, int nx, int nz,
     z_xixi = p_x2[k+nz] + z2d[iptr3] - 2*z2d[iptr];
     g22 = pow(x_zt,2) + pow(z_zt,2);
 
-    P[iptr] = -(x_xi*x_xixi + z_xi*z_xixi)/g11_x[k+nz]  
-              -(x_xi*x_ztzt + z_xi*z_ztzt)/g22;
+    //P[iptr] = -(x_xi*x_xixi + z_xi*z_xixi)/g11_x[k+nz]  
+    //          -(x_xi*x_ztzt + z_xi*z_ztzt)/g22;
     Q[iptr] = -(x_zt*x_xixi + z_zt*z_xixi)/g11_x[k+nz]  
               -(x_zt*x_ztzt + z_zt*z_ztzt)/g22;
   }
