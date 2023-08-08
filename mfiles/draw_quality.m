@@ -5,11 +5,21 @@ addmypath
 
 % -------------------------- parameters input -------------------------- %
 % file and path name
-parfnm='../project/test.json';
 output_dir='../project/output';
 
+% get nx and nz
+fnm_coord=[output_dir,'/','coord.nc'];
+if ~ exist(fnm_coord,'file')
+   error([mfilename ': file ' fnm_coord 'does not exist']);
+end
+
+xzc = nc_attget(fnm_coord,nc_global,'number_of_points');
+xzc = double(xzc);
+nx = xzc(1);
+nz = xzc(2);
+
 % which grid profile to plot
-subs=[1,1];     % start from index '1'
+subs=[1,1];     % % index 1:nx 1:nz
 subc=[-1,-1];   % '-1' to plot all points in this dimension
 subt=[1,1];
 
@@ -25,19 +35,18 @@ clrmp       = 'parula';
 % varable to plot 
 %  'orth', 'jacobi', 'ratio', 'smooth_x', 
 %  'smooth_z', 'step_x', 'step_z'
-varnm = 'jacobi';
-% varnm = 'smooth_x';
+% varnm = 'jacobi';
+varnm = 'orth';
 %-----------------------------------------------------------
 %-- load coord
 %-----------------------------------------------------------
 
-[x,z]=gather_coord(parfnm,output_dir,subs,subc,subt);
+[x,z]=gather_coord(output_dir,subs,subc,subt);
 
- 
-v=gather_quality(parfnm,output_dir,varnm,subs,subc,subt);
+v=gather_quality(output_dir,varnm,subs,subc,subt);
 
 %- set coord unit
-flag_km     = 0;
+flag_km = 0;
 if flag_km
    x=x/1e3;
    z=z/1e3;

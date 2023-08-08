@@ -1,4 +1,4 @@
-function [x,z] = gather_coord(parfnm,output_dir,subs,subc,subt)
+function [x,z] = gather_coord(output_dir,subs,subc,subt)
 
 % load
 fnm_coord=[output_dir,'/','coord.nc'];
@@ -10,22 +10,45 @@ end
 xzc = nc_attget(fnm_coord,nc_global,'number_of_points');
 xzc = double(xzc);
 
-xs = subs(1)-1;
-zs = subs(2)-1;
+if(subt(1)<0)
+  xt = abs(subt(1));
+  flip_subs = xzc(1) - subs(1) + 1;
+  if(subc(1) == -1)
+    xc = ceil((xzc(1)-flip_subs+1)/xt);
+  else
+    xc = subc(1);
+  end
+  xs = subs(1)-(xc-1)*xt-1;
+end
+if(subt(1)>0)
+  xt = subt(1);
+  if(subc(1) == -1)
+    xc = ceil((xzc(1)-subs(1)+1)/xt);
+  else
+    xc = subc(1);
+  end
+  xs = subs(1)-1;
+end
 
-if(subc(1) == -1)
-  xc = floor(xzc(1)/subt(1))-subs(1)+1;
-else
-  xc = subc(1);
+if(subt(2)<0)
+  zt = abs(subt(2));
+  flip_subs = xzc(2) - subs(2) + 1;
+  if(subc(2) == -1)
+    zc = ceil((xzc(2)-flip_subs+1)/zt);
+  else
+    zc = subc(2);
+  end
+  zs = subs(2)-(zc-1)*zt-1;
 end
-if(subc(2) == -1)
-  zc = floor(xzc(2)/subt(2))-subs(2)+1;
-else
-  zc = subc(2);
+if(subt(2)>0)
+  zt = subt(2);
+  if(subc(2) == -1)
+    zc = ceil((xzc(2)-subs(2)+1)/zt);
+  else
+    zc = subc(2);
+  end
+  zs = subs(2)-1;
 end
-%stride
-xt = subt(1);
-zt = subt(2);
 
 i1 = 1;
 i2 = i1 + xc - 1;
