@@ -204,8 +204,8 @@ set_src_diri(float *x2d, float *z2d, int nx, int nz,
     z_xixi = p_x1[k+nz] + z2d[iptr3] - 2*z2d[iptr];
     g22 = pow(x_zt,2) + pow(z_zt,2);
 
-    //P[iptr] = -(x_xi*x_xixi + z_xi*z_xixi)/g11_x[k]  
-    //          -(x_xi*x_ztzt + z_xi*z_ztzt)/g22;
+    P[iptr] = -(x_xi*x_xixi + z_xi*z_xixi)/g11_x[k]  
+              -(x_xi*x_ztzt + z_xi*z_ztzt)/g22;
     Q[iptr] = -(x_zt*x_xixi + z_zt*z_xixi)/g11_x[k]  
               -(x_zt*x_ztzt + z_zt*z_ztzt)/g22;
   }
@@ -228,8 +228,8 @@ set_src_diri(float *x2d, float *z2d, int nx, int nz,
     z_xixi = p_x2[k+nz] + z2d[iptr3] - 2*z2d[iptr];
     g22 = pow(x_zt,2) + pow(z_zt,2);
 
-    //P[iptr] = -(x_xi*x_xixi + z_xi*z_xixi)/g11_x[k+nz]  
-    //          -(x_xi*x_ztzt + z_xi*z_ztzt)/g22;
+    P[iptr] = -(x_xi*x_xixi + z_xi*z_xixi)/g11_x[k+nz]  
+              -(x_xi*x_ztzt + z_xi*z_ztzt)/g22;
     Q[iptr] = -(x_zt*x_xixi + z_zt*z_xixi)/g11_x[k+nz]  
               -(x_zt*x_ztzt + z_zt*z_ztzt)/g22;
   }
@@ -254,9 +254,9 @@ set_src_diri(float *x2d, float *z2d, int nx, int nz,
   }
   
   // then use bdry x1 x2 to interp inner point
-  // NOTE: point (:,0:5),(:,nz-6:nz-1) Q calculate
+  // NOTE: point (:,0:5),(:,nz-6:nz-1) P Q calculate
   // only by z1,z2
-  // point(:,6:nz-7), Q calculte by z1 z2 x1 x2
+  // point(:,6:nz-7), P Q calculte by z1 z2 x1 x2
   // so need superposition
   for(int k=5; k<nz-5; k++) {
     for(int i=1; i<nx-1; i++)
@@ -269,6 +269,7 @@ set_src_diri(float *x2d, float *z2d, int nx, int nz,
       iptr  = k*nx + i;
       iptr1 = k*nx + 0;
       iptr2 = k*nx + (nx-1);
+      P[iptr] = P[iptr] + r0*P[iptr1] + r1*P[iptr2];
       Q[iptr] = Q[iptr] + r0*Q[iptr1] + r1*Q[iptr2];
     }
   }
@@ -409,12 +410,9 @@ ghost_cal(float *x2d, float *z2d, int nx, int nz, float *p_x, float *p_z,
 int
 higen_gene(gd_t *gdcurv, par_t *par)
 {
-  float d1 = par->distance[0];
-  float d2 = par->distance[1];
   float err = par->i_err;
   int max_iter = par->max_iter;
   float coef = par->coef;
-
   int nx = gdcurv->nx;
   int nz = gdcurv->nz;
   float *x2d = gdcurv->x2d;
@@ -430,6 +428,21 @@ higen_gene(gd_t *gdcurv, par_t *par)
   x2d_tmp = (float *)fdlib_mem_calloc_1d_float(gdcurv->siz_icmp, 0.0, "x2d_tmp");
   z2d_tmp = (float *)fdlib_mem_calloc_1d_float(gdcurv->siz_icmp, 0.0, "z2d_tmp");
 
+  float dx1,dx2,dz1,dz2;
+  if(par->dire_itype == Z_DIRE)
+  {
+    dx1 = par->distance[0];
+    dx2 = par->distance[1];
+    dz1 = par->distance[2];
+    dz2 = par->distance[3];
+  }
+  if(par->dire_itype == X_DIRE)
+  {
+    dz1 = par->distance[0];
+    dz2 = par->distance[1];
+    dx1 = par->distance[2];
+    dx2 = par->distance[3];
+  }
   // now we default set w=1.0.
   // this is Gauss-Seidel
   float w=1.0; // SOR coef
@@ -480,7 +493,7 @@ higen_gene(gd_t *gdcurv, par_t *par)
       }
     }
     
-    set_src_higen(x2d,z2d,nx,nz,P,Q,coef,d1,d2);
+    set_src_higen(x2d,z2d,nx,nz,P,Q,coef,dx1,dx2,dz1,dz2);
 
     if(Niter>max_iter) {
       flag_true = 0;
@@ -504,7 +517,8 @@ higen_gene(gd_t *gdcurv, par_t *par)
 
 int
 set_src_higen(float *x2d, float *z2d, int nx, int nz,
-              float *P, float *Q, float coef, float d1, float d2)
+              float *P, float *Q, float coef,
+              float dx1, float dx2, float dz1, float dz2)
 {
   float theta0 = PI/2;
   float a = 0.1;
@@ -534,7 +548,7 @@ set_src_higen(float *x2d, float *z2d, int nx, int nz,
     dif_theta = (theta0-theta)/theta0;
     P[iptr] = P[iptr] - a*tanh(dif_theta);
 
-    dif_dis = (d1-len_zt)/d1;
+    dif_dis = (dz1-len_zt)/dz1;
     Q[iptr] = Q[iptr] + a*tanh(dif_dis);
   }
 
@@ -562,7 +576,7 @@ set_src_higen(float *x2d, float *z2d, int nx, int nz,
     dif_theta = (theta0-theta)/theta0;
     P[iptr] = P[iptr] + a*tanh(dif_theta);
 
-    dif_dis = (d2-len_zt)/d2;
+    dif_dis = (dz2-len_zt)/dz2;
     Q[iptr] = Q[iptr] - a*tanh(dif_dis);
   }
 
@@ -589,6 +603,9 @@ set_src_higen(float *x2d, float *z2d, int nx, int nz,
     theta = acos(cos_theta);
     dif_theta = (theta0-theta)/theta0;
     Q[iptr] = Q[iptr] - a*tanh(dif_theta);
+
+    dif_dis = (dx1-len_xi)/dx1;
+    P[iptr] = Q[iptr] + a*tanh(dif_dis);
   }
   // bdry x2 xi=1
   for(int k=1; k<nz-1; k++)
@@ -611,6 +628,9 @@ set_src_higen(float *x2d, float *z2d, int nx, int nz,
     theta = acos(cos_theta);
     dif_theta = (theta0-theta)/theta0;
     Q[iptr] = Q[iptr] + a*tanh(dif_theta);
+
+    dif_dis = (dx2-len_xi)/dx2;
+    P[iptr] = Q[iptr] - a*tanh(dif_dis);
   }
 
   // first use bdry z1 z2 to interp inner point
@@ -648,6 +668,7 @@ set_src_higen(float *x2d, float *z2d, int nx, int nz,
       iptr  = k*nx + i;
       iptr1 = k*nx + 0;
       iptr2 = k*nx + (nx-1);
+      P[iptr] = P[iptr] + r0*P[iptr1] + r1*P[iptr2];
       Q[iptr] = Q[iptr] + r0*Q[iptr1] + r1*Q[iptr2];
     }
   }

@@ -196,7 +196,7 @@ par_read_from_str(const char *str, par_t *par)
         par->coef = thirditem->valuedouble;
       }
       if (thirditem = cJSON_GetObjectItem(subitem, "distance")) {
-         for (int i = 0; i < CONST_NDIM; i++) {
+         for (int i = 0; i < 4; i++) {
            par->distance[i] = cJSON_GetArrayItem(thirditem, i)->valuedouble;
          }
       }
@@ -335,14 +335,14 @@ par_print(par_t *par)
     fprintf(stdout, "iter_error is %f\n", par->i_err);
     if(par->dire_itype == X_DIRE) {
       fprintf(stdout, "grid generate direction is x\n");
-      fprintf(stdout, "expect distance x1 bdry is %f\n",par->distance[0]);
-      fprintf(stdout, "expect distance x2 bdry is %f\n",par->distance[1]);
     }
     if(par->dire_itype == Z_DIRE) {
       fprintf(stdout, "grid generate direction is z\n");
-      fprintf(stdout, "expect distance z1 bdry is %f\n",par->distance[0]);
-      fprintf(stdout, "expect distance z2 bdry is %f\n",par->distance[1]);
     }
+    fprintf(stdout, "expect distance x1 bdry is %f\n",par->distance[0]);
+    fprintf(stdout, "expect distance x2 bdry is %f\n",par->distance[1]);
+    fprintf(stdout, "expect distance z1 bdry is %f\n",par->distance[2]);
+    fprintf(stdout, "expect distance z2 bdry is %f\n",par->distance[3]);
   }
   if(par->method_itype == PARABOLIC) {
     fprintf(stdout, "grid generate method is parabolic\n");

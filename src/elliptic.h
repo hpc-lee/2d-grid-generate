@@ -21,6 +21,7 @@ higen_gene(gd_t *gdcurv, par_t *par);
 
 int
 set_src_higen(float *x2d, float *z2d, int nx, int nz,
-              float *P, float *Q, float coef, float d1, float d2);
+              float *P, float *Q, float coef,
+              float dx1, float dx2, float dz1, float dz2);
 
 #endif

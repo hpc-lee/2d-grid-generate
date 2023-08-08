@@ -54,7 +54,7 @@ typedef struct{
   char direction[PAR_MAX_STRLEN];
   float coef;
 
-  float distance[CONST_NDIM];  // for higenstock 
+  float distance[4];  // for higenstock dx1,dx2,dz1,dz2 
   float i_err;   // iteration error
   int max_iter;  // max iterations
   int o2i;  // for parabolic
