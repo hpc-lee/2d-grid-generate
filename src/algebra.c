@@ -5,7 +5,7 @@
 #include <stddef.h>
 
 #include "algebra.h"
-#include "fdlib_mem.h"
+#include "lib_mem.h"
 
 // linear tfi interpolation
 // U means x-direction
@@ -83,11 +83,11 @@ one_hermite(gd_t *gdcurv, float coef)
   float *nor_z2_x;
   float *nor_z2_z;
 
-  dh_len = (float *)fdlib_mem_calloc_1d_float(nx, 0.0, "init");
-  nor_z1_x = (float *)fdlib_mem_calloc_1d_float(nx, 0.0, "init");
-  nor_z1_z = (float *)fdlib_mem_calloc_1d_float(nx, 0.0, "init");
-  nor_z2_x = (float *)fdlib_mem_calloc_1d_float(nx, 0.0, "init");
-  nor_z2_z = (float *)fdlib_mem_calloc_1d_float(nx, 0.0, "init");
+  dh_len = (float *)mem_calloc_1d_float(nx, 0.0, "init");
+  nor_z1_x = (float *)mem_calloc_1d_float(nx, 0.0, "init");
+  nor_z1_z = (float *)mem_calloc_1d_float(nx, 0.0, "init");
+  nor_z2_x = (float *)mem_calloc_1d_float(nx, 0.0, "init");
+  nor_z2_z = (float *)mem_calloc_1d_float(nx, 0.0, "init");
 
   for (int i=0; i<nx; i++)
   {
@@ -190,13 +190,13 @@ zt_arc_strech(gd_t *gdcurv, float coef)
   float *s;
   float *u;
 
-  x2d_temp = (float *)fdlib_mem_calloc_1d_float(
+  x2d_temp = (float *)mem_calloc_1d_float(
               nz, 0.0, "init");
-  z2d_temp = (float *)fdlib_mem_calloc_1d_float(
+  z2d_temp = (float *)mem_calloc_1d_float(
               nz, 0.0, "init");
-  s = (float *)fdlib_mem_calloc_1d_float(
+  s = (float *)mem_calloc_1d_float(
               nz, 0.0, "init");
-  u = (float *)fdlib_mem_calloc_1d_float(
+  u = (float *)mem_calloc_1d_float(
               nz, 0.0, "init");
 
  
@@ -272,13 +272,13 @@ xi_arc_strech(gd_t *gdcurv, float coef)
   float *s;
   float *u;
 
-  x2d_temp = (float *)fdlib_mem_calloc_1d_float(
+  x2d_temp = (float *)mem_calloc_1d_float(
               nx, 0.0, "init");
-  z2d_temp = (float *)fdlib_mem_calloc_1d_float(
+  z2d_temp = (float *)mem_calloc_1d_float(
               nx, 0.0, "init");
-  s = (float *)fdlib_mem_calloc_1d_float(
+  s = (float *)mem_calloc_1d_float(
               nx, 0.0, "init");
-  u = (float *)fdlib_mem_calloc_1d_float(
+  u = (float *)mem_calloc_1d_float(
               nx, 0.0, "init");
  
   // line by line. k=0 -> k=nz-1 
@@ -357,13 +357,13 @@ sample_interp(gd_t *gdcurv_new, gd_t *gdcurv)
   float r, ratio;
   int n;
 
-  x2d_temp = (float *)fdlib_mem_calloc_1d_float(
+  x2d_temp = (float *)mem_calloc_1d_float(
               nx, 0.0, "init");
-  z2d_temp = (float *)fdlib_mem_calloc_1d_float(
+  z2d_temp = (float *)mem_calloc_1d_float(
               nx, 0.0, "init");
-  u = (float *)fdlib_mem_calloc_1d_float(
+  u = (float *)mem_calloc_1d_float(
               nz, 0.0, "gd_curv_init");
-  v = (float *)fdlib_mem_calloc_1d_float(
+  v = (float *)mem_calloc_1d_float(
               nx, 0.0, "gd_curv_init");
 
   // first interp zt direction 

@@ -5,7 +5,7 @@
 
 #include "netcdf.h" 
 
-#include "fdlib_mem.h"
+#include "lib_mem.h"
 #include "constants.h"
 #include "io_funcs.h"
 
@@ -16,7 +16,7 @@ init_io_quality(io_quality_t *io_quality, gd_t *gdcurv)
   io_quality->nz = gdcurv->nz;
   
   // malloc quality space 
-  io_quality->var = (float *)fdlib_mem_calloc_1d_float(
+  io_quality->var = (float *)mem_calloc_1d_float(
                   gdcurv->siz_icmp, 0.0, "quality_init");
   if (io_quality->var == NULL) {
       fprintf(stderr,"Error: failed to alloc quality vars\n");

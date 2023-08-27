@@ -6,7 +6,7 @@
 
 #include "parabolic.h"
 #include "solver.h"
-#include "fdlib_mem.h"
+#include "lib_mem.h"
 
 int 
 para_gene(gd_t *gdcurv, float coef, int o2i)
@@ -28,7 +28,7 @@ para_gene(gd_t *gdcurv, float coef, int o2i)
   // malloc space for thomas method 
   // a,b,c,d_x,d_z,u_x,u_z. 7 vars space
   float *var_th = NULL;
-  var_th = (float *)fdlib_mem_calloc_1d_float((nx-2)*7, 0.0, "init");
+  var_th = (float *)mem_calloc_1d_float((nx-2)*7, 0.0, "init");
 
   for(int k=1; k<nz-1; k++)
   {

@@ -7,7 +7,7 @@
 #include "elliptic.h"
 #include "constants.h"
 #include "solver.h"
-#include "fdlib_mem.h"
+#include "lib_mem.h"
 
 int
 diri_gene(gd_t *gdcurv, par_t *par)
@@ -23,20 +23,20 @@ diri_gene(gd_t *gdcurv, par_t *par)
 
   float *P = NULL; //source term P
   float *Q = NULL; //source term Q
-  P = (float *)fdlib_mem_calloc_1d_float(gdcurv->siz_icmp, 0.0, "source P");
-  Q = (float *)fdlib_mem_calloc_1d_float(gdcurv->siz_icmp, 0.0, "source Q");
+  P = (float *)mem_calloc_1d_float(gdcurv->siz_icmp, 0.0, "source P");
+  Q = (float *)mem_calloc_1d_float(gdcurv->siz_icmp, 0.0, "source Q");
 
   float *x2d_tmp =NULL;
   float *z2d_tmp =NULL;
-  x2d_tmp = (float *)fdlib_mem_calloc_1d_float(gdcurv->siz_icmp, 0.0, "x2d_tmp");
-  z2d_tmp = (float *)fdlib_mem_calloc_1d_float(gdcurv->siz_icmp, 0.0, "z2d_tmp");
+  x2d_tmp = (float *)mem_calloc_1d_float(gdcurv->siz_icmp, 0.0, "x2d_tmp");
+  z2d_tmp = (float *)mem_calloc_1d_float(gdcurv->siz_icmp, 0.0, "z2d_tmp");
 
   // now we default set w=1.0.
   // this is Gauss-Seidel
   float w=1.0; // SOR coef
 
   int Niter = 0;
-  size_t iptr;
+  size_t iptr, iptr1, iptr2;
   float resi, resk;
   
   // before update grid. use init grid to
@@ -45,10 +45,10 @@ diri_gene(gd_t *gdcurv, par_t *par)
   float *p_z; // point_z_bdry
   float *g11_x;  // g11_x_bdry
   float *g22_z;  // g22_z_bdry
-  p_x = (float *)fdlib_mem_calloc_1d_float(nz*2*2, 0.0, "p_x");
-  p_z = (float *)fdlib_mem_calloc_1d_float(nx*2*2, 0.0, "p_z");
-  g11_x = (float *)fdlib_mem_calloc_1d_float(nz*2, 0.0, "g11_x"); 
-  g22_z = (float *)fdlib_mem_calloc_1d_float(nx*2, 0.0, "g22_z"); 
+  p_x = (float *)mem_calloc_1d_float(nz*2*2, 0.0, "p_x");
+  p_z = (float *)mem_calloc_1d_float(nx*2*2, 0.0, "p_z");
+  g11_x = (float *)mem_calloc_1d_float(nz*2, 0.0, "g11_x"); 
+  g22_z = (float *)mem_calloc_1d_float(nx*2, 0.0, "g22_z"); 
   ghost_cal(x2d,z2d,nx,nz,p_x,p_z,g11_x,g22_z);
 
   // copy coord
@@ -74,9 +74,11 @@ diri_gene(gd_t *gdcurv, par_t *par)
     for(int k=1; k<nz-1; k++) {
       for(int i=1; i<nx-1; i++)
       {
-        iptr = k*nx + i;
-        resi += fabs((x2d_tmp[iptr] - x2d[iptr])/(x2d_tmp[iptr]+pow(10,-6)));
-        resk += fabs((z2d_tmp[iptr] - z2d[iptr])/(z2d_tmp[iptr]+pow(10,-6)));
+        iptr  = k*nx + i;
+        iptr1 = k*nx + i+1;
+        iptr2 = (k+1)*nx + i;
+        resi += fabs((x2d_tmp[iptr] - x2d[iptr])/(x2d[iptr1]-x2d[iptr]));
+        resk += fabs((z2d_tmp[iptr] - z2d[iptr])/(z2d[iptr2]-z2d[iptr]));
       }
     }
 
@@ -95,6 +97,9 @@ diri_gene(gd_t *gdcurv, par_t *par)
     
     set_src_diri(x2d,z2d,nx,nz,P,Q,p_x,p_z,g11_x,g22_z,coef);
 
+    fprintf(stdout,"number of iter is %d\n", Niter);
+    fprintf(stdout,"resi is %f, resk is %f\n", resi, resk);
+
     if(Niter>max_iter) {
       flag_true = 0;
     }
@@ -103,8 +108,6 @@ diri_gene(gd_t *gdcurv, par_t *par)
       flag_true = 0;
     }
 
-    fprintf(stdout,"number of iter is %d\n", Niter);
-    fprintf(stdout,"resi is %f, resk is %f\n", resi, resk);
   }
 
   free(x2d_tmp);
@@ -254,9 +257,9 @@ set_src_diri(float *x2d, float *z2d, int nx, int nz,
   }
   
   // then use bdry x1 x2 to interp inner point
-  // NOTE: point (:,0:5),(:,nz-6:nz-1) P Q calculate
+  // NOTE: point (:,0:4),(:,nz-5:nz-1) P Q calculate
   // only by z1,z2
-  // point(:,6:nz-7), P Q calculte by z1 z2 x1 x2
+  // point(:,5:nz-6), P Q calculte by z1 z2 x1 x2
   // so need superposition
   for(int k=5; k<nz-5; k++) {
     for(int i=1; i<nx-1; i++)
@@ -420,13 +423,13 @@ higen_gene(gd_t *gdcurv, par_t *par)
 
   float *P = NULL; //source term P
   float *Q = NULL; //source term Q
-  P = (float *)fdlib_mem_calloc_1d_float(gdcurv->siz_icmp, 0.0, "source P");
-  Q = (float *)fdlib_mem_calloc_1d_float(gdcurv->siz_icmp, 0.0, "source Q");
+  P = (float *)mem_calloc_1d_float(gdcurv->siz_icmp, 0.0, "source P");
+  Q = (float *)mem_calloc_1d_float(gdcurv->siz_icmp, 0.0, "source Q");
 
   float *x2d_tmp =NULL;
   float *z2d_tmp =NULL;
-  x2d_tmp = (float *)fdlib_mem_calloc_1d_float(gdcurv->siz_icmp, 0.0, "x2d_tmp");
-  z2d_tmp = (float *)fdlib_mem_calloc_1d_float(gdcurv->siz_icmp, 0.0, "z2d_tmp");
+  x2d_tmp = (float *)mem_calloc_1d_float(gdcurv->siz_icmp, 0.0, "x2d_tmp");
+  z2d_tmp = (float *)mem_calloc_1d_float(gdcurv->siz_icmp, 0.0, "z2d_tmp");
 
   float dx1,dx2,dz1,dz2;
   if(par->dire_itype == Z_DIRE)
@@ -448,7 +451,7 @@ higen_gene(gd_t *gdcurv, par_t *par)
   float w=1.0; // SOR coef
 
   int Niter = 0;
-  size_t iptr;
+  size_t iptr, iptr1, iptr2;
   float resi, resk;
 
   // copy coord
@@ -475,8 +478,10 @@ higen_gene(gd_t *gdcurv, par_t *par)
       for(int i=1; i<nx-1; i++)
       {
         iptr = k*nx + i;
-        resi += fabs((x2d_tmp[iptr] - x2d[iptr])/(x2d_tmp[iptr]+pow(10,-6)));
-        resk += fabs((z2d_tmp[iptr] - z2d[iptr])/(z2d_tmp[iptr]+pow(10,-6)));
+        iptr1 = k*nx + i+1;
+        iptr2 = (k+1)*nx + i;
+        resi += fabs((x2d_tmp[iptr] - x2d[iptr])/(x2d[iptr1]-x2d[iptr]));
+        resk += fabs((z2d_tmp[iptr] - z2d[iptr])/(z2d[iptr2]-z2d[iptr]));
       }
     }
 
@@ -495,6 +500,9 @@ higen_gene(gd_t *gdcurv, par_t *par)
     
     set_src_higen(x2d,z2d,nx,nz,P,Q,coef,dx1,dx2,dz1,dz2);
 
+    fprintf(stdout,"number of iter is %d\n", Niter);
+    fprintf(stdout,"resi is %f, resk is %f\n", resi, resk);
+
     if(Niter>max_iter) {
       flag_true = 0;
     }
@@ -503,8 +511,6 @@ higen_gene(gd_t *gdcurv, par_t *par)
       flag_true = 0;
     }
 
-    fprintf(stdout,"number of iter is %d\n", Niter);
-    fprintf(stdout,"resi is %f, resk is %f\n", resi, resk);
   }
 
   free(x2d_tmp);
@@ -580,8 +586,6 @@ set_src_higen(float *x2d, float *z2d, int nx, int nz,
     Q[iptr] = Q[iptr] - a*tanh(dif_dis);
   }
 
-  // x1 x2 is less important bdry
-  // only cal Q to contral bdry orth
   // bdry x1 xi=0
   for(int k=1; k<nz-1; k++)
   {
@@ -605,7 +609,7 @@ set_src_higen(float *x2d, float *z2d, int nx, int nz,
     Q[iptr] = Q[iptr] - a*tanh(dif_theta);
 
     dif_dis = (dx1-len_xi)/dx1;
-    P[iptr] = Q[iptr] + a*tanh(dif_dis);
+    P[iptr] = P[iptr] + a*tanh(dif_dis);
   }
   // bdry x2 xi=1
   for(int k=1; k<nz-1; k++)
@@ -630,7 +634,7 @@ set_src_higen(float *x2d, float *z2d, int nx, int nz,
     Q[iptr] = Q[iptr] + a*tanh(dif_theta);
 
     dif_dis = (dx2-len_xi)/dx2;
-    P[iptr] = Q[iptr] - a*tanh(dif_dis);
+    P[iptr] = P[iptr] - a*tanh(dif_dis);
   }
 
   // first use bdry z1 z2 to interp inner point
@@ -653,9 +657,9 @@ set_src_higen(float *x2d, float *z2d, int nx, int nz,
     }
   }
   // then use bdry x1 x2 to interp inner point
-  // NOTE: point (:,0:5),(:,nz-6:nz-1) Q calculate
+  // NOTE: point (:,0:4),(:,nz-5:nz-1) P Q calculate
   // only by z1,z2
-  // point(:,6:nz-7), Q calculte by z1 z2 x1 x2
+  // point(:,5:nz-6), P Q calculte by z1 z2 x1 x2
   // so need superposition
   for(int k=5; k<nz-5; k++) {
     for(int i=1; i<nx-1; i++)

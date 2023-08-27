@@ -4,7 +4,6 @@
 #include <math.h>
 #include <stddef.h>
 
-#include "fdlib_mem.h"
 #include "quality_check.h"
 #include "constants.h"
 
@@ -141,7 +140,7 @@ cal_jacobi(io_quality_t *io_quality, gd_t *gdcurv)
       x_zt = x2d[iptr2] - x2d[iptr];
       z_zt = z2d[iptr2] - z2d[iptr];
 
-      var[iptr] = fabs(x_xi*z_zt - z_xi*x_zt);
+      var[iptr] = x_xi*z_zt - z_xi*x_zt;
     }
   }
 

@@ -14,6 +14,8 @@ typedef struct {
   float *v3d; // pointer to var
   float *x2d; 
   float *z2d;
+  
+  float *step; // for hyperbolic
 
   size_t siz_iz;
   size_t siz_icmp;
@@ -32,6 +34,9 @@ init_gdcurv(gd_t *gdcurv, int nx, int nz);
 
 int 
 grid_init_set(gd_t *gdcurv, char *input_file);
+
+int
+grid_init_set_hyper(gd_t *gdcurv, char *geometry_file, char *step_file);
 
 int
 grid_sample(gd_t *gdcurv_new, gd_t *gdcurv, float coef_x, float coef_z);

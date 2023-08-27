@@ -58,7 +58,8 @@ typedef struct{
   float i_err;   // iteration error
   int max_iter;  // max iterations
   int o2i;  // for parabolic
-  int num_layers; // for hyperbolic 
+  int bdry_itype; // for hyperbolic
+  float epsilon;  // for hyperbolic
 } par_t;
 
 int

@@ -13,6 +13,7 @@
 #include "quality_check.h"
 #include "parabolic.h"
 #include "elliptic.h"
+#include "hyperbolic.h"
 
 int main(int argc, char** argv)
 {
@@ -141,8 +142,20 @@ int main(int argc, char** argv)
     }
     case HYPERBOLIC : {
 
+      grid_init_set_hyper(gdcurv,par->geometry_input_file,par->step_input_file);
+      // before grid generate
+      if(par->dire_itype == X_DIRE)
+      {
+        permute_coord(gdcurv);
+      }
 
+      hyper_gene(gdcurv,par->coef,par->o2i,par->bdry_itype,par->epsilon);
 
+      // after grid generate
+      if(par->dire_itype == X_DIRE)
+      {
+        permute_coord(gdcurv);
+      }
 
       break;
     }
@@ -190,6 +203,4 @@ int main(int argc, char** argv)
   }
   return 0;
 }
-
-
 

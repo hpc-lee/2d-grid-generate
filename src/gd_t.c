@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "fdlib_mem.h"
+#include "lib_mem.h"
 #include "gd_t.h"
 #include "constants.h"
 #include "algebra.h"
@@ -18,7 +18,7 @@ init_gdcurv(gd_t *gdcurv, int nx, int nz)
   gdcurv->siz_iz   = gdcurv->nx;
   gdcurv->siz_icmp = gdcurv->nx * gdcurv->nz;
   // malloc grid space 
-  gdcurv->v3d = (float *)fdlib_mem_calloc_1d_float(
+  gdcurv->v3d = (float *)mem_calloc_1d_float(
                   gdcurv->siz_icmp*gdcurv->ncmp, 0.0, "gd_curv_init");
   if (gdcurv->v3d == NULL) {
       fprintf(stderr,"Error: failed to alloc coord vars\n");
@@ -26,12 +26,12 @@ init_gdcurv(gd_t *gdcurv, int nx, int nz)
   }
 
   // position of each v3d
-  size_t *cmp_pos = (size_t *) fdlib_mem_calloc_1d_sizet(gdcurv->ncmp,
+  size_t *cmp_pos = (size_t *) mem_calloc_1d_sizet(gdcurv->ncmp,
                                                          0,
                                                          "gd_curv_init");
   
   // name of each v3d
-  char **cmp_name = (char **) fdlib_mem_malloc_2l_char(gdcurv->ncmp,
+  char **cmp_name = (char **) mem_malloc_2l_char(gdcurv->ncmp,
                                                        CONST_MAX_STRLEN,
                                                        "gd_curv_init");
   
@@ -54,7 +54,7 @@ init_gdcurv(gd_t *gdcurv, int nx, int nz)
 }
 
 int
-grid_init_set(gd_t *gdcurv, char *input_file)
+grid_init_set(gd_t *gdcurv, char *geometry_file)
 {
   FILE *fp = NULL;
   char str[500];
@@ -62,8 +62,8 @@ grid_init_set(gd_t *gdcurv, char *input_file)
   int nx;
   int nz;
   // open geometry file
-  if ((fp = fopen(input_file,"r"))==NULL) {
-     fprintf(stderr,"ERROR: fail to open geometry file=%s\n", input_file);
+  if ((fp = fopen(geometry_file,"r"))==NULL) {
+     fprintf(stderr,"ERROR: fail to open geometry file=%s\n", geometry_file);
      fflush(stdout); exit(1);
   }
   // nx number
@@ -82,13 +82,13 @@ grid_init_set(gd_t *gdcurv, char *input_file)
   float *x2;
   float *z1;
   float *z2;
-  x1 = (float *)fdlib_mem_calloc_1d_float(
+  x1 = (float *)mem_calloc_1d_float(
             nz*gdcurv->ncmp, 0.0, "bdry_coords");
-  x2 = (float *)fdlib_mem_calloc_1d_float(
+  x2 = (float *)mem_calloc_1d_float(
             nz*gdcurv->ncmp, 0.0, "bdry_coords");
-  z1 = (float *)fdlib_mem_calloc_1d_float(
+  z1 = (float *)mem_calloc_1d_float(
             nx*gdcurv->ncmp, 0.0, "bdry_coords");
-  z2 = (float *)fdlib_mem_calloc_1d_float(
+  z2 = (float *)mem_calloc_1d_float(
             nx*gdcurv->ncmp, 0.0, "bdry_coords");
   // x1 
   for (int k=0; k<nz; k++)
@@ -160,6 +160,66 @@ grid_init_set(gd_t *gdcurv, char *input_file)
   free(x2);
   free(z1);
   free(z2);
+
+  return 0;
+}
+
+int
+grid_init_set_hyper(gd_t *gdcurv, char *geometry_file, char *step_file)
+{
+  FILE *fp = NULL;
+  char str[500];
+  
+  int nx;
+  int nz;
+  int num_step;
+
+  // open step file
+  if ((fp = fopen(step_file,"r"))==NULL) {
+     fprintf(stderr,"ERROR: fail to open step file=%s\n", step_file);
+     fflush(stdout); exit(1);
+  }
+  // number of step
+  if (!io_get_nextline(fp,str,500)) {
+    sscanf(str,"%d",&num_step);
+  }
+  nz = num_step+1; 
+  gdcurv->step = (float *)mem_calloc_1d_float(
+                          num_step, 0.0, "step length");
+
+  for (int k=0; k<num_step; k++)
+  {
+    if (!io_get_nextline(fp,str,500)) {
+      sscanf(str,"%f",gdcurv->step + k);
+    }
+  }
+  // close step file and free local pointer
+  fclose(fp);
+
+  // open geometry file
+  if ((fp = fopen(geometry_file,"r"))==NULL) {
+     fprintf(stderr,"ERROR: fail to open geometry file=%s\n", geometry_file);
+     fflush(stdout); exit(1);
+  }
+  // nx number
+  if (!io_get_nextline(fp,str,500)) {
+    sscanf(str,"%d",&nx);
+  }
+
+  init_gdcurv(gdcurv,nx,nz);
+ 
+  size_t iptr;
+  float *x2d = gdcurv->x2d;
+  float *z2d = gdcurv->z2d;
+  for (int i=0; i<nx; i++)
+  {
+    iptr = i;  // (i,0)
+    if (!io_get_nextline(fp,str,500)) {
+      sscanf(str,"%f %f",x2d+iptr,z2d+iptr);
+    }
+  }
+  // close  geometry file and free local pointer
+  fclose(fp);
 
   return 0;
 }
@@ -292,7 +352,7 @@ permute_coord(gd_t *gdcurv)
   float *tmp_coord_z = NULL;
   tmp_coord_x = (float *) malloc(nx*nz*sizeof(float));
   tmp_coord_z = (float *) malloc(nx*nz*sizeof(float));
-  // copy x
+  // copy x, z
   for(int k=0; k<nz; k++) {
     for(int i=0; i<nx; i++) 
     {
@@ -302,6 +362,7 @@ permute_coord(gd_t *gdcurv)
     }
   }
   // permute coord, x to z
+  // z to x
   for(int k=0; k<nz; k++) {
     for(int i=0; i<nx; i++) 
     {
