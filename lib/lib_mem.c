@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "fdlib_mem.h"
+#include "lib_mem.h"
 
 /*
  * todo:
@@ -18,7 +18,7 @@
 //-------------------------------------------------------------------------------
 
 void *
-fdlib_mem_malloc_1d(size_t siz_byte, char *msg)
+mem_malloc_1d(size_t siz_byte, char *msg)
 {
     if (siz_byte <= 0 ) {
         fprintf(stderr, "Error: siz_byte=%i is zero or negative (%s)(!\n", siz_byte, msg);
@@ -42,7 +42,7 @@ fdlib_mem_malloc_1d(size_t siz_byte, char *msg)
 //-------------------------------------------------------------------------------
 
 int *
-fdlib_mem_calloc_1d_int(size_t n, int v0, char *msg)
+mem_calloc_1d_int(size_t n, int v0, char *msg)
 {
   if (n <= 0 ) {
     fprintf(stderr, "Error: size=%i is zero or negative (%s)!\n", n, msg);
@@ -63,7 +63,7 @@ fdlib_mem_calloc_1d_int(size_t n, int v0, char *msg)
 }
 
 size_t *
-fdlib_mem_calloc_1d_sizet(size_t n, size_t v0, char *msg)
+mem_calloc_1d_sizet(size_t n, size_t v0, char *msg)
 {
   if (n <= 0 ) {
     fprintf(stderr, "Error: size=%i is zero or negative (%s)!\n", n, msg);
@@ -84,7 +84,7 @@ fdlib_mem_calloc_1d_sizet(size_t n, size_t v0, char *msg)
 }
 
 float *
-fdlib_mem_calloc_1d_float(size_t n, float v0, char *msg)
+mem_calloc_1d_float(size_t n, float v0, char *msg)
 {
   if (n <= 0 ) {
     fprintf(stderr, "Error: size=%i is zero or negative (%s)!\n", n, msg);
@@ -104,12 +104,33 @@ fdlib_mem_calloc_1d_float(size_t n, float v0, char *msg)
   return var;
 }
 
+double *
+mem_calloc_1d_double(size_t n, double v0, char *msg)
+{
+  if (n <= 0 ) {
+    fprintf(stderr, "Error: size=%i is zero or negative (%s)!\n", n, msg);
+        fflush(stderr);
+    return NULL;
+  }
+
+  double *var = (double *) malloc( n * sizeof(double));
+  if ( var == NULL ) {
+    fprintf(stderr, "Error: can't malloc enough mem (%s)!\n", msg);
+        fflush(stderr);
+    exit(-1);
+  }
+
+  for (size_t i = 0; i < n; i++ ) var[i] = v0;
+
+  return var;
+}
+
 //-------------------------------------------------------------------------------
 // free 1d array no matter data type
 //-------------------------------------------------------------------------------
 
 void 
-fdlib_mem_free_1d(void *p)
+mem_free_1d(void *p)
 {
   if (p==NULL) {
     fprintf(stderr, "Pointer is null!\n");
@@ -125,7 +146,7 @@ fdlib_mem_free_1d(void *p)
 
 // int type
 int **
-fdlib_mem_malloc_2l_int(size_t n1, size_t n2, char *msg)
+mem_malloc_2l_int(size_t n1, size_t n2, char *msg)
 {
   int **buff;
   
@@ -158,10 +179,10 @@ fdlib_mem_malloc_2l_int(size_t n1, size_t n2, char *msg)
 }
 
 int **
-fdlib_mem_calloc_2l_int(size_t n1, size_t n2, int v0, char *msg)
+mem_calloc_2l_int(size_t n1, size_t n2, int v0, char *msg)
 {
 
-  int **buff = fdlib_mem_malloc_2l_int(n1, n2, msg);
+  int **buff = mem_malloc_2l_int(n1, n2, msg);
 
   for (size_t i=0; i < n1; i++ ) 
     for (size_t j=0; j < n2; j++)
@@ -171,7 +192,7 @@ fdlib_mem_calloc_2l_int(size_t n1, size_t n2, int v0, char *msg)
 }
 
 void
-fdlib_mem_free_2l_int(int **p, size_t n1, char *msg)
+mem_free_2l_int(int **p, size_t n1, char *msg)
 {
   for (size_t i=0; i < n1; i++ ) {
     free(p[i]);
@@ -181,7 +202,7 @@ fdlib_mem_free_2l_int(int **p, size_t n1, char *msg)
 
 // size_t
 size_t **
-fdlib_mem_malloc_2l_sizet(size_t n1, size_t n2, char *msg)
+mem_malloc_2l_sizet(size_t n1, size_t n2, char *msg)
 {
   size_t **buff;
   
@@ -214,10 +235,10 @@ fdlib_mem_malloc_2l_sizet(size_t n1, size_t n2, char *msg)
 }
 
 size_t **
-fdlib_mem_calloc_2l_sizet(size_t n1, size_t n2, size_t v0, char *msg)
+mem_calloc_2l_sizet(size_t n1, size_t n2, size_t v0, char *msg)
 {
 
-  size_t **buff = fdlib_mem_malloc_2l_sizet(n1, n2, msg);
+  size_t **buff = mem_malloc_2l_sizet(n1, n2, msg);
 
   for (size_t i=0; i < n1; i++ ) 
     for (size_t j=0; j < n2; j++)
@@ -227,7 +248,7 @@ fdlib_mem_calloc_2l_sizet(size_t n1, size_t n2, size_t v0, char *msg)
 }
 
 void
-fdlib_mem_free_2l_sizet(size_t **p, size_t n1, char *msg)
+mem_free_2l_sizet(size_t **p, size_t n1, char *msg)
 {
   for (size_t i=0; i < n1; i++ ) {
     free(p[i]);
@@ -237,7 +258,7 @@ fdlib_mem_free_2l_sizet(size_t **p, size_t n1, char *msg)
 
 // float
 float **
-fdlib_mem_malloc_2l_float(size_t n1, size_t n2, char *msg)
+mem_malloc_2l_float(size_t n1, size_t n2, char *msg)
 {
   float **buff;
   
@@ -270,10 +291,10 @@ fdlib_mem_malloc_2l_float(size_t n1, size_t n2, char *msg)
 }
 
 float **
-fdlib_mem_calloc_2l_float(size_t n1, size_t n2, float v0, char *msg)
+mem_calloc_2l_float(size_t n1, size_t n2, float v0, char *msg)
 {
 
-  float **buff = fdlib_mem_malloc_2l_float(n1, n2, msg);
+  float **buff = mem_malloc_2l_float(n1, n2, msg);
 
   for (size_t i=0; i < n1; i++ ) 
     for (size_t j=0; j < n2; j++)
@@ -283,7 +304,7 @@ fdlib_mem_calloc_2l_float(size_t n1, size_t n2, float v0, char *msg)
 }
 
 void
-fdlib_mem_free_2l_float(float **p, size_t n1, char *msg)
+mem_free_2l_float(float **p, size_t n1, char *msg)
 {
   for (size_t i=0; i < n1; i++ ) {
     free(p[i]);
@@ -293,7 +314,7 @@ fdlib_mem_free_2l_float(float **p, size_t n1, char *msg)
 
 // char
 char **
-fdlib_mem_malloc_2l_char(size_t n1, size_t n2, char *msg)
+mem_malloc_2l_char(size_t n1, size_t n2, char *msg)
 {
   char **buff;
   
@@ -326,7 +347,7 @@ fdlib_mem_malloc_2l_char(size_t n1, size_t n2, char *msg)
 }
 
 void
-fdlib_mem_free_2l_char(char **p, size_t n1, char *msg)
+mem_free_2l_char(char **p, size_t n1, char *msg)
 {
   for (size_t i=0; i < n1; i++ ) {
     free(p[i]);
@@ -340,7 +361,7 @@ fdlib_mem_free_2l_char(char **p, size_t n1, char *msg)
 
 // int
 int ***
-fdlib_mem_malloc_3l_int(size_t n1, size_t n2, size_t n3, char *msg)
+mem_malloc_3l_int(size_t n1, size_t n2, size_t n3, char *msg)
 {
   int ***buff;
   
@@ -384,10 +405,10 @@ fdlib_mem_malloc_3l_int(size_t n1, size_t n2, size_t n3, char *msg)
 }
 
 int ***
-fdlib_mem_calloc_3l_int(size_t n1, size_t n2, size_t n3, int v0, char *msg)
+mem_calloc_3l_int(size_t n1, size_t n2, size_t n3, int v0, char *msg)
 {
 
-  int ***buff = fdlib_mem_malloc_3l_int(n1, n2, n3, msg);
+  int ***buff = mem_malloc_3l_int(n1, n2, n3, msg);
 
   for (size_t i=0; i < n1; i++ ) 
     for (size_t j=0; j < n2; j++)
@@ -398,7 +419,7 @@ fdlib_mem_calloc_3l_int(size_t n1, size_t n2, size_t n3, int v0, char *msg)
 }
 
 void
-fdlib_mem_free_3l_int(int ***p, size_t n1, size_t n2, char *msg)
+mem_free_3l_int(int ***p, size_t n1, size_t n2, char *msg)
 {
   for (size_t i=0; i < n1; i++ )
   {
@@ -411,7 +432,7 @@ fdlib_mem_free_3l_int(int ***p, size_t n1, size_t n2, char *msg)
 
 // size_t
 size_t ***
-fdlib_mem_malloc_3l_sizet(size_t n1, size_t n2, size_t n3, char *msg)
+mem_malloc_3l_sizet(size_t n1, size_t n2, size_t n3, char *msg)
 {
   size_t ***buff;
   
@@ -455,10 +476,10 @@ fdlib_mem_malloc_3l_sizet(size_t n1, size_t n2, size_t n3, char *msg)
 }
 
 size_t ***
-fdlib_mem_calloc_3l_sizet(size_t n1, size_t n2, size_t n3, size_t v0, char *msg)
+mem_calloc_3l_sizet(size_t n1, size_t n2, size_t n3, size_t v0, char *msg)
 {
 
-  size_t ***buff = fdlib_mem_malloc_3l_sizet(n1, n2, n3, msg);
+  size_t ***buff = mem_malloc_3l_sizet(n1, n2, n3, msg);
 
   for (size_t i=0; i < n1; i++ ) 
     for (size_t j=0; j < n2; j++)
@@ -469,7 +490,7 @@ fdlib_mem_calloc_3l_sizet(size_t n1, size_t n2, size_t n3, size_t v0, char *msg)
 }
 
 void
-fdlib_mem_free_3l_sizet(size_t ***p, size_t n1, size_t n2, char *msg)
+mem_free_3l_sizet(size_t ***p, size_t n1, size_t n2, char *msg)
 {
   for (size_t i=0; i < n1; i++ )
   {
@@ -482,7 +503,7 @@ fdlib_mem_free_3l_sizet(size_t ***p, size_t n1, size_t n2, char *msg)
 
 // float
 float ***
-fdlib_mem_malloc_3l_float(size_t n1, size_t n2, size_t n3, char *msg)
+mem_malloc_3l_float(size_t n1, size_t n2, size_t n3, char *msg)
 {
   float ***buff;
   
@@ -526,10 +547,10 @@ fdlib_mem_malloc_3l_float(size_t n1, size_t n2, size_t n3, char *msg)
 }
 
 float ***
-fdlib_mem_calloc_3l_float(size_t n1, size_t n2, size_t n3, float v0, char *msg)
+mem_calloc_3l_float(size_t n1, size_t n2, size_t n3, float v0, char *msg)
 {
 
-  float ***buff = fdlib_mem_malloc_3l_float(n1, n2, n3, msg);
+  float ***buff = mem_malloc_3l_float(n1, n2, n3, msg);
 
   for (size_t i=0; i < n1; i++ ) 
     for (size_t j=0; j < n2; j++)
@@ -540,7 +561,7 @@ fdlib_mem_calloc_3l_float(size_t n1, size_t n2, size_t n3, float v0, char *msg)
 }
 
 void
-fdlib_mem_free_3l_float(float ***p, size_t n1, size_t n2, char *msg)
+mem_free_3l_float(float ***p, size_t n1, size_t n2, char *msg)
 {
   for (size_t i=0; i < n1; i++ )
   {
@@ -553,7 +574,7 @@ fdlib_mem_free_3l_float(float ***p, size_t n1, size_t n2, char *msg)
 
 // char
 char ***
-fdlib_mem_malloc_3l_char(size_t n1, size_t n2, size_t n3, char *msg)
+mem_malloc_3l_char(size_t n1, size_t n2, size_t n3, char *msg)
 {
   char ***buff;
   
@@ -597,7 +618,7 @@ fdlib_mem_malloc_3l_char(size_t n1, size_t n2, size_t n3, char *msg)
 }
 
 void
-fdlib_mem_free_3l_char(char ***p, size_t n1, size_t n2, char *msg)
+mem_free_3l_char(char ***p, size_t n1, size_t n2, char *msg)
 {
   for (size_t i=0; i < n1; i++ )
   {
@@ -614,7 +635,7 @@ fdlib_mem_free_3l_char(char ***p, size_t n1, size_t n2, char *msg)
 
 // int
 int ****
-fdlib_mem_malloc_4l_int(size_t n1, size_t n2, size_t n3, size_t n4, char *msg)
+mem_malloc_4l_int(size_t n1, size_t n2, size_t n3, size_t n4, char *msg)
 {
   int ****buff;
   
@@ -669,10 +690,10 @@ fdlib_mem_malloc_4l_int(size_t n1, size_t n2, size_t n3, size_t n4, char *msg)
 }
 
 int ****
-fdlib_mem_calloc_4l_int(size_t n1, size_t n2, size_t n3, size_t n4, int v0, char *msg)
+mem_calloc_4l_int(size_t n1, size_t n2, size_t n3, size_t n4, int v0, char *msg)
 {
 
-  int ****buff = fdlib_mem_malloc_4l_int(n1, n2, n3, n4, msg);
+  int ****buff = mem_malloc_4l_int(n1, n2, n3, n4, msg);
 
   for (size_t i=0; i < n1; i++ ) 
     for (size_t j=0; j < n2; j++)
@@ -684,7 +705,7 @@ fdlib_mem_calloc_4l_int(size_t n1, size_t n2, size_t n3, size_t n4, int v0, char
 }
 
 void
-fdlib_mem_free_4l_int(int ****p, size_t n1, size_t n2, size_t n3, char *msg)
+mem_free_4l_int(int ****p, size_t n1, size_t n2, size_t n3, char *msg)
 {
   for (size_t i=0; i < n1; i++ )
   {
@@ -705,7 +726,7 @@ fdlib_mem_free_4l_int(int ****p, size_t n1, size_t n2, size_t n3, char *msg)
 
 // size_t
 size_t ****
-fdlib_mem_malloc_4l_sizet(size_t n1, size_t n2, size_t n3, size_t n4, char *msg)
+mem_malloc_4l_sizet(size_t n1, size_t n2, size_t n3, size_t n4, char *msg)
 {
   size_t ****buff;
   
@@ -760,10 +781,10 @@ fdlib_mem_malloc_4l_sizet(size_t n1, size_t n2, size_t n3, size_t n4, char *msg)
 }
 
 size_t ****
-fdlib_mem_calloc_4l_sizet(size_t n1, size_t n2, size_t n3, size_t n4, size_t v0, char *msg)
+mem_calloc_4l_sizet(size_t n1, size_t n2, size_t n3, size_t n4, size_t v0, char *msg)
 {
 
-  size_t ****buff = fdlib_mem_malloc_4l_sizet(n1, n2, n3, n4, msg);
+  size_t ****buff = mem_malloc_4l_sizet(n1, n2, n3, n4, msg);
 
   for (size_t i=0; i < n1; i++ ) 
     for (size_t j=0; j < n2; j++)
@@ -775,7 +796,7 @@ fdlib_mem_calloc_4l_sizet(size_t n1, size_t n2, size_t n3, size_t n4, size_t v0,
 }
 
 void
-fdlib_mem_free_4l_sizet(size_t ****p, size_t n1, size_t n2, size_t n3, char *msg)
+mem_free_4l_sizet(size_t ****p, size_t n1, size_t n2, size_t n3, char *msg)
 {
   for (size_t i=0; i < n1; i++ )
   {
@@ -796,7 +817,7 @@ fdlib_mem_free_4l_sizet(size_t ****p, size_t n1, size_t n2, size_t n3, char *msg
 
 // float
 float ****
-fdlib_mem_malloc_4l_float(size_t n1, size_t n2, size_t n3, size_t n4, char *msg)
+mem_malloc_4l_float(size_t n1, size_t n2, size_t n3, size_t n4, char *msg)
 {
   float ****buff;
   
@@ -851,10 +872,10 @@ fdlib_mem_malloc_4l_float(size_t n1, size_t n2, size_t n3, size_t n4, char *msg)
 }
 
 float ****
-fdlib_mem_calloc_4l_float(size_t n1, size_t n2, size_t n3, size_t n4, float v0, char *msg)
+mem_calloc_4l_float(size_t n1, size_t n2, size_t n3, size_t n4, float v0, char *msg)
 {
 
-  float ****buff = fdlib_mem_malloc_4l_float(n1, n2, n3, n4, msg);
+  float ****buff = mem_malloc_4l_float(n1, n2, n3, n4, msg);
 
   for (size_t i=0; i < n1; i++ ) 
     for (size_t j=0; j < n2; j++)
@@ -866,7 +887,7 @@ fdlib_mem_calloc_4l_float(size_t n1, size_t n2, size_t n3, size_t n4, float v0, 
 }
 
 void
-fdlib_mem_free_4l_float(float ****p, size_t n1, size_t n2, size_t n3, char *msg)
+mem_free_4l_float(float ****p, size_t n1, size_t n2, size_t n3, char *msg)
 {
   for (size_t i=0; i < n1; i++ )
   {
@@ -887,7 +908,7 @@ fdlib_mem_free_4l_float(float ****p, size_t n1, size_t n2, size_t n3, char *msg)
 
 // char
 char ****
-fdlib_mem_malloc_4l_char(size_t n1, size_t n2, size_t n3, size_t n4, char *msg)
+mem_malloc_4l_char(size_t n1, size_t n2, size_t n3, size_t n4, char *msg)
 {
   char ****buff;
   
@@ -941,7 +962,7 @@ fdlib_mem_malloc_4l_char(size_t n1, size_t n2, size_t n3, size_t n4, char *msg)
 }
 
 void
-fdlib_mem_free_4l_char(char ****p, size_t n1, size_t n2, size_t n3, char *msg)
+mem_free_4l_char(char ****p, size_t n1, size_t n2, size_t n3, char *msg)
 {
   for (size_t i=0; i < n1; i++ )
   {
