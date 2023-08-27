@@ -19,9 +19,9 @@ dz = 10;
 origin_x = 0;
 origin_z = 0;
 a_x=0.20;
-H_x=-0.1*nx*dx;
+H_x=-0.3*nx*dx;
 a_z=0.2;
-H_z=0.2*nz*dz;
+H_z=0.1*nz*dz;
 
 bz1 = zeros(nx,2);
 bz2 = zeros(nx,2);
@@ -54,7 +54,8 @@ if  flag_topo_z
     end
 end
 
-[bz1,bz2] = extend_abs_layer(bz1,bz2,dx,nx,nz,num_pml);
+[bz1] = extend_abs_layer(bz1,dx,nx,num_pml);
+[bz2] = extend_abs_layer(bz2,dx,nx,num_pml);
 
 dz1 = (bz2(1,2)-bz1(1,2))/(nz-1);
 dz2 = (bz2(nx,2)-bz1(nx,2))/(nz-1);
@@ -76,7 +77,7 @@ if  flag_topo_x
       bx2(k,1) = bx2(k,1) - topo_x(k);
   end
   for k=1:nz
-      bx1(k,1) = bx1(k,1) + topo_x(k);
+%       bx1(k,1) = bx1(k,1) + topo_x(k);
   end
 end
 

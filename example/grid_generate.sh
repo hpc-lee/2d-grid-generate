@@ -54,20 +54,20 @@ cat << ieof > ${PAR_FILE}
       "#linear_TFI" : "",
       "#hermite" : {
           "coef" : 0.3,
-          "direction" : "x"
+          "direction" : "z"
       },
       "#elli_diri" : {
           "coef" : -20,
-          "iter_err" : 5E-5,
+          "iter_err" : 1E-3,
           "max_iter" : 5E3,
-          "direction" : "z"
+          "direction" : "x"
       },
       "elli_higen" : {
-          "coef" : -40,
-          "iter_err" : 5E-5,
+          "coef" : -20,
+          "iter_err" : 1E-3,
           "max_iter" : 5E3,
-          "distance" : [15.0,15.0,10,10],
-          "direction" : "z"
+          "distance" : [10.0,10.0,10,10],
+          "direction" : "x"
       },
       "#parabolic" : {
           "coef" : -100,
@@ -75,8 +75,11 @@ cat << ieof > ${PAR_FILE}
           "o2i" : 1
       },
       "#hyperbolic" : {
-          "coef" : 0.3,
-          "num_layers" : 30,
+          "coef" : 20,
+          "bdry_type" : 1,
+          "epsilon" : 0,
+          "direction" : "z",
+          "o2i" : 0,
           "step_input_file" : "${INPUTDIR}/step_file_2d.txt"
       }
   }
