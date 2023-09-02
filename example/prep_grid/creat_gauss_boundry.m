@@ -21,7 +21,7 @@ origin_z = 0;
 a_x=0.20;
 H_x=-0.3*nx*dx;
 a_z=0.2;
-H_z=0.1*nz*dz;
+H_z=0.2*nz*dz;
 
 bz1 = zeros(nx,2);
 bz2 = zeros(nx,2);
@@ -80,6 +80,10 @@ if  flag_topo_x
 %       bx1(k,1) = bx1(k,1) + topo_x(k);
   end
 end
+
+A=0.0001;
+[bx1]=arc_strech(A,bx1);
+[bx2]=arc_strech(A,bx2);
 
 if flag_printf
     figure(1)   
