@@ -266,13 +266,17 @@ set_src_diri(float *x2d, float *z2d, int nx, int nz,
     {
       xi = (1.0*i)/(nx-1);
 
+      c0 = 1-xi;
+      c1 = xi;
+
       r0 = exp(coef*xi);
       r1 = exp(coef*(1-xi)); 
       
       iptr  = k*nx + i;
       iptr1 = k*nx + 0;
       iptr2 = k*nx + (nx-1);
-      P[iptr] = P[iptr] + r0*P[iptr1] + r1*P[iptr2];
+      P[iptr] = P[iptr] + c0*P[iptr1] + c1*P[iptr2];
+      //P[iptr] = P[iptr] + r0*P[iptr1] + r1*P[iptr2];
       Q[iptr] = Q[iptr] + r0*Q[iptr1] + r1*Q[iptr2];
     }
   }
@@ -666,13 +670,17 @@ set_src_higen(float *x2d, float *z2d, int nx, int nz,
     {
       xi = (1.0*i)/(nx-1);
 
+      c0 = 1-xi;
+      c1 = xi;
+
       r0 = exp(coef*xi);
       r1 = exp(coef*(1-xi)); 
       
       iptr  = k*nx + i;
       iptr1 = k*nx + 0;
       iptr2 = k*nx + (nx-1);
-      P[iptr] = P[iptr] + r0*P[iptr1] + r1*P[iptr2];
+      P[iptr] = P[iptr] + c0*P[iptr1] + c1*P[iptr2];
+      //P[iptr] = P[iptr] + r0*P[iptr1] + r1*P[iptr2];
       Q[iptr] = Q[iptr] + r0*Q[iptr1] + r1*Q[iptr2];
     }
   }

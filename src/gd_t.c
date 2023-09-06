@@ -382,9 +382,3 @@ permute_coord(gd_t *gdcurv)
 
   return 0;
 }
-
-
-
-
-
-
