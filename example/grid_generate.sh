@@ -56,22 +56,22 @@ cat << ieof > ${PAR_FILE}
           "coef" : 0.3,
           "direction" : "z"
       },
-      "#elli_diri" : {
+      "elli_diri" : {
           "coef" : -20,
-          "iter_err" : 1E-3,
+          "iter_err" : 1E-2,
           "max_iter" : 5E3,
-          "direction" : "x"
+          "direction" : "z"
       },
-      "elli_higen" : {
+      "#elli_higen" : {
           "coef" : -20,
-          "iter_err" : 1E-3,
+          "iter_err" : 1E-2,
           "max_iter" : 5E3,
           "distance" : [10.0,10.0,10,10],
-          "direction" : "x"
+          "direction" : "z"
       },
       "#parabolic" : {
-          "coef" : -100,
-          "direction" : "z",
+          "coef" : -50,
+          "direction" : "x",
           "o2i" : 1
       },
       "#hyperbolic" : {

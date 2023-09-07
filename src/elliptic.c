@@ -38,6 +38,7 @@ diri_gene(gd_t *gdcurv, par_t *par)
   int Niter = 0;
   size_t iptr, iptr1, iptr2;
   float resi, resk;
+  float max_resi, max_resk;
   
   // before update grid. use init grid to
   // calculate ghost points and bdry g11,g22 
@@ -68,8 +69,8 @@ diri_gene(gd_t *gdcurv, par_t *par)
     update_SOR(x2d,z2d,x2d_tmp,z2d_tmp,nx,nz,P,Q,w);
     Niter += 1;
 
-    resi = 0.0;
-    resk = 0.0;
+    max_resi = 0.0;
+    max_resk = 0.0;
     // cal iter error
     for(int k=1; k<nz-1; k++) {
       for(int i=1; i<nx-1; i++)
@@ -77,13 +78,12 @@ diri_gene(gd_t *gdcurv, par_t *par)
         iptr  = k*nx + i;
         iptr1 = k*nx + i+1;
         iptr2 = (k+1)*nx + i;
-        resi += fabs((x2d_tmp[iptr] - x2d[iptr])/(x2d[iptr1]-x2d[iptr]));
-        resk += fabs((z2d_tmp[iptr] - z2d[iptr])/(z2d[iptr2]-z2d[iptr]));
+        resi = fabs((x2d_tmp[iptr] - x2d[iptr])/(x2d[iptr1]-x2d[iptr]));
+        resk = fabs((z2d_tmp[iptr] - z2d[iptr])/(z2d[iptr2]-z2d[iptr]));
+        max_resi = fmax(max_resi,resi);
+        max_resk = fmax(max_resk,resk);
       }
     }
-
-    resi = resi/((nx-2)*(nz-2));
-    resk = resk/((nx-2)*(nz-2));
 
     // copy coord
     for(int k=0; k<nz; k++) {
@@ -98,13 +98,13 @@ diri_gene(gd_t *gdcurv, par_t *par)
     set_src_diri(x2d,z2d,nx,nz,P,Q,p_x,p_z,g11_x,g22_z,coef);
 
     fprintf(stdout,"number of iter is %d\n", Niter);
-    fprintf(stdout,"resi is %f, resk is %f\n", resi, resk);
+    fprintf(stdout,"max_resi is %f, max_resk is %f\n", max_resi, max_resk);
 
     if(Niter>max_iter) {
       flag_true = 0;
     }
 
-    if(resi < err && resk < err) {
+    if(max_resi < err && max_resk < err) {
       flag_true = 0;
     }
 
@@ -457,6 +457,7 @@ higen_gene(gd_t *gdcurv, par_t *par)
   int Niter = 0;
   size_t iptr, iptr1, iptr2;
   float resi, resk;
+  float max_resi, max_resk;
 
   // copy coord
   for(int k=0; k<nz; k++) {
@@ -475,8 +476,8 @@ higen_gene(gd_t *gdcurv, par_t *par)
     update_SOR(x2d,z2d,x2d_tmp,z2d_tmp,nx,nz,P,Q,w);
     Niter += 1;
 
-    resi = 0.0;
-    resk = 0.0;
+    max_resi = 0.0;
+    max_resk = 0.0;
     // cal iter error
     for(int k=1; k<nz-1; k++) {
       for(int i=1; i<nx-1; i++)
@@ -484,13 +485,12 @@ higen_gene(gd_t *gdcurv, par_t *par)
         iptr = k*nx + i;
         iptr1 = k*nx + i+1;
         iptr2 = (k+1)*nx + i;
-        resi += fabs((x2d_tmp[iptr] - x2d[iptr])/(x2d[iptr1]-x2d[iptr]));
-        resk += fabs((z2d_tmp[iptr] - z2d[iptr])/(z2d[iptr2]-z2d[iptr]));
+        resi = fabs((x2d_tmp[iptr] - x2d[iptr])/(x2d[iptr1]-x2d[iptr]));
+        resk = fabs((z2d_tmp[iptr] - z2d[iptr])/(z2d[iptr2]-z2d[iptr]));
+        max_resi = fmax(max_resi,resi);
+        max_resk = fmax(max_resk,resk);
       }
     }
-
-    resi = resi/((nx-2)*(nz-2));
-    resk = resk/((nx-2)*(nz-2));
 
     // copy coord
     for(int k=0; k<nz; k++) {
@@ -505,13 +505,13 @@ higen_gene(gd_t *gdcurv, par_t *par)
     set_src_higen(x2d,z2d,nx,nz,P,Q,coef,dx1,dx2,dz1,dz2);
 
     fprintf(stdout,"number of iter is %d\n", Niter);
-    fprintf(stdout,"resi is %f, resk is %f\n", resi, resk);
+    fprintf(stdout,"max_resi is %f, max_resk is %f\n", max_resi, max_resk);
 
     if(Niter>max_iter) {
       flag_true = 0;
     }
 
-    if(resi < err && resk < err) {
+    if(max_resi < err && max_resk < err) {
       flag_true = 0;
     }
 
