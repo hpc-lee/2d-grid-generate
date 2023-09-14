@@ -11,8 +11,8 @@ end
 file_name = '../step_file_2d.txt';
 fid=fopen(file_name,'w'); % Output file name 
 fprintf(fid,'# number of step\n'); 
-fprintf(fid,'%g\n',num_of_step);
+fprintf(fid,'%d\n',num_of_step);
 fprintf(fid,'# step\n'); 
 for i=1:num_of_step
-  fprintf(fid,'%g \n',step(i));
+  fprintf(fid,'%.9e \n',step(i));
 end

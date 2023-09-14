@@ -56,30 +56,30 @@ cat << ieof > ${PAR_FILE}
           "coef" : 0.3,
           "direction" : "z"
       },
-      "elli_diri" : {
+      "#elli_diri" : {
           "coef" : -20,
-          "iter_err" : 1E-2,
+          "iter_err" : 5E-3,
           "max_iter" : 5E3,
-          "direction" : "z"
+          "first_dire" : "z"
       },
       "#elli_higen" : {
           "coef" : -20,
-          "iter_err" : 1E-2,
+          "iter_err" : 5E-3,
           "max_iter" : 5E3,
           "distance" : [10.0,10.0,10,10],
-          "direction" : "z"
+          "first_dire" : "x"
       },
       "#parabolic" : {
           "coef" : -50,
           "direction" : "x",
           "o2i" : 1
       },
-      "#hyperbolic" : {
+      "hyperbolic" : {
           "coef" : 20,
           "bdry_type" : 1,
           "epsilon" : 0,
-          "direction" : "z",
-          "o2i" : 0,
+          "direction" : "x",
+          "o2i" : 1,
           "step_input_file" : "${INPUTDIR}/step_file_2d.txt"
       }
   }

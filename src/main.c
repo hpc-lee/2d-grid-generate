@@ -84,40 +84,18 @@ int main(int argc, char** argv)
     case ELLI_DIRI : {
 
       grid_init_set(gdcurv,par->geometry_input_file);
-      // before grid generate
-      if(par->dire_itype == X_DIRE)
-      {
-        permute_coord(gdcurv);
-      }
       // linear tfi generate init iter grid
       linear_tfi(gdcurv);
       diri_gene(gdcurv,par);
-
-      // after grid generate
-      if(par->dire_itype == X_DIRE)
-      {
-        permute_coord(gdcurv);
-      }
 
       break;
     }
     case ELLI_HIGEN : {
 
       grid_init_set(gdcurv,par->geometry_input_file);
-      // before grid generate
-      if(par->dire_itype == X_DIRE)
-      {
-        permute_coord(gdcurv);
-      }
       // linear tfi generate init iter grid
       linear_tfi(gdcurv);
       higen_gene(gdcurv,par);
-
-      // after grid generate
-      if(par->dire_itype == X_DIRE)
-      {
-        permute_coord(gdcurv);
-      }
 
       break;
     }
@@ -143,14 +121,7 @@ int main(int argc, char** argv)
     case HYPERBOLIC : {
 
       grid_init_set_hyper(gdcurv,par->geometry_input_file,par->step_input_file);
-      // before grid generate
-      if(par->dire_itype == X_DIRE)
-      {
-        permute_coord(gdcurv);
-      }
-
       hyper_gene(gdcurv,par->coef,par->o2i,par->bdry_itype,par->epsilon);
-
       // after grid generate
       if(par->dire_itype == X_DIRE)
       {

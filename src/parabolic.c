@@ -22,8 +22,8 @@ para_gene(gd_t *gdcurv, float coef, int o2i)
     fprintf(stdout,"parabolic method, march direction from inner bdry(k=0) to outer bdry(nz-1)\n");
     fprintf(stdout,"so if we want from outer bdry(nz-1) to inner bdry(k=0), must be flip\n");
     fprintf(stdout,"flip coord, trans outer bdry(nz-1) to inner bdry(0)\n");
-    flip_coord(x2d,nx,nz);
-    flip_coord(z2d,nx,nz);
+    flip_coord_z(x2d,nx,nz);
+    flip_coord_z(z2d,nx,nz);
   }
   // malloc space for thomas method 
   // a,b,c,d_x,d_z,u_x,u_z. 7 vars space
@@ -50,8 +50,8 @@ para_gene(gd_t *gdcurv, float coef, int o2i)
   if(o2i == 1)
   {
     // flip to return.
-    flip_coord(x2d,nx,nz);
-    flip_coord(z2d,nx,nz);
+    flip_coord_z(x2d,nx,nz);
+    flip_coord_z(z2d,nx,nz);
   }
 
   free(var_th);

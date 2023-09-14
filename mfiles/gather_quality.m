@@ -1,4 +1,4 @@
-function [v] = gather_media(output_dir,varnm,subs,subc,subt)
+function [v] = gather_quality(output_dir,varnm,subs,subc,subt)
 
 % load
 fnm_quality=[output_dir,'/',varnm,'.nc'];

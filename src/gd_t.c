@@ -308,7 +308,7 @@ check_bdry(float *x1, float *x2, float *z1, float *z2, int nx, int nz)
 
 // 2D array flip z direction.  nz-1->0 0->nz-1 i->(nz-1)-i 
 int
-flip_coord(float *coord, int nx, int nz)
+flip_coord_z(float *coord, int nx, int nz)
 {
   size_t iptr,iptr1;
   float *tmp_coord = NULL;

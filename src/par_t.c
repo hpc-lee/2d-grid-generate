@@ -173,20 +173,20 @@ par_read_from_str(const char *str, par_t *par)
         par->coef = thirditem->valuedouble;
       }
       if (thirditem = cJSON_GetObjectItem(subitem, "iter_err")) {
-        par->i_err = thirditem->valuedouble;
+        par->iter_err = thirditem->valuedouble;
       }
       if (thirditem = cJSON_GetObjectItem(subitem, "max_iter")) {
         par->max_iter = thirditem->valueint;
       }
-      if (thirditem = cJSON_GetObjectItem(subitem, "direction")) {
-        sprintf(par->direction, "%s", thirditem->valuestring);
-        if(strcmp(par->direction,"x") == 0)
+      if (thirditem = cJSON_GetObjectItem(subitem, "first_dire")) {
+        sprintf(par->first_dire, "%s", thirditem->valuestring);
+        if(strcmp(par->first_dire,"x") == 0)
         {
-          par->dire_itype = X_DIRE;
+          par->first_dire_itype = X_DIRE;
         }
-        if(strcmp(par->direction,"z") == 0)
+        if(strcmp(par->first_dire,"z") == 0)
         {
-          par->dire_itype = Z_DIRE;
+          par->first_dire_itype = Z_DIRE;
         }
       }
     }
@@ -196,25 +196,25 @@ par_read_from_str(const char *str, par_t *par)
         par->coef = thirditem->valuedouble;
       }
       if (thirditem = cJSON_GetObjectItem(subitem, "distance")) {
-         for (int i = 0; i < 4; i++) {
-           par->distance[i] = cJSON_GetArrayItem(thirditem, i)->valuedouble;
-         }
+        for (int i = 0; i < 4; i++) {
+          par->distance[i] = cJSON_GetArrayItem(thirditem, i)->valuedouble;
+        }
       }
       if (thirditem = cJSON_GetObjectItem(subitem, "iter_err")) {
-        par->i_err = thirditem->valuedouble;
+        par->iter_err = thirditem->valuedouble;
       }
       if (thirditem = cJSON_GetObjectItem(subitem, "max_iter")) {
         par->max_iter = thirditem->valueint;
       }
-      if (thirditem = cJSON_GetObjectItem(subitem, "direction")) {
-        sprintf(par->direction, "%s", thirditem->valuestring);
-        if(strcmp(par->direction,"x") == 0)
+      if (thirditem = cJSON_GetObjectItem(subitem, "first_dire")) {
+        sprintf(par->first_dire, "%s", thirditem->valuestring);
+        if(strcmp(par->first_dire,"x") == 0)
         {
-          par->dire_itype = X_DIRE;
+          par->first_dire_itype = X_DIRE;
         }
-        if(strcmp(par->direction,"z") == 0)
+        if(strcmp(par->first_dire,"z") == 0)
         {
-          par->dire_itype = Z_DIRE;
+          par->first_dire_itype = Z_DIRE;
         }
       }
     }
@@ -337,24 +337,24 @@ par_print(par_t *par)
     fprintf(stdout, "grid generate method is elliptic_dirichlet\n");
     fprintf(stdout, "elli_diri coef is %f\n", par->coef);
     fprintf(stdout, "max_iteration is %d\n", par->max_iter);
-    fprintf(stdout, "iter_error is %f\n", par->i_err);
-    if(par->dire_itype == X_DIRE) {
-      fprintf(stdout, "grid generate direction is x\n");
+    fprintf(stdout, "iter_error is %f\n", par->iter_err);
+    if(par->first_dire_itype == X_DIRE) {
+      fprintf(stdout, "grid generate first direction is x\n");
     }
-    if(par->dire_itype == Z_DIRE) {
-      fprintf(stdout, "grid generate direction is z\n");
+    if(par->first_dire_itype == Z_DIRE) {
+      fprintf(stdout, "grid generate first direction is z\n");
     }
   }
   if(par->method_itype == ELLI_HIGEN) {
     fprintf(stdout, "grid generate method is elliptic_hilgenstock\n");
     fprintf(stdout, "elli_higen coef is %f\n", par->coef);
     fprintf(stdout, "max_iteration is %d\n", par->max_iter);
-    fprintf(stdout, "iter_error is %f\n", par->i_err);
-    if(par->dire_itype == X_DIRE) {
-      fprintf(stdout, "grid generate direction is x\n");
+    fprintf(stdout, "iter_error is %f\n", par->iter_err);
+    if(par->first_dire_itype == X_DIRE) {
+      fprintf(stdout, "grid generate first direction is x\n");
     }
-    if(par->dire_itype == Z_DIRE) {
-      fprintf(stdout, "grid generate direction is z\n");
+    if(par->first_dire_itype == Z_DIRE) {
+      fprintf(stdout, "grid generate first direction is z\n");
     }
     fprintf(stdout, "expect distance x1 bdry is %f\n",par->distance[0]);
     fprintf(stdout, "expect distance x2 bdry is %f\n",par->distance[1]);

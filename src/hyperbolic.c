@@ -56,8 +56,8 @@ hyper_gene(gd_t *gdcurv, float coef, int o2i, int bdry_itype, float epsilon)
     fprintf(stdout,"hyperbolic method, inner bdry(k=0), outer bdry(nz-1)\n");
     fprintf(stdout,"we default set read init bdry is inner bdry(k=0)\n");
     fprintf(stdout,"so if the init bdry is outer bdry actually, must be flip\n");
-    flip_coord(x2d,nx,nz);
-    flip_coord(z2d,nx,nz);
+    flip_coord_z(x2d,nx,nz);
+    flip_coord_z(z2d,nx,nz);
   }
 
   free(coef_e);

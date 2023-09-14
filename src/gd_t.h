@@ -45,7 +45,7 @@ int
 check_bdry(float *x1, float *x2, float *z1, float *z2, int nx, int nz);
 
 int
-flip_coord(float *coord, int nx, int nz);
+flip_coord_z(float *coord, int nx, int nz);
 
 int
 permute_coord(gd_t *gdcurv);

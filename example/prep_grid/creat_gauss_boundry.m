@@ -11,17 +11,13 @@ flag_topo_z = 1;
 
 nx1 = 200;
 nz = 200;
-num_pml = 0;
+num_pml = 00;
 nx = nx1 + 2*num_pml; 
 
 dx = 10;
 dz = 10;
 origin_x = 0;
 origin_z = 0;
-a_x=0.20;
-H_x=-0.3*nx*dx;
-a_z=0.2;
-H_z=0.2*nz*dz;
 
 bz1 = zeros(nx,2);
 bz2 = zeros(nx,2);
@@ -35,23 +31,18 @@ for i=1:nx1
     bz2(i+num_pml,2) = origin_z;
 end
 
-if  flag_topo_z
-%     point = origin_x + floor(nx/2)*dx;
-%     L = 50*dx;
-%     H = 20*dz;
-%     for i = 1:nx1
-%         r1 = sqrt((bz2(i+num_pml,1)-point)^2);
-%         topo = 0;
-%         if(r1 < L)
-%             topo = 0.5*H * (1+cos(pi*r1/L));
-%         end
-%         bz2(i+num_pml,2)=bz2(i+num_pml,2)+topo;
-%     end
-    for i = 1:nx1
-       bz2(i+num_pml,2) = bz2(i+num_pml,2) + H_z*exp(-((i-1)/(nx1-1)-0.5)^2/a_z^2);
-%        bz2(i+num_pml,2) = bz2(i+num_pml,2) + (i-1)*dx;
-%        bz1(i+num_pml,2) = bz1(i+num_pml,2) + H*exp(-((i-1)/(nx1-1)-0.5)^2/a^2);
-    end
+if flag_topo_z
+  point = origin_x + floor(nx1/2)*dx;
+  L = 0.4*(nx-1)*dx;
+  H = 0.2*(nz-1)*dz;
+  for i = 1:nx1
+      r1 = sqrt((bz2(i+num_pml,1)-point)^2);
+      topo = 0;
+      if(r1 < L)
+          topo = 0.5*H * (1+cos(pi*r1/L));
+      end
+      bz2(i+num_pml,2)=bz2(i+num_pml,2)+topo;
+  end
 end
 
 [bz1] = extend_abs_layer(bz1,dx,nx,num_pml);
@@ -68,22 +59,23 @@ for k=1:nz
     bx2(k,2) = bz1(nx,2) + (k-1)*dz2;
 end
 
-if  flag_topo_x
-  for k=1:nz
-      topo_x(k) = H_x*exp(-((k-1)/(nz-1)-0.5)^2/a_x^2);
-  end
-  topo_x = topo_x - topo_x(1);
-  for k=1:nz
-      bx2(k,1) = bx2(k,1) - topo_x(k);
-  end
-  for k=1:nz
-%       bx1(k,1) = bx1(k,1) + topo_x(k);
+if flag_topo_x
+  point = origin_z - floor(nz/2)*dz;
+  L = 0.4*(nz-1)*dz;
+  H = 0.2*(nx-1)*dx;
+  for k = 1:nz
+      r1 = sqrt((bx2(k,2)-point)^2);
+      topo = 0;
+      if(r1 < L)
+          topo = 0.5*H * (1+cos(pi*r1/L));
+      end
+      bx2(k,1)=bx2(k,1)+topo;
   end
 end
 
 A=0.0001;
-[bx1]=arc_strech(A,bx1);
-[bx2]=arc_strech(A,bx2);
+% [bx1]=arc_strech(A,bx1);
+% [bx2]=arc_strech(A,bx2);
 
 if flag_printf
     figure(1)   

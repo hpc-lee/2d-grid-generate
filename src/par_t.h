@@ -52,10 +52,12 @@ typedef struct{
 
   int dire_itype;
   char direction[PAR_MAX_STRLEN];
+  int first_dire_itype;   // first for elliptic
+  char first_dire[PAR_MAX_STRLEN];
   float coef;
 
   float distance[4];  // for higenstock dx1,dx2,dz1,dz2 
-  float i_err;   // iteration error
+  float iter_err;   // iteration error
   int max_iter;  // max iterations
   int o2i;  // for parabolic
   int bdry_itype; // for hyperbolic

@@ -32,41 +32,41 @@ LDFLAGS := -L$(NETCDF)/lib -lnetcdf -lm $(LDFLAGS)
 # 	$< The names of the first prerequisite
 #   $^ The names of all the prerequisites 
 
-main_grid_2d: cJSON.o sacLib.o	lib_mem.o \
+main_grid_2d:cJSON.o sacLib.o	lib_mem.o \
 				lib_math.o par_t.o par_t.o gd_t.o \
 				io_funcs.o algebra.o quality_check.o \
 				parabolic.o elliptic.o hyperbolic.o \
 				solver.o main.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 
-cJSON.o: lib/cJSON.c
+cJSON.o:lib/cJSON.c
 	${CC} -c -o $@ $(CFLAGS) $<
-sacLib.o: lib/sacLib.c
+sacLib.o:lib/sacLib.c
 	${CC} -c -o $@ $(CFLAGS) $<
-lib_mem.o: lib/lib_mem.c
+lib_mem.o:lib/lib_mem.c
 	${CC} -c -o $@ $(CFLAGS) $<
-lib_math.o: lib/lib_math.c
+lib_math.o:lib/lib_math.c
 	${CC} -c -o $@ $(CFLAGS) $<
-par_t.o: src/par_t.c
+par_t.o:src/par_t.c
 	${CC} -c -o $@ $(CFLAGS) $<
-gd_t.o: src/gd_t.c
+gd_t.o:src/gd_t.c
 	${CC} -c -o $@ $(CFLAGS) $<
-io_funcs.o: src/io_funcs.c
+io_funcs.o:src/io_funcs.c
 	${CC} -c -o $@ $(CFLAGS) $<
-algebra.o: src/algebra.c
+algebra.o:src/algebra.c
 	${CC} -c -o $@ $(CFLAGS) $<
-quality_check.o: src/quality_check.c
+quality_check.o:src/quality_check.c
 	${CC} -c -o $@ $(CFLAGS) $<
-parabolic.o: src/parabolic.c
+parabolic.o:src/parabolic.c
 	${CC} -c -o $@ $(CFLAGS) $<
-hyperbolic.o: src/hyperbolic.c
+hyperbolic.o:src/hyperbolic.c
 	${CC} -c -o $@ $(CFLAGS) $<
-elliptic.o: src/elliptic.c
+elliptic.o:src/elliptic.c
 	${CC} -c -o $@ $(CFLAGS) $<
-solver.o: src/solver.c
+solver.o:src/solver.c
 	${CC} -c -o $@ $(CFLAGS) $<
 
-main.o: src/main.c
+main.o:src/main.c
 	${CC} -c -o $@ $(CFLAGS) $<
 
 cleanexe:

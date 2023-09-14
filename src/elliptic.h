@@ -10,7 +10,8 @@ diri_gene(gd_t *gdcurv, par_t *par);
 int
 set_src_diri(float *x2d, float *z2d, int nx, int nz, 
              float *P, float *Q, float *p_x, float *p_z,
-             float *g11_x, float *g22_z, float coef);
+             float *g11_x, float *g22_z, float coef,
+             int first_dire_itype);
 
 int
 ghost_cal(float *x2d, float *z2d, int nx, int nz, float *p_x, float *p_z,
@@ -22,6 +23,9 @@ higen_gene(gd_t *gdcurv, par_t *par);
 int
 set_src_higen(float *x2d, float *z2d, int nx, int nz,
               float *P, float *Q, float coef,
-              float dx1, float dx2, float dz1, float dz2);
+              float dx1, float dx2, float dz1, float dz2,
+              int first_dire_itype);
+
+int interp_inner_source(float *P, float *Q, int nx, int nz, float coef, int first_dire_itype);
 
 #endif
