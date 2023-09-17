@@ -2,12 +2,13 @@
 #define HYPERBOLIC_H
 
 #include "gd_t.h"
+#include "par_t.h"
 /*************************************************
  * function prototype
  *************************************************/
 
 int 
-hyper_gene(gd_t *gdcurv, float coef, int o2i, int bdry_itype, float epsilon);
+hyper_gene(gd_t *gdcurv, par_t *par);
 
 int
 cal_smooth_coef(float coef, float *x2d, float *z2d, int nx, int nz, int k, float *coef_e);

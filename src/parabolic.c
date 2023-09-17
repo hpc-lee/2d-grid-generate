@@ -9,21 +9,22 @@
 #include "lib_mem.h"
 
 int 
-para_gene(gd_t *gdcurv, float coef, int o2i)
+para_gene(gd_t *gdcurv, par_t *par)
 {
   int nx = gdcurv->nx;
   int nz = gdcurv->nz;
 
   float *x2d = gdcurv->x2d;
   float *z2d = gdcurv->z2d;
+  float coef = par->coef;
+  int o2i = par->o2i;
 
   if(o2i == 1)
   {
     fprintf(stdout,"parabolic method, march direction from inner bdry(k=0) to outer bdry(nz-1)\n");
     fprintf(stdout,"so if we want from outer bdry(nz-1) to inner bdry(k=0), must be flip\n");
     fprintf(stdout,"flip coord, trans outer bdry(nz-1) to inner bdry(0)\n");
-    flip_coord_z(x2d,nx,nz);
-    flip_coord_z(z2d,nx,nz);
+    flip_coord_z(gdcurv);
   }
   // malloc space for thomas method 
   // a,b,c,d_x,d_z,u_x,u_z. 7 vars space
@@ -45,13 +46,14 @@ para_gene(gd_t *gdcurv, float coef, int o2i)
     // base predict points
     // update k layer points
     update_point(x2d,z2d,var_th,nx,nz,k);
+    fprintf(stdout,"number of layer is %d\n",k);
+    fflush(stdout);
   }
 
   if(o2i == 1)
   {
     // flip to return.
-    flip_coord_z(x2d,nx,nz);
-    flip_coord_z(z2d,nx,nz);
+    flip_coord_z(gdcurv);
   }
 
   free(var_th);
@@ -328,7 +330,7 @@ bdry_effct(float *x2d, float *z2d, int nx, int nz, int k)
 
 int
 cal_bdry_arc_length(float *x2d, float *z2d, int nx,
-                    int nz, float *arc1_len, float *arc2_len)
+                    int nz, float *x1_len, float *x2_len)
 {
   size_t iptr1, iptr2, iptr3, iptr4; 
   float x_len, z_len, dh_len;
@@ -339,14 +341,14 @@ cal_bdry_arc_length(float *x2d, float *z2d, int nx,
     x_len = x2d[iptr1] - x2d[iptr2];
     z_len = z2d[iptr1] - z2d[iptr2];
     dh_len = sqrt(pow(x_len,2) + pow(z_len,2));
-    arc1_len[k] = arc1_len[k-1] + dh_len;
+    x1_len[k] = x1_len[k-1] + dh_len;
 
     iptr3 = k*nx + nx-1;
     iptr4 = (k-1)*nx + nx-1;
     x_len = x2d[iptr3] - x2d[iptr4];
     z_len = z2d[iptr3] - z2d[iptr4];
     dh_len = sqrt(pow(x_len,2) + pow(z_len,2));
-    arc2_len[k] = arc2_len[k-1] + dh_len;
+    x2_len[k] = x2_len[k-1] + dh_len;
   }
 
   return 0;

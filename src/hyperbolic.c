@@ -11,12 +11,15 @@
 #include "constants.h"
 
 int 
-hyper_gene(gd_t *gdcurv, float coef, int o2i, int bdry_itype, float epsilon)
+hyper_gene(gd_t *gdcurv, par_t *par)
 {
   int nx = gdcurv->nx;
   int nz = gdcurv->nz;
   int n = nx-2;  // not include bdry 2 points
-
+  float coef = par->coef; 
+  int o2i = par->o2i;
+  int bdry_itype = par->bdry_itype;
+  float epsilon = par->epsilon;
   float *x2d = gdcurv->x2d;
   float *z2d = gdcurv->z2d;
   float *step = gdcurv->step;
@@ -49,15 +52,17 @@ hyper_gene(gd_t *gdcurv, float coef, int o2i, int bdry_itype, float epsilon)
     modify_bdry(n,a,b,c,d,epsilon,bdry_itype);
     thomas_block(n,a,b,c,d,xz,D,y);
     assign_coords(xz,x2d,z2d,nx,k,epsilon,bdry_itype);
+
+    fprintf(stdout,"number of layers is %d\n",k);
+    fflush(stdout);
   }
 
   if(o2i == 1)
   {
-    fprintf(stdout,"hyperbolic method, inner bdry(k=0), outer bdry(nz-1)\n");
-    fprintf(stdout,"we default set read init bdry is inner bdry(k=0)\n");
-    fprintf(stdout,"so if the init bdry is outer bdry actually, must be flip\n");
-    flip_coord_z(x2d,nx,nz);
-    flip_coord_z(z2d,nx,nz);
+    //fprintf(stdout,"hyperbolic method, inner bdry(k=0), outer bdry(nz-1)\n");
+    //fprintf(stdout,"we default set read init bdry is inner bdry(k=0)\n");
+    //fprintf(stdout,"so if the init bdry is outer bdry actually, must be flip\n");
+    flip_coord_z(gdcurv);
   }
 
   free(coef_e);

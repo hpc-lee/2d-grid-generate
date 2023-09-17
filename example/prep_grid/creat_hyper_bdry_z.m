@@ -25,7 +25,7 @@ end
 
 if  flag_topo_z
     for i = 1:nx1
-       bdry_z(i+num_pml,2) = bzdry_(i+num_pml,2) + H_z*exp(-((i-1)/(nx1-1)-0.5)^2/a_z^2);
+       bdry_z(i+num_pml,2) = bdry_z(i+num_pml,2) + H_z*exp(-((i-1)/(nx1-1)-0.5)^2/a_z^2);
     end
 end
 

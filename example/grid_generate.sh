@@ -71,11 +71,11 @@ cat << ieof > ${PAR_FILE}
       },
       "#parabolic" : {
           "coef" : -50,
-          "direction" : "x",
+          "direction" : "z",
           "o2i" : 1
       },
       "hyperbolic" : {
-          "coef" : 20,
+          "coef" : 2,
           "bdry_type" : 1,
           "epsilon" : 0,
           "direction" : "x",

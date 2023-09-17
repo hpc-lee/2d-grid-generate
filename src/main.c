@@ -67,7 +67,7 @@ int main(int argc, char** argv)
       // before grid generate
       if(par->dire_itype == X_DIRE)
       {
-        permute_coord(gdcurv);
+        permute_coord_x(gdcurv);
       }
 
       // grid method
@@ -76,7 +76,7 @@ int main(int argc, char** argv)
       // after grid generate
       if(par->dire_itype == X_DIRE)
       {
-        permute_coord(gdcurv);
+        permute_coord_x(gdcurv);
       }
 
       break;
@@ -105,27 +105,27 @@ int main(int argc, char** argv)
       // before grid generate
       if(par->dire_itype == X_DIRE)
       {
-        permute_coord(gdcurv);
+        permute_coord_x(gdcurv);
       }
 
-      para_gene(gdcurv,par->coef,par->o2i);
+      para_gene(gdcurv,par);
 
       // after grid generate
       if(par->dire_itype == X_DIRE)
       {
-        permute_coord(gdcurv);
+        permute_coord_x(gdcurv);
       }
 
       break;
     }
     case HYPERBOLIC : {
 
-      grid_init_set_hyper(gdcurv,par->geometry_input_file,par->step_input_file);
-      hyper_gene(gdcurv,par->coef,par->o2i,par->bdry_itype,par->epsilon);
+      grid_init_set_hyper(gdcurv,par);
+      hyper_gene(gdcurv,par);
       // after grid generate
       if(par->dire_itype == X_DIRE)
       {
-        permute_coord(gdcurv);
+        permute_coord_x(gdcurv);
       }
 
       break;

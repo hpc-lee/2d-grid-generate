@@ -165,10 +165,13 @@ grid_init_set(gd_t *gdcurv, char *geometry_file)
 }
 
 int
-grid_init_set_hyper(gd_t *gdcurv, char *geometry_file, char *step_file)
+grid_init_set_hyper(gd_t *gdcurv, par_t *par)
 {
   FILE *fp = NULL;
   char str[500];
+  char *geometry_file = par->geometry_input_file;
+  char *step_file = par->step_input_file;
+  int dire_itype = par->dire_itype;
   
   int nx;
   int nz;
@@ -183,7 +186,14 @@ grid_init_set_hyper(gd_t *gdcurv, char *geometry_file, char *step_file)
   if (!io_get_nextline(fp,str,500)) {
     sscanf(str,"%d",&num_step);
   }
-  nz = num_step+1; 
+  if(par->dire_itype == Z_DIRE)
+  {
+    nz = num_step+1; 
+  } 
+  if(par->dire_itype == X_DIRE)
+  {
+    nx = num_step+1; 
+  }
   gdcurv->step = (float *)mem_calloc_1d_float(
                           num_step, 0.0, "step length");
 
@@ -201,22 +211,46 @@ grid_init_set_hyper(gd_t *gdcurv, char *geometry_file, char *step_file)
      fprintf(stderr,"ERROR: fail to open geometry file=%s\n", geometry_file);
      fflush(stdout); exit(1);
   }
-  // nx number
-  if (!io_get_nextline(fp,str,500)) {
-    sscanf(str,"%d",&nx);
-  }
-
-  init_gdcurv(gdcurv,nx,nz);
- 
-  size_t iptr;
-  float *x2d = gdcurv->x2d;
-  float *z2d = gdcurv->z2d;
-  for (int i=0; i<nx; i++)
+  if (par->dire_itype == Z_DIRE)
   {
-    iptr = i;  // (i,0)
+    // nx number
     if (!io_get_nextline(fp,str,500)) {
-      sscanf(str,"%f %f",x2d+iptr,z2d+iptr);
+      sscanf(str,"%d",&nx);
     }
+
+    init_gdcurv(gdcurv,nx,nz);
+ 
+    size_t iptr;
+    float *x2d = gdcurv->x2d;
+    float *z2d = gdcurv->z2d;
+    for (int i=0; i<nx; i++)
+    {
+      iptr = i;  // (i,0)
+      if (!io_get_nextline(fp,str,500)) {
+        sscanf(str,"%f %f",x2d+iptr,z2d+iptr);
+      }
+    }
+  }
+  if(par->dire_itype == X_DIRE)
+  {
+    // nz number
+    if (!io_get_nextline(fp,str,500)) {
+      sscanf(str,"%d",&nz);
+    }
+
+    init_gdcurv(gdcurv,nx,nz);
+ 
+    size_t iptr;
+    float *x2d = gdcurv->x2d;
+    float *z2d = gdcurv->z2d;
+    for (int k=0; k<nz; k++)
+    {
+      iptr = k*nx;  // (0,k)
+      if (!io_get_nextline(fp,str,500)) {
+        sscanf(str,"%f %f",x2d+iptr,z2d+iptr);
+      }
+    }
+    permute_coord_x(gdcurv);
   }
   // close  geometry file and free local pointer
   fclose(fp);
@@ -308,17 +342,25 @@ check_bdry(float *x1, float *x2, float *z1, float *z2, int nx, int nz)
 
 // 2D array flip z direction.  nz-1->0 0->nz-1 i->(nz-1)-i 
 int
-flip_coord_z(float *coord, int nx, int nz)
+flip_coord_z(gd_t *gdcurv)
 {
   size_t iptr,iptr1;
-  float *tmp_coord = NULL;
-  tmp_coord = (float *) malloc(nx*nz*sizeof(float));
+  int nx = gdcurv->nx;
+  int nz = gdcurv->nz;
+  float *x2d = gdcurv->x2d;
+  float *z2d = gdcurv->z2d;
+
+  float *tmp_coord_x = NULL;
+  tmp_coord_x = (float *) malloc(nx*nz*sizeof(float));
+  float *tmp_coord_z = NULL;
+  tmp_coord_z = (float *) malloc(nx*nz*sizeof(float));
   // copy data
   for(int k=0; k<nz; k++) {
     for(int i=0; i<nx; i++) 
     {
       iptr = k*nx + i;
-      tmp_coord[iptr] = coord[iptr];
+      tmp_coord_x[iptr] = x2d[iptr];
+      tmp_coord_z[iptr] = z2d[iptr];
     }
   }
   // flip coord
@@ -327,18 +369,20 @@ flip_coord_z(float *coord, int nx, int nz)
     {
       iptr = k*nx + i;
       iptr1 = (nz-1-k)*nx + i;
-      coord[iptr] = tmp_coord[iptr1];
+      x2d[iptr] = tmp_coord_x[iptr1];
+      z2d[iptr] = tmp_coord_z[iptr1];
     }
   }
 
-  free(tmp_coord);
+  free(tmp_coord_x);
+  free(tmp_coord_z);
 
   return 0;
 }
 
 // 2D array permute. transposition (nx,nz) -> (nz,nx)
 int
-permute_coord(gd_t *gdcurv)
+permute_coord_x(gd_t *gdcurv)
 {
   int nx = gdcurv->nx;
   int nz = gdcurv->nz;

@@ -36,22 +36,12 @@ if flag_printf
     axis equal;
 end
 
-% trans direction x to z
-% need keep Right-Handed Coordinate System
-nx = nz;
-bz(:,1) = bx(:,2); 
-bz(:,2) = bx(:,1); 
-if flag_printf
-    figure(2)   
-    plot(bz(:,1),bz(:,2));
-    axis equal;
-end
 % creat data file
 file_name = '../data_file_2d.txt';
 fid=fopen(file_name,'w'); % Output file name 
-fprintf(fid,'# nx number\n'); 
-fprintf(fid,'%d\n',nx);
-fprintf(fid,'# bz coords\n'); 
-for i=1:nx
-  fprintf(fid,'%.9e %.9e\n',bz(i,1),bz(i,2));
+fprintf(fid,'# nz number\n'); 
+fprintf(fid,'%d\n',nz);
+fprintf(fid,'# bx coords\n'); 
+for i=1:nz
+  fprintf(fid,'%.9e %.9e\n',bx(i,1),bx(i,2));
 end

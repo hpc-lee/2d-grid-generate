@@ -2,12 +2,13 @@
 #define PARABOLIC_H
 
 #include "gd_t.h"
+#include "par_t.h"
 /*************************************************
  * function prototype
  *************************************************/
 
 int 
-para_gene(gd_t *gdcurv,float coef, int o2i);
+para_gene(gd_t *gdcurv, par_t *par);
 
 int 
 predict_point(float *x2d, float *z2d, int nx, int nz, int k, int o2i, 
