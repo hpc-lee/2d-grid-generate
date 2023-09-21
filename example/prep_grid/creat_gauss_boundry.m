@@ -16,8 +16,8 @@ nx = nx1 + 2*num_pml;
 
 dx = 10;
 dz = 10;
-origin_x = 0;
-origin_z = 0;
+origin_x = 100000;
+origin_z = 100;
 
 bz1 = zeros(nx,2);
 bz2 = zeros(nx,2);
@@ -70,6 +70,7 @@ if flag_topo_x
           topo = 0.5*H * (1+cos(pi*r1/L));
       end
       bx2(k,1)=bx2(k,1)+topo;
+      bx1(k,1)=bx1(k,1)-topo;
   end
 end
 

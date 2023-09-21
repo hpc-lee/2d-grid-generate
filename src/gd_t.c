@@ -186,11 +186,11 @@ grid_init_set_hyper(gd_t *gdcurv, par_t *par)
   if (!io_get_nextline(fp,str,500)) {
     sscanf(str,"%d",&num_step);
   }
-  if(par->dire_itype == Z_DIRE)
+  if(dire_itype == Z_DIRE)
   {
     nz = num_step+1; 
   } 
-  if(par->dire_itype == X_DIRE)
+  if(dire_itype == X_DIRE)
   {
     nx = num_step+1; 
   }
@@ -211,7 +211,7 @@ grid_init_set_hyper(gd_t *gdcurv, par_t *par)
      fprintf(stderr,"ERROR: fail to open geometry file=%s\n", geometry_file);
      fflush(stdout); exit(1);
   }
-  if (par->dire_itype == Z_DIRE)
+  if (dire_itype == Z_DIRE)
   {
     // nx number
     if (!io_get_nextline(fp,str,500)) {
@@ -231,7 +231,7 @@ grid_init_set_hyper(gd_t *gdcurv, par_t *par)
       }
     }
   }
-  if(par->dire_itype == X_DIRE)
+  if(dire_itype == X_DIRE)
   {
     // nz number
     if (!io_get_nextline(fp,str,500)) {
@@ -252,7 +252,7 @@ grid_init_set_hyper(gd_t *gdcurv, par_t *par)
     }
     permute_coord_x(gdcurv);
   }
-  // close  geometry file and free local pointer
+  // close geometry file and free local pointer
   fclose(fp);
 
   return 0;

@@ -346,10 +346,11 @@ modify_bdry(int n, double *a, double *b, double *c, double *d,
   // dx=0 cartesian boundry
   if(bdry_itype == 2)
   {
+    int jj;
     iptr = (n-1)*CONST_NDIM*CONST_NDIM;
     for(int ii=0; ii<2; ii++) {
       // only modify second column
-      int jj = 1;
+      jj = 1;
       // modify i=0
       b[ii*2+jj] = b[ii*2+jj] + a[ii*2+jj];
       // modify i=nx-3
@@ -406,21 +407,21 @@ assign_coords(double *xz, float *x2d, float *z2d, int nx, int k,
   // cartesian boundary
   if(bdry_itype == 2)
   {
-    iptr = k*nx+0;        // (0,k) 
-    iptr1 = (k-1)*nx+0;   // (0,k-1)
-    iptr2 = k*nx+1;       // (1,k)
+    iptr  = k*nx+0;       // (0,k) 
+    iptr1 = k*nx+1;       // (1,k) 
+    iptr2 = (k-1)*nx+0;   // (0,k-1)
     iptr3 = (k-1)*nx+1;   // (1,k-1)
 
-    x2d[iptr] = x2d[iptr1];
-    z2d[iptr] = z2d[iptr1] + z2d[iptr2] - z2d[iptr3];
+    x2d[iptr] = x2d[iptr2];
+    z2d[iptr] = z2d[iptr2] + (z2d[iptr1] - z2d[iptr3]);
 
-    iptr = k*nx+(nx-1);        // (nx-1,k) 
-    iptr1 = (k-1)*nx+(nx-1);   // (nx-1,k-1)
-    iptr2 = k*nx+1;            // (nx-2,k)
-    iptr3 = (k-1)*nx+1;        // (nx-2,k-1)
+    iptr  = k*nx+(nx-1);   // (nx-1,k) 
+    iptr1 = k*nx+(nx-2);   // (nx-2,k)
+    iptr2 = (k-1)*nx+nx-1; // (nx-1,k-1)
+    iptr3 = (k-1)*nx+nx-2; // (nx-2,k-1)
 
-    x2d[iptr] = x2d[iptr1];
-    z2d[iptr] = z2d[iptr1] + z2d[iptr2] - z2d[iptr3];
+    x2d[iptr] = x2d[iptr2];
+    z2d[iptr] = z2d[iptr2] + (z2d[iptr1] - z2d[iptr3]);
   }
 
   return 0;

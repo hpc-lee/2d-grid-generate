@@ -70,13 +70,13 @@ cat << ieof > ${PAR_FILE}
           "first_dire" : "x"
       },
       "#parabolic" : {
-          "coef" : -50,
+          "coef" : -100,
           "direction" : "z",
           "o2i" : 1
       },
       "hyperbolic" : {
-          "coef" : 2,
-          "bdry_type" : 1,
+          "coef" : 30,
+          "bdry_type" : 2,
           "epsilon" : 0,
           "direction" : "x",
           "o2i" : 1,

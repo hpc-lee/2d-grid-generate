@@ -3,8 +3,8 @@
 
 #include "lib_math.h"
 
-void
-mat_invert2x2(double matrix[2][2])
+int
+mat_invert2x2(double matrix[][2])
 {
   for (int k=0; k<2; k++)
   {
@@ -27,10 +27,10 @@ mat_invert2x2(double matrix[2][2])
      }
   }
 
-  return;
+  return 0;
 }
 
-void
+int
 mat_mul2x2(double A[][2], double B[][2], double C[][2])
 {
   for (int i=0; i<2; i++)
@@ -40,18 +40,19 @@ mat_mul2x2(double A[][2], double B[][2], double C[][2])
         C[i][j] += A[i][k] * B[k][j];
     }
 
-  return;
+  return 0;
 }
 
-void
-mat_mul2x1(double A[][2], double B[2], double C[2])
+int
+mat_mul2x1(double A[][2], double *B, double *C)
 {
   C[0] = A[0][0]*B[0] + A[0][1]*B[1];
   C[1] = A[1][0]*B[0] + A[1][1]*B[1];
-  return;
+
+  return 0;
 }
 
-void
+int
 mat_add2x2(double A[][2], double B[][2], double C[][2])
 {
   for (int i=0; i<2; i++){
@@ -59,28 +60,31 @@ mat_add2x2(double A[][2], double B[][2], double C[][2])
         C[i][j] = A[i][j] + B[i][j];
     }
   }
-  return;
+
+  return 0;
 }
 
-void
-vec_add2x1(double A[2], double B[2], double C[2])
+int
+vec_add2x1(double *A, double *B, double *C)
 {
   for (int i=0; i<2; i++){
     C[i] = A[i] + B[i];
   }
-  return;
+
+  return 0;
 }
 
-void
-vec_sub2x1(double A[2], double B[2], double C[2])
+int
+vec_sub2x1(double *A, double *B, double *C)
 {
   for (int i=0; i<2; i++){
     C[i] = A[i] - B[i];
   }
-  return;
+
+  return 0;
 }
 
-void
+int
 mat_sub2x2(double A[][2], double B[][2], double C[][2])
 {
   for (int i=0; i<2; i++){
@@ -88,10 +92,11 @@ mat_sub2x2(double A[][2], double B[][2], double C[][2])
         C[i][j] = A[i][j] - B[i][j];
     }
   }
-  return;
+
+  return 0;
 }
 
-void
+int
 mat_copy2x2(double A[][2], double B[][2])
 {
   for (int i=0; i<2; i++){
@@ -99,14 +104,15 @@ mat_copy2x2(double A[][2], double B[][2])
         B[i][j] = A[i][j];
     }
   }
-  return;
+
+  return 0;
 }
 
-void
+int
 mat_iden2x2(double A[][2])
 {
-  for (int i = 0; i < 2; i++){
-    for (int j = 0; j < 2; j++){
+  for (int i=0; i<2; i++){
+    for (int j=0; j<2; j++){
       A[i][j] = 0.0;
       if(i==j) {
         A[i][j] = 1;
@@ -114,5 +120,5 @@ mat_iden2x2(double A[][2])
     }
   }
 
-  return;
+  return 0;
 }
