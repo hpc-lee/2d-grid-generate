@@ -57,10 +57,10 @@ par_read_from_str(const char *str, par_t *par)
   par->check_orth  = 0;
   par->check_jac   = 0;
   par->check_ratio = 0;
-  par->check_step_x  = 0;
-  par->check_step_z  = 0;
-  par->check_smooth_x = 0;
-  par->check_smooth_z = 0;
+  par->check_step_xi  = 0;
+  par->check_step_zt  = 0;
+  par->check_smooth_xi = 0;
+  par->check_smooth_zt = 0;
   if (item = cJSON_GetObjectItem(root, "check_orth")) {
     par->check_orth = item->valueint;
   }
@@ -70,70 +70,70 @@ par_read_from_str(const char *str, par_t *par)
   if (item = cJSON_GetObjectItem(root, "check_ratio")) {
     par->check_ratio = item->valueint;
   }
-  if (item = cJSON_GetObjectItem(root, "check_step_x")) {
-    par->check_step_x = item->valueint;
+  if (item = cJSON_GetObjectItem(root, "check_step_xi")) {
+    par->check_step_xi = item->valueint;
   }
-  if (item = cJSON_GetObjectItem(root, "check_step_z")) {
-    par->check_step_z = item->valueint;
+  if (item = cJSON_GetObjectItem(root, "check_step_zt")) {
+    par->check_step_zt = item->valueint;
   }
-  if (item = cJSON_GetObjectItem(root, "check_smooth_x")) {
-    par->check_smooth_x = item->valueint;
+  if (item = cJSON_GetObjectItem(root, "check_smooth_xi")) {
+    par->check_smooth_xi = item->valueint;
   }
-  if (item = cJSON_GetObjectItem(root, "check_smooth_z")) {
-    par->check_smooth_z = item->valueint;
+  if (item = cJSON_GetObjectItem(root, "check_smooth_zt")) {
+    par->check_smooth_zt = item->valueint;
   }
   int check = par->check_orth + par->check_jac /
-            + par->check_ratio + par->check_step_x /
-            + par->check_step_z +  par->check_smooth_x /
-            + par->check_smooth_z; 
+            + par->check_ratio + par->check_step_xi /
+            + par->check_step_zt + par->check_smooth_xi /
+            + par->check_smooth_zt; 
   if(check != 0)
   {
     par->grid_check = 1;
   }
 
   // default not strech
-  par->flag_strech_x = 0;
-  par->flag_strech_z = 0;
-  if (item = cJSON_GetObjectItem(root, "flag_strech_x")) {
-    par->flag_strech_x = item->valueint;
+  par->flag_strech_xi = 0;
+  par->flag_strech_zt = 0;
+  if (item = cJSON_GetObjectItem(root, "flag_strech_xi")) {
+    par->flag_strech_xi = item->valueint;
   }
-  if (item = cJSON_GetObjectItem(root, "strech_x_coef")) {
-    par->strech_x_coef = item->valuedouble;
+  if (item = cJSON_GetObjectItem(root, "strech_xi_coef")) {
+    par->strech_xi_coef = item->valuedouble;
   }
-  if (item = cJSON_GetObjectItem(root, "flag_strech_z")) {
-    par->flag_strech_z = item->valueint;
+  if (item = cJSON_GetObjectItem(root, "flag_strech_zt")) {
+    par->flag_strech_zt = item->valueint;
   }
-  if (item = cJSON_GetObjectItem(root, "strech_z_coef")) {
-    par->strech_z_coef = item->valuedouble;
+  if (item = cJSON_GetObjectItem(root, "strech_zt_coef")) {
+    par->strech_zt_coef = item->valuedouble;
   }
 
   // default not intep
-  par->sample_factor_x = 1.0;
-  par->sample_factor_z = 1.0;
-  if (item = cJSON_GetObjectItem(root, "flag_sample_x")) {
-    par->flag_sample_x = item->valueint;
+  par->sample_factor_xi = 1.0;
+  par->sample_factor_zt = 1.0;
+  if (item = cJSON_GetObjectItem(root, "flag_sample_xi")) {
+    par->flag_sample_xi = item->valueint;
   }
-  if (par->flag_sample_x == 1) 
+  if (par->flag_sample_xi == 1) 
   {
-    if (item = cJSON_GetObjectItem(root, "sample_factor_x")) {
-      par->sample_factor_x = item->valuedouble;
-      if((par->sample_factor_x-1) < 0.0)
+    if (item = cJSON_GetObjectItem(root, "sample_factor_xi")) {
+      par->sample_factor_xi = item->valuedouble;
+      if((par->sample_factor_xi-1) < 0.0)
       {
-        fprintf(stdout,"sample_factor_x must >= 1\n");
+        fprintf(stdout,"sample_factor_xi must >= 1\n");
         exit(1);
       }
     }
   }
-  if (item = cJSON_GetObjectItem(root, "flag_sample_z")) {
-    par->flag_sample_z = item->valueint;
+  if (item = cJSON_GetObjectItem(root, "flag_sample_zt")) {
+    par->flag_sample_zt = item->valueint;
   }
-  if (par->flag_sample_z == 1) 
+  if (par->flag_sample_zt == 1) 
   {
-    if (item = cJSON_GetObjectItem(root, "sample_factor_z")) {
-      par->sample_factor_z = item->valuedouble;
-      if((par->sample_factor_z-1) < 0.0)
+    if (item = cJSON_GetObjectItem(root, "sample_factor_zt")) {
+      par->sample_factor_zt = item->valuedouble;
+      if((par->sample_factor_zt-1) < 0.0)
       {
-        fprintf(stdout,"sample_factor_z must >= 1\n");
+        fprintf(stdout,"sample_factor_zt must >= 1\n");
         exit(1);
       }
     }
@@ -293,30 +293,30 @@ par_print(par_t *par)
   if (par->check_ratio == 1) {
     fprintf(stdout, "------- check grid ratio-------\n");
   }
-  if (par->check_step_x == 1) {
-    fprintf(stdout, "------- check grid step x direction-------\n");
+  if (par->check_step_xi == 1) {
+    fprintf(stdout, "------- check grid step xi direction-------\n");
   }
-  if (par->check_step_z == 1) {
-    fprintf(stdout, "------- check grid step z direction-------\n");
+  if (par->check_step_zt == 1) {
+    fprintf(stdout, "------- check grid step zt direction-------\n");
   }
-  if (par->check_smooth_x == 1) {
-    fprintf(stdout, "------- check grid smooth x direction-------\n");
+  if (par->check_smooth_xi == 1) {
+    fprintf(stdout, "------- check grid smooth xi direction-------\n");
   }
-  if (par->check_smooth_z == 1) {
-    fprintf(stdout, "------- check grid smooth z direction-------\n");
+  if (par->check_smooth_zt == 1) {
+    fprintf(stdout, "------- check grid smooth zt direction-------\n");
   }
 
-  if (par->flag_sample_x == 1) {
-    fprintf(stdout,"sample grid x direction factor is %f\n",par->sample_factor_x);
+  if (par->flag_sample_xi == 1) {
+    fprintf(stdout,"sample grid xi direction factor is %f\n",par->sample_factor_xi);
   }
-  if (par->flag_sample_z == 1) {
-    fprintf(stdout,"sample grid z direction factor is %f\n",par->sample_factor_z);
+  if (par->flag_sample_zt == 1) {
+    fprintf(stdout,"sample grid zt direction factor is %f\n",par->sample_factor_zt);
   }
-  if(par->flag_strech_x == 1) {
-    fprintf(stdout, "------- strech x and strech coef is %f-------\n",par->strech_x_coef);
+  if(par->flag_strech_xi == 1) {
+    fprintf(stdout, "------- strech xi and strech coef is %f-------\n",par->strech_xi_coef);
   }
-  if(par->flag_strech_z == 1) {
-    fprintf(stdout, "------- strech z and strech coef is %f-------\n",par->strech_z_coef);
+  if(par->flag_strech_zt == 1) {
+    fprintf(stdout, "------- strech zt and strech coef is %f-------\n",par->strech_zt_coef);
   }
 
   fprintf(stdout, "------- grid generate method-------\n");

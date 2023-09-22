@@ -26,20 +26,20 @@ typedef struct{
   int check_orth;
   int check_jac;
   int check_ratio;
-  int check_step_x;
-  int check_step_z;
-  int check_smooth_x;
-  int check_smooth_z;
+  int check_step_xi;
+  int check_step_zt;
+  int check_smooth_xi;
+  int check_smooth_zt;
 
-  int flag_strech_x;
-  int flag_strech_z;
-  float strech_x_coef;
-  float strech_z_coef;
+  int flag_strech_xi;
+  int flag_strech_zt;
+  float strech_xi_coef;
+  float strech_zt_coef;
 
-  int flag_sample_x;
-  int flag_sample_z;
-  float sample_factor_x;
-  float sample_factor_z;
+  int flag_sample_xi;
+  int flag_sample_zt;
+  float sample_factor_xi;
+  float sample_factor_zt;
 
   char geometry_input_file[PAR_MAX_STRLEN];
   char step_input_file[PAR_MAX_STRLEN];

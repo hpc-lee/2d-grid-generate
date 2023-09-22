@@ -33,10 +33,10 @@ scl_daspect = [1 1 1];
 clrmp       = 'parula';
 
 % varable to plot 
-%  'orth', 'jacobi', 'ratio', 'smooth_x', 
-%  'smooth_z', 'step_x', 'step_z'
+%  'orth', 'jacobi', 'ratio', 'smooth_xi', 
+%  'smooth_zt', 'step_xi', 'step_zt'
 % varnm = 'jacobi';
-varnm = 'orth';
+varnm = 'step_zt';
 %-----------------------------------------------------------
 %-- load coord
 %-----------------------------------------------------------
