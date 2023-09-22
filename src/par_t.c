@@ -82,9 +82,9 @@ par_read_from_str(const char *str, par_t *par)
   if (item = cJSON_GetObjectItem(root, "check_smooth_zt")) {
     par->check_smooth_zt = item->valueint;
   }
-  int check = par->check_orth + par->check_jac /
-            + par->check_ratio + par->check_step_xi /
-            + par->check_step_zt + par->check_smooth_xi /
+  int check = par->check_orth + par->check_jac
+            + par->check_ratio + par->check_step_xi
+            + par->check_step_zt + par->check_smooth_xi
             + par->check_smooth_zt; 
   if(check != 0)
   {

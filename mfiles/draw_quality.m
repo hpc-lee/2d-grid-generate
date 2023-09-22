@@ -21,7 +21,7 @@ nz = xzc(2);
 % which grid profile to plot
 subs=[1,1];     % % index 1:nx 1:nz
 subc=[-1,-1];   % '-1' to plot all points in this dimension
-subt=[1,1];
+subt=[2,2];
 
 % figure control parameters
 flag_km     = 1;
@@ -36,7 +36,7 @@ clrmp       = 'parula';
 %  'orth', 'jacobi', 'ratio', 'smooth_xi', 
 %  'smooth_zt', 'step_xi', 'step_zt'
 % varnm = 'jacobi';
-varnm = 'step_zt';
+varnm = 'orth';
 %-----------------------------------------------------------
 %-- load coord
 %-----------------------------------------------------------

@@ -42,10 +42,10 @@ cat << ieof > ${PAR_FILE}
   "flag_strech_zt" : 0,
   "strech_zt_coef" : 0.0001,
 
-  "flag_sample_xi" : 0,
-  "sample_factor_xi" : 2.0,
-  "flag_sample_zt" : 0,
-  "sample_factor_zt" : 1.0,
+  "flag_sample_xi" : 1,
+  "sample_factor_xi" : 1.5,
+  "flag_sample_zt" : 1,
+  "sample_factor_zt" : 2.0,
 
   "geometry_input_file" : "${INPUTDIR}/data_file_2d.txt",
   "grid_export_dir" : "${OUTPUT_DIR}",
@@ -56,7 +56,7 @@ cat << ieof > ${PAR_FILE}
           "coef" : 0.3,
           "direction" : "z"
       },
-      "#elli_diri" : {
+      "elli_diri" : {
           "coef" : -20,
           "iter_err" : 5E-3,
           "max_iter" : 5E3,
@@ -74,7 +74,7 @@ cat << ieof > ${PAR_FILE}
           "direction" : "z",
           "o2i" : 1
       },
-      "hyperbolic" : {
+      "#hyperbolic" : {
           "coef" : 30,
           "bdry_type" : 1,
           "epsilon" : 0,
