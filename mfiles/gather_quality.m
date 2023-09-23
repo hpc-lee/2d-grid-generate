@@ -41,7 +41,7 @@ if(subt(2)<0)
   zs = subs(2)-(zc-1)*zt-1;
 end
 if(subt(2)>0)
-  zt = subt(1);
+  zt = subt(2);
   if(subc(2) == -1)
     zc = ceil((xzc(2)-subs(2)+1)/zt);
   else
