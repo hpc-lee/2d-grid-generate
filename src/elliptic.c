@@ -53,6 +53,7 @@ diri_gene(gd_t *gdcurv, par_t *par)
   g22_z = (float *)mem_calloc_1d_float(nx*2, 0.0, "g22_z"); 
   ghost_cal(x2d,z2d,nx,nz,p_x,p_z,g11_x,g22_z);
 
+  set_src_diri(x2d,z2d,nx,nz,P,Q,p_x,p_z,g11_x,g22_z,coef,first_dire_itype);
   // copy coord
   for(int k=0; k<nz; k++) {
     for(int i=0; i<nx; i++)
@@ -86,6 +87,9 @@ diri_gene(gd_t *gdcurv, par_t *par)
       }
     }
 
+    fprintf(stdout,"number of iter is %d\n", Niter);
+    fprintf(stdout,"max_resi is %f, max_resk is %f\n", max_resi, max_resk);
+
     // copy coord
     for(int k=0; k<nz; k++) {
       for(int i=0; i<nx; i++)
@@ -97,9 +101,6 @@ diri_gene(gd_t *gdcurv, par_t *par)
     }
     
     set_src_diri(x2d,z2d,nx,nz,P,Q,p_x,p_z,g11_x,g22_z,coef,first_dire_itype);
-
-    fprintf(stdout,"number of iter is %d\n", Niter);
-    fprintf(stdout,"max_resi is %f, max_resk is %f\n", max_resi, max_resk);
 
     if(Niter>max_iter) {
       flag_true = 0;
@@ -410,6 +411,8 @@ higen_gene(gd_t *gdcurv, par_t *par)
   float resi, resk;
   float max_resi, max_resk;
 
+  set_src_higen(x2d,z2d,nx,nz,P,Q,coef,dx1,dx2,dz1,dz2,first_dire_itype);
+
   // copy coord
   for(int k=0; k<nz; k++) {
     for(int i=0; i<nx; i++)
@@ -443,6 +446,9 @@ higen_gene(gd_t *gdcurv, par_t *par)
       }
     }
 
+    fprintf(stdout,"number of iter is %d\n", Niter);
+    fprintf(stdout,"max_resi is %f, max_resk is %f\n", max_resi, max_resk);
+
     // copy coord
     for(int k=0; k<nz; k++) {
       for(int i=0; i<nx; i++)
@@ -454,9 +460,6 @@ higen_gene(gd_t *gdcurv, par_t *par)
     }
     
     set_src_higen(x2d,z2d,nx,nz,P,Q,coef,dx1,dx2,dz1,dz2,first_dire_itype);
-
-    fprintf(stdout,"number of iter is %d\n", Niter);
-    fprintf(stdout,"max_resi is %f, max_resk is %f\n", max_resi, max_resk);
 
     if(Niter>max_iter) {
       flag_true = 0;

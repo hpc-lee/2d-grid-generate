@@ -42,9 +42,9 @@ cat << ieof > ${PAR_FILE}
   "flag_strech_zt" : 0,
   "strech_zt_coef" : 0.0001,
 
-  "flag_sample_xi" : 1,
+  "flag_sample_xi" : 0,
   "sample_factor_xi" : 1.5,
-  "flag_sample_zt" : 1,
+  "flag_sample_zt" : 0,
   "sample_factor_zt" : 2.0,
 
   "geometry_input_file" : "${INPUTDIR}/data_file_2d.txt",
@@ -56,21 +56,21 @@ cat << ieof > ${PAR_FILE}
           "coef" : 0.3,
           "direction" : "z"
       },
-      "elli_diri" : {
+      "#elli_diri" : {
           "coef" : -20,
-          "iter_err" : 5E-3,
+          "iter_err" : 1E-2,
           "max_iter" : 5E3,
           "first_dire" : "z"
       },
-      "#elli_higen" : {
+      "elli_higen" : {
           "coef" : -20,
-          "iter_err" : 5E-3,
+          "iter_err" : 1E-2,
           "max_iter" : 5E3,
           "distance" : [10.0,10.0,10,10],
           "first_dire" : "x"
       },
       "#parabolic" : {
-          "coef" : -100,
+          "coef" : -30,
           "direction" : "z",
           "o2i" : 1
       },
@@ -78,7 +78,7 @@ cat << ieof > ${PAR_FILE}
           "coef" : 30,
           "bdry_type" : 1,
           "epsilon" : 0,
-          "direction" : "x",
+          "direction" : "z",
           "o2i" : 1,
           "step_input_file" : "${INPUTDIR}/step_file_2d.txt"
       }
