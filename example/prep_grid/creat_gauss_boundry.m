@@ -6,7 +6,7 @@ clear all;
 close all;
 
 flag_printf = 1;
-flag_topo_x = 1;
+flag_topo_x = 0;
 flag_topo_z = 1;
 
 nx1 = 200;
@@ -16,8 +16,8 @@ nx = nx1 + 2*num_pml;
 
 dx = 10;
 dz = 10;
-origin_x = 100000;
-origin_z = 100;
+origin_x = 0;
+origin_z = 0;
 
 bz1 = zeros(nx,2);
 bz2 = zeros(nx,2);
@@ -42,6 +42,7 @@ if flag_topo_z
           topo = 0.5*H * (1+cos(pi*r1/L));
       end
       bz2(i+num_pml,2)=bz2(i+num_pml,2)+topo;
+%       bz1(i+num_pml,2)=bz1(i+num_pml,2)+topo;
   end
 end
 

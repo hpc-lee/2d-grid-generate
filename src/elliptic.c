@@ -15,7 +15,6 @@ diri_gene(gd_t *gdcurv, par_t *par)
   float err = par->iter_err;
   int max_iter = par->max_iter;
   float coef = par->coef;
-  int first_dire_itype = par->first_dire_itype;
 
   int nx = gdcurv->nx;
   int nz = gdcurv->nz;
@@ -53,7 +52,7 @@ diri_gene(gd_t *gdcurv, par_t *par)
   g22_z = (float *)mem_calloc_1d_float(nx*2, 0.0, "g22_z"); 
   ghost_cal(x2d,z2d,nx,nz,p_x,p_z,g11_x,g22_z);
 
-  set_src_diri(x2d,z2d,nx,nz,P,Q,p_x,p_z,g11_x,g22_z,coef,first_dire_itype);
+  set_src_diri(x2d,z2d,nx,nz,P,Q,p_x,p_z,g11_x,g22_z,coef);
   // copy coord
   for(int k=0; k<nz; k++) {
     for(int i=0; i<nx; i++)
@@ -65,6 +64,7 @@ diri_gene(gd_t *gdcurv, par_t *par)
   }
 
   int flag_true = 1;
+  float dif1, dif2, dif3, dif_x, dif_z;
   while(flag_true)
   {
     // update solver
@@ -80,8 +80,17 @@ diri_gene(gd_t *gdcurv, par_t *par)
         iptr  = k*nx + i;
         iptr1 = k*nx + i+1;
         iptr2 = (k+1)*nx + i;
-        resi = fabs((x2d_tmp[iptr] - x2d[iptr])/(x2d[iptr1]-x2d[iptr]));
-        resk = fabs((z2d_tmp[iptr] - z2d[iptr])/(z2d[iptr2]-z2d[iptr]));
+        dif_x = x2d_tmp[iptr]-x2d[iptr];
+        dif_z = z2d_tmp[iptr]-z2d[iptr];
+        dif1 = sqrt(pow(dif_x,2) + pow(dif_z,2));
+        dif_x = x2d[iptr1]-x2d[iptr];
+        dif_z = z2d[iptr1]-z2d[iptr];
+        dif2 = sqrt(pow(dif_x,2) + pow(dif_z,2));
+        dif_x = x2d[iptr2]-x2d[iptr];
+        dif_z = z2d[iptr2]-z2d[iptr];
+        dif3 = sqrt(pow(dif_x,2) + pow(dif_z,2));
+        resi = dif1/dif2;
+        resk = dif1/dif3;
         max_resi = fmax(max_resi,resi);
         max_resk = fmax(max_resk,resk);
       }
@@ -89,6 +98,7 @@ diri_gene(gd_t *gdcurv, par_t *par)
 
     fprintf(stdout,"number of iter is %d\n", Niter);
     fprintf(stdout,"max_resi is %f, max_resk is %f\n", max_resi, max_resk);
+    fflush(stdout);
 
     // copy coord
     for(int k=0; k<nz; k++) {
@@ -100,7 +110,7 @@ diri_gene(gd_t *gdcurv, par_t *par)
       }
     }
     
-    set_src_diri(x2d,z2d,nx,nz,P,Q,p_x,p_z,g11_x,g22_z,coef,first_dire_itype);
+    set_src_diri(x2d,z2d,nx,nz,P,Q,p_x,p_z,g11_x,g22_z,coef);
 
     if(Niter>max_iter) {
       flag_true = 0;
@@ -127,8 +137,8 @@ diri_gene(gd_t *gdcurv, par_t *par)
 int
 set_src_diri(float *x2d, float *z2d, int nx, int nz, 
              float *P, float *Q, float *p_x, float *p_z,
-             float *g11_x, float *g22_z, float coef,
-             int first_dire_itype)
+             float *g11_x, float *g22_z, float coef)
+             
 {
   float *p_x1;
   float *p_x2;
@@ -240,7 +250,7 @@ set_src_diri(float *x2d, float *z2d, int nx, int nz,
               -(x_zt*x_ztzt + z_zt*z_ztzt)/g22;
   }
 
-  interp_inner_source(P,Q,nx,nz,coef,first_dire_itype);
+  interp_inner_source(P,Q,nx,nz,coef);
 
   return 0;
 }
@@ -381,7 +391,7 @@ higen_gene(gd_t *gdcurv, par_t *par)
   float err = par->iter_err;
   int max_iter = par->max_iter;
   float coef = par->coef;
-  int first_dire_itype = par->first_dire_itype;
+
   int nx = gdcurv->nx;
   int nz = gdcurv->nz;
   float *x2d = gdcurv->x2d;
@@ -411,7 +421,7 @@ higen_gene(gd_t *gdcurv, par_t *par)
   float resi, resk;
   float max_resi, max_resk;
 
-  set_src_higen(x2d,z2d,nx,nz,P,Q,coef,dx1,dx2,dz1,dz2,first_dire_itype);
+  set_src_higen(x2d,z2d,nx,nz,P,Q,coef,dx1,dx2,dz1,dz2);
 
   // copy coord
   for(int k=0; k<nz; k++) {
@@ -424,6 +434,7 @@ higen_gene(gd_t *gdcurv, par_t *par)
   }
 
   int flag_true = 1;
+  float dif1, dif2, dif3, dif_x, dif_z;
   while(flag_true)
   {
     // update solver
@@ -439,8 +450,17 @@ higen_gene(gd_t *gdcurv, par_t *par)
         iptr = k*nx + i;
         iptr1 = k*nx + i+1;
         iptr2 = (k+1)*nx + i;
-        resi = fabs((x2d_tmp[iptr] - x2d[iptr])/(x2d[iptr1]-x2d[iptr]));
-        resk = fabs((z2d_tmp[iptr] - z2d[iptr])/(z2d[iptr2]-z2d[iptr]));
+        dif_x = x2d_tmp[iptr]-x2d[iptr];
+        dif_z = z2d_tmp[iptr]-z2d[iptr];
+        dif1 = sqrt(pow(dif_x,2) + pow(dif_z,2));
+        dif_x = x2d[iptr1]-x2d[iptr];
+        dif_z = z2d[iptr1]-z2d[iptr];
+        dif2 = sqrt(pow(dif_x,2) + pow(dif_z,2));
+        dif_x = x2d[iptr2]-x2d[iptr];
+        dif_z = z2d[iptr2]-z2d[iptr];
+        dif3 = sqrt(pow(dif_x,2) + pow(dif_z,2));
+        resi = dif1/dif2;
+        resk = dif1/dif3;
         max_resi = fmax(max_resi,resi);
         max_resk = fmax(max_resk,resk);
       }
@@ -448,6 +468,7 @@ higen_gene(gd_t *gdcurv, par_t *par)
 
     fprintf(stdout,"number of iter is %d\n", Niter);
     fprintf(stdout,"max_resi is %f, max_resk is %f\n", max_resi, max_resk);
+    fflush(stdout);
 
     // copy coord
     for(int k=0; k<nz; k++) {
@@ -459,7 +480,7 @@ higen_gene(gd_t *gdcurv, par_t *par)
       }
     }
     
-    set_src_higen(x2d,z2d,nx,nz,P,Q,coef,dx1,dx2,dz1,dz2,first_dire_itype);
+    set_src_higen(x2d,z2d,nx,nz,P,Q,coef,dx1,dx2,dz1,dz2);
 
     if(Niter>max_iter) {
       flag_true = 0;
@@ -482,8 +503,7 @@ higen_gene(gd_t *gdcurv, par_t *par)
 int
 set_src_higen(float *x2d, float *z2d, int nx, int nz,
               float *P, float *Q, float coef,
-              float dx1, float dx2, float dz1, float dz2,
-              int first_dire_itype)
+              float dx1, float dx2, float dz1, float dz2)
 {
   float theta0 = PI/2;
   float a = 0.1;
@@ -596,97 +616,50 @@ set_src_higen(float *x2d, float *z2d, int nx, int nz,
     P[iptr] = P[iptr] - a*tanh(dif_dis);
   }
 
-  interp_inner_source(P,Q,nx,nz,coef,first_dire_itype);
+  interp_inner_source(P,Q,nx,nz,coef);
 
   return 0;
 }
 
-int interp_inner_source(float *P, float *Q, int nx, int nz, float coef, int first_dire_itype)
+int interp_inner_source(float *P, float *Q, int nx, int nz, float coef)
 {
   float xi,zt,c0,c1,r0,r1;
   size_t iptr, iptr1, iptr2;
-  if(first_dire_itype == Z_DIRE) 
-  {
-    for(int k=1; k<nz-1; k++) {
-      for(int i=1; i<nx-1; i++)
-      {
-        zt = (1.0*k)/(nz-1);
-        c0 = 1-zt;
-        c1 = zt;
 
-        r0 = exp(coef*zt);
-        r1 = exp(coef*(1-zt)); 
-        
-        iptr  = k*nx + i;
-        iptr1 = i;
-        iptr2 = (nz-1)*nx + i;
-        P[iptr] = r0*P[iptr1] + r1*P[iptr2];
-        Q[iptr] = c0*Q[iptr1] + c1*Q[iptr2];
-      }
-    }
-    
-    // then use bdry x1 x2 to interp inner point
-    // NOTE: point (:,0:4),(:,nz-5:nz-1) P Q calculate
-    // only by z1,z2
-    // point(:,5:nz-6), P Q calculte by z1 z2 x1 x2
-    // so need superposition
-    for(int k=5; k<nz-5; k++) {
-      for(int i=1; i<nx-1; i++)
-      {
-        xi = (1.0*i)/(nx-1);
+  for(int k=1; k<nz-1; k++) {
+    for(int i=1; i<nx-1; i++)
+    {
+      zt = (1.0*k)/(nz-1);
+      c0 = 1-zt;
+      c1 = zt;
 
-        c0 = 1-xi;
-        c1 = xi;
-
-        r0 = exp(coef*xi);
-        r1 = exp(coef*(1-xi)); 
-        
-        iptr  = k*nx + i;
-        iptr1 = k*nx + 0;
-        iptr2 = k*nx + (nx-1);
-        P[iptr] = P[iptr] + c0*P[iptr1] + c1*P[iptr2];
-        Q[iptr] = Q[iptr] + r0*Q[iptr1] + r1*Q[iptr2];
-      }
+      r0 = exp(coef*zt);
+      r1 = exp(coef*(1-zt)); 
+      
+      iptr  = k*nx + i;
+      iptr1 = i;
+      iptr2 = (nz-1)*nx + i;
+      P[iptr] = r0*P[iptr1] + r1*P[iptr2];
+      Q[iptr] = c0*Q[iptr1] + c1*Q[iptr2];
     }
   }
+  
+  for(int k=1; k<nz-1; k++) {
+    for(int i=1; i<nx-1; i++)
+    {
+      xi = (1.0*i)/(nx-1);
 
-  if(first_dire_itype == X_DIRE) 
-  {
-    for(int k=1; k<nz-1; k++) {
-      for(int i=1; i<nx-1; i++)
-      {
-        xi = (1.0*i)/(nx-1);
+      c0 = 1-xi;
+      c1 = xi;
 
-        c0 = 1-xi;
-        c1 = xi;
-
-        r0 = exp(coef*xi);
-        r1 = exp(coef*(1-xi)); 
-        
-        iptr  = k*nx + i;
-        iptr1 = k*nx + 0;
-        iptr2 = k*nx + (nx-1);
-        P[iptr] = c0*P[iptr1] + c1*P[iptr2];
-        Q[iptr] = r0*Q[iptr1] + r1*Q[iptr2];
-      }
-    }
-
-    for(int k=1; k<nz-1; k++) {
-      for(int i=5; i<nx-5; i++)
-      {
-        zt = (1.0*k)/(nz-1);
-        c0 = 1-zt;
-        c1 = zt;
-
-        r0 = exp(coef*zt);
-        r1 = exp(coef*(1-zt)); 
-        
-        iptr  = k*nx + i;
-        iptr1 = i;
-        iptr2 = (nz-1)*nx + i;
-        P[iptr] = P[iptr] + r0*P[iptr1] + r1*P[iptr2];
-        Q[iptr] = Q[iptr] + c0*Q[iptr1] + c1*Q[iptr2];
-      }
+      r0 = exp(coef*xi);
+      r1 = exp(coef*(1-xi)); 
+      
+      iptr  = k*nx + i;
+      iptr1 = k*nx + 0;
+      iptr2 = k*nx + (nx-1);
+      P[iptr] = P[iptr] + c0*P[iptr1] + c1*P[iptr2];
+      Q[iptr] = Q[iptr] + r0*Q[iptr1] + r1*Q[iptr2];
     }
   }
 

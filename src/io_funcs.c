@@ -29,8 +29,6 @@ init_io_quality(io_quality_t *io_quality, gd_t *gdcurv)
 int
 gd_curv_coord_export(gd_t *gdcurv, char *output_dir)
 {
-  size_t *restrict c3d_pos   = gdcurv->cmp_pos;
-  char  **restrict c3d_name  = gdcurv->cmp_name;
   int  nx = gdcurv->nx;
   int  nz = gdcurv->nz;
 
