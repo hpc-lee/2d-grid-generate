@@ -5,18 +5,8 @@ addmypath
 
 % -------------------------- parameters input -------------------------- %
 % file and path name
+parfnm='../project/test.json';
 output_dir='../project/output';
-
-% get nx and nz
-fnm_coord=[output_dir,'/','coord_px0_pz0.nc'];
-if ~ exist(fnm_coord,'file')
-   error([mfilename ': file ' fnm_coord 'does not exist']);
-end
-
-xzc = nc_attget(fnm_coord,nc_global,'count_of_physical_points');
-xzc = double(xzc);
-nx = xzc(1);
-nz = xzc(2);
 
 % which grid profile to plot
 subs=[1,1];     % % index 1:nx 1:nz
@@ -24,7 +14,7 @@ subc=[-1,-1];   % '-1' to plot all points in this dimension
 subt=[1,1];
 
 % figure control parameters
-flag_km     = 1;
+flag_km     = 0;
 flag_emlast = 1;
 flag_print  = 0;
 flag_clb    = 1;
@@ -41,12 +31,12 @@ varnm = 'orth';
 %-- load coord
 %-----------------------------------------------------------
 
-[x,z]=gather_coord(output_dir,subs,subc,subt);
+qualityinfo=locate_quality(parfnm,output_dir,subs,subc,subt);
+[x,z]=gather_coord(qualityinfo,output_dir);
 
-v=gather_quality(output_dir,varnm,subs,subc,subt);
+v=gather_quality(qualityinfo,output_dir,varnm);
 
 %- set coord unit
-flag_km = 0;
 if flag_km
    x=x/1e3;
    z=z/1e3;

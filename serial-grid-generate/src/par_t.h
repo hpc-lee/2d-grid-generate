@@ -11,14 +11,16 @@
 
 #define PAR_MAX_STRLEN 1000
 #define TFI 1
-#define HERMITE 2
-#define PARABOLIC 3
-#define HYPERBOLIC 4
+#define PARABOLIC 2
+#define HYPERBOLIC 3
 
 #define X_DIRE 1
 #define Z_DIRE 2
 
 typedef struct{
+
+  int number_of_grid_points_x;
+  int number_of_grid_points_z;
 
   int grid_check;
   int check_orth;

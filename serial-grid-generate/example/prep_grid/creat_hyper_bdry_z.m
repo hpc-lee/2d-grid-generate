@@ -5,7 +5,7 @@ close all;
 flag_printf = 1;
 flag_topo_z = 1;
 
-nx1 = 10000;
+nx1 = 300;
 num_pml = 00;
 nx = nx1 + 2*num_pml; 
 

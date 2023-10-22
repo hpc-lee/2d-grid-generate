@@ -63,26 +63,7 @@ int main(int argc, char** argv)
 
       break;
     }
-    case HERMITE : {
 
-      grid_init_set(gdcurv,par->geometry_input_file);
-      // before grid generate
-      if(par->dire_itype == X_DIRE)
-      {
-        permute_coord_x(gdcurv);
-      }
-
-      // grid method
-      one_hermite(gdcurv,par->coef);
-
-      // after grid generate
-      if(par->dire_itype == X_DIRE)
-      {
-        permute_coord_x(gdcurv);
-      }
-
-      break;
-    }
     case PARABOLIC : {
 
       grid_init_set(gdcurv,par->geometry_input_file);
@@ -102,6 +83,7 @@ int main(int argc, char** argv)
 
       break;
     }
+
     case HYPERBOLIC : {
 
       grid_init_set_hyper(gdcurv,par);

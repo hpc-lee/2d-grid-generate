@@ -10,7 +10,4 @@
 int 
 linear_tfi(gd_t *gdcurv);
 
-int
-one_hermite(gd_t *gdcurv, float coef);
-
 #endif

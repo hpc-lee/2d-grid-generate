@@ -2,7 +2,7 @@ clc;
 clear all;
 close all;
 
-num_of_step = 500;
+num_of_step = 100;
 dh = -10;
 for i=1:num_of_step
   step(i) = dh;

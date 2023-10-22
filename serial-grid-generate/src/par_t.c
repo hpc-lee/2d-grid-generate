@@ -52,6 +52,13 @@ par_read_from_str(const char *str, par_t *par)
   cJSON *item;
   cJSON *subitem, *thirditem;
 
+  if (item = cJSON_GetObjectItem(root, "number_of_grid_points_x")) {
+    par->number_of_grid_points_x = item->valueint;
+  }
+  if (item = cJSON_GetObjectItem(root, "number_of_grid_points_z")) {
+    par->number_of_grid_points_z = item->valueint;
+  }
+
   // default not check
   par->grid_check = 0;
   par->check_orth  = 0;
@@ -101,23 +108,6 @@ par_read_from_str(const char *str, par_t *par)
   if (item = cJSON_GetObjectItem(root, "grid_method")) {
     if (subitem = cJSON_GetObjectItem(item, "linear_TFI")) {
       par->method_itype = TFI;
-    }
-    if (subitem = cJSON_GetObjectItem(item, "hermite")) {
-      par->method_itype = HERMITE;
-      if (thirditem = cJSON_GetObjectItem(subitem, "coef")) {
-        par->coef = thirditem->valuedouble;
-      }
-      if (thirditem = cJSON_GetObjectItem(subitem, "direction")) {
-        sprintf(par->direction, "%s", thirditem->valuestring);
-        if(strcmp(par->direction,"x") == 0)
-        {
-          par->dire_itype = X_DIRE;
-        }
-        if(strcmp(par->direction,"z") == 0)
-        {
-          par->dire_itype = Z_DIRE;
-        }
-      }
     }
     if (subitem = cJSON_GetObjectItem(item, "parabolic")) {
       par->method_itype = PARABOLIC;
@@ -179,6 +169,9 @@ par_print(par_t *par)
 {    
   int ierr = 0;
 
+  fprintf(stdout,"number of total gird points x is %d\n",par->number_of_grid_points_x);
+  fprintf(stdout,"number of total gird points z is %d\n",par->number_of_grid_points_z);
+
   fprintf(stdout,"input geometry file is \n %s\n",par->geometry_input_file);
   fprintf(stdout,"export grid dir is \n %s\n",par->grid_export_dir);
   fprintf(stdout, "-------------------------------------------------------\n");
@@ -210,16 +203,6 @@ par_print(par_t *par)
   fprintf(stdout, "------- grid generate method-------\n");
   if(par->method_itype == TFI) {
     fprintf(stdout, "grid generate method is linear TFI\n");
-  }
-  if(par->method_itype == HERMITE) {
-    fprintf(stdout, "grid generate method is unidirection hermite\n");
-    fprintf(stdout, "hermite coef is %f\n", par->coef);
-    if(par->dire_itype == X_DIRE) {
-      fprintf(stdout, "grid generate direction is x\n");
-    }
-    if(par->dire_itype == Z_DIRE) {
-      fprintf(stdout, "grid generate direction is z\n");
-    }
   }
   if(par->method_itype == PARABOLIC) {
     fprintf(stdout, "grid generate method is parabolic\n");

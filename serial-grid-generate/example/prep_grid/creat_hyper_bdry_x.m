@@ -5,7 +5,7 @@ close all;
 flag_printf = 1;
 flag_topo_x = 1;
 
-nz = 250;
+nz = 300;
 
 dz = 10;
 origin_x = 0;
