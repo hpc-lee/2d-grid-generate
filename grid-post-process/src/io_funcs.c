@@ -9,9 +9,25 @@
 #include "io_funcs.h"
 
 int
+init_io_quality(io_quality_t *io_quality, gd_t *gdcurv)
+{
+  io_quality->nx = gdcurv->nx;
+  io_quality->nz = gdcurv->nz;
+  
+  // malloc quality space 
+  io_quality->var = (float *)mem_calloc_1d_float(
+                  gdcurv->siz_icmp, 0.0, "quality_init");
+  if (io_quality->var == NULL) {
+      fprintf(stderr,"Error: failed to alloc quality vars\n");
+      fflush(stderr);
+  }
+   
+  return 0;
+}
+
+int
 read_import_coord(gd_t *gdcurv, par_t *par)
 {
-  
   int ierr;
   int total_nx = par->number_of_grid_points_x;
   int total_nz = par->number_of_grid_points_z;
@@ -51,8 +67,6 @@ read_import_coord(gd_t *gdcurv, par_t *par)
 
       ierr = nc_open(in_file, NC_NOWRITE, &ncid); handle_nc_err(ierr);
 
-      fprintf(stdout,"*****************\n");
-      fflush(stdout);
       ierr = nc_get_att_int(ncid,NC_GLOBAL,att_global,global_index);
       ierr = nc_get_att_int(ncid,NC_GLOBAL,att_count,count_points);
 
@@ -68,7 +82,7 @@ read_import_coord(gd_t *gdcurv, par_t *par)
       //read vars
       ierr = nc_inq_varid(ncid, "x", &xid);  handle_nc_err(ierr);
       ierr = nc_inq_varid(ncid, "z", &zid);  handle_nc_err(ierr);
-      
+
       ierr = nc_get_vara_float(ncid, xid, start, count, coord_x);  handle_nc_err(ierr);
       ierr = nc_get_vara_float(ncid, zid, start, count, coord_z);  handle_nc_err(ierr);
 
@@ -94,7 +108,6 @@ read_import_coord(gd_t *gdcurv, par_t *par)
   free(coord_x);
   free(coord_z);
 
-
   return 0;
 }
 
@@ -119,7 +132,7 @@ gd_curv_coord_export(gd_t *gdcurv, par_t *par)
 
   char fname_coords[CONST_MAX_STRLEN];
   char ou_file[CONST_MAX_STRLEN];
-  
+
   // read in nc
   int ierr;
   int ncid;
@@ -140,7 +153,7 @@ gd_curv_coord_export(gd_t *gdcurv, par_t *par)
       gnk1 = g_start[1];
       ni = count[0];
       nk = count[1];
-      
+
       for(int k=0; k<nk; k++) {
         for(int i=0; i<ni; i++)
         {
@@ -167,10 +180,10 @@ gd_curv_coord_export(gd_t *gdcurv, par_t *par)
 
       // attribute: index in output snapshot, index w ghost in thread
       nc_put_att_int(ncid,NC_GLOBAL,"global_index_of_first_physical_points",
-                       NC_INT,2,g_start);
+          NC_INT,2,g_start);
 
       nc_put_att_int(ncid,NC_GLOBAL,"count_of_physical_points",
-                       NC_INT,2,count);
+          NC_INT,2,count);
 
       // end def
       ierr = nc_enddef(ncid);
@@ -179,7 +192,7 @@ gd_curv_coord_export(gd_t *gdcurv, par_t *par)
       // add vars
       ierr = nc_put_var_float(ncid, xid, coord_x);  handle_nc_err(ierr);
       ierr = nc_put_var_float(ncid, zid, coord_z);  handle_nc_err(ierr);
-      
+
       // close file
       ierr = nc_close(ncid);
       handle_nc_err(ierr);
@@ -192,6 +205,93 @@ gd_curv_coord_export(gd_t *gdcurv, par_t *par)
   return 0;
 }
 
+int
+quality_export(io_quality_t *io_quality, gd_t *gdcurv, par_t *par, char *var_name)
+{
+  int nprocx_out = par->number_of_mpiprocs_x_out;
+  int nprocz_out = par->number_of_mpiprocs_z_out;
+
+  int total_nx = io_quality->nx;
+  int total_nz = io_quality->nz;
+
+  int gni1, gnk1;
+  int gni, gnk;
+  int ni, nk;
+  size_t iptr, iptr1;
+
+  float *var = io_quality->var;
+  float *var_out = (float *) malloc(sizeof(float)*total_nx*total_nz);
+
+  char fname_coords[CONST_MAX_STRLEN];
+  char ou_file[CONST_MAX_STRLEN];
+
+  // read in nc
+  int ierr;
+  int ncid;
+  int varid;
+  int dimid[2];
+  int g_start[2];
+  int count[2];
+
+  // read coord nc file
+  for(int kk=0; kk<nprocz_out; kk++) {
+    for(int ii=0; ii<nprocx_out; ii++)
+    {
+      sprintf(fname_coords,"px%d_pz%d",ii,kk);
+      sprintf(ou_file,"%s/%s_%s.nc",par->export_dir,var_name,fname_coords);
+
+      gd_info_set(gdcurv, par, ii, kk, g_start, count);
+      gni1 = g_start[0];
+      gnk1 = g_start[1];
+      ni = count[0];
+      nk = count[1];
+
+      for(int k=0; k<nk; k++) {
+        for(int i=0; i<ni; i++)
+        {
+          gni = gni1 + i;
+          gnk = gnk1 + k;
+          iptr = gnk*total_nx + gni;
+
+          iptr1 = k*ni + i;
+
+          var_out[iptr1] = var[iptr];
+        }
+      }
+
+      ierr = nc_create(ou_file, NC_CLOBBER, &ncid); handle_nc_err(ierr);
+
+      // define dimension
+      ierr = nc_def_dim(ncid, "i", ni, &dimid[1]); handle_nc_err(ierr);
+      ierr = nc_def_dim(ncid, "k", nk, &dimid[0]); handle_nc_err(ierr);
+
+      // define vars
+      ierr = nc_def_var(ncid, var_name, NC_FLOAT, 2, dimid, &varid); handle_nc_err(ierr);
+
+      // attribute: index in output snapshot, index w ghost in thread
+      nc_put_att_int(ncid,NC_GLOBAL,"global_index_of_first_physical_points",
+          NC_INT,2,g_start);
+
+      nc_put_att_int(ncid,NC_GLOBAL,"count_of_physical_points",
+          NC_INT,2,count);
+
+      // end def
+      ierr = nc_enddef(ncid);
+      handle_nc_err(ierr);
+
+      // add vars
+      ierr = nc_put_var_float(ncid, varid, var_out);  handle_nc_err(ierr);
+
+      // close file
+      ierr = nc_close(ncid);
+      handle_nc_err(ierr);
+    }
+  }
+
+  free(var_out);
+
+  return 0;
+}
 
 int
 io_get_nextline(FILE *fp, char *str, int length)

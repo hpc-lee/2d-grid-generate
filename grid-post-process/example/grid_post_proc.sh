@@ -10,7 +10,7 @@ EXEC_GRID=`pwd`/../grid_post_proc_2d
 echo "EXEC_GRID=${EXEC_GRID}"
 
 #-- input dir
-INPUTDIR=/data3/lihl/code-lihl/2d-grid-generate/para-grid-generate/project/output
+INPUTDIR=/data3/lihl/code-lihl/2d-grid-generate/hyperbolic/project/output
 #INPUTDIR=/data3/lihl/code-lihl/2d-grid-generate/serial-grid-generate/project/output
 
 #-- output and conf
@@ -26,9 +26,9 @@ mkdir -p ${OUTPUT_DIR}
 
 # grid generate procs
 #-- total x mpi procs
-NPROCS_X_IN=3
+NPROCS_X_IN=1
 #-- total z mpi procs
-NPROCS_Z_IN=3
+NPROCS_Z_IN=1
 
 # after post procs
 #-- total x mpi procs
@@ -41,8 +41,8 @@ NPROCS_Z_OUT=1
 #----------------------------------------------------------------------
 cat << ieof > ${PAR_FILE}
 {
-  "number_of_grid_points_x" : 300,
-  "number_of_grid_points_z" : 300,
+  "number_of_grid_points_x" : 250,
+  "number_of_grid_points_z" : 51,
 
   "number_of_mpiprocs_x_in" : $NPROCS_X_IN,
   "number_of_mpiprocs_z_in" : $NPROCS_Z_IN,
@@ -57,12 +57,20 @@ cat << ieof > ${PAR_FILE}
          "number_of_pml_z2" : 0
   },
 
+  "check_orth" : 1,
+  "check_jac" : 1,
+  "check_ratio" : 1,
+  "check_step_xi" : 1,
+  "check_step_zt" : 1,
+  "check_smooth_xi" : 1,
+  "check_smooth_zt" : 1,
+
   "flag_strech_xi" : 0,
   "strech_xi_coef" : 0.0001,
-  "flag_strech_zt" : 0,
+  "flag_strech_zt" : 1,
   "strech_zt_coef" : 0.0001,
 
-  "flag_sample" : 1,
+  "flag_sample" : 0,
   "sample_factor_xi" : 2,
   "sample_factor_zt" : 2,
 
