@@ -32,9 +32,9 @@ NPROCS_Z_IN=1
 
 # after post procs
 #-- total x mpi procs
-NPROCS_X_OUT=1
+NPROCS_X_OUT=2
 #-- total z mpi procs
-NPROCS_Z_OUT=1
+NPROCS_Z_OUT=2
 
 #----------------------------------------------------------------------
 #-- create main conf
@@ -92,7 +92,7 @@ cat << ieof > ${PROJDIR}/grid_generate.sh
 
 set -e
 
-printf "\nStart grid generate ...\n";
+printf "\nStart grid post process ...\n";
 time $EXEC_GRID $PAR_FILE 100 2>&1 |tee log
 if [ $? -ne 0 ]; then
     printf "\ngrid generate fail! stop!\n"
