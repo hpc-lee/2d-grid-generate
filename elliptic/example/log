@@ -1,0 +1,4096 @@
+verbose=100
+par file =  /data3/lihl/code-lihl/2d-grid-generate/elliptic/example/../project/test.json
+verbose=100
+par file =  /data3/lihl/code-lihl/2d-grid-generate/elliptic/example/../project/test.json
+verbose=100
+par file =  /data3/lihl/code-lihl/2d-grid-generate/elliptic/example/../project/test.json
+verbose=100
+par file =  /data3/lihl/code-lihl/2d-grid-generate/elliptic/example/../project/test.json
+comm=6397504, size=4
+par file =  /data3/lihl/code-lihl/2d-grid-generate/elliptic/example/../project/test.json
+number of total gird points x is 300
+number of total gird points z is 300
+number of mpi procs x is 2
+number of mpi procs z is 2
+input geometry file is 
+ /data3/lihl/code-lihl/2d-grid-generate/elliptic/example/data_file_2d.txt
+export grid dir is 
+ /data3/lihl/code-lihl/2d-grid-generate/elliptic/example/../project/output
+-------------------------------------------------------
+------- grid quality check-------
+------- check grid orthogonality-------
+------- check grid jacobi-------
+------- check grid ratio-------
+------- check grid step xi direction-------
+------- check grid step zt direction-------
+------- check grid smooth xi direction-------
+------- check grid smooth zt direction-------
+------- grid generate method-------
+grid generate method is elliptic_hilgenstock
+elli_higen coef is -20.000000
+max_iteration is 5000
+iter_error is 0.010000
+set mpi topo ...
+-------------------------------------------------------
+--> grid info:
+-------------------------------------------------------
+my rank id is 1
+ nx    = 151       
+ nz    = 151       
+ ni    = 149       
+ nk    = 149       
+ ni1   = 1         
+ ni2   = 149       
+ nk1   = 1         
+ nk2   = 149       
+ ni1_to_glob_phys0   = 0         
+-------------------------------------------------------
+--> grid info:
+-------------------------------------------------------
+my rank id is 2
+ nx    = 151       
+ nz    = 151       
+ ni    = 149       
+ nk    = 149       
+ ni1   = 1         
+ ni2   = 149       
+ nk1   = 1         
+ nk2   = 149       
+ ni1_to_glob_phys0   = 149       
+ ni2_to_glob_phys0   = 297       
+ nk1_to_glob_phys0   = 0         
+ nk2_to_glob_phys0   = 148       
+-------------------------------------------------------
+--> grid info:
+-------------------------------------------------------
+my rank id is 3
+ nx    = 151       
+ nz    = 151       
+ ni    = 149       
+ nk    = 149       
+ ni1   = 1         
+ ni2   = 149       
+ nk1   = 1         
+ nk2   = 149       
+ ni1_to_glob_phys0   = 149       
+ ni2_to_glob_phys0   = 297       
+ nk1_to_glob_phys0   = 149       
+ nk2_to_glob_phys0   = 297       
+-------------------------------------------------------
+--> grid info:
+-------------------------------------------------------
+my rank id is 0
+ nx    = 151       
+ nz    = 151       
+ ni    = 149       
+ nk    = 149       
+ ni1   = 1         
+ ni2   = 149       
+ nk1   = 1         
+ nk2   = 149       
+ ni1_to_glob_phys0   = 0         
+ ni2_to_glob_phys0   = 148       
+ nk1_to_glob_phys0   = 0         
+ nk2_to_glob_phys0   = 148       
+ ni2_to_glob_phys0   = 148       
+ nk1_to_glob_phys0   = 149       
+ nk2_to_glob_phys0   = 297       
+number of iter is 1
+max_resi is 0.032658, max_resk is 0.034534
+number of iter is 1
+max_resi is 0.032658, max_resk is 0.034534
+number of iter is 1
+max_resi is 0.032658, max_resk is 0.034534
+number of iter is 1
+max_resi is 0.032658, max_resk is 0.034534
+number of iter is 1
+max_resi is 0.032658, max_resk is 0.034534
+number of iter is 2
+max_resi is 0.063088, max_resk is 0.059756
+number of iter is 2
+max_resi is 0.063088, max_resk is 0.059756
+number of iter is 2
+max_resi is 0.063088, max_resk is 0.059756
+number of iter is 2
+max_resi is 0.063088, max_resk is 0.059756
+number of iter is 2
+max_resi is 0.063088, max_resk is 0.059756
+number of iter is 3
+max_resi is 0.091913, max_resk is 0.084973
+number of iter is 3
+max_resi is 0.091913, max_resk is 0.084973
+number of iter is 3
+max_resi is 0.091913, max_resk is 0.084973
+number of iter is 3
+max_resi is 0.091913, max_resk is 0.084973
+number of iter is 3
+max_resi is 0.091913, max_resk is 0.084973
+number of iter is 4
+max_resi is 0.117465, max_resk is 0.106294
+number of iter is 4
+max_resi is 0.117465, max_resk is 0.106294
+number of iter is 4
+max_resi is 0.117465, max_resk is 0.106294
+number of iter is 4
+max_resi is 0.117465, max_resk is 0.106294
+number of iter is 4
+max_resi is 0.117465, max_resk is 0.106294
+number of iter is 5
+max_resi is 0.141156, max_resk is 0.125988
+number of iter is 5
+max_resi is 0.141156, max_resk is 0.125988
+number of iter is 5
+max_resi is 0.141156, max_resk is 0.125988
+number of iter is 5
+max_resi is 0.141156, max_resk is 0.125988
+number of iter is 5
+max_resi is 0.141156, max_resk is 0.125988
+number of iter is 6
+max_resi is 0.160918, max_resk is 0.141298
+number of iter is 6
+max_resi is 0.160918, max_resk is 0.141298
+number of iter is 6
+max_resi is 0.160918, max_resk is 0.141298
+number of iter is 6
+max_resi is 0.160918, max_resk is 0.141298
+number of iter is 6
+max_resi is 0.160918, max_resk is 0.141298
+number of iter is 7
+max_resi is 0.176324, max_resk is 0.152838
+number of iter is 7
+max_resi is 0.176324, max_resk is 0.152838
+number of iter is 7
+max_resi is 0.176324, max_resk is 0.152838
+number of iter is 7
+max_resi is 0.176324, max_resk is 0.152838
+number of iter is 7
+max_resi is 0.176324, max_resk is 0.152838
+number of iter is 8
+max_resi is 0.188231, max_resk is 0.161682
+number of iter is 8
+max_resi is 0.188231, max_resk is 0.161682
+number of iter is 8
+max_resi is 0.188231, max_resk is 0.161682
+number of iter is 8
+max_resi is 0.188231, max_resk is 0.161682
+number of iter is 8
+max_resi is 0.188231, max_resk is 0.161682
+number of iter is 9
+max_resi is 0.197271, max_resk is 0.166635
+number of iter is 9
+max_resi is 0.197271, max_resk is 0.166635
+number of iter is 9
+max_resi is 0.197271, max_resk is 0.166635
+number of iter is 9
+max_resi is 0.197271, max_resk is 0.166635
+number of iter is 9
+max_resi is 0.197271, max_resk is 0.166635
+number of iter is 10
+max_resi is 0.202404, max_resk is 0.168647
+number of iter is 10
+max_resi is 0.202404, max_resk is 0.168647
+number of iter is 10
+max_resi is 0.202404, max_resk is 0.168647
+number of iter is 10
+max_resi is 0.202404, max_resk is 0.168647
+number of iter is 10
+max_resi is 0.202404, max_resk is 0.168647
+number of iter is 11
+max_resi is 0.204006, max_resk is 0.169233
+number of iter is 11
+max_resi is 0.204006, max_resk is 0.169233
+number of iter is 11
+max_resi is 0.204006, max_resk is 0.169233
+number of iter is 11
+max_resi is 0.204006, max_resk is 0.169233
+number of iter is 11
+max_resi is 0.204006, max_resk is 0.169233
+number of iter is 12
+max_resi is 0.203654, max_resk is 0.167313
+number of iter is 12
+max_resi is 0.203654, max_resk is 0.167313
+number of iter is 12
+max_resi is 0.203654, max_resk is 0.167313
+number of iter is 12
+max_resi is 0.203654, max_resk is 0.167313
+number of iter is 12
+max_resi is 0.203654, max_resk is 0.167313
+number of iter is 13
+max_resi is 0.201535, max_resk is 0.163295
+number of iter is 13
+max_resi is 0.201535, max_resk is 0.163295
+number of iter is 13
+max_resi is 0.201535, max_resk is 0.163295
+number of iter is 13
+max_resi is 0.201535, max_resk is 0.163295
+number of iter is 13
+max_resi is 0.201535, max_resk is 0.163295
+number of iter is 14
+max_resi is 0.197293, max_resk is 0.159208
+number of iter is 14
+max_resi is 0.197293, max_resk is 0.159208
+number of iter is 14
+max_resi is 0.197293, max_resk is 0.159208
+number of iter is 14
+max_resi is 0.197293, max_resk is 0.159208
+number of iter is 14
+max_resi is 0.197293, max_resk is 0.159208
+number of iter is 15
+max_resi is 0.191316, max_resk is 0.154037
+number of iter is 15
+max_resi is 0.191316, max_resk is 0.154037
+number of iter is 15
+max_resi is 0.191316, max_resk is 0.154037
+number of iter is 15
+max_resi is 0.191316, max_resk is 0.154037
+number of iter is 15
+max_resi is 0.191316, max_resk is 0.154037
+number of iter is 16
+max_resi is 0.184070, max_resk is 0.147884
+number of iter is 16
+max_resi is 0.184070, max_resk is 0.147884
+number of iter is 16
+max_resi is 0.184070, max_resk is 0.147884
+number of iter is 16
+max_resi is 0.184070, max_resk is 0.147884
+number of iter is 16
+max_resi is 0.184070, max_resk is 0.147884
+number of iter is 17
+max_resi is 0.176891, max_resk is 0.141163
+number of iter is 17
+max_resi is 0.176891, max_resk is 0.141163
+number of iter is 17
+max_resi is 0.176891, max_resk is 0.141163
+number of iter is 17
+max_resi is 0.176891, max_resk is 0.141163
+number of iter is 17
+max_resi is 0.176891, max_resk is 0.141163
+number of iter is 18
+max_resi is 0.169007, max_resk is 0.135675
+number of iter is 18
+max_resi is 0.169007, max_resk is 0.135675
+number of iter is 18
+max_resi is 0.169007, max_resk is 0.135675
+number of iter is 18
+max_resi is 0.169007, max_resk is 0.135675
+number of iter is 18
+max_resi is 0.169007, max_resk is 0.135675
+number of iter is 19
+max_resi is 0.160494, max_resk is 0.131451
+number of iter is 19
+max_resi is 0.160494, max_resk is 0.131451
+number of iter is 19
+max_resi is 0.160494, max_resk is 0.131451
+number of iter is 19
+max_resi is 0.160494, max_resk is 0.131451
+number of iter is 19
+max_resi is 0.160494, max_resk is 0.131451
+number of iter is 20
+max_resi is 0.151601, max_resk is 0.126539
+number of iter is 20
+max_resi is 0.151601, max_resk is 0.126539
+number of iter is 20
+max_resi is 0.151601, max_resk is 0.126539
+number of iter is 20
+max_resi is 0.151601, max_resk is 0.126539
+number of iter is 20
+max_resi is 0.151601, max_resk is 0.126539
+number of iter is 21
+max_resi is 0.142419, max_resk is 0.121194
+number of iter is 21
+max_resi is 0.142419, max_resk is 0.121194
+number of iter is 21
+max_resi is 0.142419, max_resk is 0.121194
+number of iter is 21
+max_resi is 0.142419, max_resk is 0.121194
+number of iter is 21
+max_resi is 0.142419, max_resk is 0.121194
+number of iter is 22
+max_resi is 0.133701, max_resk is 0.115787
+number of iter is 22
+max_resi is 0.133701, max_resk is 0.115787
+number of iter is 22
+max_resi is 0.133701, max_resk is 0.115787
+number of iter is 22
+max_resi is 0.133701, max_resk is 0.115787
+number of iter is 22
+max_resi is 0.133701, max_resk is 0.115787
+number of iter is 23
+max_resi is 0.125104, max_resk is 0.110647
+number of iter is 23
+max_resi is 0.125104, max_resk is 0.110647
+number of iter is 23
+max_resi is 0.125104, max_resk is 0.110647
+number of iter is 23
+max_resi is 0.125104, max_resk is 0.110647
+number of iter is 23
+max_resi is 0.125104, max_resk is 0.110647
+number of iter is 24
+max_resi is 0.116518, max_resk is 0.105265
+number of iter is 24
+max_resi is 0.116518, max_resk is 0.105265
+number of iter is 24
+max_resi is 0.116518, max_resk is 0.105265
+number of iter is 24
+max_resi is 0.116518, max_resk is 0.105265
+number of iter is 24
+max_resi is 0.116518, max_resk is 0.105265
+number of iter is 25
+max_resi is 0.108636, max_resk is 0.099791
+number of iter is 25
+max_resi is 0.108636, max_resk is 0.099791
+number of iter is 25
+max_resi is 0.108636, max_resk is 0.099791
+number of iter is 25
+max_resi is 0.108636, max_resk is 0.099791
+number of iter is 25
+max_resi is 0.108636, max_resk is 0.099791
+number of iter is 26
+max_resi is 0.100705, max_resk is 0.094181
+number of iter is 26
+max_resi is 0.100705, max_resk is 0.094181
+number of iter is 26
+max_resi is 0.100705, max_resk is 0.094181
+number of iter is 26
+max_resi is 0.100705, max_resk is 0.094181
+number of iter is 26
+max_resi is 0.100705, max_resk is 0.094181
+number of iter is 27
+max_resi is 0.092754, max_resk is 0.089087
+number of iter is 27
+max_resi is 0.092754, max_resk is 0.089087
+number of iter is 27
+max_resi is 0.092754, max_resk is 0.089087
+number of iter is 27
+max_resi is 0.092754, max_resk is 0.089087
+number of iter is 27
+max_resi is 0.092754, max_resk is 0.089087
+number of iter is 28
+max_resi is 0.085101, max_resk is 0.084113
+number of iter is 28
+max_resi is 0.085101, max_resk is 0.084113
+number of iter is 28
+max_resi is 0.085101, max_resk is 0.084113
+number of iter is 28
+max_resi is 0.085101, max_resk is 0.084113
+number of iter is 28
+max_resi is 0.085101, max_resk is 0.084113
+number of iter is 29
+max_resi is 0.078119, max_resk is 0.079120
+number of iter is 29
+max_resi is 0.078119, max_resk is 0.079120
+number of iter is 29
+max_resi is 0.078119, max_resk is 0.079120
+number of iter is 29
+max_resi is 0.078119, max_resk is 0.079120
+number of iter is 29
+max_resi is 0.078119, max_resk is 0.079120
+number of iter is 30
+max_resi is 0.071322, max_resk is 0.076091
+number of iter is 30
+max_resi is 0.071322, max_resk is 0.076091
+number of iter is 30
+max_resi is 0.071322, max_resk is 0.076091
+number of iter is 30
+max_resi is 0.071322, max_resk is 0.076091
+number of iter is 30
+max_resi is 0.071322, max_resk is 0.076091
+number of iter is 31
+max_resi is 0.064686, max_resk is 0.074288
+number of iter is 31
+max_resi is 0.064686, max_resk is 0.074288
+number of iter is 31
+max_resi is 0.064686, max_resk is 0.074288
+number of iter is 31
+max_resi is 0.064686, max_resk is 0.074288
+number of iter is 31
+max_resi is 0.064686, max_resk is 0.074288
+number of iter is 32
+max_resi is 0.061788, max_resk is 0.072352
+number of iter is 32
+max_resi is 0.061788, max_resk is 0.072352
+number of iter is 32
+max_resi is 0.061788, max_resk is 0.072352
+number of iter is 32
+max_resi is 0.061788, max_resk is 0.072352
+number of iter is 32
+max_resi is 0.061788, max_resk is 0.072352
+number of iter is 33
+max_resi is 0.059536, max_resk is 0.070535
+number of iter is 33
+max_resi is 0.059536, max_resk is 0.070535
+number of iter is 33
+max_resi is 0.059536, max_resk is 0.070535
+number of iter is 33
+max_resi is 0.059536, max_resk is 0.070535
+number of iter is 33
+max_resi is 0.059536, max_resk is 0.070535
+number of iter is 34
+max_resi is 0.057357, max_resk is 0.068553
+number of iter is 34
+max_resi is 0.057357, max_resk is 0.068553
+number of iter is 34
+max_resi is 0.057357, max_resk is 0.068553
+number of iter is 34
+max_resi is 0.057357, max_resk is 0.068553
+number of iter is 34
+max_resi is 0.057357, max_resk is 0.068553
+number of iter is 35
+max_resi is 0.055871, max_resk is 0.066314
+number of iter is 35
+max_resi is 0.055871, max_resk is 0.066314
+number of iter is 35
+max_resi is 0.055871, max_resk is 0.066314
+number of iter is 35
+max_resi is 0.055871, max_resk is 0.066314
+number of iter is 35
+max_resi is 0.055871, max_resk is 0.066314
+number of iter is 36
+max_resi is 0.054355, max_resk is 0.064005
+number of iter is 36
+max_resi is 0.054355, max_resk is 0.064005
+number of iter is 36
+max_resi is 0.054355, max_resk is 0.064005
+number of iter is 36
+max_resi is 0.054355, max_resk is 0.064005
+number of iter is 36
+max_resi is 0.054355, max_resk is 0.064005
+number of iter is 37
+max_resi is 0.053065, max_resk is 0.061617
+number of iter is 37
+max_resi is 0.053065, max_resk is 0.061617
+number of iter is 37
+max_resi is 0.053065, max_resk is 0.061617
+number of iter is 37
+max_resi is 0.053065, max_resk is 0.061617
+number of iter is 37
+max_resi is 0.053065, max_resk is 0.061617
+number of iter is 38
+max_resi is 0.051644, max_resk is 0.058988
+number of iter is 38
+max_resi is 0.051644, max_resk is 0.058988
+number of iter is 38
+max_resi is 0.051644, max_resk is 0.058988
+number of iter is 38
+max_resi is 0.051644, max_resk is 0.058988
+number of iter is 38
+max_resi is 0.051644, max_resk is 0.058988
+number of iter is 39
+max_resi is 0.050181, max_resk is 0.056327
+number of iter is 39
+max_resi is 0.050181, max_resk is 0.056327
+number of iter is 39
+max_resi is 0.050181, max_resk is 0.056327
+number of iter is 39
+max_resi is 0.050181, max_resk is 0.056327
+number of iter is 39
+max_resi is 0.050181, max_resk is 0.056327
+number of iter is 40
+max_resi is 0.048616, max_resk is 0.053574
+number of iter is 40
+max_resi is 0.048616, max_resk is 0.053574
+number of iter is 40
+max_resi is 0.048616, max_resk is 0.053574
+number of iter is 40
+max_resi is 0.048616, max_resk is 0.053574
+number of iter is 40
+max_resi is 0.048616, max_resk is 0.053574
+number of iter is 41
+max_resi is 0.046845, max_resk is 0.050765
+number of iter is 41
+max_resi is 0.046845, max_resk is 0.050765
+number of iter is 41
+max_resi is 0.046845, max_resk is 0.050765
+number of iter is 41
+max_resi is 0.046845, max_resk is 0.050765
+number of iter is 41
+max_resi is 0.046845, max_resk is 0.050765
+number of iter is 42
+max_resi is 0.044903, max_resk is 0.047882
+number of iter is 42
+max_resi is 0.044903, max_resk is 0.047882
+number of iter is 42
+max_resi is 0.044903, max_resk is 0.047882
+number of iter is 42
+max_resi is 0.044903, max_resk is 0.047882
+number of iter is 42
+max_resi is 0.044903, max_resk is 0.047882
+number of iter is 43
+max_resi is 0.042744, max_resk is 0.045136
+number of iter is 43
+max_resi is 0.042744, max_resk is 0.045136
+number of iter is 43
+max_resi is 0.042744, max_resk is 0.045136
+number of iter is 43
+max_resi is 0.042744, max_resk is 0.045136
+number of iter is 43
+max_resi is 0.042744, max_resk is 0.045136
+number of iter is 44
+max_resi is 0.040414, max_resk is 0.042348
+number of iter is 44
+max_resi is 0.040414, max_resk is 0.042348
+number of iter is 44
+max_resi is 0.040414, max_resk is 0.042348
+number of iter is 44
+max_resi is 0.040414, max_resk is 0.042348
+number of iter is 44
+max_resi is 0.040414, max_resk is 0.042348
+number of iter is 45
+max_resi is 0.037849, max_resk is 0.039725
+number of iter is 45
+max_resi is 0.037849, max_resk is 0.039725
+number of iter is 45
+max_resi is 0.037849, max_resk is 0.039725
+number of iter is 45
+max_resi is 0.037849, max_resk is 0.039725
+number of iter is 45
+max_resi is 0.037849, max_resk is 0.039725
+number of iter is 46
+max_resi is 0.035338, max_resk is 0.037276
+number of iter is 46
+max_resi is 0.035338, max_resk is 0.037276
+number of iter is 46
+max_resi is 0.035338, max_resk is 0.037276
+number of iter is 46
+max_resi is 0.035338, max_resk is 0.037276
+number of iter is 46
+max_resi is 0.035338, max_resk is 0.037276
+number of iter is 47
+max_resi is 0.034115, max_resk is 0.034878
+number of iter is 47
+max_resi is 0.034115, max_resk is 0.034878
+number of iter is 47
+max_resi is 0.034115, max_resk is 0.034878
+number of iter is 47
+max_resi is 0.034115, max_resk is 0.034878
+number of iter is 47
+max_resi is 0.034115, max_resk is 0.034878
+number of iter is 48
+max_resi is 0.033126, max_resk is 0.032636
+number of iter is 48
+max_resi is 0.033126, max_resk is 0.032636
+number of iter is 48
+max_resi is 0.033126, max_resk is 0.032636
+number of iter is 48
+max_resi is 0.033126, max_resk is 0.032636
+number of iter is 48
+max_resi is 0.033126, max_resk is 0.032636
+number of iter is 49
+max_resi is 0.031922, max_resk is 0.030603
+number of iter is 49
+max_resi is 0.031922, max_resk is 0.030603
+number of iter is 49
+max_resi is 0.031922, max_resk is 0.030603
+number of iter is 49
+max_resi is 0.031922, max_resk is 0.030603
+number of iter is 49
+max_resi is 0.031922, max_resk is 0.030603
+number of iter is 50
+max_resi is 0.030534, max_resk is 0.028707
+number of iter is 50
+max_resi is 0.030534, max_resk is 0.028707
+number of iter is 50
+max_resi is 0.030534, max_resk is 0.028707
+number of iter is 50
+max_resi is 0.030534, max_resk is 0.028707
+number of iter is 50
+max_resi is 0.030534, max_resk is 0.028707
+number of iter is 51
+max_resi is 0.028916, max_resk is 0.026974
+number of iter is 51
+max_resi is 0.028916, max_resk is 0.026974
+number of iter is 51
+max_resi is 0.028916, max_resk is 0.026974
+number of iter is 51
+max_resi is 0.028916, max_resk is 0.026974
+number of iter is 51
+max_resi is 0.028916, max_resk is 0.026974
+number of iter is 52
+max_resi is 0.027160, max_resk is 0.025471
+number of iter is 52
+max_resi is 0.027160, max_resk is 0.025471
+number of iter is 52
+max_resi is 0.027160, max_resk is 0.025471
+number of iter is 52
+max_resi is 0.027160, max_resk is 0.025471
+number of iter is 52
+max_resi is 0.027160, max_resk is 0.025471
+number of iter is 53
+max_resi is 0.026043, max_resk is 0.024119
+number of iter is 53
+max_resi is 0.026043, max_resk is 0.024119
+number of iter is 53
+max_resi is 0.026043, max_resk is 0.024119
+number of iter is 53
+max_resi is 0.026043, max_resk is 0.024119
+number of iter is 53
+max_resi is 0.026043, max_resk is 0.024119
+number of iter is 54
+max_resi is 0.026558, max_resk is 0.022914
+number of iter is 54
+max_resi is 0.026558, max_resk is 0.022914
+number of iter is 54
+max_resi is 0.026558, max_resk is 0.022914
+number of iter is 54
+max_resi is 0.026558, max_resk is 0.022914
+number of iter is 54
+max_resi is 0.026558, max_resk is 0.022914
+number of iter is 55
+max_resi is 0.027015, max_resk is 0.022028
+number of iter is 55
+max_resi is 0.027015, max_resk is 0.022028
+number of iter is 55
+max_resi is 0.027015, max_resk is 0.022028
+number of iter is 55
+max_resi is 0.027015, max_resk is 0.022028
+number of iter is 55
+max_resi is 0.027015, max_resk is 0.022028
+number of iter is 56
+max_resi is 0.027631, max_resk is 0.022090
+number of iter is 56
+max_resi is 0.027631, max_resk is 0.022090
+number of iter is 56
+max_resi is 0.027631, max_resk is 0.022090
+number of iter is 56
+max_resi is 0.027631, max_resk is 0.022090
+number of iter is 56
+max_resi is 0.027631, max_resk is 0.022090
+number of iter is 57
+max_resi is 0.028168, max_resk is 0.022274
+number of iter is 57
+max_resi is 0.028168, max_resk is 0.022274
+number of iter is 57
+max_resi is 0.028168, max_resk is 0.022274
+number of iter is 57
+max_resi is 0.028168, max_resk is 0.022274
+number of iter is 57
+max_resi is 0.028168, max_resk is 0.022274
+number of iter is 58
+max_resi is 0.028507, max_resk is 0.022467
+number of iter is 58
+max_resi is 0.028507, max_resk is 0.022467
+number of iter is 58
+max_resi is 0.028507, max_resk is 0.022467
+number of iter is 58
+max_resi is 0.028507, max_resk is 0.022467
+number of iter is 58
+max_resi is 0.028507, max_resk is 0.022467
+number of iter is 59
+max_resi is 0.028598, max_resk is 0.022697
+number of iter is 59
+max_resi is 0.028598, max_resk is 0.022697
+number of iter is 59
+max_resi is 0.028598, max_resk is 0.022697
+number of iter is 59
+max_resi is 0.028598, max_resk is 0.022697
+number of iter is 59
+max_resi is 0.028598, max_resk is 0.022697
+number of iter is 60
+max_resi is 0.028445, max_resk is 0.022923
+number of iter is 60
+max_resi is 0.028445, max_resk is 0.022923
+number of iter is 60
+max_resi is 0.028445, max_resk is 0.022923
+number of iter is 60
+max_resi is 0.028445, max_resk is 0.022923
+number of iter is 60
+max_resi is 0.028445, max_resk is 0.022923
+number of iter is 61
+max_resi is 0.028033, max_resk is 0.023176
+number of iter is 61
+max_resi is 0.028033, max_resk is 0.023176
+number of iter is 61
+max_resi is 0.028033, max_resk is 0.023176
+number of iter is 61
+max_resi is 0.028033, max_resk is 0.023176
+number of iter is 61
+max_resi is 0.028033, max_resk is 0.023176
+number of iter is 62
+max_resi is 0.027526, max_resk is 0.023457
+number of iter is 62
+max_resi is 0.027526, max_resk is 0.023457
+number of iter is 62
+max_resi is 0.027526, max_resk is 0.023457
+number of iter is 62
+max_resi is 0.027526, max_resk is 0.023457
+number of iter is 62
+max_resi is 0.027526, max_resk is 0.023457
+number of iter is 63
+max_resi is 0.026778, max_resk is 0.023704
+number of iter is 63
+max_resi is 0.026778, max_resk is 0.023704
+number of iter is 63
+max_resi is 0.026778, max_resk is 0.023704
+number of iter is 63
+max_resi is 0.026778, max_resk is 0.023704
+number of iter is 63
+max_resi is 0.026778, max_resk is 0.023704
+number of iter is 64
+max_resi is 0.026937, max_resk is 0.023935
+number of iter is 64
+max_resi is 0.026937, max_resk is 0.023935
+number of iter is 64
+max_resi is 0.026937, max_resk is 0.023935
+number of iter is 64
+max_resi is 0.026937, max_resk is 0.023935
+number of iter is 64
+max_resi is 0.026937, max_resk is 0.023935
+number of iter is 65
+max_resi is 0.027662, max_resk is 0.024162
+number of iter is 65
+max_resi is 0.027662, max_resk is 0.024162
+number of iter is 65
+max_resi is 0.027662, max_resk is 0.024162
+number of iter is 65
+max_resi is 0.027662, max_resk is 0.024162
+number of iter is 65
+max_resi is 0.027662, max_resk is 0.024162
+number of iter is 66
+max_resi is 0.028233, max_resk is 0.024323
+number of iter is 66
+max_resi is 0.028233, max_resk is 0.024323
+number of iter is 66
+max_resi is 0.028233, max_resk is 0.024323
+number of iter is 66
+max_resi is 0.028233, max_resk is 0.024323
+number of iter is 66
+max_resi is 0.028233, max_resk is 0.024323
+number of iter is 67
+max_resi is 0.028748, max_resk is 0.024500
+number of iter is 67
+max_resi is 0.028748, max_resk is 0.024500
+number of iter is 67
+max_resi is 0.028748, max_resk is 0.024500
+number of iter is 67
+max_resi is 0.028748, max_resk is 0.024500
+number of iter is 67
+max_resi is 0.028748, max_resk is 0.024500
+number of iter is 68
+max_resi is 0.029178, max_resk is 0.024633
+number of iter is 68
+max_resi is 0.029178, max_resk is 0.024633
+number of iter is 68
+max_resi is 0.029178, max_resk is 0.024633
+number of iter is 68
+max_resi is 0.029178, max_resk is 0.024633
+number of iter is 68
+max_resi is 0.029178, max_resk is 0.024633
+number of iter is 69
+max_resi is 0.029508, max_resk is 0.024728
+number of iter is 69
+max_resi is 0.029508, max_resk is 0.024728
+number of iter is 69
+max_resi is 0.029508, max_resk is 0.024728
+number of iter is 69
+max_resi is 0.029508, max_resk is 0.024728
+number of iter is 69
+max_resi is 0.029508, max_resk is 0.024728
+number of iter is 70
+max_resi is 0.029763, max_resk is 0.024745
+number of iter is 70
+max_resi is 0.029763, max_resk is 0.024745
+number of iter is 70
+max_resi is 0.029763, max_resk is 0.024745
+number of iter is 70
+max_resi is 0.029763, max_resk is 0.024745
+number of iter is 70
+max_resi is 0.029763, max_resk is 0.024745
+number of iter is 71
+max_resi is 0.029952, max_resk is 0.024840
+number of iter is 71
+max_resi is 0.029952, max_resk is 0.024840
+number of iter is 71
+max_resi is 0.029952, max_resk is 0.024840
+number of iter is 71
+max_resi is 0.029952, max_resk is 0.024840
+number of iter is 71
+max_resi is 0.029952, max_resk is 0.024840
+number of iter is 72
+max_resi is 0.029964, max_resk is 0.024870
+number of iter is 72
+max_resi is 0.029964, max_resk is 0.024870
+number of iter is 72
+max_resi is 0.029964, max_resk is 0.024870
+number of iter is 72
+max_resi is 0.029964, max_resk is 0.024870
+number of iter is 72
+max_resi is 0.029964, max_resk is 0.024870
+number of iter is 73
+max_resi is 0.029960, max_resk is 0.024834
+number of iter is 73
+max_resi is 0.029960, max_resk is 0.024834
+number of iter is 73
+max_resi is 0.029960, max_resk is 0.024834
+number of iter is 73
+max_resi is 0.029960, max_resk is 0.024834
+number of iter is 73
+max_resi is 0.029960, max_resk is 0.024834
+number of iter is 74
+max_resi is 0.029897, max_resk is 0.024771
+number of iter is 74
+max_resi is 0.029897, max_resk is 0.024771
+number of iter is 74
+max_resi is 0.029897, max_resk is 0.024771
+number of iter is 74
+max_resi is 0.029897, max_resk is 0.024771
+number of iter is 74
+max_resi is 0.029897, max_resk is 0.024771
+number of iter is 75
+max_resi is 0.029732, max_resk is 0.024684
+number of iter is 75
+max_resi is 0.029732, max_resk is 0.024684
+number of iter is 75
+max_resi is 0.029732, max_resk is 0.024684
+number of iter is 75
+max_resi is 0.029732, max_resk is 0.024684
+number of iter is 75
+max_resi is 0.029732, max_resk is 0.024684
+number of iter is 76
+max_resi is 0.029482, max_resk is 0.024616
+number of iter is 76
+max_resi is 0.029482, max_resk is 0.024616
+number of iter is 76
+max_resi is 0.029482, max_resk is 0.024616
+number of iter is 76
+max_resi is 0.029482, max_resk is 0.024616
+number of iter is 76
+max_resi is 0.029482, max_resk is 0.024616
+number of iter is 77
+max_resi is 0.029225, max_resk is 0.024446
+number of iter is 77
+max_resi is 0.029225, max_resk is 0.024446
+number of iter is 77
+max_resi is 0.029225, max_resk is 0.024446
+number of iter is 77
+max_resi is 0.029225, max_resk is 0.024446
+number of iter is 77
+max_resi is 0.029225, max_resk is 0.024446
+number of iter is 78
+max_resi is 0.028914, max_resk is 0.024292
+number of iter is 78
+max_resi is 0.028914, max_resk is 0.024292
+number of iter is 78
+max_resi is 0.028914, max_resk is 0.024292
+number of iter is 78
+max_resi is 0.028914, max_resk is 0.024292
+number of iter is 78
+max_resi is 0.028914, max_resk is 0.024292
+number of iter is 79
+max_resi is 0.028609, max_resk is 0.024088
+number of iter is 79
+max_resi is 0.028609, max_resk is 0.024088
+number of iter is 79
+max_resi is 0.028609, max_resk is 0.024088
+number of iter is 79
+max_resi is 0.028609, max_resk is 0.024088
+number of iter is 79
+max_resi is 0.028609, max_resk is 0.024088
+number of iter is 80
+max_resi is 0.028235, max_resk is 0.023867
+number of iter is 80
+max_resi is 0.028235, max_resk is 0.023867
+number of iter is 80
+max_resi is 0.028235, max_resk is 0.023867
+number of iter is 80
+max_resi is 0.028235, max_resk is 0.023867
+number of iter is 80
+max_resi is 0.028235, max_resk is 0.023867
+number of iter is 81
+max_resi is 0.027909, max_resk is 0.023706
+number of iter is 81
+max_resi is 0.027909, max_resk is 0.023706
+number of iter is 81
+max_resi is 0.027909, max_resk is 0.023706
+number of iter is 81
+max_resi is 0.027909, max_resk is 0.023706
+number of iter is 81
+max_resi is 0.027909, max_resk is 0.023706
+number of iter is 82
+max_resi is 0.027540, max_resk is 0.023669
+number of iter is 82
+max_resi is 0.027540, max_resk is 0.023669
+number of iter is 82
+max_resi is 0.027540, max_resk is 0.023669
+number of iter is 82
+max_resi is 0.027540, max_resk is 0.023669
+number of iter is 82
+max_resi is 0.027540, max_resk is 0.023669
+number of iter is 83
+max_resi is 0.027180, max_resk is 0.023597
+number of iter is 83
+max_resi is 0.027180, max_resk is 0.023597
+number of iter is 83
+max_resi is 0.027180, max_resk is 0.023597
+number of iter is 83
+max_resi is 0.027180, max_resk is 0.023597
+number of iter is 83
+max_resi is 0.027180, max_resk is 0.023597
+number of iter is 84
+max_resi is 0.026801, max_resk is 0.023492
+number of iter is 84
+max_resi is 0.026801, max_resk is 0.023492
+number of iter is 84
+max_resi is 0.026801, max_resk is 0.023492
+number of iter is 84
+max_resi is 0.026801, max_resk is 0.023492
+number of iter is 84
+max_resi is 0.026801, max_resk is 0.023492
+number of iter is 85
+max_resi is 0.026397, max_resk is 0.023324
+number of iter is 85
+max_resi is 0.026397, max_resk is 0.023324
+number of iter is 85
+max_resi is 0.026397, max_resk is 0.023324
+number of iter is 85
+max_resi is 0.026397, max_resk is 0.023324
+number of iter is 85
+max_resi is 0.026397, max_resk is 0.023324
+number of iter is 86
+max_resi is 0.025973, max_resk is 0.023117
+number of iter is 86
+max_resi is 0.025973, max_resk is 0.023117
+number of iter is 86
+max_resi is 0.025973, max_resk is 0.023117
+number of iter is 86
+max_resi is 0.025973, max_resk is 0.023117
+number of iter is 86
+max_resi is 0.025973, max_resk is 0.023117
+number of iter is 87
+max_resi is 0.025540, max_resk is 0.022855
+number of iter is 87
+max_resi is 0.025540, max_resk is 0.022855
+number of iter is 87
+max_resi is 0.025540, max_resk is 0.022855
+number of iter is 87
+max_resi is 0.025540, max_resk is 0.022855
+number of iter is 87
+max_resi is 0.025540, max_resk is 0.022855
+number of iter is 88
+max_resi is 0.025115, max_resk is 0.022583
+number of iter is 88
+max_resi is 0.025115, max_resk is 0.022583
+number of iter is 88
+max_resi is 0.025115, max_resk is 0.022583
+number of iter is 88
+max_resi is 0.025115, max_resk is 0.022583
+number of iter is 88
+max_resi is 0.025115, max_resk is 0.022583
+number of iter is 89
+max_resi is 0.024673, max_resk is 0.022269
+number of iter is 89
+max_resi is 0.024673, max_resk is 0.022269
+number of iter is 89
+max_resi is 0.024673, max_resk is 0.022269
+number of iter is 89
+max_resi is 0.024673, max_resk is 0.022269
+number of iter is 89
+max_resi is 0.024673, max_resk is 0.022269
+number of iter is 90
+max_resi is 0.024257, max_resk is 0.021968
+number of iter is 90
+max_resi is 0.024257, max_resk is 0.021968
+number of iter is 90
+max_resi is 0.024257, max_resk is 0.021968
+number of iter is 90
+max_resi is 0.024257, max_resk is 0.021968
+number of iter is 90
+max_resi is 0.024257, max_resk is 0.021968
+number of iter is 91
+max_resi is 0.023866, max_resk is 0.021626
+number of iter is 91
+max_resi is 0.023866, max_resk is 0.021626
+number of iter is 91
+max_resi is 0.023866, max_resk is 0.021626
+number of iter is 91
+max_resi is 0.023866, max_resk is 0.021626
+number of iter is 91
+max_resi is 0.023866, max_resk is 0.021626
+number of iter is 92
+max_resi is 0.023410, max_resk is 0.021266
+number of iter is 92
+max_resi is 0.023410, max_resk is 0.021266
+number of iter is 92
+max_resi is 0.023410, max_resk is 0.021266
+number of iter is 92
+max_resi is 0.023410, max_resk is 0.021266
+number of iter is 92
+max_resi is 0.023410, max_resk is 0.021266
+number of iter is 93
+max_resi is 0.022993, max_resk is 0.020894
+number of iter is 93
+max_resi is 0.022993, max_resk is 0.020894
+number of iter is 93
+max_resi is 0.022993, max_resk is 0.020894
+number of iter is 93
+max_resi is 0.022993, max_resk is 0.020894
+number of iter is 93
+max_resi is 0.022993, max_resk is 0.020894
+number of iter is 94
+max_resi is 0.022567, max_resk is 0.020577
+number of iter is 94
+max_resi is 0.022567, max_resk is 0.020577
+number of iter is 94
+max_resi is 0.022567, max_resk is 0.020577
+number of iter is 94
+max_resi is 0.022567, max_resk is 0.020577
+number of iter is 94
+max_resi is 0.022567, max_resk is 0.020577
+number of iter is 95
+max_resi is 0.022173, max_resk is 0.020279
+number of iter is 95
+max_resi is 0.022173, max_resk is 0.020279
+number of iter is 95
+max_resi is 0.022173, max_resk is 0.020279
+number of iter is 95
+max_resi is 0.022173, max_resk is 0.020279
+number of iter is 95
+max_resi is 0.022173, max_resk is 0.020279
+number of iter is 96
+max_resi is 0.021799, max_resk is 0.019971
+number of iter is 96
+max_resi is 0.021799, max_resk is 0.019971
+number of iter is 96
+max_resi is 0.021799, max_resk is 0.019971
+number of iter is 96
+max_resi is 0.021799, max_resk is 0.019971
+number of iter is 96
+max_resi is 0.021799, max_resk is 0.019971
+number of iter is 97
+max_resi is 0.021449, max_resk is 0.019687
+number of iter is 97
+max_resi is 0.021449, max_resk is 0.019687
+number of iter is 97
+max_resi is 0.021449, max_resk is 0.019687
+number of iter is 97
+max_resi is 0.021449, max_resk is 0.019687
+number of iter is 97
+max_resi is 0.021449, max_resk is 0.019687
+number of iter is 98
+max_resi is 0.021064, max_resk is 0.019342
+number of iter is 98
+max_resi is 0.021064, max_resk is 0.019342
+number of iter is 98
+max_resi is 0.021064, max_resk is 0.019342
+number of iter is 98
+max_resi is 0.021064, max_resk is 0.019342
+number of iter is 98
+max_resi is 0.021064, max_resk is 0.019342
+number of iter is 99
+max_resi is 0.020775, max_resk is 0.019051
+number of iter is 99
+max_resi is 0.020775, max_resk is 0.019051
+number of iter is 99
+max_resi is 0.020775, max_resk is 0.019051
+number of iter is 99
+max_resi is 0.020775, max_resk is 0.019051
+number of iter is 99
+max_resi is 0.020775, max_resk is 0.019051
+number of iter is 100
+max_resi is 0.020509, max_resk is 0.018827
+number of iter is 100
+max_resi is 0.020509, max_resk is 0.018827
+number of iter is 100
+max_resi is 0.020509, max_resk is 0.018827
+number of iter is 100
+max_resi is 0.020509, max_resk is 0.018827
+number of iter is 100
+max_resi is 0.020509, max_resk is 0.018827
+number of iter is 101
+max_resi is 0.020280, max_resk is 0.018640
+number of iter is 101
+max_resi is 0.020280, max_resk is 0.018640
+number of iter is 101
+max_resi is 0.020280, max_resk is 0.018640
+number of iter is 101
+max_resi is 0.020280, max_resk is 0.018640
+number of iter is 101
+max_resi is 0.020280, max_resk is 0.018640
+number of iter is 102
+max_resi is 0.020073, max_resk is 0.018480
+number of iter is 102
+max_resi is 0.020073, max_resk is 0.018480
+number of iter is 102
+max_resi is 0.020073, max_resk is 0.018480
+number of iter is 102
+max_resi is 0.020073, max_resk is 0.018480
+number of iter is 102
+max_resi is 0.020073, max_resk is 0.018480
+number of iter is 103
+max_resi is 0.019916, max_resk is 0.018247
+number of iter is 103
+max_resi is 0.019916, max_resk is 0.018247
+number of iter is 103
+max_resi is 0.019916, max_resk is 0.018247
+number of iter is 103
+max_resi is 0.019916, max_resk is 0.018247
+number of iter is 103
+max_resi is 0.019916, max_resk is 0.018247
+number of iter is 104
+max_resi is 0.019734, max_resk is 0.018085
+number of iter is 104
+max_resi is 0.019734, max_resk is 0.018085
+number of iter is 104
+max_resi is 0.019734, max_resk is 0.018085
+number of iter is 104
+max_resi is 0.019734, max_resk is 0.018085
+number of iter is 104
+max_resi is 0.019734, max_resk is 0.018085
+number of iter is 105
+max_resi is 0.019533, max_resk is 0.017898
+number of iter is 105
+max_resi is 0.019533, max_resk is 0.017898
+number of iter is 105
+max_resi is 0.019533, max_resk is 0.017898
+number of iter is 105
+max_resi is 0.019533, max_resk is 0.017898
+number of iter is 105
+max_resi is 0.019533, max_resk is 0.017898
+number of iter is 106
+max_resi is 0.019395, max_resk is 0.017742
+number of iter is 106
+max_resi is 0.019395, max_resk is 0.017742
+number of iter is 106
+max_resi is 0.019395, max_resk is 0.017742
+number of iter is 106
+max_resi is 0.019395, max_resk is 0.017742
+number of iter is 106
+max_resi is 0.019395, max_resk is 0.017742
+number of iter is 107
+max_resi is 0.019304, max_resk is 0.017606
+number of iter is 107
+max_resi is 0.019304, max_resk is 0.017606
+number of iter is 107
+max_resi is 0.019304, max_resk is 0.017606
+number of iter is 107
+max_resi is 0.019304, max_resk is 0.017606
+number of iter is 107
+max_resi is 0.019304, max_resk is 0.017606
+number of iter is 108
+max_resi is 0.019137, max_resk is 0.017412
+number of iter is 108
+max_resi is 0.019137, max_resk is 0.017412
+number of iter is 108
+max_resi is 0.019137, max_resk is 0.017412
+number of iter is 108
+max_resi is 0.019137, max_resk is 0.017412
+number of iter is 108
+max_resi is 0.019137, max_resk is 0.017412
+number of iter is 109
+max_resi is 0.019046, max_resk is 0.017271
+number of iter is 109
+max_resi is 0.019046, max_resk is 0.017271
+number of iter is 109
+max_resi is 0.019046, max_resk is 0.017271
+number of iter is 109
+max_resi is 0.019046, max_resk is 0.017271
+number of iter is 109
+max_resi is 0.019046, max_resk is 0.017271
+number of iter is 110
+max_resi is 0.018987, max_resk is 0.017121
+number of iter is 110
+max_resi is 0.018987, max_resk is 0.017121
+number of iter is 110
+max_resi is 0.018987, max_resk is 0.017121
+number of iter is 110
+max_resi is 0.018987, max_resk is 0.017121
+number of iter is 110
+max_resi is 0.018987, max_resk is 0.017121
+number of iter is 111
+max_resi is 0.018911, max_resk is 0.016985
+number of iter is 111
+max_resi is 0.018911, max_resk is 0.016985
+number of iter is 111
+max_resi is 0.018911, max_resk is 0.016985
+number of iter is 111
+max_resi is 0.018911, max_resk is 0.016985
+number of iter is 111
+max_resi is 0.018911, max_resk is 0.016985
+number of iter is 112
+max_resi is 0.018830, max_resk is 0.016863
+number of iter is 112
+max_resi is 0.018830, max_resk is 0.016863
+number of iter is 112
+max_resi is 0.018830, max_resk is 0.016863
+number of iter is 112
+max_resi is 0.018830, max_resk is 0.016863
+number of iter is 112
+max_resi is 0.018830, max_resk is 0.016863
+number of iter is 113
+max_resi is 0.018770, max_resk is 0.016749
+number of iter is 113
+max_resi is 0.018770, max_resk is 0.016749
+number of iter is 113
+max_resi is 0.018770, max_resk is 0.016749
+number of iter is 113
+max_resi is 0.018770, max_resk is 0.016749
+number of iter is 113
+max_resi is 0.018770, max_resk is 0.016749
+number of iter is 114
+max_resi is 0.018728, max_resk is 0.016633
+number of iter is 114
+max_resi is 0.018728, max_resk is 0.016633
+number of iter is 114
+max_resi is 0.018728, max_resk is 0.016633
+number of iter is 114
+max_resi is 0.018728, max_resk is 0.016633
+number of iter is 114
+max_resi is 0.018728, max_resk is 0.016633
+number of iter is 115
+max_resi is 0.018678, max_resk is 0.016534
+number of iter is 115
+max_resi is 0.018678, max_resk is 0.016534
+number of iter is 115
+max_resi is 0.018678, max_resk is 0.016534
+number of iter is 115
+max_resi is 0.018678, max_resk is 0.016534
+number of iter is 115
+max_resi is 0.018678, max_resk is 0.016534
+number of iter is 116
+max_resi is 0.018672, max_resk is 0.016418
+number of iter is 116
+max_resi is 0.018672, max_resk is 0.016418
+number of iter is 116
+max_resi is 0.018672, max_resk is 0.016418
+number of iter is 116
+max_resi is 0.018672, max_resk is 0.016418
+number of iter is 116
+max_resi is 0.018672, max_resk is 0.016418
+number of iter is 117
+max_resi is 0.018651, max_resk is 0.016375
+number of iter is 117
+max_resi is 0.018651, max_resk is 0.016375
+number of iter is 117
+max_resi is 0.018651, max_resk is 0.016375
+number of iter is 117
+max_resi is 0.018651, max_resk is 0.016375
+number of iter is 117
+max_resi is 0.018651, max_resk is 0.016375
+number of iter is 118
+max_resi is 0.018632, max_resk is 0.016328
+number of iter is 118
+max_resi is 0.018632, max_resk is 0.016328
+number of iter is 118
+max_resi is 0.018632, max_resk is 0.016328
+number of iter is 118
+max_resi is 0.018632, max_resk is 0.016328
+number of iter is 118
+max_resi is 0.018632, max_resk is 0.016328
+number of iter is 119
+max_resi is 0.018576, max_resk is 0.016270
+number of iter is 119
+max_resi is 0.018576, max_resk is 0.016270
+number of iter is 119
+max_resi is 0.018576, max_resk is 0.016270
+number of iter is 119
+max_resi is 0.018576, max_resk is 0.016270
+number of iter is 119
+max_resi is 0.018576, max_resk is 0.016270
+number of iter is 120
+max_resi is 0.018580, max_resk is 0.016249
+number of iter is 120
+max_resi is 0.018580, max_resk is 0.016249
+number of iter is 120
+max_resi is 0.018580, max_resk is 0.016249
+number of iter is 120
+max_resi is 0.018580, max_resk is 0.016249
+number of iter is 120
+max_resi is 0.018580, max_resk is 0.016249
+number of iter is 121
+max_resi is 0.018530, max_resk is 0.016199
+number of iter is 121
+max_resi is 0.018530, max_resk is 0.016199
+number of iter is 121
+max_resi is 0.018530, max_resk is 0.016199
+number of iter is 121
+max_resi is 0.018530, max_resk is 0.016199
+number of iter is 121
+max_resi is 0.018530, max_resk is 0.016199
+number of iter is 122
+max_resi is 0.018528, max_resk is 0.016154
+number of iter is 122
+max_resi is 0.018528, max_resk is 0.016154
+number of iter is 122
+max_resi is 0.018528, max_resk is 0.016154
+number of iter is 122
+max_resi is 0.018528, max_resk is 0.016154
+number of iter is 122
+max_resi is 0.018528, max_resk is 0.016154
+number of iter is 123
+max_resi is 0.018483, max_resk is 0.016100
+number of iter is 123
+max_resi is 0.018483, max_resk is 0.016100
+number of iter is 123
+max_resi is 0.018483, max_resk is 0.016100
+number of iter is 123
+max_resi is 0.018483, max_resk is 0.016100
+number of iter is 123
+max_resi is 0.018483, max_resk is 0.016100
+number of iter is 124
+max_resi is 0.018458, max_resk is 0.016069
+number of iter is 124
+max_resi is 0.018458, max_resk is 0.016069
+number of iter is 124
+max_resi is 0.018458, max_resk is 0.016069
+number of iter is 124
+max_resi is 0.018458, max_resk is 0.016069
+number of iter is 124
+max_resi is 0.018458, max_resk is 0.016069
+number of iter is 125
+max_resi is 0.018443, max_resk is 0.016054
+number of iter is 125
+max_resi is 0.018443, max_resk is 0.016054
+number of iter is 125
+max_resi is 0.018443, max_resk is 0.016054
+number of iter is 125
+max_resi is 0.018443, max_resk is 0.016054
+number of iter is 125
+max_resi is 0.018443, max_resk is 0.016054
+number of iter is 126
+max_resi is 0.018409, max_resk is 0.016025
+number of iter is 126
+max_resi is 0.018409, max_resk is 0.016025
+number of iter is 126
+max_resi is 0.018409, max_resk is 0.016025
+number of iter is 126
+max_resi is 0.018409, max_resk is 0.016025
+number of iter is 126
+max_resi is 0.018409, max_resk is 0.016025
+number of iter is 127
+max_resi is 0.018349, max_resk is 0.015973
+number of iter is 127
+max_resi is 0.018349, max_resk is 0.015973
+number of iter is 127
+max_resi is 0.018349, max_resk is 0.015973
+number of iter is 127
+max_resi is 0.018349, max_resk is 0.015973
+number of iter is 127
+max_resi is 0.018349, max_resk is 0.015973
+number of iter is 128
+max_resi is 0.018324, max_resk is 0.015942
+number of iter is 128
+max_resi is 0.018324, max_resk is 0.015942
+number of iter is 128
+max_resi is 0.018324, max_resk is 0.015942
+number of iter is 128
+max_resi is 0.018324, max_resk is 0.015942
+number of iter is 128
+max_resi is 0.018324, max_resk is 0.015942
+number of iter is 129
+max_resi is 0.018272, max_resk is 0.015897
+number of iter is 129
+max_resi is 0.018272, max_resk is 0.015897
+number of iter is 129
+max_resi is 0.018272, max_resk is 0.015897
+number of iter is 129
+max_resi is 0.018272, max_resk is 0.015897
+number of iter is 129
+max_resi is 0.018272, max_resk is 0.015897
+number of iter is 130
+max_resi is 0.018234, max_resk is 0.015886
+number of iter is 130
+max_resi is 0.018234, max_resk is 0.015886
+number of iter is 130
+max_resi is 0.018234, max_resk is 0.015886
+number of iter is 130
+max_resi is 0.018234, max_resk is 0.015886
+number of iter is 130
+max_resi is 0.018234, max_resk is 0.015886
+number of iter is 131
+max_resi is 0.018143, max_resk is 0.015840
+number of iter is 131
+max_resi is 0.018143, max_resk is 0.015840
+number of iter is 131
+max_resi is 0.018143, max_resk is 0.015840
+number of iter is 131
+max_resi is 0.018143, max_resk is 0.015840
+number of iter is 131
+max_resi is 0.018143, max_resk is 0.015840
+number of iter is 132
+max_resi is 0.018125, max_resk is 0.015798
+number of iter is 132
+max_resi is 0.018125, max_resk is 0.015798
+number of iter is 132
+max_resi is 0.018125, max_resk is 0.015798
+number of iter is 132
+max_resi is 0.018125, max_resk is 0.015798
+number of iter is 132
+max_resi is 0.018125, max_resk is 0.015798
+number of iter is 133
+max_resi is 0.018024, max_resk is 0.015776
+number of iter is 133
+max_resi is 0.018024, max_resk is 0.015776
+number of iter is 133
+max_resi is 0.018024, max_resk is 0.015776
+number of iter is 133
+max_resi is 0.018024, max_resk is 0.015776
+number of iter is 133
+max_resi is 0.018024, max_resk is 0.015776
+number of iter is 134
+max_resi is 0.017983, max_resk is 0.015725
+number of iter is 134
+max_resi is 0.017983, max_resk is 0.015725
+number of iter is 134
+max_resi is 0.017983, max_resk is 0.015725
+number of iter is 134
+max_resi is 0.017983, max_resk is 0.015725
+number of iter is 134
+max_resi is 0.017983, max_resk is 0.015725
+number of iter is 135
+max_resi is 0.017936, max_resk is 0.015708
+number of iter is 135
+max_resi is 0.017936, max_resk is 0.015708
+number of iter is 135
+max_resi is 0.017936, max_resk is 0.015708
+number of iter is 135
+max_resi is 0.017936, max_resk is 0.015708
+number of iter is 135
+max_resi is 0.017936, max_resk is 0.015708
+number of iter is 136
+max_resi is 0.017821, max_resk is 0.015697
+number of iter is 136
+max_resi is 0.017821, max_resk is 0.015697
+number of iter is 136
+max_resi is 0.017821, max_resk is 0.015697
+number of iter is 136
+max_resi is 0.017821, max_resk is 0.015697
+number of iter is 136
+max_resi is 0.017821, max_resk is 0.015697
+number of iter is 137
+max_resi is 0.017770, max_resk is 0.015641
+number of iter is 137
+max_resi is 0.017770, max_resk is 0.015641
+number of iter is 137
+max_resi is 0.017770, max_resk is 0.015641
+number of iter is 137
+max_resi is 0.017770, max_resk is 0.015641
+number of iter is 137
+max_resi is 0.017770, max_resk is 0.015641
+number of iter is 138
+max_resi is 0.017693, max_resk is 0.015618
+number of iter is 138
+max_resi is 0.017693, max_resk is 0.015618
+number of iter is 138
+max_resi is 0.017693, max_resk is 0.015618
+number of iter is 138
+max_resi is 0.017693, max_resk is 0.015618
+number of iter is 138
+max_resi is 0.017693, max_resk is 0.015618
+number of iter is 139
+max_resi is 0.017633, max_resk is 0.015551
+number of iter is 139
+max_resi is 0.017633, max_resk is 0.015551
+number of iter is 139
+max_resi is 0.017633, max_resk is 0.015551
+number of iter is 139
+max_resi is 0.017633, max_resk is 0.015551
+number of iter is 139
+max_resi is 0.017633, max_resk is 0.015551
+number of iter is 140
+max_resi is 0.017535, max_resk is 0.015541
+number of iter is 140
+max_resi is 0.017535, max_resk is 0.015541
+number of iter is 140
+max_resi is 0.017535, max_resk is 0.015541
+number of iter is 140
+max_resi is 0.017535, max_resk is 0.015541
+number of iter is 140
+max_resi is 0.017535, max_resk is 0.015541
+number of iter is 141
+max_resi is 0.017451, max_resk is 0.015498
+number of iter is 141
+max_resi is 0.017451, max_resk is 0.015498
+number of iter is 141
+max_resi is 0.017451, max_resk is 0.015498
+number of iter is 141
+max_resi is 0.017451, max_resk is 0.015498
+number of iter is 141
+max_resi is 0.017451, max_resk is 0.015498
+number of iter is 142
+max_resi is 0.017407, max_resk is 0.015457
+number of iter is 142
+max_resi is 0.017407, max_resk is 0.015457
+number of iter is 142
+max_resi is 0.017407, max_resk is 0.015457
+number of iter is 142
+max_resi is 0.017407, max_resk is 0.015457
+number of iter is 142
+max_resi is 0.017407, max_resk is 0.015457
+number of iter is 143
+max_resi is 0.017317, max_resk is 0.015433
+number of iter is 143
+max_resi is 0.017317, max_resk is 0.015433
+number of iter is 143
+max_resi is 0.017317, max_resk is 0.015433
+number of iter is 143
+max_resi is 0.017317, max_resk is 0.015433
+number of iter is 143
+max_resi is 0.017317, max_resk is 0.015433
+number of iter is 144
+max_resi is 0.017218, max_resk is 0.015389
+number of iter is 144
+max_resi is 0.017218, max_resk is 0.015389
+number of iter is 144
+max_resi is 0.017218, max_resk is 0.015389
+number of iter is 144
+max_resi is 0.017218, max_resk is 0.015389
+number of iter is 144
+max_resi is 0.017218, max_resk is 0.015389
+number of iter is 145
+max_resi is 0.017106, max_resk is 0.015339
+number of iter is 145
+max_resi is 0.017106, max_resk is 0.015339
+number of iter is 145
+max_resi is 0.017106, max_resk is 0.015339
+number of iter is 145
+max_resi is 0.017106, max_resk is 0.015339
+number of iter is 145
+max_resi is 0.017106, max_resk is 0.015339
+number of iter is 146
+max_resi is 0.017060, max_resk is 0.015293
+number of iter is 146
+max_resi is 0.017060, max_resk is 0.015293
+number of iter is 146
+max_resi is 0.017060, max_resk is 0.015293
+number of iter is 146
+max_resi is 0.017060, max_resk is 0.015293
+number of iter is 146
+max_resi is 0.017060, max_resk is 0.015293
+number of iter is 147
+max_resi is 0.016943, max_resk is 0.015263
+number of iter is 147
+max_resi is 0.016943, max_resk is 0.015263
+number of iter is 147
+max_resi is 0.016943, max_resk is 0.015263
+number of iter is 147
+max_resi is 0.016943, max_resk is 0.015263
+number of iter is 147
+max_resi is 0.016943, max_resk is 0.015263
+number of iter is 148
+max_resi is 0.016887, max_resk is 0.015225
+number of iter is 148
+max_resi is 0.016887, max_resk is 0.015225
+number of iter is 148
+max_resi is 0.016887, max_resk is 0.015225
+number of iter is 148
+max_resi is 0.016887, max_resk is 0.015225
+number of iter is 148
+max_resi is 0.016887, max_resk is 0.015225
+number of iter is 149
+max_resi is 0.016766, max_resk is 0.015187
+number of iter is 149
+max_resi is 0.016766, max_resk is 0.015187
+number of iter is 149
+max_resi is 0.016766, max_resk is 0.015187
+number of iter is 149
+max_resi is 0.016766, max_resk is 0.015187
+number of iter is 149
+max_resi is 0.016766, max_resk is 0.015187
+number of iter is 150
+max_resi is 0.016694, max_resk is 0.015169
+number of iter is 150
+max_resi is 0.016694, max_resk is 0.015169
+number of iter is 150
+max_resi is 0.016694, max_resk is 0.015169
+number of iter is 150
+max_resi is 0.016694, max_resk is 0.015169
+number of iter is 150
+max_resi is 0.016694, max_resk is 0.015169
+number of iter is 151
+max_resi is 0.016628, max_resk is 0.015107
+number of iter is 151
+max_resi is 0.016628, max_resk is 0.015107
+number of iter is 151
+max_resi is 0.016628, max_resk is 0.015107
+number of iter is 151
+max_resi is 0.016628, max_resk is 0.015107
+number of iter is 151
+max_resi is 0.016628, max_resk is 0.015107
+number of iter is 152
+max_resi is 0.016534, max_resk is 0.015075
+number of iter is 152
+max_resi is 0.016534, max_resk is 0.015075
+number of iter is 152
+max_resi is 0.016534, max_resk is 0.015075
+number of iter is 152
+max_resi is 0.016534, max_resk is 0.015075
+number of iter is 152
+max_resi is 0.016534, max_resk is 0.015075
+number of iter is 153
+max_resi is 0.016449, max_resk is 0.015025
+number of iter is 153
+max_resi is 0.016449, max_resk is 0.015025
+number of iter is 153
+max_resi is 0.016449, max_resk is 0.015025
+number of iter is 153
+max_resi is 0.016449, max_resk is 0.015025
+number of iter is 153
+max_resi is 0.016449, max_resk is 0.015025
+number of iter is 154
+max_resi is 0.016368, max_resk is 0.015009
+number of iter is 154
+max_resi is 0.016368, max_resk is 0.015009
+number of iter is 154
+max_resi is 0.016368, max_resk is 0.015009
+number of iter is 154
+max_resi is 0.016368, max_resk is 0.015009
+number of iter is 154
+max_resi is 0.016368, max_resk is 0.015009
+number of iter is 155
+max_resi is 0.016332, max_resk is 0.014958
+number of iter is 155
+max_resi is 0.016332, max_resk is 0.014958
+number of iter is 155
+max_resi is 0.016332, max_resk is 0.014958
+number of iter is 155
+max_resi is 0.016332, max_resk is 0.014958
+number of iter is 155
+max_resi is 0.016332, max_resk is 0.014958
+number of iter is 156
+max_resi is 0.016207, max_resk is 0.014932
+number of iter is 156
+max_resi is 0.016207, max_resk is 0.014932
+number of iter is 156
+max_resi is 0.016207, max_resk is 0.014932
+number of iter is 156
+max_resi is 0.016207, max_resk is 0.014932
+number of iter is 156
+max_resi is 0.016207, max_resk is 0.014932
+number of iter is 157
+max_resi is 0.016154, max_resk is 0.014881
+number of iter is 157
+max_resi is 0.016154, max_resk is 0.014881
+number of iter is 157
+max_resi is 0.016154, max_resk is 0.014881
+number of iter is 157
+max_resi is 0.016154, max_resk is 0.014881
+number of iter is 157
+max_resi is 0.016154, max_resk is 0.014881
+number of iter is 158
+max_resi is 0.016054, max_resk is 0.014838
+number of iter is 158
+max_resi is 0.016054, max_resk is 0.014838
+number of iter is 158
+max_resi is 0.016054, max_resk is 0.014838
+number of iter is 158
+max_resi is 0.016054, max_resk is 0.014838
+number of iter is 158
+max_resi is 0.016054, max_resk is 0.014838
+number of iter is 159
+max_resi is 0.016011, max_resk is 0.014830
+number of iter is 159
+max_resi is 0.016011, max_resk is 0.014830
+number of iter is 159
+max_resi is 0.016011, max_resk is 0.014830
+number of iter is 159
+max_resi is 0.016011, max_resk is 0.014830
+number of iter is 159
+max_resi is 0.016011, max_resk is 0.014830
+number of iter is 160
+max_resi is 0.015925, max_resk is 0.014788
+number of iter is 160
+max_resi is 0.015925, max_resk is 0.014788
+number of iter is 160
+max_resi is 0.015925, max_resk is 0.014788
+number of iter is 160
+max_resi is 0.015925, max_resk is 0.014788
+number of iter is 160
+max_resi is 0.015925, max_resk is 0.014788
+number of iter is 161
+max_resi is 0.015849, max_resk is 0.014746
+number of iter is 161
+max_resi is 0.015849, max_resk is 0.014746
+number of iter is 161
+max_resi is 0.015849, max_resk is 0.014746
+number of iter is 161
+max_resi is 0.015849, max_resk is 0.014746
+number of iter is 161
+max_resi is 0.015849, max_resk is 0.014746
+number of iter is 162
+max_resi is 0.015820, max_resk is 0.014703
+number of iter is 162
+max_resi is 0.015820, max_resk is 0.014703
+number of iter is 162
+max_resi is 0.015820, max_resk is 0.014703
+number of iter is 162
+max_resi is 0.015820, max_resk is 0.014703
+number of iter is 162
+max_resi is 0.015820, max_resk is 0.014703
+number of iter is 163
+max_resi is 0.015746, max_resk is 0.014668
+number of iter is 163
+max_resi is 0.015746, max_resk is 0.014668
+number of iter is 163
+max_resi is 0.015746, max_resk is 0.014668
+number of iter is 163
+max_resi is 0.015746, max_resk is 0.014668
+number of iter is 163
+max_resi is 0.015746, max_resk is 0.014668
+number of iter is 164
+max_resi is 0.015678, max_resk is 0.014636
+number of iter is 164
+max_resi is 0.015678, max_resk is 0.014636
+number of iter is 164
+max_resi is 0.015678, max_resk is 0.014636
+number of iter is 164
+max_resi is 0.015678, max_resk is 0.014636
+number of iter is 164
+max_resi is 0.015678, max_resk is 0.014636
+number of iter is 165
+max_resi is 0.015622, max_resk is 0.014610
+number of iter is 165
+max_resi is 0.015622, max_resk is 0.014610
+number of iter is 165
+max_resi is 0.015622, max_resk is 0.014610
+number of iter is 165
+max_resi is 0.015622, max_resk is 0.014610
+number of iter is 165
+max_resi is 0.015622, max_resk is 0.014610
+number of iter is 166
+max_resi is 0.015553, max_resk is 0.014585
+number of iter is 166
+max_resi is 0.015553, max_resk is 0.014585
+number of iter is 166
+max_resi is 0.015553, max_resk is 0.014585
+number of iter is 166
+max_resi is 0.015553, max_resk is 0.014585
+number of iter is 166
+max_resi is 0.015553, max_resk is 0.014585
+number of iter is 167
+max_resi is 0.015502, max_resk is 0.014541
+number of iter is 167
+max_resi is 0.015502, max_resk is 0.014541
+number of iter is 167
+max_resi is 0.015502, max_resk is 0.014541
+number of iter is 167
+max_resi is 0.015502, max_resk is 0.014541
+number of iter is 167
+max_resi is 0.015502, max_resk is 0.014541
+number of iter is 168
+max_resi is 0.015464, max_resk is 0.014535
+number of iter is 168
+max_resi is 0.015464, max_resk is 0.014535
+number of iter is 168
+max_resi is 0.015464, max_resk is 0.014535
+number of iter is 168
+max_resi is 0.015464, max_resk is 0.014535
+number of iter is 168
+max_resi is 0.015464, max_resk is 0.014535
+number of iter is 169
+max_resi is 0.015397, max_resk is 0.014473
+number of iter is 169
+max_resi is 0.015397, max_resk is 0.014473
+number of iter is 169
+max_resi is 0.015397, max_resk is 0.014473
+number of iter is 169
+max_resi is 0.015397, max_resk is 0.014473
+number of iter is 169
+max_resi is 0.015397, max_resk is 0.014473
+number of iter is 170
+max_resi is 0.015363, max_resk is 0.014457
+number of iter is 170
+max_resi is 0.015363, max_resk is 0.014457
+number of iter is 170
+max_resi is 0.015363, max_resk is 0.014457
+number of iter is 170
+max_resi is 0.015363, max_resk is 0.014457
+number of iter is 170
+max_resi is 0.015363, max_resk is 0.014457
+number of iter is 171
+max_resi is 0.015282, max_resk is 0.014432
+number of iter is 171
+max_resi is 0.015282, max_resk is 0.014432
+number of iter is 171
+max_resi is 0.015282, max_resk is 0.014432
+number of iter is 171
+max_resi is 0.015282, max_resk is 0.014432
+number of iter is 171
+max_resi is 0.015282, max_resk is 0.014432
+number of iter is 172
+max_resi is 0.015265, max_resk is 0.014415
+number of iter is 172
+max_resi is 0.015265, max_resk is 0.014415
+number of iter is 172
+max_resi is 0.015265, max_resk is 0.014415
+number of iter is 172
+max_resi is 0.015265, max_resk is 0.014415
+number of iter is 172
+max_resi is 0.015265, max_resk is 0.014415
+number of iter is 173
+max_resi is 0.015182, max_resk is 0.014381
+number of iter is 173
+max_resi is 0.015182, max_resk is 0.014381
+number of iter is 173
+max_resi is 0.015182, max_resk is 0.014381
+number of iter is 173
+max_resi is 0.015182, max_resk is 0.014381
+number of iter is 173
+max_resi is 0.015182, max_resk is 0.014381
+number of iter is 174
+max_resi is 0.015150, max_resk is 0.014329
+number of iter is 174
+max_resi is 0.015150, max_resk is 0.014329
+number of iter is 174
+max_resi is 0.015150, max_resk is 0.014329
+number of iter is 174
+max_resi is 0.015150, max_resk is 0.014329
+number of iter is 174
+max_resi is 0.015150, max_resk is 0.014329
+number of iter is 175
+max_resi is 0.015112, max_resk is 0.014312
+number of iter is 175
+max_resi is 0.015112, max_resk is 0.014312
+number of iter is 175
+max_resi is 0.015112, max_resk is 0.014312
+number of iter is 175
+max_resi is 0.015112, max_resk is 0.014312
+number of iter is 175
+max_resi is 0.015112, max_resk is 0.014312
+number of iter is 176
+max_resi is 0.015073, max_resk is 0.014286
+number of iter is 176
+max_resi is 0.015073, max_resk is 0.014286
+number of iter is 176
+max_resi is 0.015073, max_resk is 0.014286
+number of iter is 176
+max_resi is 0.015073, max_resk is 0.014286
+number of iter is 176
+max_resi is 0.015073, max_resk is 0.014286
+number of iter is 177
+max_resi is 0.015032, max_resk is 0.014262
+number of iter is 177
+max_resi is 0.015032, max_resk is 0.014262
+number of iter is 177
+max_resi is 0.015032, max_resk is 0.014262
+number of iter is 177
+max_resi is 0.015032, max_resk is 0.014262
+number of iter is 177
+max_resi is 0.015032, max_resk is 0.014262
+number of iter is 178
+max_resi is 0.014974, max_resk is 0.014228
+number of iter is 178
+max_resi is 0.014974, max_resk is 0.014228
+number of iter is 178
+max_resi is 0.014974, max_resk is 0.014228
+number of iter is 178
+max_resi is 0.014974, max_resk is 0.014228
+number of iter is 178
+max_resi is 0.014974, max_resk is 0.014228
+number of iter is 179
+max_resi is 0.014913, max_resk is 0.014209
+number of iter is 179
+max_resi is 0.014913, max_resk is 0.014209
+number of iter is 179
+max_resi is 0.014913, max_resk is 0.014209
+number of iter is 179
+max_resi is 0.014913, max_resk is 0.014209
+number of iter is 179
+max_resi is 0.014913, max_resk is 0.014209
+number of iter is 180
+max_resi is 0.014893, max_resk is 0.014177
+number of iter is 180
+max_resi is 0.014893, max_resk is 0.014177
+number of iter is 180
+max_resi is 0.014893, max_resk is 0.014177
+number of iter is 180
+max_resi is 0.014893, max_resk is 0.014177
+number of iter is 180
+max_resi is 0.014893, max_resk is 0.014177
+number of iter is 181
+max_resi is 0.014844, max_resk is 0.014142
+number of iter is 181
+max_resi is 0.014844, max_resk is 0.014142
+number of iter is 181
+max_resi is 0.014844, max_resk is 0.014142
+number of iter is 181
+max_resi is 0.014844, max_resk is 0.014142
+number of iter is 181
+max_resi is 0.014844, max_resk is 0.014142
+number of iter is 182
+max_resi is 0.014808, max_resk is 0.014125
+number of iter is 182
+max_resi is 0.014808, max_resk is 0.014125
+number of iter is 182
+max_resi is 0.014808, max_resk is 0.014125
+number of iter is 182
+max_resi is 0.014808, max_resk is 0.014125
+number of iter is 182
+max_resi is 0.014808, max_resk is 0.014125
+number of iter is 183
+max_resi is 0.014732, max_resk is 0.014108
+number of iter is 183
+max_resi is 0.014732, max_resk is 0.014108
+number of iter is 183
+max_resi is 0.014732, max_resk is 0.014108
+number of iter is 183
+max_resi is 0.014732, max_resk is 0.014108
+number of iter is 183
+max_resi is 0.014732, max_resk is 0.014108
+number of iter is 184
+max_resi is 0.014721, max_resk is 0.014068
+number of iter is 184
+max_resi is 0.014721, max_resk is 0.014068
+number of iter is 184
+max_resi is 0.014721, max_resk is 0.014068
+number of iter is 184
+max_resi is 0.014721, max_resk is 0.014068
+number of iter is 184
+max_resi is 0.014721, max_resk is 0.014068
+number of iter is 185
+max_resi is 0.014659, max_resk is 0.014029
+number of iter is 185
+max_resi is 0.014659, max_resk is 0.014029
+number of iter is 185
+max_resi is 0.014659, max_resk is 0.014029
+number of iter is 185
+max_resi is 0.014659, max_resk is 0.014029
+number of iter is 185
+max_resi is 0.014659, max_resk is 0.014029
+number of iter is 186
+max_resi is 0.014605, max_resk is 0.014032
+number of iter is 186
+max_resi is 0.014605, max_resk is 0.014032
+number of iter is 186
+max_resi is 0.014605, max_resk is 0.014032
+number of iter is 186
+max_resi is 0.014605, max_resk is 0.014032
+number of iter is 186
+max_resi is 0.014605, max_resk is 0.014032
+number of iter is 187
+max_resi is 0.014572, max_resk is 0.013974
+number of iter is 187
+max_resi is 0.014572, max_resk is 0.013974
+number of iter is 187
+max_resi is 0.014572, max_resk is 0.013974
+number of iter is 187
+max_resi is 0.014572, max_resk is 0.013974
+number of iter is 187
+max_resi is 0.014572, max_resk is 0.013974
+number of iter is 188
+max_resi is 0.014554, max_resk is 0.013990
+number of iter is 188
+max_resi is 0.014554, max_resk is 0.013990
+number of iter is 188
+max_resi is 0.014554, max_resk is 0.013990
+number of iter is 188
+max_resi is 0.014554, max_resk is 0.013990
+number of iter is 188
+max_resi is 0.014554, max_resk is 0.013990
+number of iter is 189
+max_resi is 0.014501, max_resk is 0.013944
+number of iter is 189
+max_resi is 0.014501, max_resk is 0.013944
+number of iter is 189
+max_resi is 0.014501, max_resk is 0.013944
+number of iter is 189
+max_resi is 0.014501, max_resk is 0.013944
+number of iter is 189
+max_resi is 0.014501, max_resk is 0.013944
+number of iter is 190
+max_resi is 0.014462, max_resk is 0.013915
+number of iter is 190
+max_resi is 0.014462, max_resk is 0.013915
+number of iter is 190
+max_resi is 0.014462, max_resk is 0.013915
+number of iter is 190
+max_resi is 0.014462, max_resk is 0.013915
+number of iter is 190
+max_resi is 0.014462, max_resk is 0.013915
+number of iter is 191
+max_resi is 0.014437, max_resk is 0.013911
+number of iter is 191
+max_resi is 0.014437, max_resk is 0.013911
+number of iter is 191
+max_resi is 0.014437, max_resk is 0.013911
+number of iter is 191
+max_resi is 0.014437, max_resk is 0.013911
+number of iter is 191
+max_resi is 0.014437, max_resk is 0.013911
+number of iter is 192
+max_resi is 0.014391, max_resk is 0.013863
+number of iter is 192
+max_resi is 0.014391, max_resk is 0.013863
+number of iter is 192
+max_resi is 0.014391, max_resk is 0.013863
+number of iter is 192
+max_resi is 0.014391, max_resk is 0.013863
+number of iter is 192
+max_resi is 0.014391, max_resk is 0.013863
+number of iter is 193
+max_resi is 0.014327, max_resk is 0.013826
+number of iter is 193
+max_resi is 0.014327, max_resk is 0.013826
+number of iter is 193
+max_resi is 0.014327, max_resk is 0.013826
+number of iter is 193
+max_resi is 0.014327, max_resk is 0.013826
+number of iter is 193
+max_resi is 0.014327, max_resk is 0.013826
+number of iter is 194
+max_resi is 0.014270, max_resk is 0.013822
+number of iter is 194
+max_resi is 0.014270, max_resk is 0.013822
+number of iter is 194
+max_resi is 0.014270, max_resk is 0.013822
+number of iter is 194
+max_resi is 0.014270, max_resk is 0.013822
+number of iter is 194
+max_resi is 0.014270, max_resk is 0.013822
+number of iter is 195
+max_resi is 0.014250, max_resk is 0.013787
+number of iter is 195
+max_resi is 0.014250, max_resk is 0.013787
+number of iter is 195
+max_resi is 0.014250, max_resk is 0.013787
+number of iter is 195
+max_resi is 0.014250, max_resk is 0.013787
+number of iter is 195
+max_resi is 0.014250, max_resk is 0.013787
+number of iter is 196
+max_resi is 0.014200, max_resk is 0.013748
+number of iter is 196
+max_resi is 0.014200, max_resk is 0.013748
+number of iter is 196
+max_resi is 0.014200, max_resk is 0.013748
+number of iter is 196
+max_resi is 0.014200, max_resk is 0.013748
+number of iter is 196
+max_resi is 0.014200, max_resk is 0.013748
+number of iter is 197
+max_resi is 0.014153, max_resk is 0.013741
+number of iter is 197
+max_resi is 0.014153, max_resk is 0.013741
+number of iter is 197
+max_resi is 0.014153, max_resk is 0.013741
+number of iter is 197
+max_resi is 0.014153, max_resk is 0.013741
+number of iter is 197
+max_resi is 0.014153, max_resk is 0.013741
+number of iter is 198
+max_resi is 0.014121, max_resk is 0.013717
+number of iter is 198
+max_resi is 0.014121, max_resk is 0.013717
+number of iter is 198
+max_resi is 0.014121, max_resk is 0.013717
+number of iter is 198
+max_resi is 0.014121, max_resk is 0.013717
+number of iter is 198
+max_resi is 0.014121, max_resk is 0.013717
+number of iter is 199
+max_resi is 0.014079, max_resk is 0.013673
+number of iter is 199
+max_resi is 0.014079, max_resk is 0.013673
+number of iter is 199
+max_resi is 0.014079, max_resk is 0.013673
+number of iter is 199
+max_resi is 0.014079, max_resk is 0.013673
+number of iter is 199
+max_resi is 0.014079, max_resk is 0.013673
+number of iter is 200
+max_resi is 0.014022, max_resk is 0.013656
+number of iter is 200
+max_resi is 0.014022, max_resk is 0.013656
+number of iter is 200
+max_resi is 0.014022, max_resk is 0.013656
+number of iter is 200
+max_resi is 0.014022, max_resk is 0.013656
+number of iter is 200
+max_resi is 0.014022, max_resk is 0.013656
+number of iter is 201
+max_resi is 0.013977, max_resk is 0.013631
+number of iter is 201
+max_resi is 0.013977, max_resk is 0.013631
+number of iter is 201
+max_resi is 0.013977, max_resk is 0.013631
+number of iter is 201
+max_resi is 0.013977, max_resk is 0.013631
+number of iter is 201
+max_resi is 0.013977, max_resk is 0.013631
+number of iter is 202
+max_resi is 0.013938, max_resk is 0.013607
+number of iter is 202
+max_resi is 0.013938, max_resk is 0.013607
+number of iter is 202
+max_resi is 0.013938, max_resk is 0.013607
+number of iter is 202
+max_resi is 0.013938, max_resk is 0.013607
+number of iter is 202
+max_resi is 0.013938, max_resk is 0.013607
+number of iter is 203
+max_resi is 0.013913, max_resk is 0.013598
+number of iter is 203
+max_resi is 0.013913, max_resk is 0.013598
+number of iter is 203
+max_resi is 0.013913, max_resk is 0.013598
+number of iter is 203
+max_resi is 0.013913, max_resk is 0.013598
+number of iter is 203
+max_resi is 0.013913, max_resk is 0.013598
+number of iter is 204
+max_resi is 0.013840, max_resk is 0.013545
+number of iter is 204
+max_resi is 0.013840, max_resk is 0.013545
+number of iter is 204
+max_resi is 0.013840, max_resk is 0.013545
+number of iter is 204
+max_resi is 0.013840, max_resk is 0.013545
+number of iter is 204
+max_resi is 0.013840, max_resk is 0.013545
+number of iter is 205
+max_resi is 0.013817, max_resk is 0.013532
+number of iter is 205
+max_resi is 0.013817, max_resk is 0.013532
+number of iter is 205
+max_resi is 0.013817, max_resk is 0.013532
+number of iter is 205
+max_resi is 0.013817, max_resk is 0.013532
+number of iter is 205
+max_resi is 0.013817, max_resk is 0.013532
+number of iter is 206
+max_resi is 0.013784, max_resk is 0.013513
+number of iter is 206
+max_resi is 0.013784, max_resk is 0.013513
+number of iter is 206
+max_resi is 0.013784, max_resk is 0.013513
+number of iter is 206
+max_resi is 0.013784, max_resk is 0.013513
+number of iter is 206
+max_resi is 0.013784, max_resk is 0.013513
+number of iter is 207
+max_resi is 0.013737, max_resk is 0.013476
+number of iter is 207
+max_resi is 0.013737, max_resk is 0.013476
+number of iter is 207
+max_resi is 0.013737, max_resk is 0.013476
+number of iter is 207
+max_resi is 0.013737, max_resk is 0.013476
+number of iter is 207
+max_resi is 0.013737, max_resk is 0.013476
+number of iter is 208
+max_resi is 0.013669, max_resk is 0.013457
+number of iter is 208
+max_resi is 0.013669, max_resk is 0.013457
+number of iter is 208
+max_resi is 0.013669, max_resk is 0.013457
+number of iter is 208
+max_resi is 0.013669, max_resk is 0.013457
+number of iter is 208
+max_resi is 0.013669, max_resk is 0.013457
+number of iter is 209
+max_resi is 0.013657, max_resk is 0.013440
+number of iter is 209
+max_resi is 0.013657, max_resk is 0.013440
+number of iter is 209
+max_resi is 0.013657, max_resk is 0.013440
+number of iter is 209
+max_resi is 0.013657, max_resk is 0.013440
+number of iter is 209
+max_resi is 0.013657, max_resk is 0.013440
+number of iter is 210
+max_resi is 0.013610, max_resk is 0.013407
+number of iter is 210
+max_resi is 0.013610, max_resk is 0.013407
+number of iter is 210
+max_resi is 0.013610, max_resk is 0.013407
+number of iter is 210
+max_resi is 0.013610, max_resk is 0.013407
+number of iter is 210
+max_resi is 0.013610, max_resk is 0.013407
+number of iter is 211
+max_resi is 0.013589, max_resk is 0.013386
+number of iter is 211
+max_resi is 0.013589, max_resk is 0.013386
+number of iter is 211
+max_resi is 0.013589, max_resk is 0.013386
+number of iter is 211
+max_resi is 0.013589, max_resk is 0.013386
+number of iter is 211
+max_resi is 0.013589, max_resk is 0.013386
+number of iter is 212
+max_resi is 0.013543, max_resk is 0.013353
+number of iter is 212
+max_resi is 0.013543, max_resk is 0.013353
+number of iter is 212
+max_resi is 0.013543, max_resk is 0.013353
+number of iter is 212
+max_resi is 0.013543, max_resk is 0.013353
+number of iter is 212
+max_resi is 0.013543, max_resk is 0.013353
+number of iter is 213
+max_resi is 0.013478, max_resk is 0.013338
+number of iter is 213
+max_resi is 0.013478, max_resk is 0.013338
+number of iter is 213
+max_resi is 0.013478, max_resk is 0.013338
+number of iter is 213
+max_resi is 0.013478, max_resk is 0.013338
+number of iter is 213
+max_resi is 0.013478, max_resk is 0.013338
+number of iter is 214
+max_resi is 0.013454, max_resk is 0.013309
+number of iter is 214
+max_resi is 0.013454, max_resk is 0.013309
+number of iter is 214
+max_resi is 0.013454, max_resk is 0.013309
+number of iter is 214
+max_resi is 0.013454, max_resk is 0.013309
+number of iter is 214
+max_resi is 0.013454, max_resk is 0.013309
+number of iter is 215
+max_resi is 0.013412, max_resk is 0.013273
+number of iter is 215
+max_resi is 0.013412, max_resk is 0.013273
+number of iter is 215
+max_resi is 0.013412, max_resk is 0.013273
+number of iter is 215
+max_resi is 0.013412, max_resk is 0.013273
+number of iter is 215
+max_resi is 0.013412, max_resk is 0.013273
+number of iter is 216
+max_resi is 0.013400, max_resk is 0.013261
+number of iter is 216
+max_resi is 0.013400, max_resk is 0.013261
+number of iter is 216
+max_resi is 0.013400, max_resk is 0.013261
+number of iter is 216
+max_resi is 0.013400, max_resk is 0.013261
+number of iter is 216
+max_resi is 0.013400, max_resk is 0.013261
+number of iter is 217
+max_resi is 0.013334, max_resk is 0.013233
+number of iter is 217
+max_resi is 0.013334, max_resk is 0.013233
+number of iter is 217
+max_resi is 0.013334, max_resk is 0.013233
+number of iter is 217
+max_resi is 0.013334, max_resk is 0.013233
+number of iter is 217
+max_resi is 0.013334, max_resk is 0.013233
+number of iter is 218
+max_resi is 0.013332, max_resk is 0.013222
+number of iter is 218
+max_resi is 0.013332, max_resk is 0.013222
+number of iter is 218
+max_resi is 0.013332, max_resk is 0.013222
+number of iter is 218
+max_resi is 0.013332, max_resk is 0.013222
+number of iter is 218
+max_resi is 0.013332, max_resk is 0.013222
+number of iter is 219
+max_resi is 0.013260, max_resk is 0.013197
+number of iter is 219
+max_resi is 0.013260, max_resk is 0.013197
+number of iter is 219
+max_resi is 0.013260, max_resk is 0.013197
+number of iter is 219
+max_resi is 0.013260, max_resk is 0.013197
+number of iter is 219
+max_resi is 0.013260, max_resk is 0.013197
+number of iter is 220
+max_resi is 0.013224, max_resk is 0.013173
+number of iter is 220
+max_resi is 0.013224, max_resk is 0.013173
+number of iter is 220
+max_resi is 0.013224, max_resk is 0.013173
+number of iter is 220
+max_resi is 0.013224, max_resk is 0.013173
+number of iter is 220
+max_resi is 0.013224, max_resk is 0.013173
+number of iter is 221
+max_resi is 0.013199, max_resk is 0.013147
+number of iter is 221
+max_resi is 0.013199, max_resk is 0.013147
+number of iter is 221
+max_resi is 0.013199, max_resk is 0.013147
+number of iter is 221
+max_resi is 0.013199, max_resk is 0.013147
+number of iter is 221
+max_resi is 0.013199, max_resk is 0.013147
+number of iter is 222
+max_resi is 0.013143, max_resk is 0.013114
+number of iter is 222
+max_resi is 0.013143, max_resk is 0.013114
+number of iter is 222
+max_resi is 0.013143, max_resk is 0.013114
+number of iter is 222
+max_resi is 0.013143, max_resk is 0.013114
+number of iter is 222
+max_resi is 0.013143, max_resk is 0.013114
+number of iter is 223
+max_resi is 0.013134, max_resk is 0.013089
+number of iter is 223
+max_resi is 0.013134, max_resk is 0.013089
+number of iter is 223
+max_resi is 0.013134, max_resk is 0.013089
+number of iter is 223
+max_resi is 0.013134, max_resk is 0.013089
+number of iter is 223
+max_resi is 0.013134, max_resk is 0.013089
+number of iter is 224
+max_resi is 0.013093, max_resk is 0.013070
+number of iter is 224
+max_resi is 0.013093, max_resk is 0.013070
+number of iter is 224
+max_resi is 0.013093, max_resk is 0.013070
+number of iter is 224
+max_resi is 0.013093, max_resk is 0.013070
+number of iter is 224
+max_resi is 0.013093, max_resk is 0.013070
+number of iter is 225
+max_resi is 0.013037, max_resk is 0.013061
+number of iter is 225
+max_resi is 0.013037, max_resk is 0.013061
+number of iter is 225
+max_resi is 0.013037, max_resk is 0.013061
+number of iter is 225
+max_resi is 0.013037, max_resk is 0.013061
+number of iter is 225
+max_resi is 0.013037, max_resk is 0.013061
+number of iter is 226
+max_resi is 0.013019, max_resk is 0.013013
+number of iter is 226
+max_resi is 0.013019, max_resk is 0.013013
+number of iter is 226
+max_resi is 0.013019, max_resk is 0.013013
+number of iter is 226
+max_resi is 0.013019, max_resk is 0.013013
+number of iter is 226
+max_resi is 0.013019, max_resk is 0.013013
+number of iter is 227
+max_resi is 0.012959, max_resk is 0.013013
+number of iter is 227
+max_resi is 0.012959, max_resk is 0.013013
+number of iter is 227
+max_resi is 0.012959, max_resk is 0.013013
+number of iter is 227
+max_resi is 0.012959, max_resk is 0.013013
+number of iter is 227
+max_resi is 0.012959, max_resk is 0.013013
+number of iter is 228
+max_resi is 0.012931, max_resk is 0.012980
+number of iter is 228
+max_resi is 0.012931, max_resk is 0.012980
+number of iter is 228
+max_resi is 0.012931, max_resk is 0.012980
+number of iter is 228
+max_resi is 0.012931, max_resk is 0.012980
+number of iter is 228
+max_resi is 0.012931, max_resk is 0.012980
+number of iter is 229
+max_resi is 0.012900, max_resk is 0.012943
+number of iter is 229
+max_resi is 0.012900, max_resk is 0.012943
+number of iter is 229
+max_resi is 0.012900, max_resk is 0.012943
+number of iter is 229
+max_resi is 0.012900, max_resk is 0.012943
+number of iter is 229
+max_resi is 0.012900, max_resk is 0.012943
+number of iter is 230
+max_resi is 0.012864, max_resk is 0.012941
+number of iter is 230
+max_resi is 0.012864, max_resk is 0.012941
+number of iter is 230
+max_resi is 0.012864, max_resk is 0.012941
+number of iter is 230
+max_resi is 0.012864, max_resk is 0.012941
+number of iter is 230
+max_resi is 0.012864, max_resk is 0.012941
+number of iter is 231
+max_resi is 0.012851, max_resk is 0.012907
+number of iter is 231
+max_resi is 0.012851, max_resk is 0.012907
+number of iter is 231
+max_resi is 0.012851, max_resk is 0.012907
+number of iter is 231
+max_resi is 0.012851, max_resk is 0.012907
+number of iter is 231
+max_resi is 0.012851, max_resk is 0.012907
+number of iter is 232
+max_resi is 0.012812, max_resk is 0.012894
+number of iter is 232
+max_resi is 0.012812, max_resk is 0.012894
+number of iter is 232
+max_resi is 0.012812, max_resk is 0.012894
+number of iter is 232
+max_resi is 0.012812, max_resk is 0.012894
+number of iter is 232
+max_resi is 0.012812, max_resk is 0.012894
+number of iter is 233
+max_resi is 0.012779, max_resk is 0.012877
+number of iter is 233
+max_resi is 0.012779, max_resk is 0.012877
+number of iter is 233
+max_resi is 0.012779, max_resk is 0.012877
+number of iter is 233
+max_resi is 0.012779, max_resk is 0.012877
+number of iter is 233
+max_resi is 0.012779, max_resk is 0.012877
+number of iter is 234
+max_resi is 0.012761, max_resk is 0.012848
+number of iter is 234
+max_resi is 0.012761, max_resk is 0.012848
+number of iter is 234
+max_resi is 0.012761, max_resk is 0.012848
+number of iter is 234
+max_resi is 0.012761, max_resk is 0.012848
+number of iter is 234
+max_resi is 0.012761, max_resk is 0.012848
+number of iter is 235
+max_resi is 0.012701, max_resk is 0.012819
+number of iter is 235
+max_resi is 0.012701, max_resk is 0.012819
+number of iter is 235
+max_resi is 0.012701, max_resk is 0.012819
+number of iter is 235
+max_resi is 0.012701, max_resk is 0.012819
+number of iter is 235
+max_resi is 0.012701, max_resk is 0.012819
+number of iter is 236
+max_resi is 0.012681, max_resk is 0.012804
+number of iter is 236
+max_resi is 0.012681, max_resk is 0.012804
+number of iter is 236
+max_resi is 0.012681, max_resk is 0.012804
+number of iter is 236
+max_resi is 0.012681, max_resk is 0.012804
+number of iter is 236
+max_resi is 0.012681, max_resk is 0.012804
+number of iter is 237
+max_resi is 0.012638, max_resk is 0.012762
+number of iter is 237
+max_resi is 0.012638, max_resk is 0.012762
+number of iter is 237
+max_resi is 0.012638, max_resk is 0.012762
+number of iter is 237
+max_resi is 0.012638, max_resk is 0.012762
+number of iter is 237
+max_resi is 0.012638, max_resk is 0.012762
+number of iter is 238
+max_resi is 0.012623, max_resk is 0.012761
+number of iter is 238
+max_resi is 0.012623, max_resk is 0.012761
+number of iter is 238
+max_resi is 0.012623, max_resk is 0.012761
+number of iter is 238
+max_resi is 0.012623, max_resk is 0.012761
+number of iter is 238
+max_resi is 0.012623, max_resk is 0.012761
+number of iter is 239
+max_resi is 0.012583, max_resk is 0.012736
+number of iter is 239
+max_resi is 0.012583, max_resk is 0.012736
+number of iter is 239
+max_resi is 0.012583, max_resk is 0.012736
+number of iter is 239
+max_resi is 0.012583, max_resk is 0.012736
+number of iter is 239
+max_resi is 0.012583, max_resk is 0.012736
+number of iter is 240
+max_resi is 0.012541, max_resk is 0.012709
+number of iter is 240
+max_resi is 0.012541, max_resk is 0.012709
+number of iter is 240
+max_resi is 0.012541, max_resk is 0.012709
+number of iter is 240
+max_resi is 0.012541, max_resk is 0.012709
+number of iter is 240
+max_resi is 0.012541, max_resk is 0.012709
+number of iter is 241
+max_resi is 0.012544, max_resk is 0.012692
+number of iter is 241
+max_resi is 0.012544, max_resk is 0.012692
+number of iter is 241
+max_resi is 0.012544, max_resk is 0.012692
+number of iter is 241
+max_resi is 0.012544, max_resk is 0.012692
+number of iter is 241
+max_resi is 0.012544, max_resk is 0.012692
+number of iter is 242
+max_resi is 0.012495, max_resk is 0.012688
+number of iter is 242
+max_resi is 0.012495, max_resk is 0.012688
+number of iter is 242
+max_resi is 0.012495, max_resk is 0.012688
+number of iter is 242
+max_resi is 0.012495, max_resk is 0.012688
+number of iter is 242
+max_resi is 0.012495, max_resk is 0.012688
+number of iter is 243
+max_resi is 0.012468, max_resk is 0.012663
+number of iter is 243
+max_resi is 0.012468, max_resk is 0.012663
+number of iter is 243
+max_resi is 0.012468, max_resk is 0.012663
+number of iter is 243
+max_resi is 0.012468, max_resk is 0.012663
+number of iter is 243
+max_resi is 0.012468, max_resk is 0.012663
+number of iter is 244
+max_resi is 0.012428, max_resk is 0.012653
+number of iter is 244
+max_resi is 0.012428, max_resk is 0.012653
+number of iter is 244
+max_resi is 0.012428, max_resk is 0.012653
+number of iter is 244
+max_resi is 0.012428, max_resk is 0.012653
+number of iter is 244
+max_resi is 0.012428, max_resk is 0.012653
+number of iter is 245
+max_resi is 0.012419, max_resk is 0.012601
+number of iter is 245
+max_resi is 0.012419, max_resk is 0.012601
+number of iter is 245
+max_resi is 0.012419, max_resk is 0.012601
+number of iter is 245
+max_resi is 0.012419, max_resk is 0.012601
+number of iter is 245
+max_resi is 0.012419, max_resk is 0.012601
+number of iter is 246
+max_resi is 0.012368, max_resk is 0.012575
+number of iter is 246
+max_resi is 0.012368, max_resk is 0.012575
+number of iter is 246
+max_resi is 0.012368, max_resk is 0.012575
+number of iter is 246
+max_resi is 0.012368, max_resk is 0.012575
+number of iter is 246
+max_resi is 0.012368, max_resk is 0.012575
+number of iter is 247
+max_resi is 0.012336, max_resk is 0.012568
+number of iter is 247
+max_resi is 0.012336, max_resk is 0.012568
+number of iter is 247
+max_resi is 0.012336, max_resk is 0.012568
+number of iter is 247
+max_resi is 0.012336, max_resk is 0.012568
+number of iter is 247
+max_resi is 0.012336, max_resk is 0.012568
+number of iter is 248
+max_resi is 0.012298, max_resk is 0.012535
+number of iter is 248
+max_resi is 0.012298, max_resk is 0.012535
+number of iter is 248
+max_resi is 0.012298, max_resk is 0.012535
+number of iter is 248
+max_resi is 0.012298, max_resk is 0.012535
+number of iter is 248
+max_resi is 0.012298, max_resk is 0.012535
+number of iter is 249
+max_resi is 0.012274, max_resk is 0.012536
+number of iter is 249
+max_resi is 0.012274, max_resk is 0.012536
+number of iter is 249
+max_resi is 0.012274, max_resk is 0.012536
+number of iter is 249
+max_resi is 0.012274, max_resk is 0.012536
+number of iter is 249
+max_resi is 0.012274, max_resk is 0.012536
+number of iter is 250
+max_resi is 0.012248, max_resk is 0.012491
+number of iter is 250
+max_resi is 0.012248, max_resk is 0.012491
+number of iter is 250
+max_resi is 0.012248, max_resk is 0.012491
+number of iter is 250
+max_resi is 0.012248, max_resk is 0.012491
+number of iter is 250
+max_resi is 0.012248, max_resk is 0.012491
+number of iter is 251
+max_resi is 0.012226, max_resk is 0.012483
+number of iter is 251
+max_resi is 0.012226, max_resk is 0.012483
+number of iter is 251
+max_resi is 0.012226, max_resk is 0.012483
+number of iter is 251
+max_resi is 0.012226, max_resk is 0.012483
+number of iter is 251
+max_resi is 0.012226, max_resk is 0.012483
+number of iter is 252
+max_resi is 0.012200, max_resk is 0.012461
+number of iter is 252
+max_resi is 0.012200, max_resk is 0.012461
+number of iter is 252
+max_resi is 0.012200, max_resk is 0.012461
+number of iter is 252
+max_resi is 0.012200, max_resk is 0.012461
+number of iter is 252
+max_resi is 0.012200, max_resk is 0.012461
+number of iter is 253
+max_resi is 0.012159, max_resk is 0.012443
+number of iter is 253
+max_resi is 0.012159, max_resk is 0.012443
+number of iter is 253
+max_resi is 0.012159, max_resk is 0.012443
+number of iter is 253
+max_resi is 0.012159, max_resk is 0.012443
+number of iter is 253
+max_resi is 0.012159, max_resk is 0.012443
+number of iter is 254
+max_resi is 0.012120, max_resk is 0.012411
+number of iter is 254
+max_resi is 0.012120, max_resk is 0.012411
+number of iter is 254
+max_resi is 0.012120, max_resk is 0.012411
+number of iter is 254
+max_resi is 0.012120, max_resk is 0.012411
+number of iter is 254
+max_resi is 0.012120, max_resk is 0.012411
+number of iter is 255
+max_resi is 0.012117, max_resk is 0.012399
+number of iter is 255
+max_resi is 0.012117, max_resk is 0.012399
+number of iter is 255
+max_resi is 0.012117, max_resk is 0.012399
+number of iter is 255
+max_resi is 0.012117, max_resk is 0.012399
+number of iter is 255
+max_resi is 0.012117, max_resk is 0.012399
+number of iter is 256
+max_resi is 0.012066, max_resk is 0.012364
+number of iter is 256
+max_resi is 0.012066, max_resk is 0.012364
+number of iter is 256
+max_resi is 0.012066, max_resk is 0.012364
+number of iter is 256
+max_resi is 0.012066, max_resk is 0.012364
+number of iter is 256
+max_resi is 0.012066, max_resk is 0.012364
+number of iter is 257
+max_resi is 0.012042, max_resk is 0.012349
+number of iter is 257
+max_resi is 0.012042, max_resk is 0.012349
+number of iter is 257
+max_resi is 0.012042, max_resk is 0.012349
+number of iter is 257
+max_resi is 0.012042, max_resk is 0.012349
+number of iter is 257
+max_resi is 0.012042, max_resk is 0.012349
+number of iter is 258
+max_resi is 0.012035, max_resk is 0.012315
+number of iter is 258
+max_resi is 0.012035, max_resk is 0.012315
+number of iter is 258
+max_resi is 0.012035, max_resk is 0.012315
+number of iter is 258
+max_resi is 0.012035, max_resk is 0.012315
+number of iter is 258
+max_resi is 0.012035, max_resk is 0.012315
+number of iter is 259
+max_resi is 0.011988, max_resk is 0.012319
+number of iter is 259
+max_resi is 0.011988, max_resk is 0.012319
+number of iter is 259
+max_resi is 0.011988, max_resk is 0.012319
+number of iter is 259
+max_resi is 0.011988, max_resk is 0.012319
+number of iter is 259
+max_resi is 0.011988, max_resk is 0.012319
+number of iter is 260
+max_resi is 0.011951, max_resk is 0.012299
+number of iter is 260
+max_resi is 0.011951, max_resk is 0.012299
+number of iter is 260
+max_resi is 0.011951, max_resk is 0.012299
+number of iter is 260
+max_resi is 0.011951, max_resk is 0.012299
+number of iter is 260
+max_resi is 0.011951, max_resk is 0.012299
+number of iter is 261
+max_resi is 0.011938, max_resk is 0.012302
+number of iter is 261
+max_resi is 0.011938, max_resk is 0.012302
+number of iter is 261
+max_resi is 0.011938, max_resk is 0.012302
+number of iter is 261
+max_resi is 0.011938, max_resk is 0.012302
+number of iter is 261
+max_resi is 0.011938, max_resk is 0.012302
+number of iter is 262
+max_resi is 0.011901, max_resk is 0.012268
+number of iter is 262
+max_resi is 0.011901, max_resk is 0.012268
+number of iter is 262
+max_resi is 0.011901, max_resk is 0.012268
+number of iter is 262
+max_resi is 0.011901, max_resk is 0.012268
+number of iter is 262
+max_resi is 0.011901, max_resk is 0.012268
+number of iter is 263
+max_resi is 0.011887, max_resk is 0.012233
+number of iter is 263
+max_resi is 0.011887, max_resk is 0.012233
+number of iter is 263
+max_resi is 0.011887, max_resk is 0.012233
+number of iter is 263
+max_resi is 0.011887, max_resk is 0.012233
+number of iter is 263
+max_resi is 0.011887, max_resk is 0.012233
+number of iter is 264
+max_resi is 0.011839, max_resk is 0.012237
+number of iter is 264
+max_resi is 0.011839, max_resk is 0.012237
+number of iter is 264
+max_resi is 0.011839, max_resk is 0.012237
+number of iter is 264
+max_resi is 0.011839, max_resk is 0.012237
+number of iter is 264
+max_resi is 0.011839, max_resk is 0.012237
+number of iter is 265
+max_resi is 0.011828, max_resk is 0.012205
+number of iter is 265
+max_resi is 0.011828, max_resk is 0.012205
+number of iter is 265
+max_resi is 0.011828, max_resk is 0.012205
+number of iter is 265
+max_resi is 0.011828, max_resk is 0.012205
+number of iter is 265
+max_resi is 0.011828, max_resk is 0.012205
+number of iter is 266
+max_resi is 0.011801, max_resk is 0.012182
+number of iter is 266
+max_resi is 0.011801, max_resk is 0.012182
+number of iter is 266
+max_resi is 0.011801, max_resk is 0.012182
+number of iter is 266
+max_resi is 0.011801, max_resk is 0.012182
+number of iter is 266
+max_resi is 0.011801, max_resk is 0.012182
+number of iter is 267
+max_resi is 0.011752, max_resk is 0.012156
+number of iter is 267
+max_resi is 0.011752, max_resk is 0.012156
+number of iter is 267
+max_resi is 0.011752, max_resk is 0.012156
+number of iter is 267
+max_resi is 0.011752, max_resk is 0.012156
+number of iter is 267
+max_resi is 0.011752, max_resk is 0.012156
+number of iter is 268
+max_resi is 0.011726, max_resk is 0.012141
+number of iter is 268
+max_resi is 0.011726, max_resk is 0.012141
+number of iter is 268
+max_resi is 0.011726, max_resk is 0.012141
+number of iter is 268
+max_resi is 0.011726, max_resk is 0.012141
+number of iter is 268
+max_resi is 0.011726, max_resk is 0.012141
+number of iter is 269
+max_resi is 0.011718, max_resk is 0.012113
+number of iter is 269
+max_resi is 0.011718, max_resk is 0.012113
+number of iter is 269
+max_resi is 0.011718, max_resk is 0.012113
+number of iter is 269
+max_resi is 0.011718, max_resk is 0.012113
+number of iter is 269
+max_resi is 0.011718, max_resk is 0.012113
+number of iter is 270
+max_resi is 0.011687, max_resk is 0.012125
+number of iter is 270
+max_resi is 0.011687, max_resk is 0.012125
+number of iter is 270
+max_resi is 0.011687, max_resk is 0.012125
+number of iter is 270
+max_resi is 0.011687, max_resk is 0.012125
+number of iter is 270
+max_resi is 0.011687, max_resk is 0.012125
+number of iter is 271
+max_resi is 0.011654, max_resk is 0.012088
+number of iter is 271
+max_resi is 0.011654, max_resk is 0.012088
+number of iter is 271
+max_resi is 0.011654, max_resk is 0.012088
+number of iter is 271
+max_resi is 0.011654, max_resk is 0.012088
+number of iter is 271
+max_resi is 0.011654, max_resk is 0.012088
+number of iter is 272
+max_resi is 0.011644, max_resk is 0.012048
+number of iter is 272
+max_resi is 0.011644, max_resk is 0.012048
+number of iter is 272
+max_resi is 0.011644, max_resk is 0.012048
+number of iter is 272
+max_resi is 0.011644, max_resk is 0.012048
+number of iter is 272
+max_resi is 0.011644, max_resk is 0.012048
+number of iter is 273
+max_resi is 0.011611, max_resk is 0.012058
+number of iter is 273
+max_resi is 0.011611, max_resk is 0.012058
+number of iter is 273
+max_resi is 0.011611, max_resk is 0.012058
+number of iter is 273
+max_resi is 0.011611, max_resk is 0.012058
+number of iter is 273
+max_resi is 0.011611, max_resk is 0.012058
+number of iter is 274
+max_resi is 0.011594, max_resk is 0.012034
+number of iter is 274
+max_resi is 0.011594, max_resk is 0.012034
+number of iter is 274
+max_resi is 0.011594, max_resk is 0.012034
+number of iter is 274
+max_resi is 0.011594, max_resk is 0.012034
+number of iter is 274
+max_resi is 0.011594, max_resk is 0.012034
+number of iter is 275
+max_resi is 0.011560, max_resk is 0.012018
+number of iter is 275
+max_resi is 0.011560, max_resk is 0.012018
+number of iter is 275
+max_resi is 0.011560, max_resk is 0.012018
+number of iter is 275
+max_resi is 0.011560, max_resk is 0.012018
+number of iter is 275
+max_resi is 0.011560, max_resk is 0.012018
+number of iter is 276
+max_resi is 0.011510, max_resk is 0.011998
+number of iter is 276
+max_resi is 0.011510, max_resk is 0.011998
+number of iter is 276
+max_resi is 0.011510, max_resk is 0.011998
+number of iter is 276
+max_resi is 0.011510, max_resk is 0.011998
+number of iter is 276
+max_resi is 0.011510, max_resk is 0.011998
+number of iter is 277
+max_resi is 0.011496, max_resk is 0.011972
+number of iter is 277
+max_resi is 0.011496, max_resk is 0.011972
+number of iter is 277
+max_resi is 0.011496, max_resk is 0.011972
+number of iter is 277
+max_resi is 0.011496, max_resk is 0.011972
+number of iter is 277
+max_resi is 0.011496, max_resk is 0.011972
+number of iter is 278
+max_resi is 0.011491, max_resk is 0.011981
+number of iter is 278
+max_resi is 0.011491, max_resk is 0.011981
+number of iter is 278
+max_resi is 0.011491, max_resk is 0.011981
+number of iter is 278
+max_resi is 0.011491, max_resk is 0.011981
+number of iter is 278
+max_resi is 0.011491, max_resk is 0.011981
+number of iter is 279
+max_resi is 0.011454, max_resk is 0.011956
+number of iter is 279
+max_resi is 0.011454, max_resk is 0.011956
+number of iter is 279
+max_resi is 0.011454, max_resk is 0.011956
+number of iter is 279
+max_resi is 0.011454, max_resk is 0.011956
+number of iter is 279
+max_resi is 0.011454, max_resk is 0.011956
+number of iter is 280
+max_resi is 0.011401, max_resk is 0.011911
+number of iter is 280
+max_resi is 0.011401, max_resk is 0.011911
+number of iter is 280
+max_resi is 0.011401, max_resk is 0.011911
+number of iter is 280
+max_resi is 0.011401, max_resk is 0.011911
+number of iter is 280
+max_resi is 0.011401, max_resk is 0.011911
+number of iter is 281
+max_resi is 0.011407, max_resk is 0.011908
+number of iter is 281
+max_resi is 0.011407, max_resk is 0.011908
+number of iter is 281
+max_resi is 0.011407, max_resk is 0.011908
+number of iter is 281
+max_resi is 0.011407, max_resk is 0.011908
+number of iter is 281
+max_resi is 0.011407, max_resk is 0.011908
+number of iter is 282
+max_resi is 0.011393, max_resk is 0.011859
+number of iter is 282
+max_resi is 0.011393, max_resk is 0.011859
+number of iter is 282
+max_resi is 0.011393, max_resk is 0.011859
+number of iter is 282
+max_resi is 0.011393, max_resk is 0.011859
+number of iter is 282
+max_resi is 0.011393, max_resk is 0.011859
+number of iter is 283
+max_resi is 0.011341, max_resk is 0.011860
+number of iter is 283
+max_resi is 0.011341, max_resk is 0.011860
+number of iter is 283
+max_resi is 0.011341, max_resk is 0.011860
+number of iter is 283
+max_resi is 0.011341, max_resk is 0.011860
+number of iter is 283
+max_resi is 0.011341, max_resk is 0.011860
+number of iter is 284
+max_resi is 0.011356, max_resk is 0.011857
+number of iter is 284
+max_resi is 0.011356, max_resk is 0.011857
+number of iter is 284
+max_resi is 0.011356, max_resk is 0.011857
+number of iter is 284
+max_resi is 0.011356, max_resk is 0.011857
+number of iter is 284
+max_resi is 0.011356, max_resk is 0.011857
+number of iter is 285
+max_resi is 0.011293, max_resk is 0.011818
+number of iter is 285
+max_resi is 0.011293, max_resk is 0.011818
+number of iter is 285
+max_resi is 0.011293, max_resk is 0.011818
+number of iter is 285
+max_resi is 0.011293, max_resk is 0.011818
+number of iter is 285
+max_resi is 0.011293, max_resk is 0.011818
+number of iter is 286
+max_resi is 0.011279, max_resk is 0.011805
+number of iter is 286
+max_resi is 0.011279, max_resk is 0.011805
+number of iter is 286
+max_resi is 0.011279, max_resk is 0.011805
+number of iter is 286
+max_resi is 0.011279, max_resk is 0.011805
+number of iter is 286
+max_resi is 0.011279, max_resk is 0.011805
+number of iter is 287
+max_resi is 0.011235, max_resk is 0.011777
+number of iter is 287
+max_resi is 0.011235, max_resk is 0.011777
+number of iter is 287
+max_resi is 0.011235, max_resk is 0.011777
+number of iter is 287
+max_resi is 0.011235, max_resk is 0.011777
+number of iter is 287
+max_resi is 0.011235, max_resk is 0.011777
+number of iter is 288
+max_resi is 0.011221, max_resk is 0.011777
+number of iter is 288
+max_resi is 0.011221, max_resk is 0.011777
+number of iter is 288
+max_resi is 0.011221, max_resk is 0.011777
+number of iter is 288
+max_resi is 0.011221, max_resk is 0.011777
+number of iter is 288
+max_resi is 0.011221, max_resk is 0.011777
+number of iter is 289
+max_resi is 0.011189, max_resk is 0.011752
+number of iter is 289
+max_resi is 0.011189, max_resk is 0.011752
+number of iter is 289
+max_resi is 0.011189, max_resk is 0.011752
+number of iter is 289
+max_resi is 0.011189, max_resk is 0.011752
+number of iter is 289
+max_resi is 0.011189, max_resk is 0.011752
+number of iter is 290
+max_resi is 0.011173, max_resk is 0.011743
+number of iter is 290
+max_resi is 0.011173, max_resk is 0.011743
+number of iter is 290
+max_resi is 0.011173, max_resk is 0.011743
+number of iter is 290
+max_resi is 0.011173, max_resk is 0.011743
+number of iter is 290
+max_resi is 0.011173, max_resk is 0.011743
+number of iter is 291
+max_resi is 0.011146, max_resk is 0.011722
+number of iter is 291
+max_resi is 0.011146, max_resk is 0.011722
+number of iter is 291
+max_resi is 0.011146, max_resk is 0.011722
+number of iter is 291
+max_resi is 0.011146, max_resk is 0.011722
+number of iter is 291
+max_resi is 0.011146, max_resk is 0.011722
+number of iter is 292
+max_resi is 0.011135, max_resk is 0.011710
+number of iter is 292
+max_resi is 0.011135, max_resk is 0.011710
+number of iter is 292
+max_resi is 0.011135, max_resk is 0.011710
+number of iter is 292
+max_resi is 0.011135, max_resk is 0.011710
+number of iter is 292
+max_resi is 0.011135, max_resk is 0.011710
+number of iter is 293
+max_resi is 0.011083, max_resk is 0.011669
+number of iter is 293
+max_resi is 0.011083, max_resk is 0.011669
+number of iter is 293
+max_resi is 0.011083, max_resk is 0.011669
+number of iter is 293
+max_resi is 0.011083, max_resk is 0.011669
+number of iter is 293
+max_resi is 0.011083, max_resk is 0.011669
+number of iter is 294
+max_resi is 0.011069, max_resk is 0.011676
+number of iter is 294
+max_resi is 0.011069, max_resk is 0.011676
+number of iter is 294
+max_resi is 0.011069, max_resk is 0.011676
+number of iter is 294
+max_resi is 0.011069, max_resk is 0.011676
+number of iter is 294
+max_resi is 0.011069, max_resk is 0.011676
+number of iter is 295
+max_resi is 0.011033, max_resk is 0.011658
+number of iter is 295
+max_resi is 0.011033, max_resk is 0.011658
+number of iter is 295
+max_resi is 0.011033, max_resk is 0.011658
+number of iter is 295
+max_resi is 0.011033, max_resk is 0.011658
+number of iter is 295
+max_resi is 0.011033, max_resk is 0.011658
+number of iter is 296
+max_resi is 0.011014, max_resk is 0.011638
+number of iter is 296
+max_resi is 0.011014, max_resk is 0.011638
+number of iter is 296
+max_resi is 0.011014, max_resk is 0.011638
+number of iter is 296
+max_resi is 0.011014, max_resk is 0.011638
+number of iter is 296
+max_resi is 0.011014, max_resk is 0.011638
+number of iter is 297
+max_resi is 0.011005, max_resk is 0.011605
+number of iter is 297
+max_resi is 0.011005, max_resk is 0.011605
+number of iter is 297
+max_resi is 0.011005, max_resk is 0.011605
+number of iter is 297
+max_resi is 0.011005, max_resk is 0.011605
+number of iter is 297
+max_resi is 0.011005, max_resk is 0.011605
+number of iter is 298
+max_resi is 0.010963, max_resk is 0.011584
+number of iter is 298
+max_resi is 0.010963, max_resk is 0.011584
+number of iter is 298
+max_resi is 0.010963, max_resk is 0.011584
+number of iter is 298
+max_resi is 0.010963, max_resk is 0.011584
+number of iter is 298
+max_resi is 0.010963, max_resk is 0.011584
+number of iter is 299
+max_resi is 0.010936, max_resk is 0.011575
+number of iter is 299
+max_resi is 0.010936, max_resk is 0.011575
+number of iter is 299
+max_resi is 0.010936, max_resk is 0.011575
+number of iter is 299
+max_resi is 0.010936, max_resk is 0.011575
+number of iter is 299
+max_resi is 0.010936, max_resk is 0.011575
+number of iter is 300
+max_resi is 0.010913, max_resk is 0.011558
+number of iter is 300
+max_resi is 0.010913, max_resk is 0.011558
+number of iter is 300
+max_resi is 0.010913, max_resk is 0.011558
+number of iter is 300
+max_resi is 0.010913, max_resk is 0.011558
+number of iter is 300
+max_resi is 0.010913, max_resk is 0.011558
+number of iter is 301
+max_resi is 0.010914, max_resk is 0.011555
+number of iter is 301
+max_resi is 0.010914, max_resk is 0.011555
+number of iter is 301
+max_resi is 0.010914, max_resk is 0.011555
+number of iter is 301
+max_resi is 0.010914, max_resk is 0.011555
+number of iter is 301
+max_resi is 0.010914, max_resk is 0.011555
+number of iter is 302
+max_resi is 0.010890, max_resk is 0.011543
+number of iter is 302
+max_resi is 0.010890, max_resk is 0.011543
+number of iter is 302
+max_resi is 0.010890, max_resk is 0.011543
+number of iter is 302
+max_resi is 0.010890, max_resk is 0.011543
+number of iter is 302
+max_resi is 0.010890, max_resk is 0.011543
+number of iter is 303
+max_resi is 0.010844, max_resk is 0.011526
+number of iter is 303
+max_resi is 0.010844, max_resk is 0.011526
+number of iter is 303
+max_resi is 0.010844, max_resk is 0.011526
+number of iter is 303
+max_resi is 0.010844, max_resk is 0.011526
+number of iter is 303
+max_resi is 0.010844, max_resk is 0.011526
+number of iter is 304
+max_resi is 0.010829, max_resk is 0.011496
+number of iter is 304
+max_resi is 0.010829, max_resk is 0.011496
+number of iter is 304
+max_resi is 0.010829, max_resk is 0.011496
+number of iter is 304
+max_resi is 0.010829, max_resk is 0.011496
+number of iter is 304
+max_resi is 0.010829, max_resk is 0.011496
+number of iter is 305
+max_resi is 0.010814, max_resk is 0.011481
+number of iter is 305
+max_resi is 0.010814, max_resk is 0.011481
+number of iter is 305
+max_resi is 0.010814, max_resk is 0.011481
+number of iter is 305
+max_resi is 0.010814, max_resk is 0.011481
+number of iter is 305
+max_resi is 0.010814, max_resk is 0.011481
+number of iter is 306
+max_resi is 0.010822, max_resk is 0.011462
+number of iter is 306
+max_resi is 0.010822, max_resk is 0.011462
+number of iter is 306
+max_resi is 0.010822, max_resk is 0.011462
+number of iter is 306
+max_resi is 0.010822, max_resk is 0.011462
+number of iter is 306
+max_resi is 0.010822, max_resk is 0.011462
+number of iter is 307
+max_resi is 0.010759, max_resk is 0.011436
+number of iter is 307
+max_resi is 0.010759, max_resk is 0.011436
+number of iter is 307
+max_resi is 0.010759, max_resk is 0.011436
+number of iter is 307
+max_resi is 0.010759, max_resk is 0.011436
+number of iter is 307
+max_resi is 0.010759, max_resk is 0.011436
+number of iter is 308
+max_resi is 0.010743, max_resk is 0.011415
+number of iter is 308
+max_resi is 0.010743, max_resk is 0.011415
+number of iter is 308
+max_resi is 0.010743, max_resk is 0.011415
+number of iter is 308
+max_resi is 0.010743, max_resk is 0.011415
+number of iter is 308
+max_resi is 0.010743, max_resk is 0.011415
+number of iter is 309
+max_resi is 0.010731, max_resk is 0.011392
+number of iter is 309
+max_resi is 0.010731, max_resk is 0.011392
+number of iter is 309
+max_resi is 0.010731, max_resk is 0.011392
+number of iter is 309
+max_resi is 0.010731, max_resk is 0.011392
+number of iter is 309
+max_resi is 0.010731, max_resk is 0.011392
+number of iter is 310
+max_resi is 0.010704, max_resk is 0.011380
+number of iter is 310
+max_resi is 0.010704, max_resk is 0.011380
+number of iter is 310
+max_resi is 0.010704, max_resk is 0.011380
+number of iter is 310
+max_resi is 0.010704, max_resk is 0.011380
+number of iter is 310
+max_resi is 0.010704, max_resk is 0.011380
+number of iter is 311
+max_resi is 0.010692, max_resk is 0.011357
+number of iter is 311
+max_resi is 0.010692, max_resk is 0.011357
+number of iter is 311
+max_resi is 0.010692, max_resk is 0.011357
+number of iter is 311
+max_resi is 0.010692, max_resk is 0.011357
+number of iter is 311
+max_resi is 0.010692, max_resk is 0.011357
+number of iter is 312
+max_resi is 0.010693, max_resk is 0.011347
+number of iter is 312
+max_resi is 0.010693, max_resk is 0.011347
+number of iter is 312
+max_resi is 0.010693, max_resk is 0.011347
+number of iter is 312
+max_resi is 0.010693, max_resk is 0.011347
+number of iter is 312
+max_resi is 0.010693, max_resk is 0.011347
+number of iter is 313
+max_resi is 0.010660, max_resk is 0.011332
+number of iter is 313
+max_resi is 0.010660, max_resk is 0.011332
+number of iter is 313
+max_resi is 0.010660, max_resk is 0.011332
+number of iter is 313
+max_resi is 0.010660, max_resk is 0.011332
+number of iter is 313
+max_resi is 0.010660, max_resk is 0.011332
+number of iter is 314
+max_resi is 0.010600, max_resk is 0.011312
+number of iter is 314
+max_resi is 0.010600, max_resk is 0.011312
+number of iter is 314
+max_resi is 0.010600, max_resk is 0.011312
+number of iter is 314
+max_resi is 0.010600, max_resk is 0.011312
+number of iter is 314
+max_resi is 0.010600, max_resk is 0.011312
+number of iter is 315
+max_resi is 0.010590, max_resk is 0.011299
+number of iter is 315
+max_resi is 0.010590, max_resk is 0.011299
+number of iter is 315
+max_resi is 0.010590, max_resk is 0.011299
+number of iter is 315
+max_resi is 0.010590, max_resk is 0.011299
+number of iter is 315
+max_resi is 0.010590, max_resk is 0.011299
+number of iter is 316
+max_resi is 0.010565, max_resk is 0.011272
+number of iter is 316
+max_resi is 0.010565, max_resk is 0.011272
+number of iter is 316
+max_resi is 0.010565, max_resk is 0.011272
+number of iter is 316
+max_resi is 0.010565, max_resk is 0.011272
+number of iter is 316
+max_resi is 0.010565, max_resk is 0.011272
+number of iter is 317
+max_resi is 0.010536, max_resk is 0.011259
+number of iter is 317
+max_resi is 0.010536, max_resk is 0.011259
+number of iter is 317
+max_resi is 0.010536, max_resk is 0.011259
+number of iter is 317
+max_resi is 0.010536, max_resk is 0.011259
+number of iter is 317
+max_resi is 0.010536, max_resk is 0.011259
+number of iter is 318
+max_resi is 0.010520, max_resk is 0.011245
+number of iter is 318
+max_resi is 0.010520, max_resk is 0.011245
+number of iter is 318
+max_resi is 0.010520, max_resk is 0.011245
+number of iter is 318
+max_resi is 0.010520, max_resk is 0.011245
+number of iter is 318
+max_resi is 0.010520, max_resk is 0.011245
+number of iter is 319
+max_resi is 0.010506, max_resk is 0.011229
+number of iter is 319
+max_resi is 0.010506, max_resk is 0.011229
+number of iter is 319
+max_resi is 0.010506, max_resk is 0.011229
+number of iter is 319
+max_resi is 0.010506, max_resk is 0.011229
+number of iter is 319
+max_resi is 0.010506, max_resk is 0.011229
+number of iter is 320
+max_resi is 0.010474, max_resk is 0.011212
+number of iter is 320
+max_resi is 0.010474, max_resk is 0.011212
+number of iter is 320
+max_resi is 0.010474, max_resk is 0.011212
+number of iter is 320
+max_resi is 0.010474, max_resk is 0.011212
+number of iter is 320
+max_resi is 0.010474, max_resk is 0.011212
+number of iter is 321
+max_resi is 0.010451, max_resk is 0.011187
+number of iter is 321
+max_resi is 0.010451, max_resk is 0.011187
+number of iter is 321
+max_resi is 0.010451, max_resk is 0.011187
+number of iter is 321
+max_resi is 0.010451, max_resk is 0.011187
+number of iter is 321
+max_resi is 0.010451, max_resk is 0.011187
+number of iter is 322
+max_resi is 0.010415, max_resk is 0.011179
+number of iter is 322
+max_resi is 0.010415, max_resk is 0.011179
+number of iter is 322
+max_resi is 0.010415, max_resk is 0.011179
+number of iter is 322
+max_resi is 0.010415, max_resk is 0.011179
+number of iter is 322
+max_resi is 0.010415, max_resk is 0.011179
+number of iter is 323
+max_resi is 0.010414, max_resk is 0.011164
+number of iter is 323
+max_resi is 0.010414, max_resk is 0.011164
+number of iter is 323
+max_resi is 0.010414, max_resk is 0.011164
+number of iter is 323
+max_resi is 0.010414, max_resk is 0.011164
+number of iter is 323
+max_resi is 0.010414, max_resk is 0.011164
+number of iter is 324
+max_resi is 0.010389, max_resk is 0.011149
+number of iter is 324
+max_resi is 0.010389, max_resk is 0.011149
+number of iter is 324
+max_resi is 0.010389, max_resk is 0.011149
+number of iter is 324
+max_resi is 0.010389, max_resk is 0.011149
+number of iter is 324
+max_resi is 0.010389, max_resk is 0.011149
+number of iter is 325
+max_resi is 0.010369, max_resk is 0.011120
+number of iter is 325
+max_resi is 0.010369, max_resk is 0.011120
+number of iter is 325
+max_resi is 0.010369, max_resk is 0.011120
+number of iter is 325
+max_resi is 0.010369, max_resk is 0.011120
+number of iter is 325
+max_resi is 0.010369, max_resk is 0.011120
+number of iter is 326
+max_resi is 0.010385, max_resk is 0.011115
+number of iter is 326
+max_resi is 0.010385, max_resk is 0.011115
+number of iter is 326
+max_resi is 0.010385, max_resk is 0.011115
+number of iter is 326
+max_resi is 0.010385, max_resk is 0.011115
+number of iter is 326
+max_resi is 0.010385, max_resk is 0.011115
+number of iter is 327
+max_resi is 0.010357, max_resk is 0.011090
+number of iter is 327
+max_resi is 0.010357, max_resk is 0.011090
+number of iter is 327
+max_resi is 0.010357, max_resk is 0.011090
+number of iter is 327
+max_resi is 0.010357, max_resk is 0.011090
+number of iter is 327
+max_resi is 0.010357, max_resk is 0.011090
+number of iter is 328
+max_resi is 0.010329, max_resk is 0.011075
+number of iter is 328
+max_resi is 0.010329, max_resk is 0.011075
+number of iter is 328
+max_resi is 0.010329, max_resk is 0.011075
+number of iter is 328
+max_resi is 0.010329, max_resk is 0.011075
+number of iter is 328
+max_resi is 0.010329, max_resk is 0.011075
+number of iter is 329
+max_resi is 0.010285, max_resk is 0.011066
+number of iter is 329
+max_resi is 0.010285, max_resk is 0.011066
+number of iter is 329
+max_resi is 0.010285, max_resk is 0.011066
+number of iter is 329
+max_resi is 0.010285, max_resk is 0.011066
+number of iter is 329
+max_resi is 0.010285, max_resk is 0.011066
+number of iter is 330
+max_resi is 0.010250, max_resk is 0.011060
+number of iter is 330
+max_resi is 0.010250, max_resk is 0.011060
+number of iter is 330
+max_resi is 0.010250, max_resk is 0.011060
+number of iter is 330
+max_resi is 0.010250, max_resk is 0.011060
+number of iter is 330
+max_resi is 0.010250, max_resk is 0.011060
+number of iter is 331
+max_resi is 0.010255, max_resk is 0.011034
+number of iter is 331
+max_resi is 0.010255, max_resk is 0.011034
+number of iter is 331
+max_resi is 0.010255, max_resk is 0.011034
+number of iter is 331
+max_resi is 0.010255, max_resk is 0.011034
+number of iter is 331
+max_resi is 0.010255, max_resk is 0.011034
+number of iter is 332
+max_resi is 0.010221, max_resk is 0.011008
+number of iter is 332
+max_resi is 0.010221, max_resk is 0.011008
+number of iter is 332
+max_resi is 0.010221, max_resk is 0.011008
+number of iter is 332
+max_resi is 0.010221, max_resk is 0.011008
+number of iter is 332
+max_resi is 0.010221, max_resk is 0.011008
+number of iter is 333
+max_resi is 0.010197, max_resk is 0.010993
+number of iter is 333
+max_resi is 0.010197, max_resk is 0.010993
+number of iter is 333
+max_resi is 0.010197, max_resk is 0.010993
+number of iter is 333
+max_resi is 0.010197, max_resk is 0.010993
+number of iter is 333
+max_resi is 0.010197, max_resk is 0.010993
+number of iter is 334
+max_resi is 0.010196, max_resk is 0.010975
+number of iter is 334
+max_resi is 0.010196, max_resk is 0.010975
+number of iter is 334
+max_resi is 0.010196, max_resk is 0.010975
+number of iter is 334
+max_resi is 0.010196, max_resk is 0.010975
+number of iter is 334
+max_resi is 0.010196, max_resk is 0.010975
+number of iter is 335
+max_resi is 0.010179, max_resk is 0.010964
+number of iter is 335
+max_resi is 0.010179, max_resk is 0.010964
+number of iter is 335
+max_resi is 0.010179, max_resk is 0.010964
+number of iter is 335
+max_resi is 0.010179, max_resk is 0.010964
+number of iter is 335
+max_resi is 0.010179, max_resk is 0.010964
+number of iter is 336
+max_resi is 0.010144, max_resk is 0.010946
+number of iter is 336
+max_resi is 0.010144, max_resk is 0.010946
+number of iter is 336
+max_resi is 0.010144, max_resk is 0.010946
+number of iter is 336
+max_resi is 0.010144, max_resk is 0.010946
+number of iter is 336
+max_resi is 0.010144, max_resk is 0.010946
+number of iter is 337
+max_resi is 0.010130, max_resk is 0.010926
+number of iter is 337
+max_resi is 0.010130, max_resk is 0.010926
+number of iter is 337
+max_resi is 0.010130, max_resk is 0.010926
+number of iter is 337
+max_resi is 0.010130, max_resk is 0.010926
+number of iter is 337
+max_resi is 0.010130, max_resk is 0.010926
+number of iter is 338
+max_resi is 0.010118, max_resk is 0.010910
+number of iter is 338
+max_resi is 0.010118, max_resk is 0.010910
+number of iter is 338
+max_resi is 0.010118, max_resk is 0.010910
+number of iter is 338
+max_resi is 0.010118, max_resk is 0.010910
+number of iter is 338
+max_resi is 0.010118, max_resk is 0.010910
+number of iter is 339
+max_resi is 0.010091, max_resk is 0.010890
+number of iter is 339
+max_resi is 0.010091, max_resk is 0.010890
+number of iter is 339
+max_resi is 0.010091, max_resk is 0.010890
+number of iter is 339
+max_resi is 0.010091, max_resk is 0.010890
+number of iter is 339
+max_resi is 0.010091, max_resk is 0.010890
+number of iter is 340
+max_resi is 0.010061, max_resk is 0.010879
+number of iter is 340
+max_resi is 0.010061, max_resk is 0.010879
+number of iter is 340
+max_resi is 0.010061, max_resk is 0.010879
+number of iter is 340
+max_resi is 0.010061, max_resk is 0.010879
+number of iter is 340
+max_resi is 0.010061, max_resk is 0.010879
+number of iter is 341
+max_resi is 0.010042, max_resk is 0.010850
+number of iter is 341
+max_resi is 0.010042, max_resk is 0.010850
+number of iter is 341
+max_resi is 0.010042, max_resk is 0.010850
+number of iter is 341
+max_resi is 0.010042, max_resk is 0.010850
+number of iter is 341
+max_resi is 0.010042, max_resk is 0.010850
+number of iter is 342
+max_resi is 0.010037, max_resk is 0.010853
+number of iter is 342
+max_resi is 0.010037, max_resk is 0.010853
+number of iter is 342
+max_resi is 0.010037, max_resk is 0.010853
+number of iter is 342
+max_resi is 0.010037, max_resk is 0.010853
+number of iter is 342
+max_resi is 0.010037, max_resk is 0.010853
+number of iter is 343
+max_resi is 0.010005, max_resk is 0.010835
+number of iter is 343
+max_resi is 0.010005, max_resk is 0.010835
+number of iter is 343
+max_resi is 0.010005, max_resk is 0.010835
+number of iter is 343
+max_resi is 0.010005, max_resk is 0.010835
+number of iter is 343
+max_resi is 0.010005, max_resk is 0.010835
+number of iter is 344
+max_resi is 0.009999, max_resk is 0.010813
+number of iter is 344
+max_resi is 0.009999, max_resk is 0.010813
+number of iter is 344
+max_resi is 0.009999, max_resk is 0.010813
+number of iter is 344
+max_resi is 0.009999, max_resk is 0.010813
+number of iter is 344
+max_resi is 0.009999, max_resk is 0.010813
+number of iter is 345
+max_resi is 0.009966, max_resk is 0.010798
+number of iter is 345
+max_resi is 0.009966, max_resk is 0.010798
+number of iter is 345
+max_resi is 0.009966, max_resk is 0.010798
+number of iter is 345
+max_resi is 0.009966, max_resk is 0.010798
+number of iter is 345
+max_resi is 0.009966, max_resk is 0.010798
+number of iter is 346
+max_resi is 0.009950, max_resk is 0.010785
+number of iter is 346
+max_resi is 0.009950, max_resk is 0.010785
+number of iter is 346
+max_resi is 0.009950, max_resk is 0.010785
+number of iter is 346
+max_resi is 0.009950, max_resk is 0.010785
+number of iter is 346
+max_resi is 0.009950, max_resk is 0.010785
+number of iter is 347
+max_resi is 0.009931, max_resk is 0.010764
+number of iter is 347
+max_resi is 0.009931, max_resk is 0.010764
+number of iter is 347
+max_resi is 0.009931, max_resk is 0.010764
+number of iter is 347
+max_resi is 0.009931, max_resk is 0.010764
+number of iter is 347
+max_resi is 0.009931, max_resk is 0.010764
+number of iter is 348
+max_resi is 0.009911, max_resk is 0.010746
+number of iter is 348
+max_resi is 0.009911, max_resk is 0.010746
+number of iter is 348
+max_resi is 0.009911, max_resk is 0.010746
+number of iter is 348
+max_resi is 0.009911, max_resk is 0.010746
+number of iter is 348
+max_resi is 0.009911, max_resk is 0.010746
+number of iter is 349
+max_resi is 0.009904, max_resk is 0.010739
+number of iter is 349
+max_resi is 0.009904, max_resk is 0.010739
+number of iter is 349
+max_resi is 0.009904, max_resk is 0.010739
+number of iter is 349
+max_resi is 0.009904, max_resk is 0.010739
+number of iter is 349
+max_resi is 0.009904, max_resk is 0.010739
+number of iter is 350
+max_resi is 0.009852, max_resk is 0.010734
+number of iter is 350
+max_resi is 0.009852, max_resk is 0.010734
+number of iter is 350
+max_resi is 0.009852, max_resk is 0.010734
+number of iter is 350
+max_resi is 0.009852, max_resk is 0.010734
+number of iter is 350
+max_resi is 0.009852, max_resk is 0.010734
+number of iter is 351
+max_resi is 0.009853, max_resk is 0.010702
+number of iter is 351
+max_resi is 0.009853, max_resk is 0.010702
+number of iter is 351
+max_resi is 0.009853, max_resk is 0.010702
+number of iter is 351
+max_resi is 0.009853, max_resk is 0.010702
+number of iter is 351
+max_resi is 0.009853, max_resk is 0.010702
+number of iter is 352
+max_resi is 0.009830, max_resk is 0.010686
+number of iter is 352
+max_resi is 0.009830, max_resk is 0.010686
+number of iter is 352
+max_resi is 0.009830, max_resk is 0.010686
+number of iter is 352
+max_resi is 0.009830, max_resk is 0.010686
+number of iter is 352
+max_resi is 0.009830, max_resk is 0.010686
+number of iter is 353
+max_resi is 0.009809, max_resk is 0.010669
+number of iter is 353
+max_resi is 0.009809, max_resk is 0.010669
+number of iter is 353
+max_resi is 0.009809, max_resk is 0.010669
+number of iter is 353
+max_resi is 0.009809, max_resk is 0.010669
+number of iter is 353
+max_resi is 0.009809, max_resk is 0.010669
+number of iter is 354
+max_resi is 0.009795, max_resk is 0.010660
+number of iter is 354
+max_resi is 0.009795, max_resk is 0.010660
+number of iter is 354
+max_resi is 0.009795, max_resk is 0.010660
+number of iter is 354
+max_resi is 0.009795, max_resk is 0.010660
+number of iter is 354
+max_resi is 0.009795, max_resk is 0.010660
+number of iter is 355
+max_resi is 0.009762, max_resk is 0.010637
+number of iter is 355
+max_resi is 0.009762, max_resk is 0.010637
+number of iter is 355
+max_resi is 0.009762, max_resk is 0.010637
+number of iter is 355
+max_resi is 0.009762, max_resk is 0.010637
+number of iter is 355
+max_resi is 0.009762, max_resk is 0.010637
+number of iter is 356
+max_resi is 0.009753, max_resk is 0.010629
+number of iter is 356
+max_resi is 0.009753, max_resk is 0.010629
+number of iter is 356
+max_resi is 0.009753, max_resk is 0.010629
+number of iter is 356
+max_resi is 0.009753, max_resk is 0.010629
+number of iter is 356
+max_resi is 0.009753, max_resk is 0.010629
+number of iter is 357
+max_resi is 0.009725, max_resk is 0.010625
+number of iter is 357
+max_resi is 0.009725, max_resk is 0.010625
+number of iter is 357
+max_resi is 0.009725, max_resk is 0.010625
+number of iter is 357
+max_resi is 0.009725, max_resk is 0.010625
+number of iter is 357
+max_resi is 0.009725, max_resk is 0.010625
+number of iter is 358
+max_resi is 0.009708, max_resk is 0.010594
+number of iter is 358
+max_resi is 0.009708, max_resk is 0.010594
+number of iter is 358
+max_resi is 0.009708, max_resk is 0.010594
+number of iter is 358
+max_resi is 0.009708, max_resk is 0.010594
+number of iter is 358
+max_resi is 0.009708, max_resk is 0.010594
+number of iter is 359
+max_resi is 0.009707, max_resk is 0.010580
+number of iter is 359
+max_resi is 0.009707, max_resk is 0.010580
+number of iter is 359
+max_resi is 0.009707, max_resk is 0.010580
+number of iter is 359
+max_resi is 0.009707, max_resk is 0.010580
+number of iter is 359
+max_resi is 0.009707, max_resk is 0.010580
+number of iter is 360
+max_resi is 0.009658, max_resk is 0.010560
+number of iter is 360
+max_resi is 0.009658, max_resk is 0.010560
+number of iter is 360
+max_resi is 0.009658, max_resk is 0.010560
+number of iter is 360
+max_resi is 0.009658, max_resk is 0.010560
+number of iter is 360
+max_resi is 0.009658, max_resk is 0.010560
+number of iter is 361
+max_resi is 0.009647, max_resk is 0.010549
+number of iter is 361
+max_resi is 0.009647, max_resk is 0.010549
+number of iter is 361
+max_resi is 0.009647, max_resk is 0.010549
+number of iter is 361
+max_resi is 0.009647, max_resk is 0.010549
+number of iter is 361
+max_resi is 0.009647, max_resk is 0.010549
+number of iter is 362
+max_resi is 0.009645, max_resk is 0.010544
+number of iter is 362
+max_resi is 0.009645, max_resk is 0.010544
+number of iter is 362
+max_resi is 0.009645, max_resk is 0.010544
+number of iter is 362
+max_resi is 0.009645, max_resk is 0.010544
+number of iter is 362
+max_resi is 0.009645, max_resk is 0.010544
+number of iter is 363
+max_resi is 0.009605, max_resk is 0.010513
+number of iter is 363
+max_resi is 0.009605, max_resk is 0.010513
+number of iter is 363
+max_resi is 0.009605, max_resk is 0.010513
+number of iter is 363
+max_resi is 0.009605, max_resk is 0.010513
+number of iter is 363
+max_resi is 0.009605, max_resk is 0.010513
+number of iter is 364
+max_resi is 0.009598, max_resk is 0.010509
+number of iter is 364
+max_resi is 0.009598, max_resk is 0.010509
+number of iter is 364
+max_resi is 0.009598, max_resk is 0.010509
+number of iter is 364
+max_resi is 0.009598, max_resk is 0.010509
+number of iter is 364
+max_resi is 0.009598, max_resk is 0.010509
+number of iter is 365
+max_resi is 0.009570, max_resk is 0.010489
+number of iter is 365
+max_resi is 0.009570, max_resk is 0.010489
+number of iter is 365
+max_resi is 0.009570, max_resk is 0.010489
+number of iter is 365
+max_resi is 0.009570, max_resk is 0.010489
+number of iter is 365
+max_resi is 0.009570, max_resk is 0.010489
+number of iter is 366
+max_resi is 0.009554, max_resk is 0.010485
+number of iter is 366
+max_resi is 0.009554, max_resk is 0.010485
+number of iter is 366
+max_resi is 0.009554, max_resk is 0.010485
+number of iter is 366
+max_resi is 0.009554, max_resk is 0.010485
+number of iter is 366
+max_resi is 0.009554, max_resk is 0.010485
+number of iter is 367
+max_resi is 0.009547, max_resk is 0.010461
+number of iter is 367
+max_resi is 0.009547, max_resk is 0.010461
+number of iter is 367
+max_resi is 0.009547, max_resk is 0.010461
+number of iter is 367
+max_resi is 0.009547, max_resk is 0.010461
+number of iter is 367
+max_resi is 0.009547, max_resk is 0.010461
+number of iter is 368
+max_resi is 0.009539, max_resk is 0.010449
+number of iter is 368
+max_resi is 0.009539, max_resk is 0.010449
+number of iter is 368
+max_resi is 0.009539, max_resk is 0.010449
+number of iter is 368
+max_resi is 0.009539, max_resk is 0.010449
+number of iter is 368
+max_resi is 0.009539, max_resk is 0.010449
+number of iter is 369
+max_resi is 0.009505, max_resk is 0.010450
+number of iter is 369
+max_resi is 0.009505, max_resk is 0.010450
+number of iter is 369
+max_resi is 0.009505, max_resk is 0.010450
+number of iter is 369
+max_resi is 0.009505, max_resk is 0.010450
+number of iter is 369
+max_resi is 0.009505, max_resk is 0.010450
+number of iter is 370
+max_resi is 0.009506, max_resk is 0.010408
+number of iter is 370
+max_resi is 0.009506, max_resk is 0.010408
+number of iter is 370
+max_resi is 0.009506, max_resk is 0.010408
+number of iter is 370
+max_resi is 0.009506, max_resk is 0.010408
+number of iter is 370
+max_resi is 0.009506, max_resk is 0.010408
+number of iter is 371
+max_resi is 0.009470, max_resk is 0.010395
+number of iter is 371
+max_resi is 0.009470, max_resk is 0.010395
+number of iter is 371
+max_resi is 0.009470, max_resk is 0.010395
+number of iter is 371
+max_resi is 0.009470, max_resk is 0.010395
+number of iter is 371
+max_resi is 0.009470, max_resk is 0.010395
+number of iter is 372
+max_resi is 0.009459, max_resk is 0.010372
+number of iter is 372
+max_resi is 0.009459, max_resk is 0.010372
+number of iter is 372
+max_resi is 0.009459, max_resk is 0.010372
+number of iter is 372
+max_resi is 0.009459, max_resk is 0.010372
+number of iter is 372
+max_resi is 0.009459, max_resk is 0.010372
+number of iter is 373
+max_resi is 0.009425, max_resk is 0.010368
+number of iter is 373
+max_resi is 0.009425, max_resk is 0.010368
+number of iter is 373
+max_resi is 0.009425, max_resk is 0.010368
+number of iter is 373
+max_resi is 0.009425, max_resk is 0.010368
+number of iter is 373
+max_resi is 0.009425, max_resk is 0.010368
+number of iter is 374
+max_resi is 0.009415, max_resk is 0.010350
+number of iter is 374
+max_resi is 0.009415, max_resk is 0.010350
+number of iter is 374
+max_resi is 0.009415, max_resk is 0.010350
+number of iter is 374
+max_resi is 0.009415, max_resk is 0.010350
+number of iter is 374
+max_resi is 0.009415, max_resk is 0.010350
+number of iter is 375
+max_resi is 0.009412, max_resk is 0.010329
+number of iter is 375
+max_resi is 0.009412, max_resk is 0.010329
+number of iter is 375
+max_resi is 0.009412, max_resk is 0.010329
+number of iter is 375
+max_resi is 0.009412, max_resk is 0.010329
+number of iter is 375
+max_resi is 0.009412, max_resk is 0.010329
+number of iter is 376
+max_resi is 0.009400, max_resk is 0.010319
+number of iter is 376
+max_resi is 0.009400, max_resk is 0.010319
+number of iter is 376
+max_resi is 0.009400, max_resk is 0.010319
+number of iter is 376
+max_resi is 0.009400, max_resk is 0.010319
+number of iter is 376
+max_resi is 0.009400, max_resk is 0.010319
+number of iter is 377
+max_resi is 0.009378, max_resk is 0.010313
+number of iter is 377
+max_resi is 0.009378, max_resk is 0.010313
+number of iter is 377
+max_resi is 0.009378, max_resk is 0.010313
+number of iter is 377
+max_resi is 0.009378, max_resk is 0.010313
+number of iter is 377
+max_resi is 0.009378, max_resk is 0.010313
+number of iter is 378
+max_resi is 0.009320, max_resk is 0.010293
+number of iter is 378
+max_resi is 0.009320, max_resk is 0.010293
+number of iter is 378
+max_resi is 0.009320, max_resk is 0.010293
+number of iter is 378
+max_resi is 0.009320, max_resk is 0.010293
+number of iter is 378
+max_resi is 0.009320, max_resk is 0.010293
+number of iter is 379
+max_resi is 0.009330, max_resk is 0.010284
+number of iter is 379
+max_resi is 0.009330, max_resk is 0.010284
+number of iter is 379
+max_resi is 0.009330, max_resk is 0.010284
+number of iter is 379
+max_resi is 0.009330, max_resk is 0.010284
+number of iter is 379
+max_resi is 0.009330, max_resk is 0.010284
+number of iter is 380
+max_resi is 0.009317, max_resk is 0.010266
+number of iter is 380
+max_resi is 0.009317, max_resk is 0.010266
+number of iter is 380
+max_resi is 0.009317, max_resk is 0.010266
+number of iter is 380
+max_resi is 0.009317, max_resk is 0.010266
+number of iter is 380
+max_resi is 0.009317, max_resk is 0.010266
+number of iter is 381
+max_resi is 0.009316, max_resk is 0.010259
+number of iter is 381
+max_resi is 0.009316, max_resk is 0.010259
+number of iter is 381
+max_resi is 0.009316, max_resk is 0.010259
+number of iter is 381
+max_resi is 0.009316, max_resk is 0.010259
+number of iter is 381
+max_resi is 0.009316, max_resk is 0.010259
+number of iter is 382
+max_resi is 0.009297, max_resk is 0.010257
+number of iter is 382
+max_resi is 0.009297, max_resk is 0.010257
+number of iter is 382
+max_resi is 0.009297, max_resk is 0.010257
+number of iter is 382
+max_resi is 0.009297, max_resk is 0.010257
+number of iter is 382
+max_resi is 0.009297, max_resk is 0.010257
+number of iter is 383
+max_resi is 0.009278, max_resk is 0.010232
+number of iter is 383
+max_resi is 0.009278, max_resk is 0.010232
+number of iter is 383
+max_resi is 0.009278, max_resk is 0.010232
+number of iter is 383
+max_resi is 0.009278, max_resk is 0.010232
+number of iter is 383
+max_resi is 0.009278, max_resk is 0.010232
+number of iter is 384
+max_resi is 0.009262, max_resk is 0.010203
+number of iter is 384
+max_resi is 0.009262, max_resk is 0.010203
+number of iter is 384
+max_resi is 0.009262, max_resk is 0.010203
+number of iter is 384
+max_resi is 0.009262, max_resk is 0.010203
+number of iter is 384
+max_resi is 0.009262, max_resk is 0.010203
+number of iter is 385
+max_resi is 0.009234, max_resk is 0.010206
+number of iter is 385
+max_resi is 0.009234, max_resk is 0.010206
+number of iter is 385
+max_resi is 0.009234, max_resk is 0.010206
+number of iter is 385
+max_resi is 0.009234, max_resk is 0.010206
+number of iter is 385
+max_resi is 0.009234, max_resk is 0.010206
+number of iter is 386
+max_resi is 0.009218, max_resk is 0.010185
+number of iter is 386
+max_resi is 0.009218, max_resk is 0.010185
+number of iter is 386
+max_resi is 0.009218, max_resk is 0.010185
+number of iter is 386
+max_resi is 0.009218, max_resk is 0.010185
+number of iter is 386
+max_resi is 0.009218, max_resk is 0.010185
+number of iter is 387
+max_resi is 0.009204, max_resk is 0.010172
+number of iter is 387
+max_resi is 0.009204, max_resk is 0.010172
+number of iter is 387
+max_resi is 0.009204, max_resk is 0.010172
+number of iter is 387
+max_resi is 0.009204, max_resk is 0.010172
+number of iter is 387
+max_resi is 0.009204, max_resk is 0.010172
+number of iter is 388
+max_resi is 0.009165, max_resk is 0.010168
+number of iter is 388
+max_resi is 0.009165, max_resk is 0.010168
+number of iter is 388
+max_resi is 0.009165, max_resk is 0.010168
+number of iter is 388
+max_resi is 0.009165, max_resk is 0.010168
+number of iter is 388
+max_resi is 0.009165, max_resk is 0.010168
+number of iter is 389
+max_resi is 0.009157, max_resk is 0.010145
+number of iter is 389
+max_resi is 0.009157, max_resk is 0.010145
+number of iter is 389
+max_resi is 0.009157, max_resk is 0.010145
+number of iter is 389
+max_resi is 0.009157, max_resk is 0.010145
+number of iter is 389
+max_resi is 0.009157, max_resk is 0.010145
+number of iter is 390
+max_resi is 0.009171, max_resk is 0.010141
+number of iter is 390
+max_resi is 0.009171, max_resk is 0.010141
+number of iter is 390
+max_resi is 0.009171, max_resk is 0.010141
+number of iter is 390
+max_resi is 0.009171, max_resk is 0.010141
+number of iter is 390
+max_resi is 0.009171, max_resk is 0.010141
+number of iter is 391
+max_resi is 0.009128, max_resk is 0.010119
+number of iter is 391
+max_resi is 0.009128, max_resk is 0.010119
+number of iter is 391
+max_resi is 0.009128, max_resk is 0.010119
+number of iter is 391
+max_resi is 0.009128, max_resk is 0.010119
+number of iter is 391
+max_resi is 0.009128, max_resk is 0.010119
+number of iter is 392
+max_resi is 0.009119, max_resk is 0.010112
+number of iter is 392
+max_resi is 0.009119, max_resk is 0.010112
+number of iter is 392
+max_resi is 0.009119, max_resk is 0.010112
+number of iter is 392
+max_resi is 0.009119, max_resk is 0.010112
+number of iter is 392
+max_resi is 0.009119, max_resk is 0.010112
+number of iter is 393
+max_resi is 0.009116, max_resk is 0.010098
+number of iter is 393
+max_resi is 0.009116, max_resk is 0.010098
+number of iter is 393
+max_resi is 0.009116, max_resk is 0.010098
+number of iter is 393
+max_resi is 0.009116, max_resk is 0.010098
+number of iter is 393
+max_resi is 0.009116, max_resk is 0.010098
+number of iter is 394
+max_resi is 0.009068, max_resk is 0.010074
+number of iter is 394
+max_resi is 0.009068, max_resk is 0.010074
+number of iter is 394
+max_resi is 0.009068, max_resk is 0.010074
+number of iter is 394
+max_resi is 0.009068, max_resk is 0.010074
+number of iter is 394
+max_resi is 0.009068, max_resk is 0.010074
+number of iter is 395
+max_resi is 0.009048, max_resk is 0.010068
+number of iter is 395
+max_resi is 0.009048, max_resk is 0.010068
+number of iter is 395
+max_resi is 0.009048, max_resk is 0.010068
+number of iter is 395
+max_resi is 0.009048, max_resk is 0.010068
+number of iter is 395
+max_resi is 0.009048, max_resk is 0.010068
+number of iter is 396
+max_resi is 0.009050, max_resk is 0.010041
+number of iter is 396
+max_resi is 0.009050, max_resk is 0.010041
+number of iter is 396
+max_resi is 0.009050, max_resk is 0.010041
+number of iter is 396
+max_resi is 0.009050, max_resk is 0.010041
+number of iter is 396
+max_resi is 0.009050, max_resk is 0.010041
+number of iter is 397
+max_resi is 0.009015, max_resk is 0.010038
+number of iter is 397
+max_resi is 0.009015, max_resk is 0.010038
+number of iter is 397
+max_resi is 0.009015, max_resk is 0.010038
+number of iter is 397
+max_resi is 0.009015, max_resk is 0.010038
+number of iter is 397
+max_resi is 0.009015, max_resk is 0.010038
+number of iter is 398
+max_resi is 0.009011, max_resk is 0.010020
+number of iter is 398
+max_resi is 0.009011, max_resk is 0.010020
+number of iter is 398
+max_resi is 0.009011, max_resk is 0.010020
+number of iter is 398
+max_resi is 0.009011, max_resk is 0.010020
+number of iter is 398
+max_resi is 0.009011, max_resk is 0.010020
+number of iter is 399
+max_resi is 0.008989, max_resk is 0.009995
+number of iter is 399
+max_resi is 0.008989, max_resk is 0.009995
+number of iter is 399
+max_resi is 0.008989, max_resk is 0.009995
+number of iter is 399
+max_resi is 0.008989, max_resk is 0.009995
+number of iter is 399
+max_resi is 0.008989, max_resk is 0.009995
+
+************************************
+grid generate running time is :1.000000 s 
+************************************
+ 
+export coord to file ... 
+****************************************************** 
+***** grid quality check and export quality data ***** 
+****************************************************** 
