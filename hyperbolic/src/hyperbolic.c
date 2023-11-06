@@ -152,7 +152,7 @@ cal_smooth_coef(float coef, float *x2d, float *z2d, int nx, int nz, int k, float
         temp = 1-cos(theta/2);   
         alpha = fmax(1/pow(temp,2/S),0.1);
       }
-      //coef_e[i] = coef*S*N_xi*alpha;
+      coef_e[i] = coef*S*N_xi*alpha;
     }
   }
 
