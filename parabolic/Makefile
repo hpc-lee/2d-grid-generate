@@ -33,10 +33,9 @@ LDFLAGS := -L$(NETCDF)/lib -lnetcdf -lm $(LDFLAGS)
 #   $^ The names of all the prerequisites 
 
 main_grid_2d:cJSON.o sacLib.o	lib_mem.o \
-				lib_math.o par_t.o par_t.o gd_t.o \
-				io_funcs.o algebra.o quality_check.o \
-				parabolic.o hyperbolic.o \
-				solver.o main.o
+				lib_math.o par_t.o gd_t.o \
+				io_funcs.o quality_check.o \
+				parabolic.o solver.o main.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 cJSON.o:lib/cJSON.c
@@ -53,13 +52,9 @@ gd_t.o:src/gd_t.c
 	${CC} -c -o $@ $(CFLAGS) $<
 io_funcs.o:src/io_funcs.c
 	${CC} -c -o $@ $(CFLAGS) $<
-algebra.o:src/algebra.c
-	${CC} -c -o $@ $(CFLAGS) $<
 quality_check.o:src/quality_check.c
 	${CC} -c -o $@ $(CFLAGS) $<
 parabolic.o:src/parabolic.c
-	${CC} -c -o $@ $(CFLAGS) $<
-hyperbolic.o:src/hyperbolic.c
 	${CC} -c -o $@ $(CFLAGS) $<
 solver.o:src/solver.c
 	${CC} -c -o $@ $(CFLAGS) $<

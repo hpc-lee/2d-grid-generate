@@ -46,7 +46,7 @@ para_gene(gd_t *gdcurv, par_t *par)
     // base predict points
     // update k layer points
     update_point(x2d,z2d,var_th,nx,nz,k);
-    fprintf(stdout,"number of layer is %d\n",k);
+    fprintf(stdout,"number of layer is %d\n",k+1);
     fflush(stdout);
   }
 
@@ -160,7 +160,7 @@ predict_point(float *x2d, float *z2d, int nx, int nz, int k, int o2i,
     z2d[iptr4] = z2d[iptr1] + cc*(z2d[iptr3]-z2d[iptr1]);
   }
 
-  //bdry_effct(x2d,z2d,nx,nz,k);
+  bdry_effct(x2d,z2d,nx,nz,k);
 
   return 0;
 }

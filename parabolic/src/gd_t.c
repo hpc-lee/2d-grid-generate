@@ -5,7 +5,6 @@
 #include "lib_mem.h"
 #include "gd_t.h"
 #include "constants.h"
-#include "algebra.h"
 #include "io_funcs.h"
 
 int
@@ -160,100 +159,6 @@ grid_init_set(gd_t *gdcurv, char *geometry_file)
   free(x2);
   free(z1);
   free(z2);
-
-  return 0;
-}
-
-int
-grid_init_set_hyper(gd_t *gdcurv, par_t *par)
-{
-  FILE *fp = NULL;
-  char str[500];
-  char *geometry_file = par->geometry_input_file;
-  char *step_file = par->step_input_file;
-  int dire_itype = par->dire_itype;
-  
-  int nx;
-  int nz;
-  int num_step;
-
-  // open step file
-  if ((fp = fopen(step_file,"r"))==NULL) {
-     fprintf(stderr,"ERROR: fail to open step file=%s\n", step_file);
-     fflush(stdout); exit(1);
-  }
-  // number of step
-  if (!io_get_nextline(fp,str,500)) {
-    sscanf(str,"%d",&num_step);
-  }
-  if(dire_itype == Z_DIRE)
-  {
-    nz = num_step+1; 
-  } 
-  if(dire_itype == X_DIRE)
-  {
-    nx = num_step+1; 
-  }
-  gdcurv->step = (float *)mem_calloc_1d_float(
-                          num_step, 0.0, "step length");
-
-  for (int k=0; k<num_step; k++)
-  {
-    if (!io_get_nextline(fp,str,500)) {
-      sscanf(str,"%f",gdcurv->step + k);
-    }
-  }
-  // close step file and free local pointer
-  fclose(fp);
-
-  // open geometry file
-  if ((fp = fopen(geometry_file,"r"))==NULL) {
-     fprintf(stderr,"ERROR: fail to open geometry file=%s\n", geometry_file);
-     fflush(stdout); exit(1);
-  }
-  if (dire_itype == Z_DIRE)
-  {
-    // nx number
-    if (!io_get_nextline(fp,str,500)) {
-      sscanf(str,"%d",&nx);
-    }
-
-    init_gdcurv(gdcurv,nx,nz);
- 
-    size_t iptr;
-    float *x2d = gdcurv->x2d;
-    float *z2d = gdcurv->z2d;
-    for (int i=0; i<nx; i++)
-    {
-      iptr = i;  // (i,0)
-      if (!io_get_nextline(fp,str,500)) {
-        sscanf(str,"%f %f",x2d+iptr,z2d+iptr);
-      }
-    }
-  }
-  if(dire_itype == X_DIRE)
-  {
-    // nz number
-    if (!io_get_nextline(fp,str,500)) {
-      sscanf(str,"%d",&nz);
-    }
-
-    init_gdcurv(gdcurv,nx,nz);
- 
-    size_t iptr;
-    float *x2d = gdcurv->x2d;
-    float *z2d = gdcurv->z2d;
-    for (int k=0; k<nz; k++)
-    {
-      iptr = k*nx;  // (0,k)
-      if (!io_get_nextline(fp,str,500)) {
-        sscanf(str,"%f %f",x2d+iptr,z2d+iptr);
-      }
-    }
-    permute_coord_x(gdcurv);
-  }
-  // close geometry file and free local pointer
-  fclose(fp);
 
   return 0;
 }

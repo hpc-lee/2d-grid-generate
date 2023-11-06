@@ -28,8 +28,8 @@ mkdir -p ${OUTPUT_DIR}
 #----------------------------------------------------------------------
 cat << ieof > ${PAR_FILE}
 {
-  "number_of_grid_points_x" : 300,
-  "number_of_grid_points_z" : 300,
+  "number_of_grid_points_x" : 641,
+  "number_of_grid_points_z" : 601,
 
   "check_orth" : 1,
   "check_jac" : 1,
@@ -43,19 +43,10 @@ cat << ieof > ${PAR_FILE}
   "grid_export_dir" : "${OUTPUT_DIR}",
 
   "grid_method" : {
-      "#linear_TFI" : "",
       "parabolic" : {
-          "coef" : -20,
+          "coef" : -80,
           "direction" : "z",
           "o2i" : 1
-      },
-      "#hyperbolic" : {
-          "coef" : 20,
-          "bdry_type" : 1,
-          "epsilon" : 0,
-          "direction" : "z",
-          "o2i" : 1,
-          "step_input_file" : "${INPUTDIR}/step_file_2d.txt"
       }
   }
 }

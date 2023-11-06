@@ -8,11 +8,9 @@
 #include "par_t.h"
 #include "constants.h"
 #include "gd_t.h"
-#include "algebra.h"
 #include "io_funcs.h"
 #include "quality_check.h"
 #include "parabolic.h"
-#include "hyperbolic.h"
 
 int main(int argc, char** argv)
 {
@@ -48,22 +46,10 @@ int main(int argc, char** argv)
    
   // generate grid 
   gd_t *gdcurv = (gd_t *) malloc(sizeof(gd_t));
-  // for grid sample space
-  gd_t *gdcurv_new = (gd_t *) malloc(sizeof(gd_t));
-
 
   time_t t_start = time(NULL);
   switch(par->method_itype)
   {
-    case TFI : {
-
-      grid_init_set(gdcurv,par->geometry_input_file);
-      // grid method
-      linear_tfi(gdcurv);
-
-      break;
-    }
-
     case PARABOLIC : {
 
       grid_init_set(gdcurv,par->geometry_input_file);
@@ -75,19 +61,6 @@ int main(int argc, char** argv)
 
       para_gene(gdcurv,par);
 
-      // after grid generate
-      if(par->dire_itype == X_DIRE)
-      {
-        permute_coord_x(gdcurv);
-      }
-
-      break;
-    }
-
-    case HYPERBOLIC : {
-
-      grid_init_set_hyper(gdcurv,par);
-      hyper_gene(gdcurv,par);
       // after grid generate
       if(par->dire_itype == X_DIRE)
       {

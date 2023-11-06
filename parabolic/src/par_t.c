@@ -129,35 +129,6 @@ par_read_from_str(const char *str, par_t *par)
         }
       }
     }
-    if (subitem = cJSON_GetObjectItem(item, "hyperbolic")) {
-      par->method_itype = HYPERBOLIC;
-      if (thirditem = cJSON_GetObjectItem(subitem, "coef")) {
-        par->coef = thirditem->valuedouble;
-      }
-      if (thirditem = cJSON_GetObjectItem(subitem, "epsilon")) {
-        par->epsilon = thirditem->valuedouble;
-      }
-      if (thirditem = cJSON_GetObjectItem(subitem, "bdry_type")) {
-        par->bdry_itype = thirditem->valueint;
-      }
-      if (thirditem = cJSON_GetObjectItem(subitem, "o2i")) {
-        par->o2i = thirditem->valueint;
-      }
-      if (thirditem = cJSON_GetObjectItem(subitem, "direction")) {
-        sprintf(par->direction, "%s", thirditem->valuestring);
-        if(strcmp(par->direction,"x") == 0)
-        {
-          par->dire_itype = X_DIRE;
-        }
-        if(strcmp(par->direction,"z") == 0)
-        {
-          par->dire_itype = Z_DIRE;
-        }
-      }
-      if (thirditem = cJSON_GetObjectItem(subitem, "step_input_file")) {
-        sprintf(par->step_input_file, "%s", thirditem->valuestring);
-      }
-    }
   }
 
   return ierr;
@@ -201,9 +172,6 @@ par_print(par_t *par)
   }
 
   fprintf(stdout, "------- grid generate method-------\n");
-  if(par->method_itype == TFI) {
-    fprintf(stdout, "grid generate method is linear TFI\n");
-  }
   if(par->method_itype == PARABOLIC) {
     fprintf(stdout, "grid generate method is parabolic\n");
     fprintf(stdout, "parabolic coef is %f\n", par->coef);
@@ -219,30 +187,6 @@ par_print(par_t *par)
     } else {
       fprintf(stdout, "inner(bdry_1) to outer(bdry_2)\n");
     }
-  }
-
-  if(par->method_itype == HYPERBOLIC) {
-    fprintf(stdout, "grid generate method is hyperbolic\n");
-    fprintf(stdout, "hyperbolic coef is %f\n", par->coef);
-    if(par->bdry_itype == 1) {
-      fprintf(stdout, "boundary type is floating boundary\n");
-    }
-    if(par->bdry_itype == 2) {
-      fprintf(stdout, "boundary type is cartesian boundary\n");
-    }
-    if(par->dire_itype == X_DIRE) {
-      fprintf(stdout, "grid generate direction is x\n");
-    }
-    if(par->dire_itype == Z_DIRE) {
-      fprintf(stdout, "grid generate direction is z\n");
-    }
-    if(par->o2i == 1)
-    {
-      fprintf(stdout, "outer(bdry_2) to inner(bdry_1)\n");
-    } else {
-      fprintf(stdout, "inner(bdry_1) to outer(bdry_2)\n");
-    }
-    fprintf(stdout, "step file is  %s\n",par->step_input_file);
   }
 
   return ierr;
