@@ -266,9 +266,9 @@ cal_matrix(float *x2d, float *z2d, int nx, int k, float *step,
       temp = pow(x_xi0,2) + pow(z_xi0,2);
       x_zt0 = -z_xi0*area[i+nx]/temp;
       z_zt0 =  x_xi0*area[i+nx]/temp;
-      // add damping factor, maybe A,B singular
-      A[0][0] = x_zt0+1e-7; A[0][1] = z_zt0;
-      A[1][0] = z_zt0;      A[1][1] =-x_zt0+1e-7; 
+      // add damping factor, maybe inv(B) singular
+      A[0][0] = x_zt0;      A[0][1] = z_zt0;
+      A[1][0] = z_zt0;      A[1][1] =-x_zt0; 
       B[0][0] = x_xi0+1e-7; B[0][1] = z_xi0;
       B[1][0] =-z_xi0;      B[1][1] = x_xi0+1e-7; 
       mat_invert2x2(B);
