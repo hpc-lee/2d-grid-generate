@@ -1,0 +1,23 @@
+{
+  "number_of_grid_points_x" : 401,
+  "number_of_grid_points_z" : 21,
+
+  "check_orth" : 1,
+  "check_jac" : 1,
+  "check_ratio" : 1,
+  "check_step_xi" : 1,
+  "check_step_zt" : 1,
+  "check_smooth_xi" : 1,
+  "check_smooth_zt" : 1,
+
+  "geometry_input_file" : "/data/lihl/code/2d-grid-generate/new-parabolic/example/data_file_2d.txt",
+  "step_input_file" : "/data/lihl/code/2d-grid-generate/new-parabolic/example/step_file_2d.txt",
+  "grid_export_dir" : "/data/lihl/code/2d-grid-generate/new-parabolic/example/../project4/output",
+
+  "grid_method" : {
+      "parabolic" : {
+          "coef" : -1,
+          "o2i" : 1
+      }
+  }
+}

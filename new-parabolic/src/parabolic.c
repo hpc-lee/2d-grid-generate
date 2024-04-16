@@ -118,21 +118,17 @@ predict_point(float *x2d, float *z2d, float *step, int nx, int nz, int k,
     z_k0[i] = z2d[iptr1] + c*(z_k1[i]-z2d[iptr1]);
   }
 
-  iptr1 = (k-1)*nx+0;   // (0,k-1)
-  iptr2 = (k-1)*nx+1;   // (0,k-1)
-  // float bdry
-  x_k0[0] = x2d[iptr1] + (x_k0[1] - x2d[iptr2]);
-  z_k0[0] = z2d[iptr1] + (z_k0[1] - z2d[iptr2]);
-  x_k1[0] = x2d[iptr1] + (x_k1[1] - x2d[iptr2]);
-  z_k1[0] = z2d[iptr1] + (z_k1[1] - z2d[iptr2]);
+  // geometric symmetry bdry
+  x_k0[0] = 2*x_k0[1] - x_k0[2];
+  z_k0[0] = 2*z_k0[1] - z_k0[2];
+  x_k1[0] = 2*x_k1[1] - x_k1[2];
+  z_k1[0] = 2*z_k1[1] - z_k1[2];
 
-  iptr1 = (k-1)*nx+(nx-1);   // (0,k-1)
-  iptr2 = (k-1)*nx+(nx-2);   // (0,k-1)
   // float bdry
-  x_k0[nx-1] = x2d[iptr1] + (x_k0[nx-2] - x2d[iptr2]);
-  z_k0[nx-1] = z2d[iptr1] + (z_k0[nx-2] - z2d[iptr2]);
-  x_k1[nx-1] = x2d[iptr1] + (x_k1[nx-2] - x2d[iptr2]);
-  z_k1[nx-1] = z2d[iptr1] + (z_k1[nx-2] - z2d[iptr2]);
+  x_k0[nx-1] = 2*x_k0[nx-2] - x_k0[nx-3];
+  z_k0[nx-1] = 2*z_k0[nx-2] - z_k0[nx-3];
+  x_k1[nx-1] = 2*x_k1[nx-2] - x_k1[nx-3];
+  z_k1[nx-1] = 2*z_k1[nx-2] - z_k1[nx-3];
 
 
   return 0;
@@ -230,25 +226,23 @@ update_point(float *x2d, float *z2d, float *var_th, int nx, int k,
 int 
 assign_bdry_coords(float *x2d, float *z2d, int nx, int k)
 {
+  // geometric symmetry bdry
   size_t iptr1,iptr2,iptr3,iptr4;
-  iptr1 = (k-1)*nx+0;   // (0,k-1)
-  iptr2 =  k*nx+0;      // (0,k)
+  iptr1 =  k*nx+0;      // (0,k)
+  iptr2 =  k*nx+1;      // (0,k)
+  iptr3 =  k*nx+2;      // (0,k)
 
-  iptr3 = (k-1)*nx+1;   // (1,k-1)
-  iptr4 =  k*nx+1;      // (1,k)
+  x2d[iptr1] = 2*x2d[iptr2] - x2d[iptr3];
+  z2d[iptr1] = 2*z2d[iptr2] - z2d[iptr3];
 
-  x2d[iptr2] = x2d[iptr1] + (x2d[iptr4]-x2d[iptr3]);
-  z2d[iptr2] = z2d[iptr1] + (z2d[iptr4]-z2d[iptr3]);
+  iptr1 =  k*nx+(nx-1);   // (nx-1,k)
+  iptr2 =  k*nx+(nx-2);   // (nx-2,k-1)
+  iptr3 =  k*nx+(nx-3);   // (nx-2,k)
 
-  iptr1 = (k-1)*nx+(nx-1);   // (nx-1,k-1)
-  iptr2 =  k*nx+(nx-1);      // (nx-1,k)
-
-  iptr3 = (k-1)*nx+(nx-2);   // (nx-2,k-1)
-  iptr4 =  k*nx+(nx-2);      // (nx-2,k)
-
-  x2d[iptr2] = x2d[iptr1] + (x2d[iptr4]-x2d[iptr3]);
-  z2d[iptr2] = z2d[iptr1] + (z2d[iptr4]-z2d[iptr3]);
+  x2d[iptr1] = 2*x2d[iptr2] - x2d[iptr3];
+  z2d[iptr1] = 2*z2d[iptr2] - z2d[iptr3];
 
   return 0;
+
 }
 

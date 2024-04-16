@@ -11,12 +11,12 @@ output_dir='../project/output';
 % which grid profile to plot
 subs=[1,1];    
 subc=[-1,-1];   % '-1' to plot all points in this dimension
-subt=[1,1];
+subt=[8,8];
 
 % figure control parameters
 flag_km     = 1;
 flag_emlast = 1;
-flag_print  = 0;
+flag_print  = 1;
 flag_title  = 0;
 scl_daspect = [1 1 1];
 %-----------------------------------------------------------
@@ -45,8 +45,8 @@ plot(x,z,'k-');
 hold on
 plot(x',z','k-');
   
-xlabel(['X axis (' str_unit ')']);
-ylabel(['Y axis (' str_unit ')']);
+xlabel(['X axis (' str_unit ')'],FontSize=15);
+ylabel(['Y axis (' str_unit ')'],FontSize=15);
   
 set(gca,'layer','top');
 set(gcf,'color','white','renderer','painters');
@@ -55,21 +55,21 @@ set(gcf,'color','white','renderer','painters');
 if exist('scl_daspect')
     daspect(scl_daspect);
 end
-axis tight;
+axis equal tight;
 
 % title
 if flag_title
-    gridtitle='XOZ-Grid';
+    gridtitle='XOY-Grid';
     title(gridtitle);
 end
 
 % save and print figure
 if flag_print
-    width= 500;
-    height=500;
-    set(gcf,'paperpositionmode','manual');
-    set(gcf,'paperunits','points');
-    set(gcf,'papersize',[width,height]);
-    set(gcf,'paperposition',[0,0,width,height]);
-    print(gcf,[gridtitle '.png'],'-dpng');
+%     width= 500;
+%     height=500;
+%     set(gcf,'paperpositionmode','manual');
+%     set(gcf,'paperunits','points');
+%     set(gcf,'papersize',[width,height]);
+%     set(gcf,'paperposition',[0,0,width,height]);
+    print(gcf,['gird.png'],'-r300','-dpng');
 end

@@ -6,16 +6,16 @@ clear all;
 close all;
 
 flag_printf = 1;
-flag_topo_x = 1;
+flag_topo_x = 0;
 flag_topo_z = 1;
 
-nx1 = 300;
-nz = 300;
-num_pml = 00;
+nx1 = 801;
+nz = 401;
+num_pml = 0;
 nx = nx1 + 2*num_pml; 
 
-dx = 10;
-dz = 10;
+dx = 50;
+dz = 50;
 origin_x = 0;
 origin_z = 0;
 
@@ -32,17 +32,14 @@ for i=1:nx1
 end
 
 if flag_topo_z
-  point = origin_x + floor(nx1/2)*dx;
-  L = 0.4*(nx-1)*dx;
-  H = 0.2*(nz-1)*dz;
-  for i = 1:nx1
-      r1 = sqrt((bz2(i+num_pml,1)-point)^2);
-      topo = 0;
-      if(r1 < L)
-          topo = 0.5*H * (1+cos(pi*r1/L));
-      end
-      bz2(i+num_pml,2)=bz2(i+num_pml,2)+topo;
-      bz1(i+num_pml,2)=bz1(i+num_pml,2)-topo;
+  x0 = 10*1e3;
+  x1 = 30*1e3;
+  a = 3*1e3;
+  H = 6*1e3;
+  for i = 1:nx
+      x = (i-1)*dx;
+      topo = H*exp(-(x-x0)^2/a^2) - H*exp(-(x-x1)^2/a^2);
+      bz2(i,2)=bz2(i,2)+topo;
   end
 end
 
@@ -75,9 +72,9 @@ if flag_topo_x
   end
 end
 
-A=-1;
-[bx1]=arc_strech(A,bx1);
-[bx2]=arc_strech(A,bx2);
+%A=-1;
+%[bx1]=arc_strech(A,bx1);
+%[bx2]=arc_strech(A,bx2);
 
 if flag_printf
     figure(1)   
@@ -86,7 +83,7 @@ if flag_printf
     plot(bx2(:,1),bx2(:,2));
     plot(bz1(:,1),bz1(:,2));
     plot(bz2(:,1),bz2(:,2));
-    axis equal;
+    axis equal tight;
 end
 % creat data file
 export_bdry;

@@ -11,7 +11,10 @@ output_dir='../project/output';
 % which grid profile to plot
 subs=[1,1];     % % index 1:nx 1:nz
 subc=[-1,-1];   % '-1' to plot all points in this dimension
-subt=[3,3];
+subt=[4,4];
+% subs=[100,701];     % % index 1:nx 1:nz
+% subc=[100,100];   % '-1' to plot all points in this dimension
+% subt=[1,1];
 
 % figure control parameters
 flag_km     = 0;

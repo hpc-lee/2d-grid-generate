@@ -13,8 +13,8 @@ output_dir='../project4/output';
 % subc=[100,100];   % '-1' to plot all points in this dimension
 % subt=[1,1];
 subs=[1,1];     % % index 1:nx 1:nz
-subc=[-1,-1];   % '-1' to plot all points in this dimension
-subt=[4,4];
+subc=[200,-1];   % '-1' to plot all points in this dimension
+subt=[2,1];
 % figure control parameters
 flag_km     = 1;
 flag_emlast = 1;

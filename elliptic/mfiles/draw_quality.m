@@ -11,7 +11,7 @@ output_dir='../project/output';
 % which grid profile to plot
 subs=[1,1];     % % index 1:nx 1:nz
 subc=[-1,-1];   % '-1' to plot all points in this dimension
-subt=[1,1];
+subt=[2,2];
 
 % figure control parameters
 flag_km     = 0;
@@ -25,8 +25,8 @@ clrmp       = 'parula';
 % varable to plot 
 %  'orth', 'jacobi', 'ratio', 'smooth_xi', 
 %  'smooth_zt', 'step_xi', 'step_zt'
-% varnm = 'jacobi';
-varnm = 'orth';
+varnm = 'smooth_xi';
+% varnm = 'orth';
 %-----------------------------------------------------------
 %-- load coord
 %-----------------------------------------------------------
@@ -62,7 +62,7 @@ set(gca,'layer','top');
 set(gcf,'color','white','renderer','painters');
 
 % shading
-% shading interp;
+shading interp;
 % shading flat;
 % colorbar range/scale
 if exist('scl_caxis','var')

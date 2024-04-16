@@ -28,8 +28,8 @@ mkdir -p ${OUTPUT_DIR}
 #----------------------------------------------------------------------
 cat << ieof > ${PAR_FILE}
 {
-  "number_of_grid_points_x" : 641,
-  "number_of_grid_points_z" : 601,
+  "number_of_grid_points_x" : 801,
+  "number_of_grid_points_z" : 801,
 
   "check_orth" : 1,
   "check_jac" : 1,
@@ -44,7 +44,7 @@ cat << ieof > ${PAR_FILE}
 
   "grid_method" : {
       "parabolic" : {
-          "coef" : -80,
+          "coef" : -100,
           "direction" : "z",
           "o2i" : 1
       }

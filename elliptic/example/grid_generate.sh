@@ -6,8 +6,7 @@ set -e
 date
 
 #-- system related dir
-MPIDIR=/data3/lihl/software/openmpi-gnu-4.1.2
-
+MPIDIR=/data/apps/openmpi/4.1.5-cuda-aware
 #-- program related dir
 EXEC_GRID=`pwd`/../main_grid_2d
 echo "EXEC_GRID=${EXEC_GRID}"
@@ -27,16 +26,16 @@ mkdir -p ${PROJDIR}
 mkdir -p ${OUTPUT_DIR}
 
 #-- total x mpi procs
-NPROCS_X=2
+NPROCS_X=1
 #-- total z mpi procs
-NPROCS_Z=2
+NPROCS_Z=1
 #----------------------------------------------------------------------
 #-- create main conf
 #----------------------------------------------------------------------
 cat << ieof > ${PAR_FILE}
 {
-  "number_of_grid_points_x" : 300,
-  "number_of_grid_points_z" : 300,
+  "number_of_grid_points_x" : 801,
+  "number_of_grid_points_z" : 401,
 
   "number_of_mpiprocs_x" : $NPROCS_X,
   "number_of_mpiprocs_z" : $NPROCS_Z,
@@ -58,7 +57,7 @@ cat << ieof > ${PAR_FILE}
           "iter_err" : 1E-2,
           "max_iter" : 5E3
       },
-      "elli_higen" : {
+      "#elli_higen" : {
           "coef" : -20,
           "iter_err" : 1E-2,
           "max_iter" : 5E3
