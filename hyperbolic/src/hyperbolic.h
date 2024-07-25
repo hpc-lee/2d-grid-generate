@@ -30,4 +30,7 @@ int
 assign_coords(double *xz, float *x2d, float *z2d, int nx, int k,
               float epsilon, int bdry_itype);
 
+int
+modify_incre(double *xz, float *x2d, float *z2d, int nx, int k);
+
  #endif

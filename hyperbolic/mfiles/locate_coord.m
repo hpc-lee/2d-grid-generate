@@ -9,6 +9,10 @@ end
 par=loadjson(parfnm);
 ngik=[par.number_of_grid_points_x,...
       par.number_of_grid_points_z];
+% if(par.flag_sample == 1)
+%   ngik(1) = ngik(1)*par.sample_factor_xi;
+%   ngik(2) = ngik(2)*par.sample_factor_zt;
+% end
 
 gsubs = subs;
 gsubt = subt;

@@ -1,7 +1,7 @@
 verbose=100
-par file =  /data/lihl/code/2d-grid-generate/grid-post-process/example/../project/test.json
-number of total gird points x is 250
-number of total gird points z is 202
+par file =  /data/lihl/code/2d-grid-generate/grid-post-process/example/../project1/test.json
+number of total gird points x is 801
+number of total gird points z is 401
 number of mpi procs x import is 1
 number of mpi procs z import is 1
 number of mpi procs x export is 1
@@ -13,9 +13,9 @@ number of pml layers z2 is 0
 -------------------------------------------------------
 ------- strech zt and strech coef is 0.000100-------
 input grid dir is 
- /data/lihl/code/2d-grid-generate/hyperbolic/project/output
+ /data/lihl/code/2d-grid-generate/hyperbolic/project1/output
 export grid dir is 
- /data/lihl/code/2d-grid-generate/grid-post-process/example/../project/output
+ /data/lihl/code/2d-grid-generate/grid-post-process/example/../project1/output
 ******* not sample grid ******* 
 export coord to file ... 
 ****************************************************** 

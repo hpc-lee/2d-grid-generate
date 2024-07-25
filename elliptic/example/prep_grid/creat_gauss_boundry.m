@@ -9,13 +9,13 @@ flag_printf = 1;
 flag_topo_x = 0;
 flag_topo_z = 1;
 
-nx1 = 801;
+nx1 = 601;
 nz = 401;
 num_pml = 0;
 nx = nx1 + 2*num_pml; 
 
-dx = 50;
-dz = 50;
+dx = 1;
+dz = 1;
 origin_x = 0;
 origin_z = 0;
 
@@ -32,13 +32,13 @@ for i=1:nx1
 end
 
 if flag_topo_z
-  x0 = 10*1e3;
-  x1 = 30*1e3;
-  a = 3*1e3;
-  H = 6*1e3;
+  x0 = 0.3*1e3;
+  a = 0.1*1e3;
+  H = 0.0*1e3;
   for i = 1:nx
       x = (i-1)*dx;
-      topo = H*exp(-(x-x0)^2/a^2) - H*exp(-(x-x1)^2/a^2);
+      %topo = H*exp(-(x-x0)^2/a^2) - H*exp(-(x-x1)^2/a^2);
+      topo = -H*exp(-(x-x0)^2/a^2);
       bz2(i,2)=bz2(i,2)+topo;
   end
 end

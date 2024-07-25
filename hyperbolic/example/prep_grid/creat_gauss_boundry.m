@@ -7,9 +7,9 @@ close all;
 
 flag_printf = 1;
 flag_km = 1;
-flag_topo_z = 1;
+flag_topo_z = 0;
 
-nx1 = 201;
+nx1 = 2501;
 num_pml = 00;
 nx = nx1 + 2*num_pml; 
 

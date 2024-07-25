@@ -35,6 +35,15 @@ hyper_gene(gd_t *gdcurv, par_t *par)
   double *D = (double *)mem_calloc_1d_double(n*CONST_NDIM*CONST_NDIM, 0.0, "init");
   double *y = (double *)mem_calloc_1d_double(n*CONST_NDIM, 0.0, "init");
 
+  // solve first layer  
+  int k=1;
+  cal_matrix(x2d,z2d,nx,k,step,a,b,c,d,area);
+  modify_smooth(x2d,z2d,nx,k,a,b,c,d,coef_e);
+  modify_bdry(n,a,b,c,d,epsilon,bdry_itype);
+  thomas_block(n,a,b,c,d,xz,D,y);
+  assign_coords(xz,x2d,z2d,nx,k,epsilon,bdry_itype);
+
+
   for(int k=1; k<nz; k++)
   {
     cal_smooth_coef(coef,x2d,z2d,nx,nz,k,step,coef_e);
@@ -83,38 +92,52 @@ cal_smooth_coef(float coef, float *x2d, float *z2d, int nx, int nz, int k, float
   float dot,det,theta,alpha;
   float temp;
 
-  //S = sqrt((1.0*k)/(nz-1));
-  if(nz<=50) {
-    S = sqrt((1.0*k)/(nz-1));
-  }
+  S = sqrt((1.0*k)/(nz-1));
+  //if(nz<=50) {
+  //  S = sqrt((1.0*k)/(nz-1));
+  //}
 
-  if(nz>50) 
-  {
-    if(k<=50)
-    {
-      S = sqrt((1.0*k)/50);
-    } else {
-      //S = 1.0;
-      S = 1.0 + 1.0*(k-50)/(nz-51);
-    }
-  }
+  //if(nz>50) 
+  //{
+  //  if(k<=50)
+  //  {
+  //    S = sqrt((1.0*k)/50);
+  //  } else {
+  //    //S = 1.0;
+  //    S = 1.0 + 1.0*(k-50)/(nz-51);
+  //  }
+  //}
 
   if(k==1)
   {
+    int k1=2;
     for(int i=1; i<nx-1; i++)
     {
-      iptr1 = (k-1)*nx + i+1;   // (i+1,k-1)
-      iptr2 = (k-1)*nx + i-1;   // (i-1,k-1)
-      iptr3 = (k-1)*nx + i;     // (i,k-1)
+      iptr1 = (k1-1)*nx + i+1;   // (i+1,k-1)
+      iptr2 = (k1-1)*nx + i-1;   // (i-1,k-1)
+      iptr3 = (k1-1)*nx + i;     // (i,k-1)
+      iptr4 = (k1-2)*nx + i;     // (i,k-2)
       x_xi = 0.5*(x2d[iptr1] - x2d[iptr2]);
       z_xi = 0.5*(z2d[iptr1] - z2d[iptr2]); 
+      x_zt = x2d[iptr3] - x2d[iptr4];
+      z_zt = z2d[iptr3] - z2d[iptr4];
       xi_len = sqrt(pow(x_xi,2) + pow(z_xi,2));
       zt_len = sqrt(pow(x_zt,2) + pow(z_zt,2));
-      N_xi = fabs(step[k-1])/xi_len;
+      N_xi = zt_len/xi_len;
 
-      iptr1 = (k-1)*nx + i+1;   // (i+1,k-1)
-      iptr2 = (k-1)*nx + i;     // (i,  k-1)
-      iptr3 = (k-1)*nx + i-1;   // (i-1,k-1)
+      iptr1 = (k1-2)*nx + i+1;   // (i+1,k-2)
+      iptr2 = (k1-2)*nx + i;     // (i,  k-2)
+      iptr3 = (k1-2)*nx + i-1;   // (i-1,k-2)
+      x_xi_plus = x2d[iptr1] - x2d[iptr2];
+      z_xi_plus = z2d[iptr1] - z2d[iptr2];
+      xi_plus1 = sqrt(pow(x_xi_plus,2) + pow(z_xi_plus,2));
+      x_xi_minus = x2d[iptr3] - x2d[iptr2];
+      z_xi_minus = z2d[iptr3] - z2d[iptr2];
+      xi_minus1 = sqrt(pow(x_xi_minus,2) + pow(z_xi_minus,2));
+
+      iptr1 = (k1-1)*nx + i+1;   // (i+1,k-1)
+      iptr2 = (k1-1)*nx + i;     // (i,  k-1)
+      iptr3 = (k1-1)*nx + i-1;   // (i-1,k-1)
       x_xi_plus = x2d[iptr1] - x2d[iptr2];
       z_xi_plus = z2d[iptr1] - z2d[iptr2];
       xi_plus2 = sqrt(pow(x_xi_plus,2) + pow(z_xi_plus,2));
@@ -122,6 +145,10 @@ cal_smooth_coef(float coef, float *x2d, float *z2d, int nx, int nz, int k, float
       z_xi_minus = z2d[iptr3] - z2d[iptr2];
       xi_minus2 = sqrt(pow(x_xi_minus,2) + pow(z_xi_minus,2));
 
+      d1 = xi_plus1 + xi_minus1;
+      d2 = xi_plus2 + xi_minus2;
+      delta = d1/d2;
+      delta_mdfy = fmax(pow(delta,2/S),0.01);
       // normalization
       x_plus = (x2d[iptr1]-x2d[iptr2])/xi_plus2;
       z_plus = (z2d[iptr1]-z2d[iptr2])/xi_plus2;
@@ -130,29 +157,26 @@ cal_smooth_coef(float coef, float *x2d, float *z2d, int nx, int nz, int k, float
 
       dot = x_plus*x_minus + z_plus*z_minus;
       det = x_plus*z_minus - z_plus*x_minus;
+
       // cal two normal vector clockwise angle. 
       // the method from website
       // from right vector to left vector
       // z axis upward, so is -det
       theta = atan2(-det,dot);
-      // NOTE: here first layer alpha function 
-      // like delta_mdfy function
       if(theta<0)
       {
         theta = theta + 2*PI;
       }
-
       if(theta<PI)
       {
-        temp = 1-cos(theta/2);   
-        alpha = 1/pow(temp,2/S);
+        alpha = 1.0/(1-pow(cos(theta/2),2));
       }
       if(theta>=PI)
       {
-        temp = 1-cos(theta/2);   
-        alpha = fmax(1/pow(temp,2/S),0.1);
+        //alpha = pow(sin(theta/2),10);
+        alpha = 1;
       }
-      coef_e[i] = coef*S*N_xi*alpha;
+      coef_e[i] = coef*N_xi*S*delta_mdfy*alpha;
     }
   }
 
@@ -195,7 +219,7 @@ cal_smooth_coef(float coef, float *x2d, float *z2d, int nx, int nz, int k, float
       d1 = xi_plus1 + xi_minus1;
       d2 = xi_plus2 + xi_minus2;
       delta = d1/d2;
-      delta_mdfy = fmax(pow(delta,2/S),0.1);
+      delta_mdfy = fmax(pow(delta,2/S),0.01);
 
       // normalization
       x_plus = (x2d[iptr1]-x2d[iptr2])/xi_plus2;
@@ -221,7 +245,8 @@ cal_smooth_coef(float coef, float *x2d, float *z2d, int nx, int nz, int k, float
       }
       if(theta>=PI)
       {
-        alpha = pow(sin(theta/2),2);
+        //alpha = pow(sin(theta/2),2);
+        alpha = 1;
       }
       coef_e[i] = coef*N_xi*S*delta_mdfy*alpha;
     }
@@ -478,3 +503,45 @@ assign_coords(double *xz, float *x2d, float *z2d, int nx, int k,
   return 0;
 }
 
+// function: check increment, if too big or to small
+// modofy increment
+// not used
+int
+modify_incre(double *xz, float *x2d, float *z2d, int nx, int k)
+{
+  size_t  iptr1, iptr2, iptr3;
+  float x0, x1, z0, z1;
+  float x ,z;
+  float arc_k0, arc_k1;
+  if(k > 1)
+  {
+    for(int i=1; i<nx-1; i++)
+    {
+      iptr1 = (k-1)*nx + i;
+      iptr2 = (k-2)*nx + i;
+      iptr3 = (i-1)*CONST_NDIM;
+      x0 = x2d[iptr1] - x2d[iptr2];
+      z0 = z2d[iptr1] - z2d[iptr2];
+      x1 = xz[iptr3];
+      z1 = xz[iptr3+1];
+      arc_k0 = sqrt(pow(x0,2) + pow(z0,2));
+      arc_k1 = sqrt(pow(x1,2) + pow(z1,2));
+
+      // normalize get unit vertor (x,z)
+      x = x1/arc_k1;
+      z = z1/arc_k1;
+      if( arc_k1 < 0.5*arc_k0)
+      {
+        xz[iptr3]   = x * 0.5*arc_k0;
+        xz[iptr3+1] = z * 0.5*arc_k0;
+      }
+      if( arc_k1 > 2.0*arc_k0)
+      {
+        xz[iptr3]   = x * 2.0*arc_k0;
+        xz[iptr3+1] = z * 2.0*arc_k0;
+      }
+    }
+  }
+    
+  return 0;
+}

@@ -28,14 +28,14 @@ mkdir -p ${OUTPUT_DIR}
 #----------------------------------------------------------------------
 cat << ieof > ${PAR_FILE}
 {
-  "number_of_grid_points_x" : 250,
-  "number_of_grid_points_z" : 202,
+  "number_of_grid_points_x" : 2501,
+  "number_of_grid_points_z" : 2501,
 
   "check_orth" : 1,
-  "check_jac" : 1,
-  "check_ratio" : 1,
-  "check_step_xi" : 1,
-  "check_step_zt" : 1,
+  "#check_jac" : 1,
+  "#check_ratio" : 1,
+  "#check_step_xi" : 1,
+  "#check_step_zt" : 1,
   "check_smooth_xi" : 1,
   "check_smooth_zt" : 1,
 
@@ -44,7 +44,7 @@ cat << ieof > ${PAR_FILE}
 
   "grid_method" : {
       "hyperbolic" : {
-          "coef" : 15,
+          "coef" : 100,
           "bdry_type" : 1,
           "epsilon" : 0,
           "direction" : "z",

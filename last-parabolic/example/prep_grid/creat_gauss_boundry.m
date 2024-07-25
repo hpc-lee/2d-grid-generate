@@ -60,7 +60,7 @@ if flag_printf
     plot(bz2(20/dh,1), bz2(20/dh,2),'ro');
     plot(bz2(28/dh,1), bz2(28/dh,2),'ro');
     plot(bz2(32/dh,1), bz2(32/dh,2),'ro');
-    plot(15*1e3,-0.5*1e3,'b*');
+    plot(15*1e3,-10*1e3,'b*');
     axis equal tight;
     set(gcf,'Position',[200,200,650,400]);
     xlabel('X axis (m)');
@@ -79,7 +79,7 @@ if flag_printf
     plot(bz2(20/dh,1)/1e3, bz2(20/dh,2)/1e3,'kv');
     plot(bz2(28/dh,1)/1e3, bz2(28/dh,2)/1e3,'kv');
     plot(bz2(32/dh,1)/1e3, bz2(32/dh,2)/1e3,'kv');
-    plot(15,-0.5,'k*');
+    plot(15,-10.,'k*');
     axis equal tight;
 %     set(gcf,'Position',[200,200,650,400]);
     xlabel('X axis (km)',FontSize=15);

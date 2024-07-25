@@ -7,7 +7,7 @@ addmypath;
 flag_printf=1;
 num_pml = 20;
 %
-[Vp,SegyTraceH,SegyH]=ReadSegy('../../../../velocity.segy');
+[Vp,SegyTraceH,SegyH]=ReadSegy('../../../../../velocity.segy');
 [row, col] = size(Vp);
 
 dz=10;
