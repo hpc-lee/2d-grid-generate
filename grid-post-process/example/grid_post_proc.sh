@@ -6,15 +6,15 @@ set -e
 date
 
 #-- program related dir
-EXEC_GRID=`pwd`/../grid_post_proc_2d
+EXEC_GRID=`pwd`/../main
 echo "EXEC_GRID=${EXEC_GRID}"
 
 #-- input dir
-INPUTDIR=/data/lihl/code/2d-grid-generate/hyperbolic/project2/output
+INPUTDIR=/data/lihl/code/2d-grid-generate/hyperbolic/project5/output
 #INPUTDIR=/data/lihl/code/2d-grid-generate/last-parabolic/project/output
 
 #-- output and conf
-PROJDIR=`pwd`/../project2
+PROJDIR=`pwd`/../project5
 PAR_FILE=${PROJDIR}/test.json
 OUTPUT_DIR=${PROJDIR}/output
 
@@ -41,8 +41,8 @@ NPROCS_Z_OUT=1
 #----------------------------------------------------------------------
 cat << ieof > ${PAR_FILE}
 {
-  "number_of_grid_points_x" : 901,
-  "number_of_grid_points_z" : 401,
+  "number_of_grid_points_x" : 451,
+  "number_of_grid_points_z" : 201,
 
   "number_of_mpiprocs_x_in" : $NPROCS_X_IN,
   "number_of_mpiprocs_z_in" : $NPROCS_Z_IN,
