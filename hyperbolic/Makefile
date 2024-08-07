@@ -55,7 +55,7 @@ $(DIR_OBJ)/%.o : lib/%.c
 	${CC} -c -o $@ $(CFLAGS) $<
 
 cleanexe:
-	rm -f main_grid_2d
+	rm -f main
 
 cleanobj:
 	rm -rf $(DIR_OBJ)
