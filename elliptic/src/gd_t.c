@@ -211,8 +211,7 @@ int
 gd_info_set(gd_t *gdcurv,
             mympi_t *mympi,
             int number_of_grid_points_x,
-            int number_of_grid_points_z,
-            int verbose)
+            int number_of_grid_points_z)
 {
   int ierr = 0;
 
@@ -297,8 +296,7 @@ gd_info_set(gd_t *gdcurv,
 int
 set_output_dir(gd_t *gdcurv,
                mympi_t *mympi,
-               char *output_dir,
-               int verbose)
+               char *output_dir)
 {
   // output file name
   sprintf(gdcurv->fname_part,"px%d_pz%d", mympi->topoid[0],mympi->topoid[1]);

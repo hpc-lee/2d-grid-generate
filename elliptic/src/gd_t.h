@@ -56,14 +56,12 @@ typedef struct {
 int
 gd_info_set(gd_t *gdcurv, mympi_t *mympi,
             int number_of_grid_points_x,
-            int number_of_grid_points_z,
-            int verbose);
+            int number_of_grid_points_z);
 
 int
 set_output_dir(gd_t *gdcurv,
                mympi_t *mympi,
-               char *output_dir,
-               const int verbose);
+               char *output_dir);
 
 int 
 init_gdcurv(gd_t *gdcurv);
