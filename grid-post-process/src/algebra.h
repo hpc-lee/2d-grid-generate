@@ -8,10 +8,10 @@
  *************************************************/
 
 int 
-xi_arc_strech(gd_t *gdcurv, float coef);
+xi_arc_stretch(gd_t *gdcurv, float *arc_len);
 
 int 
-zt_arc_strech(gd_t *gdcurv, float coef);
+zt_arc_stretch(gd_t *gdcurv, float *arc_len);
 
 int 
 sample_interp(gd_t *gdcurv_new, gd_t *gdcurv);

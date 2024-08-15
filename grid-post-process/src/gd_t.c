@@ -66,27 +66,28 @@ gd_info_set(gd_t *gdcurv, par_t *par, int iprocx, int iprocz,
   int total_nx = gdcurv->nx;
   int total_nz = gdcurv->nz;
 
-  int nprocx_out = par->number_of_mpiprocs_x_out;
-  int nprocz_out = par->number_of_mpiprocs_z_out;
+  int nprocx_out = par->num_of_procs_out[0];
+  int nprocz_out = par->num_of_procs_out[1];
 
-  int number_of_pml_x1 = par->number_of_pml_x1*par->sample_factor_xi;
-  int number_of_pml_x2 = par->number_of_pml_x2*par->sample_factor_xi;
-  int number_of_pml_z1 = par->number_of_pml_z1*par->sample_factor_zt;
-  int number_of_pml_z2 = par->number_of_pml_z2*par->sample_factor_zt;
+  int num_of_pml_x1 = par->num_of_pml_x1;
+  int num_of_pml_x2 = par->num_of_pml_x2;
+  int num_of_pml_z1 = par->num_of_pml_z1;
+  int num_of_pml_z2 = par->num_of_pml_z2;
+
 
   int gni1, gnj1, gnk1;
   // determine ni
   int nx_et = total_nx;
 
   // double cfspml layer, load balance
-  nx_et += number_of_pml_x1 + number_of_pml_x2;
+  nx_et += num_of_pml_x1 + num_of_pml_x2;
 
   // partition into average plus left at last
   int nx_avg  = nx_et / nprocx_out;
   int nx_left = nx_et % nprocx_out;
 
   // nx_avg must > pml layers
-  if(nx_avg<=number_of_pml_x1 || nx_avg<=number_of_pml_x2)
+  if(nx_avg<=num_of_pml_x1 || nx_avg<=num_of_pml_x2)
   {
     fprintf(stdout,"nx must large pml_layers\n");
     fflush(stdout);
@@ -97,10 +98,10 @@ gd_info_set(gd_t *gdcurv, par_t *par, int iprocx, int iprocz,
   int ni = nx_avg;
   // subtract nlay for pml node
   if (iprocx == 0) {
-    ni -= number_of_pml_x1;
+    ni -= num_of_pml_x1;
   }
   if (iprocx == nprocx_out-1) {
-    ni -= number_of_pml_x2;
+    ni -= num_of_pml_x2;
   }
 
   // first nx_left node add one more point
@@ -111,7 +112,7 @@ gd_info_set(gd_t *gdcurv, par_t *par, int iprocx, int iprocz,
   if (iprocx==0) {
     gni1 = 0;
   } else {
-    gni1 = iprocx * nx_avg - number_of_pml_x1;
+    gni1 = iprocx * nx_avg - num_of_pml_x1;
   }
   if (nx_left != 0) {
     gni1 += (iprocx < nx_left) ? iprocx : nx_left;
@@ -121,13 +122,13 @@ gd_info_set(gd_t *gdcurv, par_t *par, int iprocx, int iprocz,
   int nz_et = total_nz;
 
   // double cfspml layer, load balance
-  nz_et += number_of_pml_z1 + number_of_pml_z2;
+  nz_et += num_of_pml_z1 + num_of_pml_z2;
 
   int nz_avg  = nz_et / nprocz_out;
   int nz_left = nz_et % nprocz_out;
 
   // ny_avg must > pml layers
-  if(nz_avg<=number_of_pml_z1 || nz_avg<=number_of_pml_z2)
+  if(nz_avg<=num_of_pml_z1 || nz_avg<=num_of_pml_z2)
   {
     fprintf(stdout,"nz must large pml_layers\n");
     fflush(stdout);
@@ -138,10 +139,10 @@ gd_info_set(gd_t *gdcurv, par_t *par, int iprocx, int iprocz,
   int nk = nz_avg;
   // subtract nlay for pml node
   if (iprocz == 0) {
-    nk -= number_of_pml_z1;
+    nk -= num_of_pml_z1;
   }
   if (iprocz == nprocz_out-1) {
-    nk -= number_of_pml_z2;
+    nk -= num_of_pml_z2;
   }
 
   // first nz_left node add one more point
@@ -152,7 +153,7 @@ gd_info_set(gd_t *gdcurv, par_t *par, int iprocx, int iprocz,
   if (iprocz==0) {
     gnk1 = 0;
   } else {
-    gnk1 = iprocz * nz_avg - number_of_pml_z1;
+    gnk1 = iprocz * nz_avg - num_of_pml_z1;
   }
   if (nz_left != 0) {
     gnk1 += (iprocz < nz_left) ? iprocz : nz_left;

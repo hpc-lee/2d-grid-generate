@@ -10,7 +10,7 @@
 // strech grid base on arc length 
 // use exponential function
 int 
-zt_arc_strech(gd_t *gdcurv, float coef)
+zt_arc_stretch(gd_t *gdcurv, float *arc_len)
 {
   int nx = gdcurv->nx;
   int nz = gdcurv->nz;
@@ -61,8 +61,7 @@ zt_arc_strech(gd_t *gdcurv, float coef)
     }
     for(int k=1; k<nz-1; k++)
     {
-      zeta = (1.0*k)/(nz-1);
-      r = single_exp(coef,zeta);
+      r = arc_len[k];
       for(int m=0; m<nz-1; m++)
       {
         if(r>=u[m] && r<u[m+1]) {
@@ -92,7 +91,7 @@ zt_arc_strech(gd_t *gdcurv, float coef)
 // strech grid base on arc length 
 // use exponential function
 int 
-xi_arc_strech(gd_t *gdcurv, float coef)
+xi_arc_stretch(gd_t *gdcurv, float *arc_len)
 {
   int nx = gdcurv->nx;
   int nz = gdcurv->nz;
@@ -142,8 +141,7 @@ xi_arc_strech(gd_t *gdcurv, float coef)
     }
     for(int i=1; i<nx-1; i++)
     {
-      xi = (1.0*i)/(nx-1);
-      r = single_exp(coef,xi);
+      r = arc_len[i];
       for(int m=0; m<nx-1; m++)
       {
         if(r>=u[m] && r<u[m+1]) {
@@ -283,10 +281,3 @@ sample_interp(gd_t *gdcurv_new, gd_t *gdcurv)
   return 0;
 }
 
-float 
-single_exp(float coef, float zeta)
-{
-  float r;
-  r = (exp(coef*zeta)-1)/(exp(coef)-1);
-  return r; 
-}

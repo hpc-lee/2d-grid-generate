@@ -28,85 +28,217 @@ init_io_quality(io_quality_t *io_quality, gd_t *gdcurv)
 int
 read_import_coord(gd_t *gdcurv, par_t *par)
 {
+  char fname_coords[CONST_MAX_STRLEN];
+  char in_file[CONST_MAX_STRLEN];
   int ierr;
-  int total_nx = par->number_of_grid_points_x;
-  int total_nz = par->number_of_grid_points_z;
-
-  int nprocx_in = par->number_of_mpiprocs_x_in;
-  int nprocz_in = par->number_of_mpiprocs_z_in;
-
   int gni1, gnk1;
   int gni, gnk;
   int ni, nk;
   size_t iptr, iptr1;
+  int points_nx;
+  int points_nz;
+
+  // malloc each grid space and read coord
+  gd_t *gdcurv_in = (gd_t *) malloc(par->num_of_grid*sizeof(gd_t));
+  for(int id=0; id<par->num_of_grid; id++)
+  {
+    points_nx = par->num_of_points[0 +id*CONST_NDIM];
+    points_nz = par->num_of_points[1 +id*CONST_NDIM];
+    gd_t *gdcurv_in_one = gdcurv_in + id;
+    init_gdcurv(gdcurv_in_one,points_nx,points_nz);
+    float *x2d = gdcurv_in_one->x2d;
+    float *z2d = gdcurv_in_one->z2d;
+
+    float *coord_x = (float *) malloc(sizeof(float)*points_nx*points_nz);
+    float *coord_z = (float *) malloc(sizeof(float)*points_nx*points_nz);
+    int nprocx_in = par->num_of_procs_in[0+id*CONST_NDIM];
+    int nprocz_in = par->num_of_procs_in[1+id*CONST_NDIM];
+
+    int ncid;
+    int xid, zid;
+    int global_index[2];
+    int count_points[2];
+    size_t start[2] = {0, 0};
+    size_t count[2];
+    char att_global[CONST_MAX_STRLEN] = "global_index_of_first_physical_points";
+    char att_count[CONST_MAX_STRLEN] = "count_of_physical_points";
+
+    // read coord nc file
+    for(int kk=0; kk<nprocz_in; kk++) {
+      for(int ii=0; ii<nprocx_in; ii++)
+      {
+        sprintf(fname_coords,"px%d_pz%d",ii,kk);
+        sprintf(in_file,"%s/coord_%s.nc",par->import_dir[id],fname_coords);
+
+        ierr = nc_open(in_file, NC_NOWRITE, &ncid); handle_nc_err(ierr);
+
+        ierr = nc_get_att_int(ncid,NC_GLOBAL,att_global,global_index);
+        ierr = nc_get_att_int(ncid,NC_GLOBAL,att_count,count_points);
+
+        gni1 = global_index[0];
+        gnk1 = global_index[1];
+
+        ni = count_points[0];
+        nk = count_points[1];
+
+        count[0] = nk;
+        count[1] = ni;
+
+        //read vars
+        ierr = nc_inq_varid(ncid, "x", &xid);  handle_nc_err(ierr);
+        ierr = nc_inq_varid(ncid, "z", &zid);  handle_nc_err(ierr);
+        
+        ierr = nc_get_vara_float(ncid, xid, start, count, coord_x);  handle_nc_err(ierr);
+        ierr = nc_get_vara_float(ncid, zid, start, count, coord_z);  handle_nc_err(ierr);
+
+        for(int k=0; k<nk; k++) {
+          for(int i=0; i<ni; i++)
+          {
+            gni = gni1 + i;
+            gnk = gnk1 + k;
+            iptr = gnk*points_nx + gni;
+
+            iptr1 = k*ni + i;
+
+            x2d[iptr] = coord_x[iptr1];
+            z2d[iptr] = coord_z[iptr1];
+          }
+        }
+
+        //close file
+        ierr = nc_close(ncid);  handle_nc_err(ierr);
+      }
+    }
+    free(coord_x);
+    free(coord_z);
+  }
+
+  // stretch grid
+  for(int id=0; id<par->num_of_grid; id++)
+  {
+    gd_t *gdcurv_in_one = gdcurv_in + id;
+    int npoints;
+    FILE *fp = NULL;
+    char str[500];
+
+    if(par->flag_stretch[id] == 1)
+    {
+      // read stretch file
+      if ((fp = fopen(par->stretch_file[id],"r"))==NULL) {
+         fprintf(stderr,"ERROR: fail to open step file=%s\n", par->stretch_file[id]);
+         fflush(stdout); exit(1);
+      }
+      // number of points
+      if (!io_get_nextline(fp,str,500)) {
+        sscanf(str,"%d",&npoints);
+      }
+
+      float *arc_len = (float *)mem_calloc_1d_float(
+                              npoints, 0.0, "arc length");
+
+      for (int i=0; i<npoints; i++)
+      {
+        if (!io_get_nextline(fp,str,500)) {
+          sscanf(str,"%f",arc_len + i);
+        }
+      }
+      if(par->stretch_idire == X_DIRE)
+      {
+        if(npoints != gdcurv_in_one->nx)
+        {
+          fprintf(stdout,"!error stretch x direction points number not matching\n");
+          exit(-1);
+        }
+        xi_arc_stretch(gdcurv_in_one, arc_len);
+      }
+      if(par->stretch_idire == Z_DIRE)
+      {
+        if(npoints != gdcurv_in_one->nz)
+        {
+          fprintf(stdout,"!error stretch z direction points number not matching\n");
+          exit(-1);
+        }
+        zt_arc_stretch(gdcurv_in_one, arc_len);
+      }
+      // close step file and free local pointer
+      fclose(fp);
+      free(arc_len);
+    }
+  }
+
+  int total_nx = 0;
+  int total_nz = 0;
+  if(par->num_of_grid == 1)
+  {
+    total_nx = par->num_of_points[0];
+    total_nz = par->num_of_points[1];
+  }
+  if(par->num_of_grid > 1)
+  {
+    if(par->merge_idire == X_DIRE)
+    {
+      for(int id=0; id<par->num_of_grid; id++)
+      {
+        total_nx += par->num_of_points[0 + id*CONST_NDIM];
+      }
+      total_nx = total_nx - par->num_of_grid + 1;
+      total_nz = par->num_of_points[1];
+    }
+    if(par->merge_idire == Z_DIRE)
+    {
+      for(int id=0; id<par->num_of_grid; id++)
+      {
+        total_nz += par->num_of_points[1 + id*CONST_NDIM];
+      }
+      total_nz = total_nz - par->num_of_grid + 1;
+      total_nx = par->num_of_points[0];
+    }
+  }
 
   init_gdcurv(gdcurv,total_nx,total_nz);
   float *x2d = gdcurv->x2d;
   float *z2d = gdcurv->z2d;
-
-  float *coord_x = (float *) malloc(sizeof(float)*total_nx*total_nz);
-  float *coord_z = (float *) malloc(sizeof(float)*total_nx*total_nz);
-
-  int ncid;
-  int xid, zid;
-  int global_index[2];
-  int count_points[2];
-  size_t start[2] = {0, 0};
-  size_t count[2];
-  char att_global[CONST_MAX_STRLEN] = "global_index_of_first_physical_points";
-  char att_count[CONST_MAX_STRLEN] = "count_of_physical_points";
-
-  char fname_coords[CONST_MAX_STRLEN];
-  char in_file[CONST_MAX_STRLEN];
-  // read coord nc file
-  for(int kk=0; kk<nprocz_in; kk++) {
-    for(int ii=0; ii<nprocx_in; ii++)
+  // merge grid and init global index set to 0 
+  gni1 = 0;
+  gnk1 = 0;
+  for(int id=0; id<par->num_of_grid; id++)
+  {
+    gd_t *gdcurv_in_one = gdcurv_in + id;
+    float *x2d_in = gdcurv_in_one->x2d;
+    float *z2d_in = gdcurv_in_one->z2d;
+    points_nx = par->num_of_points[0 +id*CONST_NDIM];
+    points_nz = par->num_of_points[1 +id*CONST_NDIM];
+    if(par->merge_idire == X_DIRE && id>0)
     {
-      sprintf(fname_coords,"px%d_pz%d",ii,kk);
-      sprintf(in_file,"%s/coord_%s.nc",par->import_dir,fname_coords);
+      gni1 = gni1 + par->num_of_points[0 +(id-1)*CONST_NDIM] - 1;
+    }
+    if(par->merge_idire == Z_DIRE && id>0)
+    {
+      gnk1 = gnk1 + par->num_of_points[1 +(id-1)*CONST_NDIM] - 1;
+    }
 
-      ierr = nc_open(in_file, NC_NOWRITE, &ncid); handle_nc_err(ierr);
+    for(int k=0; k<points_nz; k++) {
+      for(int i=0; i<points_nx; i++)
+      {
+        gni = gni1 + i;
+        gnk = gnk1 + k;
+        iptr = gnk*total_nx + gni;
 
-      ierr = nc_get_att_int(ncid,NC_GLOBAL,att_global,global_index);
-      ierr = nc_get_att_int(ncid,NC_GLOBAL,att_count,count_points);
+        iptr1 = k*points_nx + i;
 
-      gni1 = global_index[0];
-      gnk1 = global_index[1];
-
-      ni = count_points[0];
-      nk = count_points[1];
-
-      count[0] = nk;
-      count[1] = ni;
-
-      //read vars
-      ierr = nc_inq_varid(ncid, "x", &xid);  handle_nc_err(ierr);
-      ierr = nc_inq_varid(ncid, "z", &zid);  handle_nc_err(ierr);
-
-      ierr = nc_get_vara_float(ncid, xid, start, count, coord_x);  handle_nc_err(ierr);
-      ierr = nc_get_vara_float(ncid, zid, start, count, coord_z);  handle_nc_err(ierr);
-
-      for(int k=0; k<nk; k++) {
-        for(int i=0; i<ni; i++)
-        {
-          gni = gni1 + i;
-          gnk = gnk1 + k;
-          iptr = gnk*total_nx + gni;
-
-          iptr1 = k*ni + i;
-
-          x2d[iptr] = coord_x[iptr1];
-          z2d[iptr] = coord_z[iptr1];
-        }
+        x2d[iptr] = x2d_in[iptr1];
+        z2d[iptr] = z2d_in[iptr1];
       }
-
-      //close file
-      ierr = nc_close(ncid);  handle_nc_err(ierr);
     }
   }
 
-  free(coord_x);
-  free(coord_z);
+  // free 
+  for(int id=0; id<par->num_of_grid; id++)
+  {
+    gd_t *gdcurv_in_one = gdcurv_in + id;
+    free(gdcurv_in_one->v3d);
+  }
+  free(gdcurv_in);
 
   return 0;
 }
@@ -114,8 +246,8 @@ read_import_coord(gd_t *gdcurv, par_t *par)
 int
 gd_curv_coord_export(gd_t *gdcurv, par_t *par)
 {
-  int nprocx_out = par->number_of_mpiprocs_x_out;
-  int nprocz_out = par->number_of_mpiprocs_z_out;
+  int nprocx_out = par->num_of_procs_out[0];
+  int nprocz_out = par->num_of_procs_out[1];
 
   int total_nx = gdcurv->nx;
   int total_nz = gdcurv->nz;
@@ -208,8 +340,8 @@ gd_curv_coord_export(gd_t *gdcurv, par_t *par)
 int
 quality_export(io_quality_t *io_quality, gd_t *gdcurv, par_t *par, char *var_name)
 {
-  int nprocx_out = par->number_of_mpiprocs_x_out;
-  int nprocz_out = par->number_of_mpiprocs_z_out;
+  int nprocx_out = par->num_of_procs_out[0];
+  int nprocz_out = par->num_of_procs_out[1];
 
   int total_nx = io_quality->nx;
   int total_nz = io_quality->nz;
