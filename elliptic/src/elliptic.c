@@ -526,6 +526,7 @@ higen_gene(gd_t *gdcurv, par_t *par, mympi_t *mympi)
   float err = par->iter_err;
   int max_iter = par->max_iter;
   float coef = par->coef;
+  int *flag_orth = par->flag_bdry_orth;
 
   int nx = gdcurv->nx;
   int nz = gdcurv->nz;
@@ -552,7 +553,7 @@ higen_gene(gd_t *gdcurv, par_t *par, mympi_t *mympi)
   float *dz2 = (float *)mem_calloc_1d_float(nx, 0.0, "dz2"); 
   dist_cal(gdcurv,dx1,dx2,dz1,dz2,neighid);
 
-  set_src_higen(x2d,z2d,gdcurv,src,dx1,dx2,dz1,dz2,mympi);
+  set_src_higen(x2d,z2d,gdcurv,src,dx1,dx2,dz1,dz2,flag_orth,mympi);
   interp_inner_source(src, gdcurv, coef);
 
   // copy coord
@@ -638,7 +639,7 @@ higen_gene(gd_t *gdcurv, par_t *par, mympi_t *mympi)
     x2d_tmp = ptr_x;
     z2d_tmp = ptr_z;
     
-    set_src_higen(x2d,z2d,gdcurv,src,dx1,dx2,dz1,dz2,mympi);
+    set_src_higen(x2d,z2d,gdcurv,src,dx1,dx2,dz1,dz2,flag_orth,mympi);
     interp_inner_source(src, gdcurv, coef);
 
     fprintf(stdout,"number of iter is %d\n", Niter);
@@ -672,7 +673,7 @@ higen_gene(gd_t *gdcurv, par_t *par, mympi_t *mympi)
 int
 set_src_higen(float *x2d, float *z2d, gd_t *gdcurv, 
               src_t *src, float *dx1, float *dx2,
-              float *dz1, float *dz2, mympi_t *mympi)
+              float *dz1, float *dz2, int *flag_orth, mympi_t *mympi)
              
 {
   int nx = gdcurv->nx;
@@ -714,7 +715,7 @@ set_src_higen(float *x2d, float *z2d, gd_t *gdcurv,
   float x_xi, z_xi, x_zt, z_zt;
 
   // bdry x1 xi=0
-  if(neighid[0] == MPI_PROC_NULL)
+  if(neighid[0] == MPI_PROC_NULL && flag_orth[0] == 1)
   {
     // bdry x1 xi=0
     for(int k=1; k<nz-1; k++)
@@ -745,7 +746,7 @@ set_src_higen(float *x2d, float *z2d, gd_t *gdcurv,
   }
 
   // bdry x2 xi=1
-  if(neighid[1] == MPI_PROC_NULL)
+  if(neighid[1] == MPI_PROC_NULL && flag_orth[1] == 1)
   {
     for(int k=1; k<nz-1; k++)
     {
@@ -775,7 +776,7 @@ set_src_higen(float *x2d, float *z2d, gd_t *gdcurv,
   }
 
   // bdry z1 zt=0
-  if(neighid[2] == MPI_PROC_NULL)
+  if(neighid[2] == MPI_PROC_NULL && flag_orth[2] == 1)
   {
     for(int i=1; i<nx-1; i++)
     {
@@ -805,7 +806,7 @@ set_src_higen(float *x2d, float *z2d, gd_t *gdcurv,
   }
 
   // bdry z2 zt=1
-  if(neighid[3] == MPI_PROC_NULL)
+  if(neighid[3] == MPI_PROC_NULL && flag_orth[3] == 1)
   {
     for(int i=1; i<nx-1; i++)
     {
