@@ -133,6 +133,10 @@ par_read_from_str(const char *str, par_t *par)
     sprintf(par->output_dir, "%s", item->valuestring);
   }
 
+  for (int i=0; i<4; i++)
+  {
+    par->flag_bdry_orth[i] = 1;
+  }
   if (item = cJSON_GetObjectItem(root, "flag_bdry_orth")) {
     for (int i=0; i<4; i++)
     {
