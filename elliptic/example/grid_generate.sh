@@ -8,7 +8,7 @@ date
 #-- system related dir
 MPIDIR=/data/apps/openmpi/4.1.5-cuda-aware
 #-- program related dir
-EXEC_GRID=`pwd`/../main_grid_2d
+EXEC_GRID=`pwd`/../main
 echo "EXEC_GRID=${EXEC_GRID}"
 
 #-- input dir
@@ -34,7 +34,7 @@ NPROCS_Z=1
 #----------------------------------------------------------------------
 cat << ieof > ${PAR_FILE}
 {
-  "number_of_grid_points_x" : 801,
+  "number_of_grid_points_x" : 601,
   "number_of_grid_points_z" : 401,
 
   "number_of_mpiprocs_x" : $NPROCS_X,
@@ -50,10 +50,13 @@ cat << ieof > ${PAR_FILE}
 
   "geometry_input_file" : "${INPUTDIR}/data_file_2d.txt",
   "grid_export_dir" : "${OUTPUT_DIR}",
+   
+   "flag_bdry_orth" : [0,1,1,1],
 
   "grid_method" : {
-      "#elli_diri" : {
-          "coef" : -20,
+      "#tfi":"",
+      "elli_diri" : {
+          "coef" : -5,
           "iter_err" : 1E-2,
           "max_iter" : 5E3
       },

@@ -91,6 +91,13 @@ int main(int argc, char** argv)
   time_t t_start = time(NULL);
   switch(par->method_itype)
   {
+    case TFI : {
+        
+      //
+
+      break;
+    }
+
     case ELLI_DIRI : {
       
       diri_gene(gdcurv,par,mympi);

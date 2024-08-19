@@ -51,6 +51,7 @@ diri_gene(gd_t *gdcurv, par_t *par, mympi_t *mympi)
   float err = par->iter_err;
   int max_iter = par->max_iter;
   float coef = par->coef;
+  int *flag_orth = par->flag_bdry_orth;
 
   int nx = gdcurv->nx;
   int nz = gdcurv->nz;
@@ -83,7 +84,7 @@ diri_gene(gd_t *gdcurv, par_t *par, mympi_t *mympi)
   g22_z = (float *)mem_calloc_1d_float(nx*2, 0.0, "g22_z"); 
   ghost_cal(x2d,z2d,nx,nz,p_x,p_z,g11_x,g22_z,neighid);
 
-  set_src_diri(x2d,z2d,gdcurv,src,p_x,p_z,g11_x,g22_z,mympi);
+  set_src_diri(x2d,z2d,gdcurv,src,p_x,p_z,flag_orth,g11_x,g22_z,mympi);
   interp_inner_source(src, gdcurv, coef);
 
   // copy coord
@@ -169,7 +170,7 @@ diri_gene(gd_t *gdcurv, par_t *par, mympi_t *mympi)
     x2d_tmp = ptr_x;
     z2d_tmp = ptr_z;
     
-    set_src_diri(x2d,z2d,gdcurv,src,p_x,p_z,g11_x,g22_z,mympi);
+    set_src_diri(x2d,z2d,gdcurv,src,p_x,p_z,flag_orth,g11_x,g22_z,mympi);
     interp_inner_source(src, gdcurv, coef);
 
     if(Niter>max_iter) {
@@ -198,7 +199,7 @@ diri_gene(gd_t *gdcurv, par_t *par, mympi_t *mympi)
 
 int
 set_src_diri(float *x2d, float *z2d, gd_t *gdcurv, 
-             src_t *src, float *p_x, float *p_z,
+             src_t *src, float *p_x, float *p_z, int *flag_orth,
              float *g11_x, float *g22_z, mympi_t *mympi)
 {
   int nx = gdcurv->nx;
@@ -253,7 +254,7 @@ set_src_diri(float *x2d, float *z2d, gd_t *gdcurv,
   float g11, g22;
 
   // bdry x1 xi=0
-  if(neighid[0] == MPI_PROC_NULL)
+  if(neighid[0] == MPI_PROC_NULL && flag_orth[0] == 1)
   {
     for(int k=1; k<nz-1; k++)
     {
@@ -281,7 +282,7 @@ set_src_diri(float *x2d, float *z2d, gd_t *gdcurv,
   }
 
   // bdry x2 xi=1
-  if(neighid[1] == MPI_PROC_NULL)
+  if(neighid[1] == MPI_PROC_NULL && flag_orth[1] == 1)
   {
     for(int k=1; k<nz-1; k++)
     {
@@ -309,7 +310,7 @@ set_src_diri(float *x2d, float *z2d, gd_t *gdcurv,
   }
 
   // bdry z1 zt=0
-  if(neighid[2] == MPI_PROC_NULL)
+  if(neighid[2] == MPI_PROC_NULL && flag_orth[2] == 1)
   {
     for(int i=1; i<nx-1; i++)
     {
@@ -337,7 +338,7 @@ set_src_diri(float *x2d, float *z2d, gd_t *gdcurv,
   }
 
   // bdry z2 zt=1
-  if(neighid[3] == MPI_PROC_NULL)
+  if(neighid[3] == MPI_PROC_NULL && flag_orth[3] == 1)
   {
     for(int i=1; i<nx-1; i++)
     {

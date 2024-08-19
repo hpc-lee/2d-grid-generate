@@ -37,7 +37,7 @@ diri_gene(gd_t *gdcurv, par_t *par, mympi_t *mympi);
 
 int
 set_src_diri(float *x2d, float *z2d, gd_t *gdcurv,
-             src_t *src, float *p_x, float *p_z,
+             src_t *src, float *p_x, float *p_z, int *flag_orth,
              float *g11_x, float *g22_z, mympi_t *mympi);
 
 int

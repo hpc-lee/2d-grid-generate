@@ -133,7 +133,17 @@ par_read_from_str(const char *str, par_t *par)
     sprintf(par->output_dir, "%s", item->valuestring);
   }
 
+  if (item = cJSON_GetObjectItem(root, "flag_bdry_orth")) {
+    for (int i=0; i<4; i++)
+    {
+      par->flag_bdry_orth[i] = cJSON_GetArrayItem(item, i)->valueint;
+    }
+  }
+
   if (item = cJSON_GetObjectItem(root, "grid_method")) {
+    if (subitem = cJSON_GetObjectItem(item, "tfi")) {
+      par->method_itype = TFI;
+    }
     if (subitem = cJSON_GetObjectItem(item, "elli_diri")) {
       par->method_itype = ELLI_DIRI;
       if (thirditem = cJSON_GetObjectItem(subitem, "coef")) {
