@@ -50,18 +50,16 @@ cat << ieof > ${PAR_FILE}
 
   "geometry_input_file" : "${INPUTDIR}/data_file_2d.txt",
   "grid_export_dir" : "${OUTPUT_DIR}",
-   
-   "flag_bdry_orth" : [0,1,1,1],
 
   "grid_method" : {
       "#tfi":"",
-      "elli_diri" : {
-          "coef" : -5,
+      "#elli_diri" : {
+          "coef" : [1000,20,20,20],
           "iter_err" : 1E-2,
           "max_iter" : 5E3
       },
-      "#elli_higen" : {
-          "coef" : -20,
+      "elli_higen" : {
+          "coef" : [1000,1000,20,20],
           "iter_err" : 1E-2,
           "max_iter" : 5E3
       }

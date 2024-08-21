@@ -6,7 +6,7 @@ clear all;
 close all;
 
 flag_printf = 1;
-flag_topo_x = 0;
+flag_topo_x = 1;
 flag_topo_z = 1;
 
 nx1 = 601;
@@ -32,9 +32,9 @@ for i=1:nx1
 end
 
 if flag_topo_z
-  x0 = 0.3*1e3;
+  x0 = 0.1*1e3;
   a = 0.1*1e3;
-  H = 0.0*1e3;
+  H = 0.1*1e3;
   for i = 1:nx
       x = (i-1)*dx;
       %topo = H*exp(-(x-x0)^2/a^2) - H*exp(-(x-x1)^2/a^2);
@@ -68,7 +68,7 @@ if flag_topo_x
           topo = 0.5*H * (1+cos(pi*r1/L));
       end
       bx2(k,1)=bx2(k,1)+topo;
-      bx1(k,1)=bx1(k,1)-topo;
+%       bx1(k,1)=bx1(k,1)-topo;
   end
 end
 

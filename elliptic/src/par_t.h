@@ -39,13 +39,12 @@ typedef struct{
   char geometry_input_file[PAR_MAX_STRLEN];
   char output_dir[PAR_MAX_STRLEN];
   
-  int flag_bdry_orth[4]; // boundary orthogonality
   // TFI hermite elliptic-dirichlet
   // elliptic-hilgenstock
   // parabolic hyperbolic
   int method_itype;
 
-  float coef;
+  float coef[4];  //each bdry coef
 
   float iter_err;   // iteration error
   int max_iter;  // max iterations

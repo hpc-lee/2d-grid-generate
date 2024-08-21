@@ -133,17 +133,6 @@ par_read_from_str(const char *str, par_t *par)
     sprintf(par->output_dir, "%s", item->valuestring);
   }
 
-  for (int i=0; i<4; i++)
-  {
-    par->flag_bdry_orth[i] = 1;
-  }
-  if (item = cJSON_GetObjectItem(root, "flag_bdry_orth")) {
-    for (int i=0; i<4; i++)
-    {
-      par->flag_bdry_orth[i] = cJSON_GetArrayItem(item, i)->valueint;
-    }
-  }
-
   if (item = cJSON_GetObjectItem(root, "grid_method")) {
     if (subitem = cJSON_GetObjectItem(item, "tfi")) {
       par->method_itype = TFI;
@@ -151,7 +140,10 @@ par_read_from_str(const char *str, par_t *par)
     if (subitem = cJSON_GetObjectItem(item, "elli_diri")) {
       par->method_itype = ELLI_DIRI;
       if (thirditem = cJSON_GetObjectItem(subitem, "coef")) {
-        par->coef = thirditem->valuedouble;
+        for (int i=0; i<4; i++)
+        {
+          par->coef[i] = cJSON_GetArrayItem(thirditem, i)->valuedouble;
+        }
       }
       if (thirditem = cJSON_GetObjectItem(subitem, "iter_err")) {
         par->iter_err = thirditem->valuedouble;
@@ -163,7 +155,10 @@ par_read_from_str(const char *str, par_t *par)
     if (subitem = cJSON_GetObjectItem(item, "elli_higen")) {
       par->method_itype = ELLI_HIGEN;
       if (thirditem = cJSON_GetObjectItem(subitem, "coef")) {
-        par->coef = thirditem->valuedouble;
+        for (int i=0; i<4; i++)
+        {
+          par->coef[i] = cJSON_GetArrayItem(thirditem, i)->valuedouble;
+        }
       }
       if (thirditem = cJSON_GetObjectItem(subitem, "iter_err")) {
         par->iter_err = thirditem->valuedouble;
@@ -220,13 +215,19 @@ par_print(par_t *par)
   fprintf(stdout, "------- grid generate method-------\n");
   if(par->method_itype == ELLI_DIRI) {
     fprintf(stdout, "grid generate method is elliptic_dirichlet\n");
-    fprintf(stdout, "elli_diri coef is %f\n", par->coef);
+    fprintf(stdout, "elli_diri coef x1 is %f\n", par->coef[0]);
+    fprintf(stdout, "elli_diri coef x2 is %f\n", par->coef[1]);
+    fprintf(stdout, "elli_diri coef z1 is %f\n", par->coef[2]);
+    fprintf(stdout, "elli_diri coef z2 is %f\n", par->coef[3]);
     fprintf(stdout, "max_iteration is %d\n", par->max_iter);
     fprintf(stdout, "iter_error is %f\n", par->iter_err);
   }
   if(par->method_itype == ELLI_HIGEN) {
     fprintf(stdout, "grid generate method is elliptic_hilgenstock\n");
-    fprintf(stdout, "elli_higen coef is %f\n", par->coef);
+    fprintf(stdout, "elli_higen coef x1 is %f\n", par->coef[0]);
+    fprintf(stdout, "elli_higen coef x2 is %f\n", par->coef[1]);
+    fprintf(stdout, "elli_higen coef z1 is %f\n", par->coef[2]);
+    fprintf(stdout, "elli_higen coef z2 is %f\n", par->coef[3]);
     fprintf(stdout, "max_iteration is %d\n", par->max_iter);
     fprintf(stdout, "iter_error is %f\n", par->iter_err);
   }

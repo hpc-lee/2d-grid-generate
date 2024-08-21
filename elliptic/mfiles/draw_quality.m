@@ -11,12 +11,12 @@ output_dir='../project/output';
 % which grid profile to plot
 subs=[1,1];     % % index 1:nx 1:nz
 subc=[-1,-1];   % '-1' to plot all points in this dimension
-subt=[1,1];
+subt=[4,4];
 
 % figure control parameters
 flag_km     = 0;
 flag_emlast = 1;
-flag_print  = 1;
+flag_print  = 0;
 flag_clb    = 1;
 flag_title  = 1;
 scl_daspect = [1 1 1];
@@ -64,8 +64,7 @@ set(gca,'FontSize',10,FontWeight='bold');
 set(gcf,'color','white','renderer','painters');
 set(gcf,'Position',[200,200,650,400]);
 % shading
-shading interp;
-% shading flat;
+% shading interp;
 % coorbar range/scale
 if exist('scl_caxis')
     caxis(scl_caxis);
@@ -86,7 +85,7 @@ end
 % title
 if flag_title
 %     title('Orthogonality',FontSize=15);
-    title('Smooth\_\xi',FontSize=15);
+%     title('Smooth\_\xi',FontSize=15);
 %     title('Smooth\_\eta',FontSize=15);
 end
 % text(-100,-20,'b)',FontSize=20);
