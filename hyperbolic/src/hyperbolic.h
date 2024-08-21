@@ -24,11 +24,13 @@ modify_smooth(float *x2d, float *z2d, int nx, int k, double *a,
 
 int
 modify_bdry(int n, double *a, double *b, double *c, double *d,
-            float epsilon, int bdry_itype);
+            float *epsilon, int *bdry_itype,
+            float *bdry1, float *bdry2, int k, int nz);
 
 int
-assign_coords(double *xz, float *x2d, float *z2d, int nx, int k,
-              float epsilon, int bdry_itype);
+assign_coords(double *xz, float *x2d, float *z2d, int nx, int nz, int k,
+              float *epsilon, int *bdry_itype,
+              float *bdry1, float *bdry2);
 
 int
 modify_incre(double *xz, float *x2d, float *z2d, int nx, int k);

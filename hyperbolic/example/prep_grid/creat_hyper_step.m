@@ -2,8 +2,9 @@ clc;
 clear all;
 close all;
 
-num_of_step = 2500;
-dh = -100;
+nz=301;
+num_of_step = nz-1;
+dh = -10;
 for i=1:num_of_step
   step(i) = dh;
 end

@@ -7,14 +7,14 @@ close all;
 
 flag_printf = 1;
 flag_km = 1;
-flag_topo_z = 0;
+flag_topo_z = 1;
 
-nx1 = 2501;
+nx1 = 501;
 num_pml = 00;
 nx = nx1 + 2*num_pml; 
 
-dx = 100;
-dz = 100;
+dx = 10;
+dz = 10;
 origin_x = 0;
 origin_z = 0;
 
@@ -25,10 +25,10 @@ for i=1:nx1
 end
 
 if flag_topo_z
-  point1 = 5*1e3;
-  point2 = 15*1e3;
-  L = 4*1e3;
-  H = 1.5*1e3;
+  point1 = 1.5*1e3;
+  point2 = 3.5*1e3;
+  L = 1*1e3;
+  H = 0.5*1e3;
   for i = 1:nx1
       r1 = sqrt((bz(i+num_pml,1)-point1)^2);
       topo1 = 0;

@@ -5,20 +5,20 @@ close all;
 flag_printf = 1;
 flag_topo_x = 1;
 
-nz = 300;
+nz = 301;
 
 dz = 10;
 origin_x = 0;
 origin_z = 0;
 a_x=0.2;
-H_x=0.2*nz*dz;
+H_x=0.1*nz*dz;
 
 bx = zeros(nz,2);
 % NOTE: z direction upward
 % so coord z incremental with k
 for k=1:nz
     bx(k,1) = origin_x;
-    bx(k,2) = origin_z + (k-1)*dz;
+    bx(k,2) = origin_z - (k-1)*dz;
 end
 
 if  flag_topo_x
@@ -37,10 +37,10 @@ if flag_printf
 end
 
 % creat data file
-file_name = '../data_file_2d.txt';
+file_name = '../bdry_file_1.txt';
 fid=fopen(file_name,'w'); % Output file name 
-fprintf(fid,'# nz number\n'); 
-fprintf(fid,'%d\n',nz);
+fprintf(fid,'# grid number\n'); 
+fprintf(fid,'# %d\n',nz);
 fprintf(fid,'# bx coords\n'); 
 for i=1:nz
   fprintf(fid,'%.9e %.9e\n',bx(i,1),bx(i,2));

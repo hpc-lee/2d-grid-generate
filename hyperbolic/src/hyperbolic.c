@@ -9,6 +9,7 @@
 #include "lib_mem.h"
 #include "lib_math.h"
 #include "constants.h"
+#include "io_funcs.h"
 
 int 
 hyper_gene(gd_t *gdcurv, par_t *par)
@@ -17,12 +18,50 @@ hyper_gene(gd_t *gdcurv, par_t *par)
   int nz = gdcurv->nz;
   int n = nx-2;  // not include bdry 2 points
   float coef = par->coef; 
-  int o2i = par->o2i;
-  int bdry_itype = par->bdry_itype;
-  float epsilon = par->epsilon;
+  int index_is_min = par->index_is_min;
+  int *bdry_itype = par->bdry_itype;
+  float *epsilon = par->epsilon;
   float *x2d = gdcurv->x2d;
   float *z2d = gdcurv->z2d;
   float *step = gdcurv->step;
+
+  float *bdry1 = NULL;
+  float *bdry2 = NULL;
+  FILE *fp = NULL;
+  char str[500];
+  // read bdry coord if bdry type is fixed
+  if(bdry_itype[0] == 3)
+  {
+    bdry1 =  (float *)mem_calloc_1d_float(nz*2, 0.0, "init");
+    // open bdry1 file
+    if ((fp = fopen(par->bdry_file1,"r"))==NULL) {
+       fprintf(stderr,"ERROR: fail to open bdry1 file=%s\n", par->bdry_file1);
+       fflush(stdout); exit(1);
+    }
+    for(int i=0; i<nz; i++)
+    {
+      if (!io_get_nextline(fp,str,500)) {
+        sscanf(str,"%f %f",bdry1+i,bdry1+nz+i);
+      }
+    }
+    fclose(fp);
+  }
+  if(bdry_itype[1] == 3)
+  {
+    bdry2 =  (float *)mem_calloc_1d_float(nz*2, 0.0, "init");
+    // open bdry1 file
+    if ((fp = fopen(par->bdry_file2,"r"))==NULL) {
+       fprintf(stderr,"ERROR: fail to open bdry2 file=%s\n", par->bdry_file2);
+       fflush(stdout); exit(1);
+    }
+    for(int i=0; i<nz; i++)
+    {
+      if (!io_get_nextline(fp,str,500)) {
+        sscanf(str,"%f %f",bdry2+i,bdry2+nz+i);
+      }
+    }
+    fclose(fp);
+  }
 
   float *coef_e = (float *)mem_calloc_1d_float(nx, 0.0, "init");
   float *area = (float *)mem_calloc_1d_float(nx*2, 0.0, "init");
@@ -39,29 +78,26 @@ hyper_gene(gd_t *gdcurv, par_t *par)
   int k=1;
   cal_matrix(x2d,z2d,nx,k,step,a,b,c,d,area);
   modify_smooth(x2d,z2d,nx,k,a,b,c,d,coef_e);
-  modify_bdry(n,a,b,c,d,epsilon,bdry_itype);
+  modify_bdry(n,a,b,c,d,epsilon,bdry_itype,bdry1,bdry2,k,nz);
   thomas_block(n,a,b,c,d,xz,D,y);
-  assign_coords(xz,x2d,z2d,nx,k,epsilon,bdry_itype);
-
+  assign_coords(xz,x2d,z2d,nx,nz,k,epsilon,bdry_itype,bdry1,bdry2);
 
   for(int k=1; k<nz; k++)
   {
     cal_smooth_coef(coef,x2d,z2d,nx,nz,k,step,coef_e);
     cal_matrix(x2d,z2d,nx,k,step,a,b,c,d,area);
     modify_smooth(x2d,z2d,nx,k,a,b,c,d,coef_e);
-    modify_bdry(n,a,b,c,d,epsilon,bdry_itype);
+    modify_bdry(n,a,b,c,d,epsilon,bdry_itype,bdry1,bdry2,k,nz);
     thomas_block(n,a,b,c,d,xz,D,y);
-    assign_coords(xz,x2d,z2d,nx,k,epsilon,bdry_itype);
+    assign_coords(xz,x2d,z2d,nx,nz,k,epsilon,bdry_itype,bdry1,bdry2);
 
     fprintf(stdout,"number of layers is %d\n",k);
     fflush(stdout);
   }
 
-  if(o2i == 1)
+  if(index_is_min == 0)
   {
-    //fprintf(stdout,"hyperbolic method, inner bdry(k=0), outer bdry(nz-1)\n");
-    //fprintf(stdout,"we default set read init bdry is inner bdry(k=0)\n");
-    //fprintf(stdout,"so if the init bdry is outer bdry actually, must be flip\n");
+    //fprintf(stdout,"the init bdry is max index, so index must be flip\n");
     flip_coord_z(gdcurv);
   }
 
@@ -74,6 +110,8 @@ hyper_gene(gd_t *gdcurv, par_t *par)
   free(xz);
   free(D);
   free(y);
+  free(bdry1);
+  free(bdry2);
 
   return 0;
 }
@@ -400,37 +438,84 @@ modify_smooth(float *x2d, float *z2d, int nx, int k, double *a,
 
 int
 modify_bdry(int n, double *a, double *b, double *c, double *d,
-            float epsilon, int bdry_itype)
+            float *epsilon, int *bdry_itype, 
+            float *bdry1, float *bdry2, int k, int nz)
 {
   size_t iptr;
+  // left bdry
   // float boundry
-  if(bdry_itype == 1)
+  if(bdry_itype[0] == 1)
+  {
+    for(int ii=0; ii<2; ii++) {
+      for(int jj=0; jj<2; jj++) {
+        // modify i=0
+        b[ii*2+jj] = b[ii*2+jj] + (1+epsilon[0])*a[ii*2+jj];
+        c[ii*2+jj] = c[ii*2+jj] - epsilon[0]*a[ii*2+jj];
+      }
+    }
+  }
+  else if(bdry_itype[0] == 2)  // dx=0 cartesian boundry
+  {
+    // only modify second column
+    int jj = 1;
+    for(int ii=0; ii<2; ii++) {
+      // modify i=0
+      b[ii*2+jj] = b[ii*2+jj] + a[ii*2+jj];
+    }
+  }
+  else if(bdry_itype[0] == 3) // fixed boundry modify d = d-A*delta(r1)
+  {
+    double A[2][2], vec_1[2], vec[2];
+    for(int ii=0; ii<2; ii++) {
+      for(int jj=0; jj<2; jj++) {
+        A[ii][jj] = a[ii*2+jj];
+      }
+      vec_1[ii] = bdry1[k+ii*nz]-bdry1[(k-1)+ii*nz];  // coord increment
+    }
+    mat_mul2x1(A,vec_1,vec);
+    for(int ii=0; ii<2; ii++)
+    {
+        d[ii] = d[ii] - vec[ii];
+    }
+  }
+  // right bdry
+  // float boundry
+  if(bdry_itype[1] == 1)
   {
     iptr = (n-1)*CONST_NDIM*CONST_NDIM;
     for(int ii=0; ii<2; ii++) {
       for(int jj=0; jj<2; jj++) {
-        // modify i=0
-        b[ii*2+jj] = b[ii*2+jj] + (1+epsilon)*a[ii*2+jj];
-        c[ii*2+jj] = c[ii*2+jj] - epsilon*a[ii*2+jj];
         // modify i=n-1
-        b[iptr+ii*2+jj] = b[iptr+ii*2+jj] + (1+epsilon)*c[iptr+ii*2+jj];
-        a[iptr+ii*2+jj] = a[iptr+ii*2+jj] - epsilon*c[iptr+ii*2+jj];
+        b[iptr+ii*2+jj] = b[iptr+ii*2+jj] + (1+epsilon[1])*c[iptr+ii*2+jj];
+        a[iptr+ii*2+jj] = a[iptr+ii*2+jj] - epsilon[1]*c[iptr+ii*2+jj];
       }
     }
   }
-
-  // dx=0 cartesian boundry
-  if(bdry_itype == 2)
+  else if(bdry_itype[1] == 2)  // dx=0 cartesian boundry
   {
-    int jj;
     iptr = (n-1)*CONST_NDIM*CONST_NDIM;
+    // only modify second column
+    int jj = 1;
     for(int ii=0; ii<2; ii++) {
-      // only modify second column
-      jj = 1;
-      // modify i=0
-      b[ii*2+jj] = b[ii*2+jj] + a[ii*2+jj];
       // modify i=nx-3
       b[iptr+ii*2+jj] = b[iptr+ii*2+jj] + c[iptr+ii*2+jj];
+    }
+  }
+  else if(bdry_itype[1] == 3) // fixed boundry
+  {
+    iptr = (n-1)*CONST_NDIM*CONST_NDIM;
+    double A[2][2], vec_2[2], vec[2];
+    for(int ii=0; ii<2; ii++) {
+      for(int jj=0; jj<2; jj++) {
+        A[ii][jj] = a[iptr+ii*2+jj];
+      }
+      vec_2[ii] = bdry2[k+ii*nz]-bdry2[(k-1)+ii*nz];  // coord increment
+    }
+    mat_mul2x1(A,vec_2,vec);
+    iptr = (n-1)*CONST_NDIM;
+    for(int ii=0; ii<2; ii++) 
+    {
+      d[iptr+ii] = d[iptr+ii] - vec[ii];
     }
   }
 
@@ -438,8 +523,8 @@ modify_bdry(int n, double *a, double *b, double *c, double *d,
 }
 
 int
-assign_coords(double *xz, float *x2d, float *z2d, int nx, int k,
-              float epsilon, int bdry_itype)
+assign_coords(double *xz, float *x2d, float *z2d, int nx, int nz, int k,
+              float *epsilon, int *bdry_itype, float *bdry1, float *bdry2)
 {
   size_t iptr,iptr1,iptr2;
   size_t iptr3,iptr4,iptr5;
@@ -452,8 +537,9 @@ assign_coords(double *xz, float *x2d, float *z2d, int nx, int k,
     z2d[iptr] = z2d[iptr1] + xz[iptr2+1];
   }
 
+  // left
   // floating boundary
-  if(bdry_itype == 1)
+  if(bdry_itype[0] == 1)
   {
     iptr  = k*nx+0;       // (0,k)
     iptr1 = (k-1)*nx+0;   // (0,k-1)
@@ -462,26 +548,13 @@ assign_coords(double *xz, float *x2d, float *z2d, int nx, int k,
     iptr4 = k*nx+2;       // (2,k)
     iptr5 = (k-1)*nx+2;   // (2,k-1)
 
-    x2d[iptr] = x2d[iptr1] + (1+epsilon)*(x2d[iptr2]-x2d[iptr3])
-               -epsilon*(x2d[iptr4]-x2d[iptr5]);
-    z2d[iptr] = z2d[iptr1] + (1+epsilon)*(z2d[iptr2]-z2d[iptr3])
-               -epsilon*(z2d[iptr4]-z2d[iptr5]);
+    x2d[iptr] = x2d[iptr1] + (1+epsilon[0])*(x2d[iptr2]-x2d[iptr3])
+               -epsilon[0]*(x2d[iptr4]-x2d[iptr5]);
+    z2d[iptr] = z2d[iptr1] + (1+epsilon[0])*(z2d[iptr2]-z2d[iptr3])
+               -epsilon[0]*(z2d[iptr4]-z2d[iptr5]);
 
-    iptr  = k*nx+(nx-1);       // (nx-1,k)
-    iptr1 = (k-1)*nx+(nx-1);   // (nx-1,k-1)
-    iptr2 = k*nx+(nx-2);       // (nx-2,k)
-    iptr3 = (k-1)*nx+(nx-2);   // (nx-2,k-1)
-    iptr4 = k*nx+(nx-3);       // (nx-3,k)
-    iptr5 = (k-1)*nx+(nx-3);   // (nx-3,k-1)
-
-    x2d[iptr] = x2d[iptr1] + (1+epsilon)*(x2d[iptr2]-x2d[iptr3])
-               -epsilon*(x2d[iptr4]-x2d[iptr5]);
-    z2d[iptr] = z2d[iptr1] + (1+epsilon)*(z2d[iptr2]-z2d[iptr3])
-               -epsilon*(z2d[iptr4]-z2d[iptr5]);
   }
-
-  // cartesian boundary
-  if(bdry_itype == 2)
+  else if(bdry_itype[0] == 2) // cartesian boundary
   {
     iptr  = k*nx+0;       // (0,k) 
     iptr1 = k*nx+1;       // (1,k) 
@@ -490,7 +563,30 @@ assign_coords(double *xz, float *x2d, float *z2d, int nx, int k,
 
     x2d[iptr] = x2d[iptr2];
     z2d[iptr] = z2d[iptr2] + (z2d[iptr1] - z2d[iptr3]);
+  }
+  else if(bdry_itype[0] == 3)  //fixed bpundary
+  {
+    iptr  = k*nx+0;       // (0,k) 
+    x2d[iptr] = bdry1[k];
+    z2d[iptr] = bdry1[k+nz];
+  }
 
+  if(bdry_itype[1] == 1)
+  {
+    iptr  = k*nx+(nx-1);       // (nx-1,k)
+    iptr1 = (k-1)*nx+(nx-1);   // (nx-1,k-1)
+    iptr2 = k*nx+(nx-2);       // (nx-2,k)
+    iptr3 = (k-1)*nx+(nx-2);   // (nx-2,k-1)
+    iptr4 = k*nx+(nx-3);       // (nx-3,k)
+    iptr5 = (k-1)*nx+(nx-3);   // (nx-3,k-1)
+
+    x2d[iptr] = x2d[iptr1] + (1+epsilon[1])*(x2d[iptr2]-x2d[iptr3])
+               -epsilon[1]*(x2d[iptr4]-x2d[iptr5]);
+    z2d[iptr] = z2d[iptr1] + (1+epsilon[1])*(z2d[iptr2]-z2d[iptr3])
+               -epsilon[1]*(z2d[iptr4]-z2d[iptr5]);
+  }
+  else if(bdry_itype[1] == 2) // cartesian boundary
+  {
     iptr  = k*nx+(nx-1);   // (nx-1,k) 
     iptr1 = k*nx+(nx-2);   // (nx-2,k)
     iptr2 = (k-1)*nx+nx-1; // (nx-1,k-1)
@@ -498,6 +594,13 @@ assign_coords(double *xz, float *x2d, float *z2d, int nx, int k,
 
     x2d[iptr] = x2d[iptr2];
     z2d[iptr] = z2d[iptr2] + (z2d[iptr1] - z2d[iptr3]);
+  }
+  else if(bdry_itype[1] == 3)  //fixed boundary
+  {
+    iptr  = k*nx+(nx-1);   // (nx-1,k) 
+
+    x2d[iptr] = bdry2[k];
+    z2d[iptr] = bdry2[k+nz];
   }
 
   return 0;
