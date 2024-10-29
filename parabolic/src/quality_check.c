@@ -90,7 +90,7 @@ cal_orth(io_quality_t *io_quality, gd_t *gdcurv)
       len_zt = sqrt(pow(x_zt,2) + pow(z_zt,2));
       cos_angle = dot/(len_xi*len_zt); 
       // offset relative 90 degree
-      var[iptr] = fabs((acos(cos_angle) * trans - 90));
+      var[iptr] = 90-fabs((acos(cos_angle) * trans - 90));
     }
   }
   

@@ -48,29 +48,9 @@ int main(int argc, char** argv)
   gd_t *gdcurv = (gd_t *) malloc(sizeof(gd_t));
 
   time_t t_start = time(NULL);
-  switch(par->method_itype)
-  {
-    case PARABOLIC : {
+  grid_init_set(gdcurv,par);
 
-      grid_init_set(gdcurv,par->geometry_input_file);
-      // before grid generate
-      if(par->dire_itype == X_DIRE)
-      {
-        permute_coord_x(gdcurv);
-      }
-
-      para_gene(gdcurv,par);
-
-      // after grid generate
-      if(par->dire_itype == X_DIRE)
-      {
-        permute_coord_x(gdcurv);
-      }
-
-      break;
-    }
-  }
-
+  para_gene(gdcurv,par);
   time_t t_end = time(NULL);
 
   fprintf(stdout,"\n************************************\n");

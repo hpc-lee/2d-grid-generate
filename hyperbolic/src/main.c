@@ -29,14 +29,12 @@ int main(int argc, char** argv)
 
   par_fname = argv[1];
 
-
   fprintf(stdout,"par file =  %s\n", par_fname); fflush(stdout);
 
   // read par
   par_t *par = (par_t *) malloc(sizeof(par_t));
 
   par_read_from_file(par_fname, par);
-
 
   par_print(par);
    
@@ -46,21 +44,14 @@ int main(int argc, char** argv)
   gd_t *gdcurv_new = (gd_t *) malloc(sizeof(gd_t));
 
   time_t t_start = time(NULL);
-  switch(par->method_itype)
+  grid_init_set_hyper(gdcurv,par);
+  hyper_gene(gdcurv,par);
+  // after grid generate
+  if(par->dire_itype == X_DIRE)
   {
-    case HYPERBOLIC : {
-
-      grid_init_set_hyper(gdcurv,par);
-      hyper_gene(gdcurv,par);
-      // after grid generate
-      if(par->dire_itype == X_DIRE)
-      {
-        permute_coord_x(gdcurv);
-      }
-
-      break;
-    }
+    permute_coord_x(gdcurv);
   }
+
 
   time_t t_end = time(NULL);
 

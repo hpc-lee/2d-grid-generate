@@ -1024,7 +1024,6 @@ int interp_inner_source(src_t *src, gd_t *gdcurv, float *coef)
       Q[iptr] = Q[iptr] + c0*Q_z1[gni] + c1*Q_z2[gni];
     }
   }
-  
 
   return 0;
 }

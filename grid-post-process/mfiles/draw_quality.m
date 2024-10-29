@@ -1,12 +1,11 @@
 clear all;
 close all;
 clc;
-addmypath
 
 % -------------------------- parameters input -------------------------- %
 % file and path name
-parfnm='../project1/test.json';
-output_dir='../project1/output';
+parfnm='../project/test.json';
+output_dir='../project/output';
 
 % which grid profile to plot
 subs=[1,1];     % % index 1:nx 1:nz
@@ -14,20 +13,18 @@ subc=[-1,-1];   % '-1' to plot all points in this dimension
 subt=[1,1];
 
 % figure control parameters
-flag_km     = 0;
-flag_emlast = 1;
-flag_print  = 1;
+flag_km     = 1;
+flag_print  = 0;
 flag_clb    = 1;
 flag_title  = 1;
-scl_daspect = [1 1 1];
 clrmp       = 'parula';
-scl_caxis = [45 90];
+% scl_caxis = [20 90];
 % varable to plot 
 %  'orth', 'jacobi', 'ratio', 'smooth_xi', 
 %  'smooth_zt', 'step_xi', 'step_zt'
 % varnm = 'jacobi';
 varnm = 'orth';
-% varnm = 'smooth_zt';
+% varnm = 'smooth_xi';
 %-----------------------------------------------------------
 %-- load coord
 %-----------------------------------------------------------
@@ -61,20 +58,14 @@ ylabel(['Y axis (' str_unit ')'],FontSize=15);
 
 set(gca,'layer','top');
 set(gca,'FontSize',10,FontWeight='bold');
-set(gcf,'color','white','renderer','painters');
+set(gcf,'color','white');
 set(gcf,'Position',[200,200,650,400]);
-% shading
 shading interp;
-% shading flat;
 % coorbar range/scale
-if exist('scl_caxis','var')
+if exist('scl_caxis')
     caxis(scl_caxis);
 end
-% axis daspect
-if exist('scl_daspect')
-    daspect(scl_daspect);
-end
-axis equal tight;
+axis equal;
 % colormap and colorbar
 if exist('clrmp')
     colormap(clrmp);
@@ -83,13 +74,11 @@ if flag_clb
     cid=colorbar;
 %     set(get(cid,'Title'),'string','degree');
 end
-% title
 if flag_title
-    title('Orthogonality',FontSize=15);
-%     title('Smooth\_\xi',FontSize=15);
+%     title('Orthogonality',FontSize=15);
+    title('Smooth\_\xi',FontSize=15);
 %     title('Smooth\_\eta',FontSize=15);
 end
-% text(-100,-20,'b)',FontSize=20);
 
 % save and print figure
 if flag_print

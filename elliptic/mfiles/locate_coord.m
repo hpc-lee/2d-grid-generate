@@ -6,7 +6,8 @@ if ~ exist(parfnm,'file')
 end
 
 % read parameters file
-par=loadjson(parfnm);
+jsontext=fileread(parfnm);
+par=jsondecode(jsontext);
 ngik=[par.number_of_grid_points_x,...
       par.number_of_grid_points_z];
 
@@ -27,10 +28,10 @@ n=0;
 for i=1:length(coordlist)
     
     coordnm=[output_dir,'/',coordlist(i).name];
-    xzs=double(nc_attget(coordnm,nc_global,'global_index_of_first_physical_points'));
+    xzs=double(ncreadatt(coordnm, '/', 'global_index_of_first_physical_points'));
     xs=xzs(1);
     zs=xzs(2);
-    xzc=double(nc_attget(coordnm,nc_global,'count_of_physical_points'));
+    xzc=double(ncreadatt(coordnm, '/', 'count_of_physical_points'));
     xc=xzc(1);
     zc=xzc(2);
     xarray=[xs:xs+xc-1];
@@ -53,10 +54,10 @@ for ip=1:length(px)
     
     coordnm=[output_dir,'/',coordprefix,'_px',num2str(px(ip)),...
             '_pz',num2str(pz(ip)),'.nc'];
-    xzs=double(nc_attget(coordnm,nc_global,'global_index_of_first_physical_points'));
+    xzs=double(ncreadatt(coordnm, '/', 'global_index_of_first_physical_points'));
     xs=xzs(1);
     zs=xzs(2);
-    xzc=double(nc_attget(coordnm,nc_global,'count_of_physical_points'));
+    xzc=double(ncreadatt(coordnm, '/', 'count_of_physical_points'));
     xc=xzc(1);
     zc=xzc(2);
     xe=xs+xc-1;

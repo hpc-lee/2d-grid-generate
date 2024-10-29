@@ -11,17 +11,17 @@ int
 para_gene(gd_t *gdcurv, par_t *par);
 
 int 
-predict_point(float *x2d, float *z2d, int nx, int nz, int k, int o2i, 
-              float coef, float *x1_len, float *x2_len);
+predict_point(float *x2d, float *z2d, int nx, int nz, int k, int t2b, 
+              float coef, float *step_len, float *x_pre, float *z_pre);
 
 int
-update_point(float *x2d, float *z2d, float *thomas, int nx, int nz, int k);
+update_point(float *x2d, float *z2d, float *var_th, int nx, int k,
+             float *x_pre, float *z_pre);
+
+int 
+assign_bdry_coords(float *x2d, float *z2d, int nx, int k);
 
 int
-bdry_effct(float *x2d, float *z2d, int nx, int nz, int k);
-
-int
-cal_bdry_arc_length(float *x2d, float *z2d, int nx,
-                    int nz, float *arc1_len, float *arc2_len);
+flip_step_z(float *step, int nz);
 
 #endif

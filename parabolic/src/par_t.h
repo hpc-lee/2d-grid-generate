@@ -44,7 +44,7 @@ typedef struct{
   char direction[PAR_MAX_STRLEN];
   float coef;
 
-  int o2i;  // for parabolic hyperbolic
+  int t2b;  // for parabolic hyperbolic
   int bdry_itype; // for hyperbolic
   float epsilon;  // for hyperbolic
 } par_t;

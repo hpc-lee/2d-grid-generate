@@ -10,9 +10,6 @@
 #include "par_t.h"
 
 #define PAR_MAX_STRLEN 1000
-#define TFI 1
-#define PARABOLIC 2
-#define HYPERBOLIC 3
 
 #define X_DIRE 1
 #define Z_DIRE 2
@@ -35,14 +32,11 @@ typedef struct{
   char grid_export_dir[PAR_MAX_STRLEN];
 
   char step_input_file[PAR_MAX_STRLEN];
-  char bdry_file1[PAR_MAX_STRLEN];
-  char bdry_file2[PAR_MAX_STRLEN];
 
-  int method_itype;
   int dire_itype;
   char direction[PAR_MAX_STRLEN];
   float coef;
-  int index_is_min;
+  int t2b;
   int bdry_itype[2]; 
   float epsilon[2];  
 } par_t;

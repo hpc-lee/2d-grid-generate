@@ -6,9 +6,31 @@ if ~ exist(parfnm,'file')
 end
 
 % read parameters file
-par=loadjson(parfnm);
-ngik=[par.number_of_grid_points_x,...
-      par.number_of_grid_points_z];
+jsontext=fileread(parfnm);
+par=jsondecode(jsontext);
+num_of_grid = length(par.input_grids_info);
+
+total_nx = 0;
+total_nz = 0;
+if(strcmp(par.merge_direction,"x") == 1)
+  for i=1:num_of_grid
+    total_nx = total_nx + par.input_grids_info(i).number_of_grid_points(1);
+    total_nz = par.input_grids_info(1).number_of_grid_points(2);
+  end
+  total_nx = total_nx - num_of_grid + 1;
+  ngik=[total_nx,total_nz];
+end
+
+
+if(strcmp(par.merge_direction,"z") == 1)
+  for i=1:num_of_grid
+    total_nz = total_nz + par.input_grids_info(i).number_of_grid_points(2);
+    total_nx = par.input_grids_info(1).number_of_grid_points(1);
+  end
+  total_nz = total_nz - num_of_grid + 1;
+  ngik=[total_nx,total_nz];
+end
+
 if(par.flag_sample == 1)
   ngik(1) = ngik(1)*par.sample_factor_xi;
   ngik(2) = ngik(2)*par.sample_factor_zt;
@@ -31,10 +53,10 @@ n=0;
 for i=1:length(coordlist)
     
     coordnm=[output_dir,'/',coordlist(i).name];
-    xzs=double(nc_attget(coordnm,nc_global,'global_index_of_first_physical_points'));
+    xzs=double(ncreadatt(coordnm, '/', 'global_index_of_first_physical_points'));
     xs=xzs(1);
     zs=xzs(2);
-    xzc=double(nc_attget(coordnm,nc_global,'count_of_physical_points'));
+    xzc=double(ncreadatt(coordnm, '/', 'count_of_physical_points'));
     xc=xzc(1);
     zc=xzc(2);
     xarray=[xs:xs+xc-1];
@@ -57,10 +79,10 @@ for ip=1:length(px)
     
     coordnm=[output_dir,'/',coordprefix,'_px',num2str(px(ip)),...
             '_pz',num2str(pz(ip)),'.nc'];
-    xzs=double(nc_attget(coordnm,nc_global,'global_index_of_first_physical_points'));
+    xzs=double(ncreadatt(coordnm, '/', 'global_index_of_first_physical_points'));
     xs=xzs(1);
     zs=xzs(2);
-    xzc=double(nc_attget(coordnm,nc_global,'count_of_physical_points'));
+    xzc=double(ncreadatt(coordnm, '/', 'count_of_physical_points'));
     xc=xzc(1);
     zc=xzc(2);
     xe=xs+xc-1;

@@ -30,25 +30,16 @@ typedef struct {
  * function prototype
  *************************************************/
 
-int 
+int
 init_gdcurv(gd_t *gdcurv, int nx, int nz);
 
 int 
-grid_init_set(gd_t *gdcurv, char *input_file);
-
-int
-grid_init_set_hyper(gd_t *gdcurv, par_t *par);
+grid_init_set(gd_t *gdcurv, par_t *par);
 
 int
 grid_sample(gd_t *gdcurv_new, gd_t *gdcurv, float coef_x, float coef_z);
 
-int 
-check_bdry(float *x1, float *x2, float *z1, float *z2, int nx, int nz);
-
 int
 flip_coord_z(gd_t *gdcurv);
-
-int
-permute_coord_x(gd_t *gdcurv);
 
 #endif

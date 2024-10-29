@@ -18,7 +18,7 @@ hyper_gene(gd_t *gdcurv, par_t *par)
   int nz = gdcurv->nz;
   int n = nx-2;  // not include bdry 2 points
   float coef = par->coef; 
-  int index_is_min = par->index_is_min;
+  int t2b = par->t2b;
   int *bdry_itype = par->bdry_itype;
   float *epsilon = par->epsilon;
   float *x2d = gdcurv->x2d;
@@ -29,39 +29,6 @@ hyper_gene(gd_t *gdcurv, par_t *par)
   float *bdry2 = NULL;
   FILE *fp = NULL;
   char str[500];
-  // read bdry coord if bdry type is fixed
-  if(bdry_itype[0] == 3)
-  {
-    bdry1 =  (float *)mem_calloc_1d_float(nz*2, 0.0, "init");
-    // open bdry1 file
-    if ((fp = fopen(par->bdry_file1,"r"))==NULL) {
-       fprintf(stderr,"ERROR: fail to open bdry1 file=%s\n", par->bdry_file1);
-       fflush(stdout); exit(1);
-    }
-    for(int i=0; i<nz; i++)
-    {
-      if (!io_get_nextline(fp,str,500)) {
-        sscanf(str,"%f %f",bdry1+i,bdry1+nz+i);
-      }
-    }
-    fclose(fp);
-  }
-  if(bdry_itype[1] == 3)
-  {
-    bdry2 =  (float *)mem_calloc_1d_float(nz*2, 0.0, "init");
-    // open bdry1 file
-    if ((fp = fopen(par->bdry_file2,"r"))==NULL) {
-       fprintf(stderr,"ERROR: fail to open bdry2 file=%s\n", par->bdry_file2);
-       fflush(stdout); exit(1);
-    }
-    for(int i=0; i<nz; i++)
-    {
-      if (!io_get_nextline(fp,str,500)) {
-        sscanf(str,"%f %f",bdry2+i,bdry2+nz+i);
-      }
-    }
-    fclose(fp);
-  }
 
   float *coef_e = (float *)mem_calloc_1d_float(nx, 0.0, "init");
   float *area = (float *)mem_calloc_1d_float(nx*2, 0.0, "init");
@@ -95,7 +62,7 @@ hyper_gene(gd_t *gdcurv, par_t *par)
     fflush(stdout);
   }
 
-  if(index_is_min == 0)
+  if(t2b== 0)
   {
     //fprintf(stdout,"the init bdry is max index, so index must be flip\n");
     flip_coord_z(gdcurv);
@@ -564,12 +531,6 @@ assign_coords(double *xz, float *x2d, float *z2d, int nx, int nz, int k,
     x2d[iptr] = x2d[iptr2];
     z2d[iptr] = z2d[iptr2] + (z2d[iptr1] - z2d[iptr3]);
   }
-  else if(bdry_itype[0] == 3)  //fixed bpundary
-  {
-    iptr  = k*nx+0;       // (0,k) 
-    x2d[iptr] = bdry1[k];
-    z2d[iptr] = bdry1[k+nz];
-  }
 
   if(bdry_itype[1] == 1)
   {
@@ -594,13 +555,6 @@ assign_coords(double *xz, float *x2d, float *z2d, int nx, int nz, int k,
 
     x2d[iptr] = x2d[iptr2];
     z2d[iptr] = z2d[iptr2] + (z2d[iptr1] - z2d[iptr3]);
-  }
-  else if(bdry_itype[1] == 3)  //fixed boundary
-  {
-    iptr  = k*nx+(nx-1);   // (nx-1,k) 
-
-    x2d[iptr] = bdry2[k];
-    z2d[iptr] = bdry2[k+nz];
   }
 
   return 0;

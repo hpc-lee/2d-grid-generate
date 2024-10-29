@@ -28,8 +28,8 @@ mkdir -p ${OUTPUT_DIR}
 #----------------------------------------------------------------------
 cat << ieof > ${PAR_FILE}
 {
-  "number_of_grid_points_x" : 501,
-  "number_of_grid_points_z" : 301,
+  "number_of_grid_points_x" : 1708,
+  "number_of_grid_points_z" : 601,
 
   "check_orth" : 1,
   "#check_jac" : 1,
@@ -42,17 +42,13 @@ cat << ieof > ${PAR_FILE}
   "geometry_input_file" : "${INPUTDIR}/data_file_2d.txt",
   "grid_export_dir" : "${OUTPUT_DIR}",
 
-  "grid_method" : {
-      "hyperbolic" : {
-          "coef" : 60,
-          "bdry_type" : [3,1],
-          "epsilon" : [0,0],
-          "direction" : "z",
-          "index_is_min" : 0,
-          "step_input_file" : "${INPUTDIR}/step_file_2d.txt",
-          "bdry_file1" : "${INPUTDIR}/bdry_file_1.txt",
-          "bdry_file2" : "${INPUTDIR}/bdry_file_2.txt"
-      }
+  "hyperbolic" : {
+      "coef" : 70,
+      "bdry_type" : [1,1],
+      "epsilon" : [0,0],
+      "direction" : "z",
+      "t2b" : 1,
+      "step_input_file" : "${INPUTDIR}/step_file_2d.txt"
   }
 }
 ieof

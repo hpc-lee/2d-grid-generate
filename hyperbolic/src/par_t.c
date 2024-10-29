@@ -105,47 +105,38 @@ par_read_from_str(const char *str, par_t *par)
     sprintf(par->grid_export_dir, "%s", item->valuestring);
   }
 
-  if (item = cJSON_GetObjectItem(root, "grid_method")) {
-    if (subitem = cJSON_GetObjectItem(item, "hyperbolic")) {
-      par->method_itype = HYPERBOLIC;
-      if (thirditem = cJSON_GetObjectItem(subitem, "coef")) {
-        par->coef = thirditem->valuedouble;
+  if (item = cJSON_GetObjectItem(root, "hyperbolic")) {
+    if (subitem = cJSON_GetObjectItem(item, "coef")) {
+      par->coef = subitem->valuedouble;
+    }
+    if (subitem = cJSON_GetObjectItem(item, "epsilon")) {
+      for( int i=0; i<2; i++)
+      {
+        par->epsilon[i] = cJSON_GetArrayItem(subitem, i)->valuedouble;
       }
-      if (thirditem = cJSON_GetObjectItem(subitem, "epsilon")) {
-        for( int i=0; i<2; i++)
-        {
-          par->epsilon[i] = cJSON_GetArrayItem(thirditem, i)->valuedouble;
-        }
+    }
+    if (subitem = cJSON_GetObjectItem(item, "bdry_type")) {
+      for( int i=0; i<2; i++)
+      {
+        par->bdry_itype[i] = cJSON_GetArrayItem(subitem, i)->valueint;
       }
-      if (thirditem = cJSON_GetObjectItem(subitem, "bdry_type")) {
-        for( int i=0; i<2; i++)
-        {
-          par->bdry_itype[i] = cJSON_GetArrayItem(thirditem, i)->valueint;
-        }
+    }
+    if (subitem = cJSON_GetObjectItem(item, "t2b")) {
+      par->t2b = subitem->valueint;
+    }
+    if (subitem = cJSON_GetObjectItem(item, "direction")) {
+      sprintf(par->direction, "%s", subitem->valuestring);
+      if(strcmp(par->direction,"x") == 0)
+      {
+        par->dire_itype = X_DIRE;
       }
-      if (thirditem = cJSON_GetObjectItem(subitem, "index_is_min")) {
-        par->index_is_min = thirditem->valueint;
+      if(strcmp(par->direction,"z") == 0)
+      {
+        par->dire_itype = Z_DIRE;
       }
-      if (thirditem = cJSON_GetObjectItem(subitem, "direction")) {
-        sprintf(par->direction, "%s", thirditem->valuestring);
-        if(strcmp(par->direction,"x") == 0)
-        {
-          par->dire_itype = X_DIRE;
-        }
-        if(strcmp(par->direction,"z") == 0)
-        {
-          par->dire_itype = Z_DIRE;
-        }
-      }
-      if (thirditem = cJSON_GetObjectItem(subitem, "step_input_file")) {
-        sprintf(par->step_input_file, "%s", thirditem->valuestring);
-      }
-      if (thirditem = cJSON_GetObjectItem(subitem, "bdry_file1")) {
-        sprintf(par->bdry_file1, "%s", thirditem->valuestring);
-      }
-      if (thirditem = cJSON_GetObjectItem(subitem, "bdry_file2")) {
-        sprintf(par->bdry_file2, "%s", thirditem->valuestring);
-      }
+    }
+    if (subitem = cJSON_GetObjectItem(item, "step_input_file")) {
+      sprintf(par->step_input_file, "%s", subitem->valuestring);
     }
   }
 
@@ -190,43 +181,32 @@ par_print(par_t *par)
   }
 
   fprintf(stdout, "------- grid generate method-------\n");
-  if(par->method_itype == HYPERBOLIC) {
-    fprintf(stdout, "grid generate method is hyperbolic\n");
-    fprintf(stdout, "hyperbolic coef is %f\n", par->coef);
-    if(par->bdry_itype[0] == 1) {
-      fprintf(stdout, "left boundary type is floating boundary\n");
-    }
-    if(par->bdry_itype[0] == 2) {
-      fprintf(stdout, "left boundary type is cartesian boundary\n");
-    }
-    if(par->bdry_itype[0] == 3) {
-      fprintf(stdout, "left boundary type is fixed boundary\n");
-      fprintf(stdout, "bdry file is  %s\n",par->bdry_file1);
-    }
-    if(par->bdry_itype[1] == 1) {
-      fprintf(stdout, "right boundary type is floating boundary\n");
-    }
-    if(par->bdry_itype[1] == 2) {
-      fprintf(stdout, "right boundary type is cartesian boundary\n");
-    }
-    if(par->bdry_itype[1] == 3) {
-      fprintf(stdout, "right boundary type is fixed boundary\n");
-      fprintf(stdout, "bdry file is  %s\n",par->bdry_file2);
-    }
-    if(par->dire_itype == X_DIRE) {
-      fprintf(stdout, "grid generate direction is x\n");
-    }
-    if(par->dire_itype == Z_DIRE) {
-      fprintf(stdout, "grid generate direction is z\n");
-    }
-    if(par->index_is_min == 1)
-    {
-      fprintf(stdout, "init bdry index is 1\n");
-    } else {
-      fprintf(stdout, "init bdry index is max index\n");
-    }
-    fprintf(stdout, "step file is  %s\n",par->step_input_file);
+  fprintf(stdout, "hyperbolic coef is %f\n", par->coef);
+  if(par->bdry_itype[0] == 1) {
+    fprintf(stdout, "left boundary type is floating boundary\n");
   }
+  if(par->bdry_itype[0] == 2) {
+    fprintf(stdout, "left boundary type is cartesian boundary\n");
+  }
+  if(par->bdry_itype[1] == 1) {
+    fprintf(stdout, "right boundary type is floating boundary\n");
+  }
+  if(par->bdry_itype[1] == 2) {
+    fprintf(stdout, "right boundary type is cartesian boundary\n");
+  }
+  if(par->dire_itype == X_DIRE) {
+    fprintf(stdout, "grid generate direction is x\n");
+  }
+  if(par->dire_itype == Z_DIRE) {
+    fprintf(stdout, "grid generate direction is z\n");
+  }
+  if(par->t2b == 1)
+  {
+    fprintf(stdout, "init bdry is top\n");
+  } else {
+    fprintf(stdout, "init bdry is bottom\n");
+  }
+  fprintf(stdout, "step file is  %s\n",par->step_input_file);
 
   return ierr;
 }

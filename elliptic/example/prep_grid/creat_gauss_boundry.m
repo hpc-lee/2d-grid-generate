@@ -6,11 +6,11 @@ clear all;
 close all;
 
 flag_printf = 1;
-flag_topo_x = 1;
+flag_topo_x = 0;
 flag_topo_z = 1;
 
-nx1 = 601;
-nz = 401;
+nx1 = 801;
+nz = 801;
 num_pml = 0;
 nx = nx1 + 2*num_pml; 
 
@@ -32,13 +32,13 @@ for i=1:nx1
 end
 
 if flag_topo_z
-  x0 = 0.1*1e3;
+  x0 = 0.4*1e3;
   a = 0.1*1e3;
-  H = 0.1*1e3;
+  H = 0.2*1e3;
   for i = 1:nx
       x = (i-1)*dx;
       %topo = H*exp(-(x-x0)^2/a^2) - H*exp(-(x-x1)^2/a^2);
-      topo = -H*exp(-(x-x0)^2/a^2);
+      topo = H*exp(-(x-x0)^2/a^2);
       bz2(i,2)=bz2(i,2)+topo;
   end
 end
@@ -59,8 +59,8 @@ end
 
 if flag_topo_x
   point = origin_z - floor(nz/2)*dz;
-  L = 0.4*(nz-1)*dz;
-  H = 0.2*(nx-1)*dx;
+  L = 0.3*(nz-1)*dz;
+  H = 0.3*(nx-1)*dx;
   for k = 1:nz
       r1 = sqrt((bx2(k,2)-point)^2);
       topo = 0;
@@ -83,7 +83,9 @@ if flag_printf
     plot(bx2(:,1),bx2(:,2));
     plot(bz1(:,1),bz1(:,2));
     plot(bz2(:,1),bz2(:,2));
-    axis equal tight;
+%     axis equal tight;
+% xlim([-50,450]);
+% ylim([-450,50]);
 end
 % creat data file
 export_bdry;

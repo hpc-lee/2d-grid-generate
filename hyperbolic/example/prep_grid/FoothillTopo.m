@@ -2,15 +2,14 @@ close all;
 clear all;
 clc; 
 
-addmypath;
 
 flag_printf=1;
 num_pml = 20;
 %
-[Vp,SegyTraceH,SegyH]=ReadSegy('../../../../../velocity.segy');
+[Vp,SegyTraceH,SegyH]=ReadSegy('../../../../velocity.segy');
 [row, col] = size(Vp);
 
-dz=10;
+dz=-10;
 dx=15;
 % pcolor(Vp(1:5:row,1:5:col));
 
@@ -26,12 +25,12 @@ for i = 1 : col
     x(i)=i*dx;
 end
 
-a=800:1400; % important topo zone
+% a=800:1400; % important topo zone
 % a=900:1100;
-% a=300:900;
+a=1:1668;
 x = x(a);
 z = z(a);
-z = smooth(z,10);
+z = smooth(z,20);
 
 % plot(x(a),z(a),'r');
 % hold on;
@@ -58,7 +57,7 @@ end
 if flag_printf
     figure(1) 
     plot(bz(:,1),bz(:,2));
-    axis equal;
+%     axis equal;
     set(gcf,'color','w');
 end
 

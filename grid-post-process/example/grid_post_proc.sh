@@ -10,10 +10,9 @@ EXEC_GRID=`pwd`/../main
 echo "EXEC_GRID=${EXEC_GRID}"
 
 #-- input dir
-INPUTDIR1=/data/lihl/code/2d-grid-generate/hyperbolic/project1/output
-INPUTDIR2=/data/lihl/code/2d-grid-generate/hyperbolic/project2/output
+#INPUTDIR1=/data/lihl/code/2d-grid-generate/last-parabolic/project1/output
+INPUTDIR1=/data/lihl/code/2d-grid-generate/hyperbolic/project/output
 STRETCH_FILE1=`pwd`/arc_len_file1.txt
-STRETCH_FILE2=`pwd`/arc_len_file2.txt
 
 #-- output and conf
 PROJDIR=`pwd`/../project
@@ -34,24 +33,17 @@ cat << ieof > ${PAR_FILE}
   "input_grids_info" : [
     {
       "grid_import_dir" : "${INPUTDIR1}",
-      "number_of_grid_points" : [200,400],
-      "number_of_mpiprocs_in" : [2,2],
-      "flag_stretch" : 0,
+      "number_of_grid_points" : [1708,601],
+      "number_of_mpiprocs_in" : [1,1],
+      "flag_stretch" : 1,
       "stretch_file" : "${STRETCH_FILE1}"
-    },
-    {
-      "grid_import_dir" : "${INPUTDIR2}",
-      "number_of_grid_points" : [200,400],
-      "number_of_mpiprocs_in" : [2,2],
-      "flag_stretch" : 0,
-      "stretch_file" : "${STRETCH_FILE2}"
     }
   ],
     
-  "stretch_direction" : "x",
-  "merge_direction" : "x",
+  "stretch_direction" : "z",
+  "merge_direction" : "z",
 
-  "number_of_mpiprocs_out" : [1,2],
+  "number_of_mpiprocs_out" : [1,1],
 
   "check_orth" : 1,
   "check_jac" : 1,
@@ -65,13 +57,13 @@ cat << ieof > ${PAR_FILE}
   "sample_factor_xi" : 1,
   "sample_factor_zt" : 1,
 
-  "grid_export_dir" : "${OUTPUT_DIR}"
+  "grid_export_dir" : "${OUTPUT_DIR}",
 
   "flag_pml" : 0,
   "pml_layers" : {
-         "number_of_pml_x1" : 10,
-         "number_of_pml_x2" : 10,
-         "number_of_pml_z1" : 10,
+         "number_of_pml_x1" : 20,
+         "number_of_pml_x2" : 20,
+         "number_of_pml_z1" : 20,
          "number_of_pml_z2" : 0
   }
 

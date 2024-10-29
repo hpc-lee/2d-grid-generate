@@ -43,7 +43,6 @@ int main(int argc, char** argv)
   MPI_Comm_rank(comm, &myid);
   MPI_Comm_size(comm, &mpi_size);
 
-
   if (myid==0) fprintf(stdout,"comm=%d, size=%d\n", comm, mpi_size); 
   if (myid==0) fprintf(stdout,"par file =  %s\n", par_fname); 
 
