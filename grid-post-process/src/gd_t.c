@@ -4,6 +4,7 @@
 #include <math.h>
 
 #include "lib_mem.h"
+#include "lib_math.h"
 #include "gd_t.h"
 #include "algebra.h"
 #include "constants.h"
@@ -166,4 +167,50 @@ gd_info_set(gd_t *gdcurv, par_t *par, int iprocx, int iprocz,
   count[1] = nk;
 
   return ierr;
+}
+
+int
+cal_min_dist(gd_t *gdcurv, int *indx_i,  int *indx_k, float *dL_min)
+{
+  float dL_min_local = 1e10;
+  float dL_min_global = 1e10;
+  float *x2d = gdcurv->x2d;
+  float *z2d = gdcurv->z2d;
+  int nx = gdcurv->nx;
+  int nz = gdcurv->nz;
+  size_t siz_iz = gdcurv->siz_iz;
+
+  for (int k = 1; k < nz-1; k++)
+  {
+    for (int i = 1; i < nx-1; i++)
+    {
+      size_t iptr = i + k * siz_iz;
+      float p0[] = { x2d[iptr], z2d[iptr] };
+
+      // min L to 4 adjacent planes
+      for (int kk = -1; kk <=1; kk = kk+2)
+      {
+        for (int ii = -1; ii <= 1; ii = ii+2) 
+        {
+          float p1[] = { x2d[iptr-ii], z2d[iptr-ii] };
+          float p2[] = { x2d[iptr-kk*siz_iz],
+                         z2d[iptr-kk*siz_iz] };
+
+          float L = dist_point2line(p0, p1, p2);
+
+          if (dL_min_local > L) dL_min_local = L;
+        }
+      }
+
+      if (dL_min_global > dL_min_local) 
+      {
+        dL_min_global = dL_min_local;
+        *dL_min = dL_min_global;
+        *indx_i = i;
+        *indx_k = k;
+      }
+    }
+  }
+
+  return 0;
 }

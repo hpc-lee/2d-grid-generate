@@ -4,9 +4,9 @@
 #include "lib_math.h"
 
 int
-mat_invert3x3(double m[][3])
+mat_invert3x3(float m[][3])
 {
-  double inv[3][3];
+  float inv[3][3];
   double det;
 
   inv[0][0] = m[1][1]*m[2][2] - m[2][1]*m[1][2];
@@ -36,7 +36,7 @@ mat_invert3x3(double m[][3])
 }
 
 int
-mat_mul3x3(double A[][3], double B[][3], double C[][3])
+mat_mul3x3(float A[][3], float B[][3], float C[][3])
 {
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {
@@ -52,7 +52,7 @@ mat_mul3x3(double A[][3], double B[][3], double C[][3])
 }
 
 int
-cross_product(double *A, double *B, double *C)
+cross_product(float *A, float *B, float *C)
 {
   C[0] = A[1]*B[2] - A[2]*B[1];
   C[1] = A[2]*B[0] - A[0]*B[2];
@@ -61,10 +61,10 @@ cross_product(double *A, double *B, double *C)
   return 0;
 }
 
-double
-dot_product(double *A, double *B)
+float
+dot_product(float *A, float *B)
 {
-  double result = 0.0;
+  float result = 0.0;
   for(int i=0; i<3; i++)
   {
     result += A[i]*B[i];
@@ -74,7 +74,7 @@ dot_product(double *A, double *B)
 }
 
 int 
-mat_mul3x1(double A[][3], double *B, double *C)
+mat_mul3x1(float A[][3], float *B, float *C)
 {
   for(int i=0; i<3; i++)
   {
@@ -85,7 +85,7 @@ mat_mul3x1(double A[][3], double *B, double *C)
 }
 
 int
-mat_add3x3(double A[][3], double B[][3], double C[][3])
+mat_add3x3(float A[][3], float B[][3], float C[][3])
 {
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++){
@@ -97,7 +97,7 @@ mat_add3x3(double A[][3], double B[][3], double C[][3])
 }
 
 int
-vec_add3x1(double *A, double *B, double *C)
+vec_add3x1(float *A, float *B, float *C)
 {
   for (int i=0; i<3; i++){
     C[i] = A[i] + B[i];
@@ -107,7 +107,7 @@ vec_add3x1(double *A, double *B, double *C)
 }
 
 int
-vec_sub3x1(double *A, double *B, double *C)
+vec_sub3x1(float *A, float *B, float *C)
 {
   for (int i=0; i<3; i++){
     C[i] = A[i] - B[i];
@@ -117,7 +117,7 @@ vec_sub3x1(double *A, double *B, double *C)
 }
 
 int
-mat_sub3x3(double A[][3], double B[][3], double C[][3])
+mat_sub3x3(float A[][3], float B[][3], float C[][3])
 {
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++){
@@ -129,7 +129,7 @@ mat_sub3x3(double A[][3], double B[][3], double C[][3])
 }
 
 int
-mat_copy3x3(double A[][3], double B[][3])
+mat_copy3x3(float A[][3], float B[][3])
 {
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++){
@@ -141,7 +141,7 @@ mat_copy3x3(double A[][3], double B[][3])
 }
 
 int
-mat_iden3x3(double A[][3])
+mat_iden3x3(float A[][3])
 {
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++){
@@ -153,4 +153,19 @@ mat_iden3x3(double A[][3])
   }
 
   return 0;
+}
+
+float
+dist_point2line(float p0[2], float p1[2], float p2[2])
+{
+  float L;
+  float A,B,C;
+
+  A=p2[1]-p1[1];
+  B=p1[0]-p2[0];
+  C=-p1[1]*B-p1[0]*A;
+
+  L=fabs((A*p0[0]+B*p0[1]+C)/sqrt(A*A+B*B));
+
+  return L;
 }

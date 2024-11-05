@@ -101,6 +101,9 @@ par_read_from_str(const char *str, par_t *par)
   if (item = cJSON_GetObjectItem(root, "geometry_input_file")) {
     sprintf(par->geometry_input_file, "%s", item->valuestring);
   }
+  if (item = cJSON_GetObjectItem(root, "step_input_file")) {
+    sprintf(par->step_input_file, "%s", item->valuestring);
+  }
   if (item = cJSON_GetObjectItem(root, "grid_export_dir")) {
     sprintf(par->grid_export_dir, "%s", item->valuestring);
   }
@@ -134,9 +137,6 @@ par_read_from_str(const char *str, par_t *par)
       {
         par->dire_itype = Z_DIRE;
       }
-    }
-    if (subitem = cJSON_GetObjectItem(item, "step_input_file")) {
-      sprintf(par->step_input_file, "%s", subitem->valuestring);
     }
   }
 

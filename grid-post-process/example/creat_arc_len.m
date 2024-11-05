@@ -2,7 +2,7 @@ clc;
 clear all;
 close all;
 
-nz = 601;
+nz = 401;
 num_of_step = nz-1;
 
 for i=1:num_of_step

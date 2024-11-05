@@ -87,12 +87,12 @@ thomas(int n, float *a, float *b, float *c, float *d_x,
   Ux=y
 */
 int
-thomas_block(int n, double *a, double *b, double *c, double *d,
-             double *xz, double *D, double *y)
+thomas_block(int n, float *a, float *b, float *c, float *d,
+             float *xz, float *D, float *y)
 {
-  double mat_a[2][2], mat_b[2][2], mat_c[2][2], vec_d[2];
-  double mat_G[2][2], mat_D[2][2], vec_y[2], vec_xz[2];
-  double det, mat1[2][2], vec1[2], vec2[2];
+  float mat_a[2][2], mat_b[2][2], mat_c[2][2], vec_d[2];
+  float mat_G[2][2], mat_D[2][2], vec_y[2], vec_xz[2];
+  float det, mat1[2][2], vec1[2], vec2[2];
   size_t iptr1,iptr2,iptr3,iptr4;
 
   // i=0

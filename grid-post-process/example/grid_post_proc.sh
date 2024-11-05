@@ -33,7 +33,7 @@ cat << ieof > ${PAR_FILE}
   "input_grids_info" : [
     {
       "grid_import_dir" : "${INPUTDIR1}",
-      "number_of_grid_points" : [1708,601],
+      "number_of_grid_points" : [901,401],
       "number_of_mpiprocs_in" : [1,1],
       "flag_stretch" : 1,
       "stretch_file" : "${STRETCH_FILE1}"

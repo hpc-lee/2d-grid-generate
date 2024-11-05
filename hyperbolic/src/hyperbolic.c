@@ -25,44 +25,42 @@ hyper_gene(gd_t *gdcurv, par_t *par)
   float *z2d = gdcurv->z2d;
   float *step = gdcurv->step;
 
-  float *bdry1 = NULL;
-  float *bdry2 = NULL;
   FILE *fp = NULL;
   char str[500];
 
   float *coef_e = (float *)mem_calloc_1d_float(nx, 0.0, "init");
   float *area = (float *)mem_calloc_1d_float(nx*2, 0.0, "init");
   // malloc space for thomas_block method 
-  double *a = (double *)mem_calloc_1d_double(n*CONST_NDIM*CONST_NDIM, 0.0, "init");
-  double *b = (double *)mem_calloc_1d_double(n*CONST_NDIM*CONST_NDIM, 0.0, "init");
-  double *c = (double *)mem_calloc_1d_double(n*CONST_NDIM*CONST_NDIM, 0.0, "init");
-  double *d = (double *)mem_calloc_1d_double(n*CONST_NDIM, 0.0, "init");
-  double *xz = (double *)mem_calloc_1d_double(n*CONST_NDIM, 0.0, "init");
-  double *D = (double *)mem_calloc_1d_double(n*CONST_NDIM*CONST_NDIM, 0.0, "init");
-  double *y = (double *)mem_calloc_1d_double(n*CONST_NDIM, 0.0, "init");
+  float *a  = (float *)mem_calloc_1d_float(n*CONST_NDIM*CONST_NDIM, 0.0, "init");
+  float *b  = (float *)mem_calloc_1d_float(n*CONST_NDIM*CONST_NDIM, 0.0, "init");
+  float *c  = (float *)mem_calloc_1d_float(n*CONST_NDIM*CONST_NDIM, 0.0, "init");
+  float *d  = (float *)mem_calloc_1d_float(n*CONST_NDIM, 0.0, "init");
+  float *xz = (float *)mem_calloc_1d_float(n*CONST_NDIM, 0.0, "init");
+  float *D  = (float *)mem_calloc_1d_float(n*CONST_NDIM*CONST_NDIM, 0.0, "init");
+  float *y  = (float *)mem_calloc_1d_float(n*CONST_NDIM, 0.0, "init");
 
   // solve first layer  
   int k=1;
   cal_matrix(x2d,z2d,nx,k,step,a,b,c,d,area);
   modify_smooth(x2d,z2d,nx,k,a,b,c,d,coef_e);
-  modify_bdry(n,a,b,c,d,epsilon,bdry_itype,bdry1,bdry2,k,nz);
+  modify_bdry(n,a,b,c,d,epsilon,bdry_itype,k,nz);
   thomas_block(n,a,b,c,d,xz,D,y);
-  assign_coords(xz,x2d,z2d,nx,nz,k,epsilon,bdry_itype,bdry1,bdry2);
+  assign_coords(xz,x2d,z2d,nx,nz,k,epsilon,bdry_itype);
 
   for(int k=1; k<nz; k++)
   {
     cal_smooth_coef(coef,x2d,z2d,nx,nz,k,step,coef_e);
     cal_matrix(x2d,z2d,nx,k,step,a,b,c,d,area);
     modify_smooth(x2d,z2d,nx,k,a,b,c,d,coef_e);
-    modify_bdry(n,a,b,c,d,epsilon,bdry_itype,bdry1,bdry2,k,nz);
+    modify_bdry(n,a,b,c,d,epsilon,bdry_itype,k,nz);
     thomas_block(n,a,b,c,d,xz,D,y);
-    assign_coords(xz,x2d,z2d,nx,nz,k,epsilon,bdry_itype,bdry1,bdry2);
+    assign_coords(xz,x2d,z2d,nx,nz,k,epsilon,bdry_itype);
 
     fprintf(stdout,"number of layers is %d\n",k);
     fflush(stdout);
   }
 
-  if(t2b== 0)
+  if(t2b == 1)
   {
     //fprintf(stdout,"the init bdry is max index, so index must be flip\n");
     flip_coord_z(gdcurv);
@@ -77,8 +75,6 @@ hyper_gene(gd_t *gdcurv, par_t *par)
   free(xz);
   free(D);
   free(y);
-  free(bdry1);
-  free(bdry2);
 
   return 0;
 }
@@ -262,11 +258,11 @@ cal_smooth_coef(float coef, float *x2d, float *z2d, int nx, int nz, int k, float
 
 int 
 cal_matrix(float *x2d, float *z2d, int nx, int k, float *step,
-           double *a, double *b, double *c, double *d, float *area)
+           float *a, float *b, float *c, float *d, float *area)
 {
-  double A[2][2], B[2][2];
-  double mat[2][2], vec[2];
-  double mat_b[2][2], vec_d[2];
+  float A[2][2], B[2][2];
+  float mat[2][2], vec[2];
+  float mat_b[2][2], vec_d[2];
   size_t iptr1,iptr2,iptr3;
   float x_xi0,z_xi0,x_zt0,z_zt0;
   float x_plus,z_plus,x_minus,z_minus;
@@ -366,10 +362,10 @@ cal_matrix(float *x2d, float *z2d, int nx, int k, float *step,
 }
 
 int
-modify_smooth(float *x2d, float *z2d, int nx, int k, double *a,
-              double *b, double *c, double *d, float *coef_e)
+modify_smooth(float *x2d, float *z2d, int nx, int k, float *a,
+              float *b, float *c, float *d, float *coef_e)
 {
-  double mat[2][2], vec1[2], vec2[2], vec3[2];
+  float mat[2][2], vec1[2], vec2[2], vec3[2];
   float coef_i;
   size_t iptr1, iptr2, iptr3, iptr4, iptr5;
   mat_iden2x2(mat);
@@ -404,9 +400,9 @@ modify_smooth(float *x2d, float *z2d, int nx, int k, double *a,
 }
 
 int
-modify_bdry(int n, double *a, double *b, double *c, double *d,
+modify_bdry(int n, float *a, float *b, float *c, float *d,
             float *epsilon, int *bdry_itype, 
-            float *bdry1, float *bdry2, int k, int nz)
+            int k, int nz)
 {
   size_t iptr;
   // left bdry
@@ -428,21 +424,6 @@ modify_bdry(int n, double *a, double *b, double *c, double *d,
     for(int ii=0; ii<2; ii++) {
       // modify i=0
       b[ii*2+jj] = b[ii*2+jj] + a[ii*2+jj];
-    }
-  }
-  else if(bdry_itype[0] == 3) // fixed boundry modify d = d-A*delta(r1)
-  {
-    double A[2][2], vec_1[2], vec[2];
-    for(int ii=0; ii<2; ii++) {
-      for(int jj=0; jj<2; jj++) {
-        A[ii][jj] = a[ii*2+jj];
-      }
-      vec_1[ii] = bdry1[k+ii*nz]-bdry1[(k-1)+ii*nz];  // coord increment
-    }
-    mat_mul2x1(A,vec_1,vec);
-    for(int ii=0; ii<2; ii++)
-    {
-        d[ii] = d[ii] - vec[ii];
     }
   }
   // right bdry
@@ -468,30 +449,13 @@ modify_bdry(int n, double *a, double *b, double *c, double *d,
       b[iptr+ii*2+jj] = b[iptr+ii*2+jj] + c[iptr+ii*2+jj];
     }
   }
-  else if(bdry_itype[1] == 3) // fixed boundry
-  {
-    iptr = (n-1)*CONST_NDIM*CONST_NDIM;
-    double A[2][2], vec_2[2], vec[2];
-    for(int ii=0; ii<2; ii++) {
-      for(int jj=0; jj<2; jj++) {
-        A[ii][jj] = a[iptr+ii*2+jj];
-      }
-      vec_2[ii] = bdry2[k+ii*nz]-bdry2[(k-1)+ii*nz];  // coord increment
-    }
-    mat_mul2x1(A,vec_2,vec);
-    iptr = (n-1)*CONST_NDIM;
-    for(int ii=0; ii<2; ii++) 
-    {
-      d[iptr+ii] = d[iptr+ii] - vec[ii];
-    }
-  }
 
   return 0;
 }
 
 int
-assign_coords(double *xz, float *x2d, float *z2d, int nx, int nz, int k,
-              float *epsilon, int *bdry_itype, float *bdry1, float *bdry2)
+assign_coords(float *xz, float *x2d, float *z2d, int nx, int nz, int k,
+              float *epsilon, int *bdry_itype)
 {
   size_t iptr,iptr1,iptr2;
   size_t iptr3,iptr4,iptr5;
@@ -564,7 +528,7 @@ assign_coords(double *xz, float *x2d, float *z2d, int nx, int nz, int k,
 // modofy increment
 // not used
 int
-modify_incre(double *xz, float *x2d, float *z2d, int nx, int k)
+modify_incre(float *xz, float *x2d, float *z2d, int nx, int k)
 {
   size_t  iptr1, iptr2, iptr3;
   float x0, x1, z0, z1;

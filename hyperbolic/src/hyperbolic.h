@@ -16,23 +16,22 @@ cal_smooth_coef(float coef, float *x2d, float *z2d,
 
 int 
 cal_matrix(float *x2d, float *z2d, int nx, int k, float *step,
-           double *a, double *b, double *c, double *d, float *area);
+           float *a, float *b, float *c, float *d, float *area);
 
 int
-modify_smooth(float *x2d, float *z2d, int nx, int k, double *a,
-              double *b, double *c, double *d, float *coef_e);
+modify_smooth(float *x2d, float *z2d, int nx, int k, float *a,
+              float *b, float *c, float *d, float *coef_e);
 
 int
-modify_bdry(int n, double *a, double *b, double *c, double *d,
+modify_bdry(int n, float *a, float *b, float *c, float *d,
             float *epsilon, int *bdry_itype,
-            float *bdry1, float *bdry2, int k, int nz);
+            int k, int nz);
 
 int
-assign_coords(double *xz, float *x2d, float *z2d, int nx, int nz, int k,
-              float *epsilon, int *bdry_itype,
-              float *bdry1, float *bdry2);
+assign_coords(float *xz, float *x2d, float *z2d, int nx, int nz, int k,
+              float *epsilon, int *bdry_itype);
 
 int
-modify_incre(double *xz, float *x2d, float *z2d, int nx, int k);
+modify_incre(float *xz, float *x2d, float *z2d, int nx, int k);
 
  #endif
